@@ -17,6 +17,12 @@ public class IndexController {
 	
 	@RequestMapping("/main")
     public String showMain() {
-		return "main";
+		return "main/main";
+    }
+	
+	@RequestMapping("/loginOut")
+    public String loginOut(HttpSession session) {
+		session.removeAttribute(WebConfig.LOGIN_USER);
+		return "index";
     }
 }

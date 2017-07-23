@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MenuController {
 
 	@RequestMapping("/home")
-    public String showIndex() {
-		return "home";
+    public String showHome() {
+		return "main/home";
+    }
+	
+	@RequestMapping("/userManage")
+    public String userManage() {
+		return "userManage";
     }
 }

@@ -7,7 +7,7 @@
 		    </div>
 	    	<ul class="menuson">
 		        <li class="active"><cite></cite><a href="javascript:void(0);" onclick="">数据列表</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('第一页','/menu/home')">图片数据表</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('用户管理','/menu/userManage')">用户管理</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="">添加编辑</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="">图片列表</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="">自定义</a><i></i></li>
@@ -53,6 +53,25 @@
 </div>
 
 <script type="text/javascript">
+	$(function(){	
+		//导航切换
+		$(".menuson li").click(function(){
+			$(".menuson li.active").removeClass("active")
+			$(this).addClass("active");
+		});
+		
+		$('.title').click(function(){
+			var $ul = $(this).next('ul');
+			$('dd').find('ul').slideUp();
+			if($ul.is(':visible')){
+				$(this).next('ul').slideUp();
+			}else{
+				$(this).next('ul').slideDown();
+			}
+		});
+	});
+
+
 	function addTab(title,url){
 		var content = '<iframe src="'+url+'" id="iframe" width="100%" height="99%" frameborder="0"></iframe>';
 		$('#mainTabs').tabs('add',{

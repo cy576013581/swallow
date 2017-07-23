@@ -38,6 +38,7 @@
                 success:function(data){ //data为交互成功后，后台返回的数据
                     var flag =data.flag;//服务器返回标记
                     if(flag){
+                    	alert("登录成功！");
                     	window.location.href="/main";
                     }else {
                     	alert("用户名或者密码错误！");

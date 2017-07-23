@@ -15,7 +15,7 @@
     <ul>
 	    <li><span><img src="../images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
 	    <li><a href="#">关于</a></li>
-	    <li><a href="#" target="_parent">退出</a></li>
+	    <li><a href="javascript:void(0);" onclick="loginOut()" target="_parent">退出</a></li>
     </ul>
      
     <div class="user">
@@ -27,25 +27,14 @@
 
 <script type="text/javascript">
 	$(function(){	
-		//导航切换
-		$(".menuson li").click(function(){
-			$(".menuson li.active").removeClass("active")
-			$(this).addClass("active");
-		});
-		
-		$('.title').click(function(){
-			var $ul = $(this).next('ul');
-			$('dd').find('ul').slideUp();
-			if($ul.is(':visible')){
-				$(this).next('ul').slideUp();
-			}else{
-				$(this).next('ul').slideDown();
-			}
-		});
 		//顶部导航切换
 		$(".nav li a").click(function(){
 			$(".nav li a.selected").removeClass("selected")
 			$(this).addClass("selected");
 		});
 	});
+	
+	function loginOut(){
+		window.location.href="/loginOut";
+	}
 </script>

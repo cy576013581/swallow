@@ -88,9 +88,12 @@ public class UserController {
     }
 	
 	@RequestMapping("/findAll")
-    public String findAllUser(ModelMap map) {
+	@ResponseBody
+    public Map<String, Object> findAllUser() {
 		List<User> list = userService.findUsers();
-		map.put("user", list.get(0));
-        return "index";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rows", list);
+		map.put("total", list.size());
+		return map;
     }
 }

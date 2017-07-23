@@ -31,6 +31,6 @@ public interface UserMapper {
     @Select("select id,c_username,c_pwd,c_phone,n_age,n_sex from users where id = #{id}")
     User findUserById(@Param("id") Long id);
  
-    @Select("select id,c_username,c_pwd,c_phone,n_age,n_sex from users")
+    @Select("select id,c_username,c_phone,n_age,n_sex from users")
     List<User> findUsers();
 }
