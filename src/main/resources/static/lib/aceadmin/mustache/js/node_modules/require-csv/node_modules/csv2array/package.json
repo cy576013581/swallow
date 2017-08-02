@@ -1,0 +1,33 @@
+{
+  "name": "csv2array",
+  "version": "0.0.1",
+  "description": "Sync CSV parser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:olalonde/csv2array.git"
+  },
+  "keywords": [
+    "csv",
+    "parser"
+  ],
+  "author": {
+    "name": "Olivier Lalonde",
+    "email": "olalonde@gmail.com"
+  },
+  "license": "BSD",
+  "readme": "Sync CSV parser.\n\n# Install \n\n    npm install csv2array\n\n# Usage \n\n    var csv2array = require('csv2array');\n    var arr = csv2array('\"a\", \"b\", \"c\"\\n\"d\",\"e\",\"f\"');\n\n# Credit \n\nhttp://stackoverflow.com/questions/1293147/javascript-code-to-parse-csv-data\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/olalonde/csv2array/issues"
+  },
+  "_id": "csv2array@0.0.1",
+  "dist": {
+    "shasum": "9175a8ec642f9445d1ed9ba07041fb3571b06ef0"
+  },
+  "_from": "csv2array@",
+  "_resolved": "https://registry.npmjs.org/csv2array/-/csv2array-0.0.1.tgz"
+}
