@@ -4,8 +4,8 @@ springMVC+Mybatis+freemarker+easyui+Mysql
 这是spring—boot的学习demo，准备将其打造成我的整体开发框架
 
 
-### 添加个人日程管理
-this is domain
+#### 添加个人日程管理
+this is domain /<br>
 //主键
 int id;
 
