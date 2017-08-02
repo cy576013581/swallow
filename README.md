@@ -5,7 +5,7 @@ springMVC+Mybatis+freemarker+easyui+Mysql
 
 
 #### 添加个人日程管理
-this is domain /<br>
+this is domain <br>
 //主键
 int id;
 
