@@ -13,9 +13,9 @@ public class User {
 	
 	private String c_phone;
 	
-	private int n_age;
+	private String n_age;
 	
-	private int n_sex;
+	private String n_sex;
 
 	public long getId() {
 		return id;
@@ -49,19 +49,19 @@ public class User {
 		this.c_phone = c_phone;
 	}
 
-	public int getN_age() {
+	public String getN_age() {
 		return n_age;
 	}
 
-	public void setN_age(int n_age) {
+	public void setN_age(String n_age) {
 		this.n_age = n_age;
 	}
 
-	public int getN_sex() {
+	public String getN_sex() {
 		return n_sex;
 	}
 
-	public void setN_sex(int n_sex) {
+	public void setN_sex(String n_sex) {
 		this.n_sex = n_sex;
 	}
 

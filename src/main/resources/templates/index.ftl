@@ -46,11 +46,19 @@
                 }
             });
 		}
+		
+		function keyDown(){
+		  	if (window.event.keyCode == 13)
+		 	{
+		    	$(".loginbtn").click();
+		  	}
+		}
+		
 	</script>
 
 </head>
 
-<body style="background-color:#1c77ac; background-image:url(${pageContext.request.contextPath }/images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
+<body onkeydown="keyDown()" style="background-color:#1c77ac; background-image:url(${pageContext.request.contextPath }/images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
     <div id="mainBody">
       <div id="cloud1" class="cloud"></div>
       <div id="cloud2" class="cloud"></div>

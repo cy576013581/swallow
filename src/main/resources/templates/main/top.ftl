@@ -1,7 +1,7 @@
 <div class="topleft">
     <a href="main.html" target="_parent"><img src="../images/logo.png" title="系统首页" /></a>
 </div>
-        
+<!--      
 <ul class="nav">
     <li><a href="#" class="selected"><img src="../images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
     <li><a href="#"><img src="../images/icon02.png" title="模型管理" /><h2>模型管理</h2></a></li>
@@ -10,7 +10,7 @@
     <li><a href="#"><img src="../images/icon05.png" title="文件管理" /><h2>文件管理</h2></a></li>
     <li><a href="#" ><img src="../images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
 </ul>
-            
+-->        
 <div class="topright">    
     <ul>
 	    <li><span><img src="../images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
@@ -19,7 +19,7 @@
     </ul>
      
     <div class="user">
-	    <span>admin</span>
+	    <span>${user.c_username}</span>
 	    <i>消息</i>
 	    <b>5</b>
     </div>    

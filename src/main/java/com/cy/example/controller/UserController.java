@@ -32,31 +32,15 @@ public class UserController {
 
 	@Autowired
 	private UserServiceImpl userService;
-	
-	
-	@RequestMapping("/validate")
-	@ResponseBody
-    public Map<String, Boolean> validateUser(@ModelAttribute("user")User user,HttpSession session) {
-		User getUser = userService.validate(user);
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		if(null==getUser){//登录失败
-			map.put("flag",false);
-		}else{//登录成功
-			map.put("flag",true);
-			user.setC_pwd("");
-			session.setAttribute(WebConfig.LOGIN_USER, user);
-		}
-		return map;
-    }
-	
+
 	@RequestMapping("/add")
     public String addUser(ModelMap map) {
 		User u = new User();
 		u.setC_username("3123");
 		u.setC_pwd("32123");
 		u.setC_phone("23123");
-		u.setN_age(18);
-		u.setN_sex(1);
+		u.setN_age("18");
+		u.setN_sex("1");
 		userService.add(u);
         return "index";
     }
@@ -67,17 +51,24 @@ public class UserController {
 		u.setC_username("3123");
 		u.setC_pwd("32123");
 		u.setC_phone("23123");
-		u.setN_age(18);
-		u.setN_sex(1);
+		u.setN_age("18");
+		u.setN_sex("1");
 		u.setId(1);
 		
         return "index";
     }
 	
 	@RequestMapping("/delete")
-    public String deleteUser(ModelMap map) {
-		userService.delete((long) 1);
-        return "index";
+	@ResponseBody
+    public Map<String, Object> deleteUser(@ModelAttribute("user")User user) {
+		int rows = userService.delete(user.getId());
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(rows>0){
+			map.put("flag", true);
+		}else{
+			map.put("flag", false);
+		}
+		return map;
     }
 	
 	@RequestMapping("/find")
@@ -96,4 +87,32 @@ public class UserController {
 		map.put("total", list.size());
 		return map;
     }
+	
+	@RequestMapping("/searchData")
+	@ResponseBody
+    public Map<String, Object> searchData(@ModelAttribute("user")User user) {
+//		System.out.println(user.toString());
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<User> users  = userService.searchData(user);
+		map.put("rows", users);
+		map.put("total", users.size());
+		return map;
+    }
+	
+	
+	@RequestMapping("/validate")
+	@ResponseBody
+    public Map<String, Boolean> validateUser(@ModelAttribute("user")User user,HttpSession session) {
+		User getUser = userService.validate(user);
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		if(null==getUser){//登录失败
+			map.put("flag",false);
+		}else{//登录成功
+			map.put("flag",true);
+			user.setC_pwd("");
+			session.setAttribute(WebConfig.LOGIN_USER, user);
+		}
+		return map;
+    }
+	
 }
