@@ -1,0 +1,12 @@
+{
+	"name": "ace-builder",
+	"version": "0.0.1",
+	"description": "build ace html files using either Mustache.js or Hogan.js",
+	"dependencies": {
+		"hogan.js": "2.0.0",
+		"htmlparser2": "3.0.5",
+		"mustache": "0.7.2",
+		"require-csv": "0.0.1",
+		"xtend": "2.0.3"
+	}
+}

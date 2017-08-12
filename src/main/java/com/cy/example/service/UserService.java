@@ -17,4 +17,6 @@ public interface UserService {
 	public User findUserById(Long id);
 	
 	public List<User> findUsers();
+	
+	public List<User> searchData(User obj);
 }

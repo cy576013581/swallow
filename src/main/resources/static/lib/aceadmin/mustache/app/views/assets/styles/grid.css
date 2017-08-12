@@ -1,0 +1,43 @@
+/* styling the grid page's grid elements */
+.center {
+	text-align: center;
+}
+.center [class*="col-"] {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+
+	position: relative;
+	text-overflow: ellipsis;
+}
+.center [class*="col-"]  span{
+  position: relative;
+  z-index: 2;
+	
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  width: 100%;
+}
+.center [class*="col-"]:before {
+	display: block;
+	content: "";
+	
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 2px;
+	right: 2px;
+	z-index: 1;
+	
+	border: 1px solid #DDD;
+	
+}
+
+.center [class*="col-"]:hover:before {
+	background-color: #FCE6A6;
+	border-color: #EFD27A;
+}

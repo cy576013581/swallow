@@ -6,9 +6,12 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
+import com.cy.example.dao.provider.BaseProvider;
 import com.cy.example.domain.User;
 
 @Mapper
@@ -31,6 +34,10 @@ public interface UserMapper {
     @Select("select id,c_username,c_pwd,c_phone,n_age,n_sex from users where id = #{id}")
     User findUserById(@Param("id") Long id);
  
-    @Select("select id,c_username,c_phone,n_age,n_sex from users")
+    @Select("select id,c_username,c_phone,n_age,case when n_sex=1 then '男' "
+    		+ "when n_sex=0 then '女' end as n_sex from users")
     List<User> findUsers();
+    
+    @SelectProvider(type = BaseProvider.class, method = "searchData")
+    List<User> searchData(User user);
 }

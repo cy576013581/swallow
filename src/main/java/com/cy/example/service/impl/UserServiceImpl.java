@@ -1,5 +1,6 @@
 package com.cy.example.service.impl;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cy.example.dao.UserMapper;
 import com.cy.example.domain.User;
 import com.cy.example.service.UserService;
+
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -33,5 +35,10 @@ public class UserServiceImpl implements UserService{
 	public User validate(User user) {
 		// TODO Auto-generated method stub
 		return this.userMapper.validate(user);
+	}
+	
+	public List<User> searchData(User obj) {
+		List<User> list = userMapper.searchData(obj);
+		return list;
 	}
 }

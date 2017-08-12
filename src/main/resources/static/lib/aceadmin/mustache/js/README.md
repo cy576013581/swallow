@@ -1,0 +1,1 @@
+This folder contains the js files to create raw html output.Use like this:  node index.jsIt uses Hogan.js by default.To use Mustache.js:  node index.js --engine=mustacheExtra options are like 'app/data/common/site.json'For example:  node index.js --engine=mustache --remote_jquery=true

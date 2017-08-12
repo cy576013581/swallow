@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 		
 		function addTab(title,url){
-			var content = '<iframe src="'+url+'" id="iframe" width="100%" height="99%" frameborder="0"></iframe>';
+			var content = '<iframe src="'+url+'" id="iframe" width="100%" height="100%" frameborder="0"></iframe>';
 			$('#mainTabs').tabs('add',{
 			    title:title,
 			    content:content,
@@ -34,7 +34,7 @@
 			<div class="easyui-tabs" id="mainTabs" data-options="border:false" 
 				style="width:100%;height:100%;">
 			<div title="主页" data-options="closable:false" >
-				<iframe src="/menu/home" id="iframe" width="100%" height="99%" frameborder="0"></iframe>
+				<iframe src="/menu/home" id="iframe" width="100%" height="100%" frameborder="0"></iframe>
 			</div>
 		</div>
 		</div>

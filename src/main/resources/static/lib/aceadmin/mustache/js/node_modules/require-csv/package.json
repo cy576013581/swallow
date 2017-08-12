@@ -1,0 +1,37 @@
+{
+  "name": "require-csv",
+  "version": "0.0.1",
+  "description": "require('require-csv') lets you load CSV files using require syntax. For example: var data = require('./data.csv');",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:olalonde/require-csv.git"
+  },
+  "keywords": [
+    "require",
+    "csv",
+    "better-require"
+  ],
+  "author": {
+    "name": "Olivier Lalonde",
+    "email": "olalonde@gmail.com"
+  },
+  "license": "BSD",
+  "dependencies": {
+    "csv2array": ""
+  },
+  "readme": "# Reference\n\nhttp://nodejs.org/api/all.html#all_require_extensions\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/olalonde/require-csv/issues"
+  },
+  "_id": "require-csv@0.0.1",
+  "dist": {
+    "shasum": "0e7ab9baba9d2b2c72f4ee937fdba683f46cb2d6"
+  },
+  "_from": "require-csv@0.0.1",
+  "_resolved": "https://registry.npmjs.org/require-csv/-/require-csv-0.0.1.tgz"
+}
