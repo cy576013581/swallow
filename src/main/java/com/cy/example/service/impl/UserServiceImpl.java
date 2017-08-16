@@ -11,6 +11,10 @@ import com.cy.example.domain.User;
 import com.cy.example.service.UserService;
 
 
+
+
+
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -39,6 +43,13 @@ public class UserServiceImpl implements UserService{
 	
 	public List<User> searchData(User obj) {
 		List<User> list = userMapper.searchData(obj);
+		for(User u : list){
+			if("1".equals(u.getN_sex())){
+				u.setN_sex("男");
+			}else{
+				u.setN_sex("女");
+			}
+		}
 		return list;
 	}
 }

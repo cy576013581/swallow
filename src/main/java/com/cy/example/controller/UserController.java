@@ -34,28 +34,30 @@ public class UserController {
 	private UserServiceImpl userService;
 
 	@RequestMapping("/add")
-    public String addUser(ModelMap map) {
-		User u = new User();
-		u.setC_username("3123");
-		u.setC_pwd("32123");
-		u.setC_phone("23123");
-		u.setN_age("18");
-		u.setN_sex("1");
-		userService.add(u);
-        return "index";
+	@ResponseBody
+    public Map<String, Object> addUser(@ModelAttribute("user")User user) {
+		user.setC_pwd("123456");
+		int rows = userService.add(user);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(rows>0){
+			map.put("flag", true);
+		}else{
+			map.put("flag", false);
+		}
+		return map;
     }
 	
 	@RequestMapping("/update")
-    public String updateUser(ModelMap map) {
-		User u = new User();
-		u.setC_username("3123");
-		u.setC_pwd("32123");
-		u.setC_phone("23123");
-		u.setN_age("18");
-		u.setN_sex("1");
-		u.setId(1);
-		
-        return "index";
+	@ResponseBody
+    public Map<String, Object> updateUser(@ModelAttribute("user")User user) {
+    	int rows = userService.update(user);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(rows>0){
+			map.put("flag", true);
+		}else{
+			map.put("flag", false);
+		}
+		return map;
     }
 	
 	@RequestMapping("/delete")
@@ -94,6 +96,7 @@ public class UserController {
 //		System.out.println(user.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<User> users  = userService.searchData(user);
+		
 		map.put("rows", users);
 		map.put("total", users.size());
 		return map;
