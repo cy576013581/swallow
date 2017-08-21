@@ -23,3 +23,14 @@ Datetime end;
 
 //事件级别
 int level;
+
+#### 添加实体基类
+public class BaseEntity {
+    protected Integer id;
+    protected Date createTime;
+    protected Integer createId;
+    protected Date updateTime;
+    protected Integer updateId;
+    protected Boolean deleted;
+    //省略setter getter
+}
