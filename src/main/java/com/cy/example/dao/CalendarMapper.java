@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.cy.example.domain.Calendar;
+import com.cy.example.entity.Calendar;
 
 
 @Mapper

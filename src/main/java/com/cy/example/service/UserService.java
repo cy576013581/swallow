@@ -2,7 +2,7 @@ package com.cy.example.service;
 
 import java.util.List;
 
-import com.cy.example.domain.User;
+import com.cy.example.entity.User;
 
 public interface UserService {
 

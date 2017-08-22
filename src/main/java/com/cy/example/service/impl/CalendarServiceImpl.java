@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cy.example.dao.CalendarMapper;
-import com.cy.example.domain.Calendar;
+import com.cy.example.entity.Calendar;
 import com.cy.example.service.CalendarService;
 
 @Service

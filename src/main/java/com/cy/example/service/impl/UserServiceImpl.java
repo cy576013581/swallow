@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cy.example.dao.UserMapper;
-import com.cy.example.domain.User;
+import com.cy.example.entity.User;
 import com.cy.example.service.UserService;
 
 

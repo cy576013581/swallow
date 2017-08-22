@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.cy.example.domain.User;
-import com.cy.example.filter.WebConfig;
+import redis.clients.jedis.Jedis;
+
+import com.cy.example.config.WebConfig;
+import com.cy.example.entity.User;
 
 @Controller
 public class IndexController {

@@ -5,8 +5,8 @@ import java.lang.reflect.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cy.example.domain.User;
-import com.cy.example.filter.LoginInterceptor;
+import com.cy.example.config.LoginInterceptor;
+import com.cy.example.entity.User;
 
 public class BaseProvider {
 	
