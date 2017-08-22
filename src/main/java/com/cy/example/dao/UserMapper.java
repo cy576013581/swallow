@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
 import com.cy.example.dao.provider.BaseProvider;
-import com.cy.example.domain.User;
+import com.cy.example.entity.User;
 
 @Mapper
 public interface UserMapper {

@@ -2,7 +2,7 @@ package com.cy.example.service;
 
 import java.util.List;
 
-import com.cy.example.domain.Calendar;
+import com.cy.example.entity.Calendar;
 
 public interface CalendarService {
 
