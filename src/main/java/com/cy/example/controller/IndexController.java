@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import redis.clients.jedis.Jedis;
 
 import com.cy.example.config.WebConfig;
-import com.cy.example.entity.User;
+import com.cy.example.entity.UserEntity;
 
 @Controller
 public class IndexController {
@@ -21,7 +21,7 @@ public class IndexController {
 	
 	@RequestMapping("/main")
     public String showMain(HttpSession session,ModelMap map) {
-		User user = (User) session.getAttribute(WebConfig.LOGIN_USER);
+		UserEntity user = (UserEntity) session.getAttribute(WebConfig.LOGIN_USER);
 		map.put("user", user);
 		return "main/main";
     }

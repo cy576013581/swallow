@@ -2,17 +2,18 @@ package com.cy.example.service;
 
 import java.util.List;
 
-import com.cy.example.entity.Calendar;
+
+import com.cy.example.entity.CalendarEntity;
 
 public interface CalendarService {
 
-	public int add(Calendar cal);
+	public int add(CalendarEntity cal);
 	
-	public int update(Calendar cal);
+	public int update(CalendarEntity cal);
 	
 	public int delete(Long id);
 	
-	public Calendar findCalendarById(Long id);
+	public CalendarEntity findCalendarById(Long id);
 	
-	public List<Calendar> findCalendars();
+	public List<CalendarEntity> findCalendars();
 }

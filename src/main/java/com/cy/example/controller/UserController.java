@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cy.example.config.WebConfig;
-import com.cy.example.entity.User;
+import com.cy.example.entity.UserEntity;
+import com.cy.example.service.UserService;
 import com.cy.example.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
@@ -31,12 +32,11 @@ import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 public class UserController {
 
 	@Autowired
-	private UserServiceImpl userService;
+	private UserService userService;
 
 	@RequestMapping("/add")
 	@ResponseBody
-    public Map<String, Object> addUser(@ModelAttribute("user")User user) {
-		user.setC_pwd("123456");
+    public Map<String, Object> addUser(@ModelAttribute("user")UserEntity user) {
 		int rows = userService.add(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -49,7 +49,8 @@ public class UserController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-    public Map<String, Object> updateUser(@ModelAttribute("user")User user) {
+    public Map<String, Object> updateUser(@ModelAttribute("user")UserEntity user) {
+		System.out.println(user.toString());
     	int rows = userService.update(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -62,7 +63,7 @@ public class UserController {
 	
 	@RequestMapping("/delete")
 	@ResponseBody
-    public Map<String, Object> deleteUser(@ModelAttribute("user")User user) {
+    public Map<String, Object> deleteUser(@ModelAttribute("user")UserEntity user) {
 		int rows = userService.delete(user.getId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -75,7 +76,7 @@ public class UserController {
 	
 	@RequestMapping("/find")
     public String findUser(ModelMap map) {
-		User user = userService.findUserById((long)2);
+		UserEntity user = userService.findUserById((long)2);
 		map.put("user", user);
         return "index";
     }
@@ -83,7 +84,7 @@ public class UserController {
 	@RequestMapping("/findAll")
 	@ResponseBody
     public Map<String, Object> findAllUser() {
-		List<User> list = userService.findUsers();
+		List<UserEntity> list = userService.findUsers();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rows", list);
 		map.put("total", list.size());
@@ -92,10 +93,10 @@ public class UserController {
 	
 	@RequestMapping("/searchData")
 	@ResponseBody
-    public Map<String, Object> searchData(@ModelAttribute("user")User user) {
+    public Map<String, Object> searchData(@ModelAttribute("user")UserEntity user) {
 //		System.out.println(user.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<User> users  = userService.searchData(user);
+		List<UserEntity> users  = userService.searchData(user);
 		
 		map.put("rows", users);
 		map.put("total", users.size());
@@ -105,8 +106,8 @@ public class UserController {
 	
 	@RequestMapping("/validate")
 	@ResponseBody
-    public Map<String, Boolean> validateUser(@ModelAttribute("user")User user,HttpSession session) {
-		User getUser = userService.validate(user);
+    public Map<String, Boolean> validateUser(@ModelAttribute("user")UserEntity user,HttpSession session) {
+		UserEntity getUser = userService.validate(user);
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		if(null==getUser){//登录失败
 			map.put("flag",false);
