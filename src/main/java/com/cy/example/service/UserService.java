@@ -2,21 +2,23 @@ package com.cy.example.service;
 
 import java.util.List;
 
-import com.cy.example.entity.User;
+import org.springframework.stereotype.Service;
+
+import com.cy.example.entity.UserEntity;
 
 public interface UserService {
 
-	public int add(User user);
+	public int add(UserEntity user);
 	
-	public int update(User user);
+	public int update(UserEntity user);
 	
 	public int delete(Long id);
 	
-	public User validate(User user);
+	public UserEntity validate(UserEntity user);
 	
-	public User findUserById(Long id);
+	public UserEntity findUserById(Long id);
 	
-	public List<User> findUsers();
+	public List<UserEntity> findUsers();
 	
-	public List<User> searchData(User obj);
+	public List<UserEntity> searchData(UserEntity obj);
 }

@@ -33,6 +33,7 @@
 		});  
 		
 		
+		
 		function deleteData(){
 			var row = $('#dg').datagrid('getSelected');
             if (row){
@@ -70,12 +71,12 @@
 		function searchData(){
 			var json = "";
 			for(var i = 0;i<map.size();i++){
-				json += map.key(i)+"="+getValues("tb_",map.key(i))+"&";
+				json += map.key(i)+"="+getValues(map,"tb_",map.key(i))+"&";
 				//var arr = $("#tb_"+map.key(i)).attr("class");
 				//alert(arr);
 			}
 			json = json.substring(0,json.length-1);
-			alert(json);
+			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
                 url:"${controller}searchData?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
                 type:"POST",
@@ -97,8 +98,9 @@
 		function addData(){
             operation = 1;
             //清空编辑框的值
-            for(var i = 0;i<map.size();i++){
-				setValues(map.key(i),'');
+            for(var i = 0;i<editMap.size();i++){
+            	//alert(editMap.key(i));
+				setValues(editMap.key(i),'');
 			}
             $('#dlg').dialog("open");
 		}
@@ -106,8 +108,10 @@
 		//编辑数据
 		function editData(){
 			var row = $('#dg').datagrid('getSelected');
+			//console.log(row);
             if (row){
             	operation = 2;
+            	
             	var jsonStr = JSON.stringify(row);
             	var reg = new RegExp('"','g');
             	jsonStr = jsonStr.substring(1,jsonStr.length-1).replace(reg,'');
@@ -115,13 +119,16 @@
             	//console.log(attr);
             	for(var i=0;i<attr.length;i++){
             		var attr2 =  attr[i].split(":")
-            		for(var j=0;j<attr2.length;j++){
+            		for(var j=0;j<attr2.length-1;j++){
             			if(attr2[0] == "id"){
             				$("#ed_id").val(attr2[1]);
             				continue;
             			}
-            			<#nested>
-            			setValues(attr2[0],attr2[1]);
+            			
+            			if(!needTurn(attr2[0],attr2[1])){
+            				setValues(attr2[0],attr2[1]);
+            			}
+            			
             		}
             	}
             	$('#dlg').dialog("open");
@@ -136,7 +143,7 @@
 			var url;
 			var json = "";
 			for(var i = 0;i<editMap.size();i++){
-				json += editMap.key(i)+"="+getValues("ed_",editMap.key(i))+"&";
+				json += editMap.key(i)+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
 			}
 			if(operation == 1){
 				url = "${controller}add?s="+new Date().getTime();
@@ -145,7 +152,7 @@
 				url = "${controller}update?s="+new Date().getTime();
 				json += "id="+$("#ed_id").val();
 			}
-			alert(json);
+			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
                 url:url, //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
                 type:"POST",
@@ -209,7 +216,11 @@
 				var children = $("<input id='"+loc+id+"' type= 'text' class='easyui-"+type+"' style='width:120px' valueField='id' textField='text' panelHeight='auto'>");
 				parent.append(children);
 				$.parser.parse(parent);
-				map.put(id,type);
+				if(loc == "ed_"){
+					editMap.put(id,type);
+				}else if(loc == "tb_"){
+					map.put(id,type);
+				}
 				data = JSON.parse(data);
 				if(type == "combobox"){
 					//console.log(data);
@@ -252,14 +263,27 @@
 			
 		}
 		
+		//在下拉框中需要转义
+		//提供重写方法
+		function needTurn(){
+			
+		}
+		
 		function setValues(key,value){
-			if(map.contains(key)>-1){
-				var type = map.get(key);
+			
+			if(editMap.contains(key)>-1){
+				var type = editMap.get(key);
+				//alert("key:"+key+"type:"+type);
 				switch (type)
 				{
 					case "combobox":
-					  $("#ed_"+key).combobox('select',value);//$("#tb_"+key)是我自定义的格式
-					  break;
+						var attr = $("#ed_"+key).combobox('getData');
+						for(var i =0;i<attr.length;i++){
+							if(attr[i].text==value){
+								$("#ed_"+key).combobox('select',attr[i].id);
+							}
+						}
+					    break;
 					case "numberbox":
 					  $("#ed_"+key).numberbox('setValue',value);
 					  break;
@@ -270,7 +294,12 @@
 					  $("#ed_"+key).datetimebox('setValue',value);
 					  break;
 					case "combotree":
-					  $("#ed_"+key).combotree('select',value);
+					  var attr = $("#ed_"+key).combotree('getData');
+						for(var i =0;i<attr.length;i++){
+							if(attr[i].text==value){
+								$("#ed_"+key).combotree('select',attr[i].id);
+							}
+						}
 					  break;
 					case "textbox":
 					  $("#ed_"+key).textbox('setValue',value);
@@ -279,7 +308,7 @@
 			}
 		}
 		
-		function getValues(loc,key){
+		function getValues(map,loc,key){
 			var returnVal = "";
 			if(map.contains(key)>-1){
 				var type = map.get(key);
@@ -302,6 +331,7 @@
 					  break;
 					case "textbox":
 					  returnVal = $("#"+loc+key).textbox('getValue');
+					  //alert("#"+loc+key+":"+returnVal);
 					  break;
 				}
 			}

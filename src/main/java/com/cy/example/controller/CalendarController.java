@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cy.example.config.WebConfig;
-import com.cy.example.entity.Calendar;
-import com.cy.example.service.impl.CalendarServiceImpl;
+import com.cy.example.entity.CalendarEntity;
+import com.cy.example.service.CalendarService;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 
@@ -31,11 +31,11 @@ import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 public class CalendarController {
 
 	@Autowired
-	private CalendarServiceImpl calendarService;
+	private CalendarService calendarService;
 	
 	
 	@RequestMapping("/add")
-    public Map<String, Object> addCalendar(@ModelAttribute("calendar")Calendar cal) {
+    public Map<String, Object> addCalendar(@ModelAttribute("calendar")CalendarEntity cal) {
 		int rows = calendarService.add(cal);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -47,7 +47,7 @@ public class CalendarController {
     }
 	
 	@RequestMapping("/update")
-    public Map<String, Object> updateCalendar(@ModelAttribute("calendar")Calendar cal) {
+    public Map<String, Object> updateCalendar(@ModelAttribute("calendar")CalendarEntity cal) {
 		int rows = calendarService.update(cal);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -73,7 +73,7 @@ public class CalendarController {
 	@RequestMapping("/findAll")
 	@ResponseBody
     public Map<String, Object> findAllcalendar() {
-		List<Calendar> list = calendarService.findCalendars();
+		List<CalendarEntity> list = calendarService.findCalendars();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rows", list);
 		map.put("total", list.size());
