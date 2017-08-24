@@ -2,8 +2,10 @@ package com.cy.example.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
+import com.cy.example.Vo.PageVo;
 import com.cy.example.entity.UserEntity;
 
 public interface UserService {
@@ -18,7 +20,11 @@ public interface UserService {
 	
 	public UserEntity findUserById(Long id);
 	
-	public List<UserEntity> findUsers();
+	public List<UserEntity> findAll(PageVo page);
 	
-	public List<UserEntity> searchData(UserEntity obj);
+	public int findAllCount(PageVo page);
+	
+	public int searchAllCount(UserEntity user,PageVo page);
+    
+	public List<UserEntity> searchAll(UserEntity user,PageVo page);
 }

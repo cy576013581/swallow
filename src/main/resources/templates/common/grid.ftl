@@ -30,6 +30,7 @@
 			        </#list> 
 		        </#if>
 		    </#list>
+		    change();
 		});  
 		
 		
@@ -207,7 +208,7 @@
 			}
 		}
 		
-		//根据id修改查询框输入框类型
+		//根据id修改输入框类型
 		/*
 		loc:控件位置，值为tb_和ed_，分别代表工具栏和查询栏
 		
@@ -238,6 +239,9 @@
 		function hideEditElem(id){
 			$("#ed_"+id).parent().remove();
 			editMap.remove(id);
+		}
+		
+		function change(){
 		}
 		
 		function addEditElem(id,name){
@@ -420,11 +424,11 @@
 				        <#list x?split(":")?reverse  as y>
 				         	<#if (y_index ==0)>
 				         		<#if ("${y}" != "id")>
-									<span>${y}:
+									<div style='margin-bottom:20px'>${y}:
 								</#if>
 							<#else>
 								<#if ("${y}" != " ")>
-									<input id="ed_${y}" name="${y}" class="easyui-textbox" style="width:120px;margin-top:10px"></span></br></br>
+									<input id="ed_${y}" name="${y}" class="easyui-textbox" style="width:120px;margin-top:10px"></div>
 								</#if>
 							</#if>
 				        </#list> 

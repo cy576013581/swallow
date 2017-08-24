@@ -12,26 +12,25 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
 import com.cy.example.Vo.PageVo;
+import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
 
 @Mapper
-public interface UserMapper {
+public interface LoginRecordMapper {
 
-    int add(UserEntity user);
+    int add(LoginRecordEntity loginRecord);
  
-    int update(UserEntity user);
+//    int update(LoginRecordEntity loginRecord);
+// 
+//    int delete(Long id);
+     
+    LoginRecordEntity findOneById(Long id);
  
-    int delete(Long id);
-    
-    UserEntity validate(UserEntity user);
- 
-    UserEntity findOneById(Long id);
- 
-    List<UserEntity> findAll(@Param("page")PageVo page);
+    List<LoginRecordEntity> findAll(@Param("page")PageVo page);
     
     int findAllCount(@Param("page")PageVo page);
     
-    int searchAllCount(@Param("user")UserEntity user,@Param("page")PageVo page);
+    int searchAllCount(@Param("user")LoginRecordEntity loginRecord,@Param("page")PageVo page);
     
-    List<UserEntity> searchAll(@Param("user")UserEntity user,@Param("page")PageVo page);
+    List<LoginRecordEntity> searchAll(@Param("loginRecord")LoginRecordEntity loginRecord,@Param("page")PageVo page);
 }

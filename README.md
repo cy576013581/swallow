@@ -10,3 +10,5 @@ springMVC+Mybatis+freemarker+easyui+Mysql
 *2017.8.23 mybatis添加mapperxml、grid修改下拉框bug
 
 *2017.8.24 添加BaseEntity以及相应的数据库存储
+
+*2017.8.24 添加用户登录记录，修改获取IP的类

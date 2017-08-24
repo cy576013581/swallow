@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.example.mapper.LoginRecordMapper" >
+    <resultMap id="BaseResultMap" type="com.cy.example.entity.LoginRecordEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
+        <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
+        <result column="c_loginIp" property="c_loginIp" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="ColumnList" >
+        id, c_createDate, n_creater, c_loginIp
+    </sql>
+    
+    <select id="findAll" resultMap="BaseResultMap"  >
+	   select <include refid="ColumnList" />
+	   from loginrecord order by id limit #{page.index},#{page.rows}
+    </select>
+    
+    <select id="findAllCount" resultType="java.lang.Integer" >
+	   select count(id)
+	   from loginrecord
+    </select>
+    
+    <select id="searchAll" resultMap="BaseResultMap"  >
+	   select <include refid="ColumnList" />
+	   from loginrecord
+	   <if test="loginRecord.n_creater != ''"><if test="loginRecord.n_creater != null"> and n_creater = #{loginRecord.n_create}</if></if>
+   	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp = #{loginRecord.c_loginIp}</if></if>
+   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
+   	   order by id limit #{page.index},#{page.rows}
+    </select>  
+    
+    <select id="searchAllCount" resultType="java.lang.Integer" >
+	   select count(id)
+	   from loginrecord
+	   where
+	   <if test="loginRecord.n_creater != ''"><if test="loginRecord.n_creater != null"> and n_creater = #{loginRecord.n_create}</if></if>
+   	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp = #{loginRecord.c_loginIp}</if></if>
+   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
+   	   order by id limit #{page.index},#{page.rows}
+    </select>
+
+
+    <select id="findOneById" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+        SELECT 
+       <include refid="ColumnList" />
+	   FROM loginrecord
+	   WHERE id = #{id}
+    </select>
+
+    <insert id="add" parameterType="com.cy.example.entity.UserEntity" >
+       insert into 
+       		loginrecord( c_createDate, n_creater, c_loginIp) 
+       	values(#{c_createDate},#{n_creater},#{c_loginIp})
+    </insert>
+</mapper>

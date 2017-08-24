@@ -13,11 +13,19 @@
 	</@userGrid.grid>
 	
 	<script language="javascript">
-		$(function(){
-		    modifyElem("tb_","n_sex","combobox",'[{"id":"1","text":"男","selected":true},{"id":"0","text":"女"}]');
+		//重写grid的change事件
+		function change(){
+			addEditElem("c_pwd","密码");
+			modifyElem("tb_","n_sex","combobox",'[{"id":"1","text":"男","selected":true},{"id":"0","text":"女"}]');
 		    modifyElem("ed_","n_sex","combobox",'[{"id":"1","text":"男","selected":true},{"id":"0","text":"女"}]');
-		    addEditElem("c_pwd","密码");
-		});
+		    modifyQueryElem("c_createDate","datebox");
+		    modifyQueryElem("c_updateDate","datebox");
+		    hideQueryElem("n_age");
+		    hideEditElem("c_createDate");
+		    hideEditElem("c_updateDate");
+		    
+		}
+		
 		
 		//在下拉框中需要转义--重写
 		function needTurn(key,value){

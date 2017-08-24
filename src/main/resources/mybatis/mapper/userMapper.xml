@@ -26,6 +26,11 @@
 	   select id, c_username, c_phone , n_age,
 	   case when n_sex=1 then '男'
 	   when n_sex=0 then '女' end as n_sex ,<include refid="BaseList" />
+	   from users where n_deleted=0 order by id limit #{page.index},#{page.rows}
+    </select>
+    
+    <select id="findAllCount" resultType="java.lang.Integer" >
+	   select count(id)
 	   from users where n_deleted=0
     </select>
     
@@ -34,13 +39,28 @@
 	   case when n_sex=1 then '男'
 	   when n_sex=0 then '女' end as n_sex ,<include refid="BaseList" />
 	   from users
-	   where n_deleted=0
-	   <if test="c_username != ''"> and 	c_username = #{c_username}</if>
-   	   <if test="c_phone != ''"> and c_phone = #{c_phone}</if>
-   	   <if test="n_age != ''">	and n_age = #{n_age}</if>
-   	   <if test="n_sex != ''">  and n_sex = #{n_sex}</if>
-	   
+	   where n_deleted=0 
+	   <if test="user.c_username != ''"><if test="user.c_username != null"> and c_username = #{user.c_username}</if></if>
+   	   <if test="user.c_phone != ''"><if test="user.c_phone != null"> and c_phone = #{user.c_phone}</if></if>
+   	   <if test="user.n_age != ''"><if test="user.n_age != null">	and n_age = #{user.n_age}</if></if>
+   	   <if test="user.n_sex != ''"><if test="user.n_sex != null">  and n_sex = #{user.n_sex}</if></if>
+   	   <if test="user.c_createDate != ''"><if test="user.c_createDate != null">	and substr(c_createDate,1,10) = #{user.c_createDate}</if></if>
+   	   <if test="user.c_updateDate != ''"><if test="user.c_updateDate != null">  and substr(c_updateDate,1,10) = #{user.c_updateDate}</if></if>
+   	   order by id limit #{page.index},#{page.rows}
     </select>  
+    
+    <select id="searchAllCount" resultType="java.lang.Integer" >
+	   select count(id)
+	   from users
+	   where n_deleted=0
+	   <if test="user.c_username != ''"><if test="user.c_username != null"> and c_username = #{user.c_username}</if></if>
+   	   <if test="user.c_phone != ''"><if test="user.c_phone != null"> and c_phone = #{user.c_phone}</if></if>
+   	   <if test="user.n_age != ''"><if test="user.n_age != null">	and n_age = #{user.n_age}</if></if>
+   	   <if test="user.n_sex != ''"><if test="user.n_sex != null">  and n_sex = #{user.n_sex}</if></if>
+ 	   <if test="user.c_createDate != ''"><if test="user.c_createDate != null">	and substr(c_createDate,1,10) = #{user.c_createDate}</if></if>
+   	   <if test="user.c_updateDate != ''"><if test="user.c_updateDate != null">  and substr(c_updateDate,1,10) = #{user.c_updateDate}</if></if>
+   	   order by id limit #{page.index},#{page.rows}
+    </select>
 
     <select id="validate" parameterType="com.cy.example.entity.UserEntity" resultMap="BaseResultMap"  >
 	  select <include refid="ColumnList" />,<include refid="BaseList" />,

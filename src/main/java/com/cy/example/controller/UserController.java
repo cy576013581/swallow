@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cy.example.Vo.PageVo;
 import com.cy.example.config.WebConfig;
+import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
+import com.cy.example.service.LoginRecordService;
 import com.cy.example.service.UserService;
 import com.cy.example.service.impl.UserServiceImpl;
+import com.cy.example.utils.DateUtil;
 
 
 @Controller
@@ -23,6 +27,9 @@ public class UserController extends BaseController{
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private LoginRecordService loginRecordService;
 
 	@RequestMapping("/add")
 	@ResponseBody
@@ -66,7 +73,7 @@ public class UserController extends BaseController{
     }
 	
 	@RequestMapping("/find")
-    public String findUser(ModelMap map) {
+    public String findOne(ModelMap map) {
 		UserEntity user = userService.findUserById((long)2);
 		map.put("user", user);
         return "index";
@@ -74,22 +81,24 @@ public class UserController extends BaseController{
 	
 	@RequestMapping("/findAll")
 	@ResponseBody
-    public Map<String, Object> findAllUser() {
-		List<UserEntity> list = userService.findUsers();
+    public Map<String, Object> findAll(@ModelAttribute("pageVo")PageVo page) {
+//		System.out.print("================================="+page.toString()+page.getIndex());
+		List<UserEntity> list = userService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
+		int sum = userService.findAllCount(page);
 		map.put("rows", list);
-		map.put("total", list.size());
+		map.put("total", sum);
 		return map;
     }
 	
 	@RequestMapping("/searchData")
 	@ResponseBody
-    public Map<String, Object> searchData(@ModelAttribute("user")UserEntity user) {
+    public Map<String, Object> searchData(@ModelAttribute("user")UserEntity user,@ModelAttribute("pageVo")PageVo page) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UserEntity> users  = userService.searchData(user);
-		
+		List<UserEntity> users  = userService.searchAll(user,page);
+		int sum = userService.searchAllCount(user, page);
 		map.put("rows", users);
-		map.put("total", users.size());
+		map.put("total", sum);
 		return map;
     }
 	
@@ -105,6 +114,11 @@ public class UserController extends BaseController{
 			map.put("flag",true);
 			user.setC_pwd("");
 			getSession().setAttribute(WebConfig.LOGIN_USER, getUser);
+			LoginRecordEntity loginRecord = new LoginRecordEntity();
+			loginRecord.setC_createDate(DateUtil.getNow());
+			loginRecord.setC_loginIp(super.getIP(getRequest()));
+			loginRecord.setN_creater(getUser.getId());
+			loginRecordService.add(loginRecord);
 		}
 		return map;
     }
