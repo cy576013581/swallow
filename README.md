@@ -8,3 +8,5 @@ springMVC+Mybatis+freemarker+easyui+Mysql
 *2017.8.22 添加Redis缓存、测试实例和安全加密工具类
 
 *2017.8.23 mybatis添加mapperxml、grid修改下拉框bug
+
+*2017.8.24 添加BaseEntity以及相应的数据库存储
