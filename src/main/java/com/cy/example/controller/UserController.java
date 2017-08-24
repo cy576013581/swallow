@@ -1,42 +1,33 @@
 package com.cy.example.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import netscape.javascript.JSObject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.service.UserService;
 import com.cy.example.service.impl.UserServiceImpl;
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 
 @Controller
 @RequestMapping("/system/user")
-public class UserController {
+public class UserController extends BaseController{
 
 	@Autowired
 	private UserService userService;
 
 	@RequestMapping("/add")
 	@ResponseBody
-    public Map<String, Object> addUser(@ModelAttribute("user")UserEntity user) {
+    public Map<String, Object> add(@ModelAttribute("user")UserEntity user) {
+		super.add(user);
 		int rows = userService.add(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -49,8 +40,8 @@ public class UserController {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-    public Map<String, Object> updateUser(@ModelAttribute("user")UserEntity user) {
-		System.out.println(user.toString());
+    public Map<String, Object> update(@ModelAttribute("user")UserEntity user) {
+		super.update(user);
     	int rows = userService.update(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -63,7 +54,7 @@ public class UserController {
 	
 	@RequestMapping("/delete")
 	@ResponseBody
-    public Map<String, Object> deleteUser(@ModelAttribute("user")UserEntity user) {
+    public Map<String, Object> delete(@ModelAttribute("user")UserEntity user) {
 		int rows = userService.delete(user.getId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -94,7 +85,6 @@ public class UserController {
 	@RequestMapping("/searchData")
 	@ResponseBody
     public Map<String, Object> searchData(@ModelAttribute("user")UserEntity user) {
-//		System.out.println(user.toString());
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UserEntity> users  = userService.searchData(user);
 		
@@ -106,7 +96,7 @@ public class UserController {
 	
 	@RequestMapping("/validate")
 	@ResponseBody
-    public Map<String, Boolean> validateUser(@ModelAttribute("user")UserEntity user,HttpSession session) {
+    public Map<String, Boolean> validate(@ModelAttribute("user")UserEntity user) {
 		UserEntity getUser = userService.validate(user);
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		if(null==getUser){//登录失败
@@ -114,7 +104,7 @@ public class UserController {
 		}else{//登录成功
 			map.put("flag",true);
 			user.setC_pwd("");
-			session.setAttribute(WebConfig.LOGIN_USER, user);
+			getSession().setAttribute(WebConfig.LOGIN_USER, getUser);
 		}
 		return map;
     }

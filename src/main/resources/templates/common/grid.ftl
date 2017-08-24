@@ -142,15 +142,18 @@
 		function dlgBtnClick(){
 			var url;
 			var json = "";
+			var toastStr ="";
 			for(var i = 0;i<editMap.size();i++){
 				json += editMap.key(i)+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
 			}
 			if(operation == 1){
 				url = "${controller}add?s="+new Date().getTime();
 				json = json.substring(0,json.length-1);
+				toastStr = "添加";
 			}else if(operation == 2){
 				url = "${controller}update?s="+new Date().getTime();
 				json += "id="+$("#ed_id").val();
+				toastStr = "更新";
 			}
 			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
@@ -166,11 +169,11 @@
 					var flag =data.flag;//服务器返回标记
                     if(flag){
                     	$('#dlg').dialog("close");
-                    	toastr.success('添加成功！');
+                    	toastr.success(toastStr+"成功!");
                     	$('#dlg').dialog("close");
                     	$('#dg').datagrid('reload');
                     }else {
-                    	toastr.error('删除失败！');
+                    	toastr.error(toastStr+'失败！');
 					}
                 }
             });
@@ -353,9 +356,9 @@
 			        <#list x?split(":") as y>
 			         	<#if (y_index ==0)>
 			         		<#if ("${y}" == "id")>
-								<th data-options="field:'${y}',width:200,hidden:true">
+								<th data-options="field:'${y}',hidden:true">
 							<#else>	
-								<th data-options="field:'${y}',width:200">
+								<th data-options="field:'${y}',width:150">
 							</#if>
 						<#else>
 							${y}</th>

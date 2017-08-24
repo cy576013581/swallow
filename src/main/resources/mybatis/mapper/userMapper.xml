@@ -8,25 +8,33 @@
         <result column="c_phone" property="c_phone" jdbcType="VARCHAR"/>
         <result column="n_age" property="n_age" jdbcType="INTEGER" />
         <result column="n_sex" property="n_sex" jdbcType="INTEGER" />
+        <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
+        <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
+        <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
+        <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
     </resultMap>
     
     <sql id="ColumnList" >
-        id, c_username, c_pwd, c_phone , n_age,
+        id, c_username, c_pwd, c_phone , n_age
+    </sql>
+    
+    <sql id="BaseList" >
+        c_createDate, n_creater, c_updateDate, n_updater
     </sql>
     
     <select id="findAll" resultMap="BaseResultMap"  >
 	   select id, c_username, c_phone , n_age,
 	   case when n_sex=1 then '男'
-	   when n_sex=0 then '女' end as n_sex 
-	   from users
+	   when n_sex=0 then '女' end as n_sex ,<include refid="BaseList" />
+	   from users where n_deleted=0
     </select>
     
     <select id="searchAll" resultMap="BaseResultMap"  >
 	   select id, c_username, c_phone , n_age,
 	   case when n_sex=1 then '男'
-	   when n_sex=0 then '女' end as n_sex 
+	   when n_sex=0 then '女' end as n_sex ,<include refid="BaseList" />
 	   from users
-	   where 1=1
+	   where n_deleted=0
 	   <if test="c_username != ''"> and 	c_username = #{c_username}</if>
    	   <if test="c_phone != ''"> and c_phone = #{c_phone}</if>
    	   <if test="n_age != ''">	and n_age = #{n_age}</if>
@@ -35,25 +43,25 @@
     </select>  
 
     <select id="validate" parameterType="com.cy.example.entity.UserEntity" resultMap="BaseResultMap"  >
-	  select <include refid="ColumnList" />
+	  select <include refid="ColumnList" />,<include refid="BaseList" />,
 	   case when n_sex=1 then '男'
 	   when n_sex=0 then '女' end as n_sex 
-	   from users where c_username = #{c_username} and c_pwd = #{c_pwd}
+	   from users where c_username = #{c_username} and c_pwd = #{c_pwd} and n_deleted=0
     </select>
     
 
     <select id="findOneById" parameterType="java.lang.Long" resultMap="BaseResultMap" >
         SELECT 
-       <include refid="ColumnList" />
+       <include refid="ColumnList" />,
 	   case when n_sex=1 then '男'
-	   when n_sex=0 then '女' end as n_sex 
+	   when n_sex=0 then '女' end as n_sex ,<include refid="BaseList" />
 	   FROM users
-	   WHERE id = #{id}
+	   WHERE id = #{id} and n_deleted=0
     </select>
 
     <insert id="add" parameterType="com.cy.example.entity.UserEntity" >
        insert into 
-       		users(c_username, c_pwd,c_phone,n_age,n_sex) 
+       		users(c_username, c_pwd,c_phone,n_age,n_sex,<include refid="BaseList" />,n_deleted) 
        	values(#{c_username},
         <choose>
 			<when test="c_pwd == ''">
@@ -63,7 +71,7 @@
 	              #{c_pwd},
 	        </otherwise>
 		</choose>
-		#{c_phone},#{n_age},#{n_sex})
+		#{c_phone},#{n_age},#{n_sex},#{c_createDate},#{n_creater},#{c_updateDate},#{n_updater},0)
     </insert>
     
     <update id="update" parameterType="com.cy.example.entity.UserEntity" >
@@ -78,12 +86,18 @@
        	c_phone = #{c_phone},
        	n_age = #{n_age},
        	n_sex = #{n_sex},
-       	c_username = #{c_username}
+       	c_username = #{c_username},
+       	c_updateDate = #{c_updateDate},
+       	n_updater = #{n_updater}
        WHERE 
        		id = #{id}
     </update>
     
     <delete id="delete" parameterType="java.lang.Long" >
-       delete from users where id = #{id}
+       UPDATE 
+       		users 
+       SET
+       		n_deleted =1
+       where id = #{id}
     </delete>
 </mapper>

@@ -8,8 +8,7 @@
 </head>
 <body>
 	<@userGrid.grid controller="/system/user/" title="用户" width="1100px" height="500px"
-		fields="id: ,c_username:用户名,c_phone:联系方式,n_age:年龄,n_sex:性别">
-		//在编辑时需要转义的字段,适用修改数据时下拉框的value和text不一致
+		fields="id: ,c_username:用户名,c_phone:联系方式,n_age:年龄,n_sex:性别,c_createDate:创建时间,c_updateDate:更新时间">
 		
 	</@userGrid.grid>
 	

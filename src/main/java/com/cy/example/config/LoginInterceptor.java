@@ -32,13 +32,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
         //获取session
 		HttpSession session = request.getSession(true);
-	    //判断用户ID是否存在，不存在就跳转到登录界面
-		/*String url = request.getServletPath();
-		logger.info("----进入拦截器--url："+request.getServletPath()+"-----");
-		if(url.contains("/system/user/validate")){
-			logger.info("----放过/system/user/validate-----");
-			return true;
-		}*/
 		logger.info("----进入登录拦截器--url："+request.getServletPath()+"-----");
 		if(session.getAttribute(WebConfig.LOGIN_USER) == null){
 	        logger.info("------跳转到login页面-----");

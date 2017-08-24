@@ -4,50 +4,51 @@ public class BaseEntity {
 	
 	protected long id;
 	
-	protected String createTime;
+	protected String c_createDate;
 	
-	protected Integer createId;
+	protected long n_creater;
 	
-	protected String updateTime;
+	protected String c_updateDate;
 	
-	protected Integer updateId;
+	protected long n_updater;
 	//是否删除
-	protected Boolean deleted;
+	protected Integer n_deleted=0;
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getCreateTime() {
-		return createTime;
+	public String getC_createDate() {
+		return c_createDate;
 	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+	public void setC_createDate(String c_createDate) {
+		this.c_createDate = c_createDate;
 	}
-	public Integer getCreateId() {
-		return createId;
+	public long getN_creater() {
+		return n_creater;
 	}
-	public void setCreateId(Integer createId) {
-		this.createId = createId;
+	public void setN_creater(long n_creater) {
+		this.n_creater = n_creater;
 	}
-	public String getUpdateTime() {
-		return updateTime;
+	public String getC_updateDate() {
+		return c_updateDate;
 	}
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
+	public void setC_updateDate(String c_updateDate) {
+		this.c_updateDate = c_updateDate;
 	}
-	public Integer getUpdateId() {
-		return updateId;
+	public long getN_updater() {
+		return n_updater;
 	}
-	public void setUpdateId(Integer updateId) {
-		this.updateId = updateId;
+	public void setN_updater(long n_updater) {
+		this.n_updater = n_updater;
 	}
-	public Boolean getDeleted() {
-		return deleted;
+	public Integer getN_deleted() {
+		return n_deleted;
 	}
-	public void setDeleted(Boolean deleted) {
-		this.deleted = deleted;
+	public void setN_deleted(Integer n_deleted) {
+		this.n_deleted = n_deleted;
 	}
+	
 	
 }

@@ -31,13 +31,6 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 		
-		<!-- json转换支持 -->
-		<dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.15</version>
-        </dependency>
-		
 		<!-- 测试模块   -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
