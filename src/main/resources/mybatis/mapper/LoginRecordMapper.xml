@@ -4,8 +4,11 @@
     <resultMap id="BaseResultMap" type="com.cy.example.entity.LoginRecordEntity" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
-        <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
         <result column="c_loginIp" property="c_loginIp" jdbcType="VARCHAR"/>
+        <association property="user" javaType="com.cy.example.entity.UserEntity">  
+            <id column="n_creater" property="id"/>  
+            <id column="c_username" property="c_username"/>
+        </association>  
     </resultMap>
     
     <sql id="ColumnList" >
@@ -13,8 +16,8 @@
     </sql>
     
     <select id="findAll" resultMap="BaseResultMap"  >
-	   select <include refid="ColumnList" />
-	   from loginrecord order by id limit #{page.index},#{page.rows}
+	   select l.id, l.c_createDate, l.n_creater, l.c_loginIp,u.c_username
+	   from loginrecord l,users u where l.n_creater = u.id order by id limit #{page.index},#{page.rows}
     </select>
     
     <select id="findAllCount" resultType="java.lang.Integer" >
@@ -23,21 +26,22 @@
     </select>
     
     <select id="searchAll" resultMap="BaseResultMap"  >
-	   select <include refid="ColumnList" />
-	   from loginrecord
-	   <if test="loginRecord.n_creater != ''"><if test="loginRecord.n_creater != null"> and n_creater = #{loginRecord.n_create}</if></if>
+	   select l.id, l.c_createDate, l.n_creater, l.c_loginIp,u.c_username
+	   from loginrecord l,users u  
+	   where 1=1
+	   <if test="loginRecord.user != null"><if test="loginRecord.user.id != null"> and l.n_creater = #{loginRecord.user.id}</if></if>
    	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp = #{loginRecord.c_loginIp}</if></if>
-   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
-   	   order by id limit #{page.index},#{page.rows}
+   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(l.c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
+   	   order by u.id limit #{page.index},#{page.rows}
     </select>  
     
     <select id="searchAllCount" resultType="java.lang.Integer" >
 	   select count(id)
 	   from loginrecord
-	   where
-	   <if test="loginRecord.n_creater != ''"><if test="loginRecord.n_creater != null"> and n_creater = #{loginRecord.n_create}</if></if>
+	   where 1=1
+	   <if test="loginRecord.user != null"><if test="loginRecord.user.id != null"> and l.n_creater = #{loginRecord.user.id}</if></if>
    	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp = #{loginRecord.c_loginIp}</if></if>
-   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
+   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(l.c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
    	   order by id limit #{page.index},#{page.rows}
     </select>
 

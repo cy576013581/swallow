@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Auto Height for Tabs - jQuery EasyUI Demo</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href="../lib/easyui/themes/material/easyui.css">
     <link rel="stylesheet" type="text/css" href="../lib/easyui/themes/icon.css">
     <link href="../lib/toastr/toastr.css" rel="stylesheet"/>
@@ -70,24 +70,27 @@
 		}
 		
 		function searchData(){
+			var options = $('#dg').datagrid('getPager').data("pagination").options;  
 			var json = "";
 			for(var i = 0;i<map.size();i++){
 				json += map.key(i)+"="+getValues(map,"tb_",map.key(i))+"&";
 				//var arr = $("#tb_"+map.key(i)).attr("class");
 				//alert(arr);
 			}
-			json = json.substring(0,json.length-1);
+			json += "&rows="+options.pageSize
 			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
                 url:"${controller}searchData?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
                 type:"POST",
                 data: json, 
+                async: false,
                 dataType:"json",
                 error:function(XMLHttpRequest,textStatus,errorThrown){
                 	toastr.error('网络连接失败！');
                 }, //错误提示
 
                 success:function(data){ //data为交互成功后，后台返回的数据
+                	//$('#dg').datagrid('gotoPage', 1);
 					$('#dg').datagrid('loadData',data);  
 					toastr.success('查询成功！共查询到'+data.total+'条数据！');
                 }
@@ -117,20 +120,40 @@
             	var reg = new RegExp('"','g');
             	jsonStr = jsonStr.substring(1,jsonStr.length-1).replace(reg,'');
             	var attr = jsonStr.split(",");
-            	//console.log(attr);
+            	console.log(attr);
             	for(var i=0;i<attr.length;i++){
             		var attr2 =  attr[i].split(":")
-            		for(var j=0;j<attr2.length-1;j++){
-            			if(attr2[0] == "id"){
-            				$("#ed_id").val(attr2[1]);
-            				continue;
-            			}
-            			
-            			if(!needTurn(attr2[0],attr2[1])){
-            				setValues(attr2[0],attr2[1]);
-            			}
-            			
+            		if(attr2[1] != "null" && attr2[1] != ""){
+            			if(attr2.lenth==2){
+	            			for(var j=0;j<attr2.length-1;j++){
+		            			if(attr2[0] == "id"){
+		            				$("#ed_id").val(attr2[1]);
+		            				continue;
+		            			}
+		            			//alert(attr2[0]+":"+attr2[1]);
+		            			if(!needTurn(attr2[0],attr2[1])){
+		            				setValues(attr2[0],attr2[1]);
+		            			}
+		            			
+		            		}
+	            		}else{
+	            			for(var j=0;j<attr2.length-1;j++){
+		            			if(attr2[0] == "id"){
+		            				$("#ed_id").val(attr2[1]);
+		            				continue;
+		            			}
+		            			for(var x=2;x<attr2.length;x++){
+		            				attr2[1] += ":"+attr2[x];
+		            			}
+		            			alert(attr2[0]+":"+attr2[1]);
+		            			if(!needTurn(attr2[0],attr2[1])){
+		            				setValues(attr2[0],attr2[1]);
+		            			}
+		            			
+		            		}
+	            		}
             		}
+            		
             	}
             	$('#dlg').dialog("open");
             	

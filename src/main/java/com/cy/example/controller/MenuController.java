@@ -16,4 +16,9 @@ public class MenuController {
     public String userManage() {
 		return "userManage";
     }
+	
+	@RequestMapping("/loginRecordManage")
+    public String loginRecordManage() {
+		return "loginRecordManage";
+    }
 }

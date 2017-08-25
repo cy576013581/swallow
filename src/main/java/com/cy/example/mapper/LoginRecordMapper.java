@@ -24,13 +24,13 @@ public interface LoginRecordMapper {
 // 
 //    int delete(Long id);
      
-    LoginRecordEntity findOneById(Long id);
+//    LoginRecordEntity findOneById(Long id);
  
     List<LoginRecordEntity> findAll(@Param("page")PageVo page);
     
     int findAllCount(@Param("page")PageVo page);
     
-    int searchAllCount(@Param("user")LoginRecordEntity loginRecord,@Param("page")PageVo page);
+    int searchAllCount(@Param("loginRecord")LoginRecordEntity loginRecord,@Param("page")PageVo page);
     
     List<LoginRecordEntity> searchAll(@Param("loginRecord")LoginRecordEntity loginRecord,@Param("page")PageVo page);
 }
