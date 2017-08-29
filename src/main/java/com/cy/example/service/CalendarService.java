@@ -13,7 +13,5 @@ public interface CalendarService {
 	
 	public int delete(Long id);
 	
-	public CalendarEntity findCalendarById(Long id);
-	
-	public List<CalendarEntity> findCalendars();
+	public List<CalendarEntity> searchAll(CalendarEntity cal);
 }

@@ -36,6 +36,13 @@ public class CalendarController extends BaseController{
 	@RequestMapping("/add")
 	@ResponseBody
     public Map<String, Object> add(@ModelAttribute("calendar")CalendarEntity calendar) {
+		super.add(calendar);
+		if(null == calendar.getC_color()){
+			calendar.setC_color("#3a87ad");
+		}
+		if(null == calendar.getC_title()){
+			calendar.setC_title("默认日程");
+		}
 		calendar.setC_username(getLoginUserInfo().getC_username());
 		int rows = calendarService.add(calendar);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -49,7 +56,8 @@ public class CalendarController extends BaseController{
 	
 	@RequestMapping("/update")
 	@ResponseBody
-    public Map<String, Object> update(@ModelAttribute("calendar")CalendarEntity cal) {
+    public Map<String, Object> update(@ModelAttribute("cal")CalendarEntity cal) {
+		super.update(cal);
 		int rows = calendarService.update(cal);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -73,10 +81,11 @@ public class CalendarController extends BaseController{
 		return map;
     }
 	
-	@RequestMapping("/findAll")
+	@RequestMapping("/searchAll")
 	@ResponseBody
-    public Map<String, Object> findAll() {
-		List<CalendarEntity> list = calendarService.findCalendars();
+    public Map<String, Object> searchAll(@ModelAttribute("cal")CalendarEntity cal,String start,String end){
+		cal.setC_username(getLoginUserInfo().getC_username());
+		List<CalendarEntity> list = calendarService.searchAll(cal);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rows", list);
 		map.put("total", list.size());

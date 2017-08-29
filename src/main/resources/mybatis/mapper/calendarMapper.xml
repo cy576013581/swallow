@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.example.mapper.CalendarMapper" >
+    <resultMap id="BaseResultMap" type="com.cy.example.entity.CalendarEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="c_username" property="c_username" jdbcType="VARCHAR" />
+        <result column="c_title" property="c_title" jdbcType="VARCHAR" />
+        <result column="c_start" property="c_start" jdbcType="VARCHAR"/>
+        <result column="c_end" property="c_end" jdbcType="VARCHAR" />
+        <result column="c_color" property="c_color" jdbcType="VARCHAR" />
+        <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
+        <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
+        <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
+        <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
+    </resultMap>
+    
+    <sql id="ColumnList" >
+        id, c_username, c_title, c_start , c_end , c_color
+    </sql>
+    
+    <sql id="BaseList" >
+        c_createDate, n_creater, c_updateDate, n_updater
+    </sql>
+    
+    <select id="searchAll" resultMap="BaseResultMap"  >
+	   select <include refid="ColumnList" />
+	   from calendars
+	   where n_deleted=0 
+	   <if test="cal.c_username != ''"><if test="cal.c_username != null"> and c_username = #{cal.c_username}</if></if>
+   	   order by id
+    </select>  
+
+    <insert id="add" parameterType="com.cy.example.entity.UserEntity" >
+       insert into 
+       		calendars(c_username, c_title, c_start , c_end , c_color,<include refid="BaseList" />,n_deleted) 
+       	values(#{c_username},#{c_title},#{c_start},#{c_end},#{c_color},#{c_createDate},#{n_creater},#{c_updateDate},#{n_updater},0)
+    </insert>
+    
+    <update id="update" parameterType="com.cy.example.entity.UserEntity" >
+       UPDATE 
+       		calendars 
+       SET 
+       	<if test="c_username != null">
+       		<if test="c_username != '' ">
+       			c_username = #{c_username},
+       		</if> 
+       	</if>
+       	<if test="c_title != null">
+       		<if test="c_title != '' ">
+       			c_title = #{c_title},
+       		</if> 
+       	</if>
+       	<if test="c_start != null">
+       		<if test="c_start != '' ">
+       			c_start = #{c_start},
+       		</if> 
+       	</if>
+       	<if test="c_end != null">
+       		<if test="c_end != '' ">
+       			c_end = #{c_end},
+       		</if> 
+       	</if>
+       	<if test="c_color != null">
+       		<if test="c_color != '' ">
+       			c_color = #{c_color},
+       		</if> 
+       	</if>
+       	c_updateDate = #{c_updateDate},
+       	n_updater = #{n_updater}
+       WHERE 
+       		id = #{id}
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.Long" >
+       UPDATE 
+       		calendars 
+       SET
+       		n_deleted =1
+       where id = #{id}
+    </delete>
+</mapper>

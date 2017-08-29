@@ -24,10 +24,7 @@ public class CalendarServiceImpl implements CalendarService{
 	public int delete(Long id) {
 		return this.calendarMapper.delete(id);
 	}
-	public CalendarEntity findCalendarById(Long id) {
-		return this.calendarMapper.findCalendarById(id);
-	}
-	public List<CalendarEntity> findCalendars() {
-		return this.calendarMapper.findCalendars();
+	public List<CalendarEntity> searchAll(CalendarEntity cal) {
+		return this.calendarMapper.searchAll(cal);
 	}
 }

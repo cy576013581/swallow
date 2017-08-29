@@ -57,37 +57,37 @@
 													<div id="external-events">
 														<div class="external-event label-grey" data-class="label-grey">
 															<i class="ace-icon fa fa-arrows"></i>
-															日程1
+															默认日程
 														</div>
 
 														<div class="external-event label-success" data-class="label-success">
 															<i class="ace-icon fa fa-arrows"></i>
-															日程2
+															默认日程
 														</div>
 
 														<div class="external-event label-danger" data-class="label-danger">
 															<i class="ace-icon fa fa-arrows"></i>
-															日程3
+															默认日程
 														</div>
 
 														<div class="external-event label-purple" data-class="label-purple">
 															<i class="ace-icon fa fa-arrows"></i>
-															日程4
+															默认日程
 														</div>
 
 														<div class="external-event label-yellow" data-class="label-yellow">
 															<i class="ace-icon fa fa-arrows"></i>
-															日程5
+															默认日程
 														</div>
 
 														<div class="external-event label-pink" data-class="label-pink">
 															<i class="ace-icon fa fa-arrows"></i>
-															日程6
+															默认日程
 														</div>
 
 														<div class="external-event label-info" data-class="label-info">
 															<i class="ace-icon fa fa-arrows"></i>
-															日程7
+															默认日程
 														</div>
 
 														<label>
@@ -128,6 +128,7 @@
 		<script src="../lib/aceadmin/assets/js/ace-elements.min.js"></script>
 		<script src="../lib/aceadmin/assets/js/ace.min.js"></script>
 		<script type="text/javascript" src="../lib/toastr/toastr.js"></script>
+		<script src="../lib/aceadmin/assets/js/fullcalendar_zh-cn.js"></script>
 		<script type="text/javascript">
 			
 			// 对Date的扩展，将 Date 转化为指定格式的String  
@@ -191,7 +192,7 @@
 					events: function(start,end,timezone, callback) {
 						//alert(new Date(start).Format("yyyy-MM-dd")+":"+new Date(end).Format("yyyy-MM-dd"));
 						$.ajax({
-				            url: "${controller}findAll?s="+new Date().getTime(),
+				            url: "${controller}searchAll?s="+new Date().getTime(),
 				            dataType: 'json',
 				            data: {
 				                start: new Date(start).Format("yyyy-MM-dd"), 
@@ -204,8 +205,9 @@
 			                            events.push({
 			                            	id: c.id,
 			                                title: c.c_title,
-			                                start: c.d_start, // will be parsed
-			                                end: c.d_end
+			                                start: c.c_start, // will be parsed
+			                                end: c.c_end,
+			                                color: c.c_color
 			                            });
 				                    });
 				                }
@@ -216,54 +218,105 @@
 					,
 					editable: true,
 					droppable: true, // this allows things to be dropped onto the calendar !!!
-					drop: function(date, allDay) { // this function is called when something is dropped
-					
+					drop: function(date, allDay) {
 						var originalEventObject = $(this).data('eventObject');
 						var $extraEventClass = $(this).attr('data-class');
-						
 						var copiedEventObject = $.extend({}, originalEventObject);
 						
 						copiedEventObject.start = date;
 						copiedEventObject.allDay = allDay;
 						if($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
+						var color = $(this).css("background-color");
+						var startStr = new Date(date).Format("yyyy-MM-dd");
+						var endStr = new Date(new Date(date).getTime()+1000 * 60 * 60 * 24).Format("yyyy-MM-dd");
+						//alert(startStr+":"+endStr);
+						$.ajax({ 
+							url:"${controller}add?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+							type:"POST",
+							data: {c_start:startStr,c_end:endStr,c_color:color},
+							dataType:"json", //接收返回的数据方式为json
+							error:function(XMLHttpRequest,textStatus,errorThrown){
+							}, //错误提示 
+							success:function(data){ //data为交互成功后，后台返回的数据
+								var flag =data.flag;//服务器返回标记
+								if(flag){
+									$('#calendar').fullCalendar('refetchEvents');
+									toastr.success("添加成功！");
+								}else {
+									toastr.error("添加失败！");
+								}
+							}
+						});
 						
-						$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-						
-						if ($('#drop-remove').is(':checked')) {
-							// if so, remove the element from the "Draggable Events" list
-							$(this).remove();
-						}
-					}
-					,
+					},
+					//日程拖动事件
+					/*
+					event 是 Event Object 对象，包含当前日程的信息（时间，标题等）
+					dayDelta 是日程移动的天数（可能是负数）
+					minuteDelta 是日程移动的分钟数（可能是负数），只有在议程周视图有效，其他视图下是0。
+					allDay 在月视图下被移动一天或者周视图下的“all-day”时间槽时是true；当移动到周视图下的其他时间槽时是false。
+					revertFunc 是一个函数，如果被调用的话，日程会恢复到拖拽前的时间（就是被还原），当ajax失败的时候比较有用。
+					jsEvent 是原生的js对象，包含鼠标点击坐标等信息。
+					ui 是 jQuery UI 对象。
+					view 是当前的 View Object。
+					*/
+					eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ) {
+						//alert(new Date(event.start).Format("yyyy-MM-dd")+":"+new Date(event.end).Format("yyyy-MM-dd"));
+						$.ajax({ 
+							url:"${controller}update?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+							type:"POST",
+							data: {id:event.id,c_color:event.color,c_title:event.title,c_start:new Date(event.start).Format("yyyy-MM-dd"),c_end:new Date(event.end).Format("yyyy-MM-dd")},
+							dataType:"json", //接收返回的数据方式为json
+							error:function(XMLHttpRequest,textStatus,errorThrown){
+							}, //错误提示 
+							success:function(data){ //data为交互成功后，后台返回的数据
+								var flag =data.flag;//服务器返回标记
+								if(flag){
+									toastr.success("修改成功！");
+								}else {
+									toastr.error("修改失败！");
+								}
+							}
+						});
+					},
+					eventResize: function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
+						$.ajax({ 
+							url:"${controller}update?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+							type:"POST",
+							data: {id:event.id,c_color:event.color,c_title:event.title,c_start:new Date(event.start).Format("yyyy-MM-dd"),c_end:new Date(event.end).Format("yyyy-MM-dd")},
+							dataType:"json", //接收返回的数据方式为json
+							error:function(XMLHttpRequest,textStatus,errorThrown){
+							}, //错误提示 
+							success:function(data){ //data为交互成功后，后台返回的数据
+								var flag =data.flag;//服务器返回标记
+								if(flag){
+									toastr.success("修改成功！");
+								}else {
+									toastr.error("修改失败！");
+								}
+							}
+						});
+					},
 					selectable: true,
 					selectHelper: true,
-					select: function(start, end, allDay, jsEvent, view ) {
+					select: function(start, end, allDay) {
 						bootbox.setDefaults("locale","zh_CN");  
 						bootbox.prompt("创建新的日程:", function(title) {
 							if (title !== null) {
-								console.info(jsEvent);
-								console.info(view);
+								//alert($(this).css("background-color"));
 								var endStr = new Date(end).Format("yyyy-MM-dd");
 								var startStr = new Date(start).Format("yyyy-MM-dd");
 								$.ajax({ 
 									url:"${controller}add?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
 									type:"POST",
-									data: {c_title:title,d_start:startStr,d_end:endStr},
+									data: {c_title:title,c_start:startStr,c_end:endStr},
 									dataType:"json", //接收返回的数据方式为json
 									error:function(XMLHttpRequest,textStatus,errorThrown){
 									}, //错误提示 
 									success:function(data){ //data为交互成功后，后台返回的数据
 										var flag =data.flag;//服务器返回标记
 										if(flag){
-											calendar.fullCalendar('renderEvent',
-												{
-													title: title,
-													start: start,
-													end: end,
-													allDay: allDay
-												},
-												true
-											);
+											$('#calendar').fullCalendar('refetchEvents');
 											toastr.success("添加成功！");
 										}else {
 											toastr.error("添加失败！");
@@ -297,24 +350,57 @@
 						  </div>\
 						 </div>\
 						</div>';
-					
+						
+						
 					
 						var modal = $(modal).appendTo('body');
-						modal.find('form').on('submit', function(ev){
+						modal.find('form').on('submit', function(ev){//修改
 							ev.preventDefault();
-			
+							
 							calEvent.title = $(this).find("input[type=text]").val();
-							calendar.fullCalendar('updateEvent', calEvent);
+							$.ajax({ 
+								url:"${controller}update?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+								type:"POST",
+								data: {id:parseInt(calEvent._id),c_title:calEvent.title},
+								dataType:"json", //接收返回的数据方式为json
+								error:function(XMLHttpRequest,textStatus,errorThrown){
+								}, //错误提示 
+								success:function(data){ //data为交互成功后，后台返回的数据
+									var flag =data.flag;//服务器返回标记
+									if(flag){
+										calendar.fullCalendar('updateEvent', calEvent);
+										toastr.success("修改成功！");
+									}else {
+										toastr.error("修改失败！");
+									}
+								}
+							});
 							modal.modal("hide");
 						});
-						modal.find('button[data-action=delete]').on('click', function() {
-							calendar.fullCalendar('removeEvents' , function(ev){
-								return (ev._id == calEvent._id);
-							})
+						modal.find('button[data-action=delete]').on('click', function() {//删除
+							$.ajax({ 
+									url:"${controller}delete?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+									type:"POST",
+									data: {id:calEvent._id},
+									dataType:"json", //接收返回的数据方式为json
+									error:function(XMLHttpRequest,textStatus,errorThrown){
+									}, //错误提示 
+									success:function(data){ //data为交互成功后，后台返回的数据
+										var flag =data.flag;//服务器返回标记
+										if(flag){
+											calendar.fullCalendar('removeEvents' , function(ev){
+												return (ev._id == calEvent._id);
+											})
+											toastr.success("删除成功！");
+										}else {
+											toastr.error("删除失败！");
+										}
+									}
+								});
 							modal.modal("hide");
 						});
 						
-						modal.modal('show').on('hidden', function(){
+						modal.modal('show').on('hidden', function(){//取消
 							modal.remove();
 						});
 			
@@ -325,12 +411,7 @@
 			
 			});
 			
-			function addCal(title,start,end){
-				//alert(end.Format("yyyy-MM-dd"));
-				
-			}
-			
-			
+		
 		</script>
 
 		<!-- the following scripts are used in demo only for onpage help and you don't need them -->
