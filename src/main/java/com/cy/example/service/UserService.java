@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
-import com.cy.example.Vo.PageVo;
+import com.cy.example.carrier.PageCar;
 import com.cy.example.entity.UserEntity;
 
 public interface UserService {
@@ -20,11 +20,13 @@ public interface UserService {
 	
 	public UserEntity findUserById(Long id);
 	
-	public List<UserEntity> findAll(PageVo page);
+	public UserEntity findOneByUsername(String username);
 	
-	public int findAllCount(PageVo page);
+	public List<UserEntity> findAll(PageCar page);
 	
-	public int searchAllCount(UserEntity user,PageVo page);
+	public int findAllCount(PageCar page);
+	
+	public int searchAllCount(UserEntity user,PageCar page);
     
-	public List<UserEntity> searchAll(UserEntity user,PageVo page);
+	public List<UserEntity> searchAll(UserEntity user,PageCar page);
 }

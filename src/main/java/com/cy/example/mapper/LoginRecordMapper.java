@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
-import com.cy.example.Vo.PageVo;
+import com.cy.example.carrier.PageCar;
 import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
 
@@ -26,11 +26,11 @@ public interface LoginRecordMapper {
      
 //    LoginRecordEntity findOneById(Long id);
  
-    List<LoginRecordEntity> findAll(@Param("page")PageVo page);
+    List<LoginRecordEntity> findAll(@Param("page")PageCar page);
     
-    int findAllCount(@Param("page")PageVo page);
+    int findAllCount(@Param("page")PageCar page);
     
-    int searchAllCount(@Param("loginRecord")LoginRecordEntity loginRecord,@Param("page")PageVo page);
+    int searchAllCount(@Param("loginRecord")LoginRecordEntity loginRecord,@Param("page")PageCar page);
     
-    List<LoginRecordEntity> searchAll(@Param("loginRecord")LoginRecordEntity loginRecord,@Param("page")PageVo page);
+    List<LoginRecordEntity> searchAll(@Param("loginRecord")LoginRecordEntity loginRecord,@Param("page")PageCar page);
 }

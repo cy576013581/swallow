@@ -1,17 +1,21 @@
 package com.cy.example.entity;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class LoginRecordEntity extends BaseEntity{
 
 	private String c_loginIp;
 	
-	private UserEntity user;
+	private String c_username;
 	
-	public UserEntity getUser() {
-		return user;
+	
+	public String getC_username() {
+		return c_username;
 	}
 
-	public void setUser(UserEntity user) {
-		this.user = user;
+	public void setC_username(String c_username) {
+		this.c_username = c_username;
 	}
 
 	public String getC_loginIp() {

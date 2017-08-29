@@ -1,4 +1,4 @@
-<#macro calendar>
+<#macro calendar controller>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -15,6 +15,8 @@
 		<link rel="stylesheet" href="../lib/aceadmin/assets/css/ace.min.css" id="main-ace-style" />
 		<link rel="stylesheet" href="../lib/aceadmin/assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="../lib/aceadmin/assets/css/ace-rtl.min.css" />
+		<link href="../lib/toastr/toastr.css" rel="stylesheet"/>
+		
 		<script src="../lib/aceadmin/assets/js/ace-extra.min.js"></script>
 	</head>
 
@@ -47,7 +49,7 @@
 									<div class="col-sm-3">
 										<div class="widget-box transparent">
 											<div class="widget-header">
-												<h4>拖动标签添加事件</h4>
+												<h4>拖动标签添加日程</h4>
 											</div>
 
 											<div class="widget-body">
@@ -55,37 +57,37 @@
 													<div id="external-events">
 														<div class="external-event label-grey" data-class="label-grey">
 															<i class="ace-icon fa fa-arrows"></i>
-															事件1
+															日程1
 														</div>
 
 														<div class="external-event label-success" data-class="label-success">
 															<i class="ace-icon fa fa-arrows"></i>
-															事件2
+															日程2
 														</div>
 
 														<div class="external-event label-danger" data-class="label-danger">
 															<i class="ace-icon fa fa-arrows"></i>
-															事件3
+															日程3
 														</div>
 
 														<div class="external-event label-purple" data-class="label-purple">
 															<i class="ace-icon fa fa-arrows"></i>
-															事件4
+															日程4
 														</div>
 
 														<div class="external-event label-yellow" data-class="label-yellow">
 															<i class="ace-icon fa fa-arrows"></i>
-															事件5
+															日程5
 														</div>
 
 														<div class="external-event label-pink" data-class="label-pink">
 															<i class="ace-icon fa fa-arrows"></i>
-															事件6
+															日程6
 														</div>
 
 														<div class="external-event label-info" data-class="label-info">
 															<i class="ace-icon fa fa-arrows"></i>
-															事件7
+															日程7
 														</div>
 
 														<label>
@@ -125,21 +127,38 @@
 		<!-- ace scripts -->
 		<script src="../lib/aceadmin/assets/js/ace-elements.min.js"></script>
 		<script src="../lib/aceadmin/assets/js/ace.min.js"></script>
+		<script type="text/javascript" src="../lib/toastr/toastr.js"></script>
 		<script type="text/javascript">
+			
+			// 对Date的扩展，将 Date 转化为指定格式的String  
+			// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，   
+			// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)   
+			Date.prototype.Format = function (fmt) { //author: meizz   
+			    var o = {  
+			        "M+": this.getMonth() + 1, //月份   
+			        "d+": this.getDate(), //日   
+			        "H+": this.getHours(), //小时   
+			        "m+": this.getMinutes(), //分   
+			        "s+": this.getSeconds(), //秒   
+			        "q+": Math.floor((this.getMonth() + 3) / 3), //季度   
+			        "S": this.getMilliseconds() //毫秒   
+			    };  
+			    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));  
+			    for (var k in o)  
+			    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));  
+			    return fmt;  
+			}
+			
+			
 			jQuery(function($) {
-
 				$('#external-events div.external-event').each(function() {
 			
-					// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-					// it doesn't need to have a start or end
 					var eventObject = {
 						title: $.trim($(this).text()) // use the element's text as the event title
 					};
 			
-					// store the Event Object in the DOM element so we can get to it later
 					$(this).data('eventObject', eventObject);
 			
-					// make the event draggable using jQuery UI
 					$(this).draggable({
 						zIndex: 999,
 						revert: true,      // will cause the event to go back to its
@@ -147,6 +166,7 @@
 					});
 					
 				});
+				
 			
 				/* initialize the calendar
 				-----------------------------------------------------------------*/
@@ -156,8 +176,6 @@
 				var m = date.getMonth();
 				var y = date.getFullYear();
 			
-				//alert(new Date(y, m, d-3, 16, 0));
-				
 				var calendar = $('#calendar').fullCalendar({
 					//isRTL: true,
 					 buttonHtml: {
@@ -170,77 +188,92 @@
 						center: 'title',
 						right: 'month,agendaWeek,agendaDay'
 					},
-					events: [
-					  {
-						title: 'All Day Event',
-						start: new Date(y, m, 1),
-						className: 'label-important'
-					  },
-					  {
-						title: 'Long Event',
-						start: new Date(y, m, d-5),
-						end: new Date(y, m, d-2),
-						className: 'label-success'
-					  },
-					  {
-						title: 'Some Event',
-						start: new Date(y, m, d-3, 16, 0),
-						allDay: false
-					  }
-					]
+					events: function(start,end,timezone, callback) {
+						//alert(new Date(start).Format("yyyy-MM-dd")+":"+new Date(end).Format("yyyy-MM-dd"));
+						$.ajax({
+				            url: "${controller}findAll?s="+new Date().getTime(),
+				            dataType: 'json',
+				            data: {
+				                start: new Date(start).Format("yyyy-MM-dd"), 
+								end: new Date(end).Format("yyyy-MM-dd")
+				            },
+				            success: function(data) { // 获取当前月的数据
+				                var events = [];
+				                if (data.total >0) {
+				                    $.each(data.rows,function(i,c) {
+			                            events.push({
+			                            	id: c.id,
+			                                title: c.c_title,
+			                                start: c.d_start, // will be parsed
+			                                end: c.d_end
+			                            });
+				                    });
+				                }
+				                callback(events);
+				            }
+				        });
+					}
 					,
 					editable: true,
 					droppable: true, // this allows things to be dropped onto the calendar !!!
 					drop: function(date, allDay) { // this function is called when something is dropped
 					
-						// retrieve the dropped element's stored Event Object
 						var originalEventObject = $(this).data('eventObject');
 						var $extraEventClass = $(this).attr('data-class');
 						
-						
-						// we need to copy it, so that multiple events don't have a reference to the same object
 						var copiedEventObject = $.extend({}, originalEventObject);
 						
-						// assign it the date that was reported
 						copiedEventObject.start = date;
 						copiedEventObject.allDay = allDay;
 						if($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
 						
-						// render the event on the calendar
-						// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
 						$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
 						
-						// is the "remove after drop" checkbox checked?
 						if ($('#drop-remove').is(':checked')) {
 							// if so, remove the element from the "Draggable Events" list
 							$(this).remove();
 						}
-						
 					}
 					,
 					selectable: true,
 					selectHelper: true,
-					select: function(start, end, allDay) {
-						
+					select: function(start, end, allDay, jsEvent, view ) {
 						bootbox.setDefaults("locale","zh_CN");  
-						bootbox.prompt("创建新的事件:", function(title) {
+						bootbox.prompt("创建新的日程:", function(title) {
 							if (title !== null) {
-								calendar.fullCalendar('renderEvent',
-									{
-										title: title,
-										start: start,
-										end: end,
-										allDay: allDay
-									},
-									true
-								);
-								addCal(title,start,end);
+								console.info(jsEvent);
+								console.info(view);
+								var endStr = new Date(end).Format("yyyy-MM-dd");
+								var startStr = new Date(start).Format("yyyy-MM-dd");
+								$.ajax({ 
+									url:"${controller}add?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+									type:"POST",
+									data: {c_title:title,d_start:startStr,d_end:endStr},
+									dataType:"json", //接收返回的数据方式为json
+									error:function(XMLHttpRequest,textStatus,errorThrown){
+									}, //错误提示 
+									success:function(data){ //data为交互成功后，后台返回的数据
+										var flag =data.flag;//服务器返回标记
+										if(flag){
+											calendar.fullCalendar('renderEvent',
+												{
+													title: title,
+													start: start,
+													end: end,
+													allDay: allDay
+												},
+												true
+											);
+											toastr.success("添加成功！");
+										}else {
+											toastr.error("添加失败！");
+										}
+									}
+								});
 							}
 						});
-						
-			
 						calendar.fullCalendar('unselect');
-
+						
 					}
 					,
 					eventClick: function(calEvent, jsEvent, view) {
@@ -252,13 +285,13 @@
 							 <div class="modal-body">\
 							   <button type="button" class="close" data-dismiss="modal" style="margin-top:-10px;">&times;</button>\
 							   <form class="no-margin">\
-								  <label>修改事件内容 &nbsp;</label>\
+								  <label>修改日程内容 &nbsp;</label>\
 								  <input class="middle" autocomplete="off" type="text" value="' + calEvent.title + '" />\
 								 <button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> 保存</button>\
 							   </form>\
 							 </div>\
 							 <div class="modal-footer">\
-								<button type="button" class="btn btn-sm btn-danger" data-action="delete"><i class="ace-icon fa fa-trash-o"></i> 删除事件</button>\
+								<button type="button" class="btn btn-sm btn-danger" data-action="delete"><i class="ace-icon fa fa-trash-o"></i> 删除日程</button>\
 								<button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> 退出</button>\
 							 </div>\
 						  </div>\
@@ -293,24 +326,11 @@
 			});
 			
 			function addCal(title,start,end){
-				alert(new Date(start)+"-"+end+"-"+title);
-				$.ajax({ 
-					url:"system/calendar/add?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
-					type:"POST",
-					data: {title:title,start:start,end:end},
-					dataType:"json", //接收返回的数据方式为json
-					error:function(XMLHttpRequest,textStatus,errorThrown){
-					}, //错误提示 
-					success:function(data){ //data为交互成功后，后台返回的数据
-						var flag =data.flag;//服务器返回标记
-						if(flag){
-							alert("添加成功！");
-						}else {
-							alert("添加失败！");
-						}
-					}
-				});
+				//alert(end.Format("yyyy-MM-dd"));
+				
 			}
+			
+			
 		</script>
 
 		<!-- the following scripts are used in demo only for onpage help and you don't need them -->

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cy.example.Vo.PageVo;
+import com.cy.example.carrier.PageCar;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
@@ -81,7 +81,7 @@ public class UserController extends BaseController{
 	
 	@RequestMapping("/findAll")
 	@ResponseBody
-    public Map<String, Object> findAll(@ModelAttribute("pageVo")PageVo page) {
+    public Map<String, Object> findAll(@ModelAttribute("pageVo")PageCar page) {
 //		System.out.print("================================="+page.toString()+page.getIndex());
 		List<UserEntity> list = userService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -93,7 +93,7 @@ public class UserController extends BaseController{
 	
 	@RequestMapping("/searchData")
 	@ResponseBody
-    public Map<String, Object> searchData(@ModelAttribute("user")UserEntity user,@ModelAttribute("pageVo")PageVo page) {
+    public Map<String, Object> searchData(@ModelAttribute("user")UserEntity user,@ModelAttribute("pageVo")PageCar page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UserEntity> users  = userService.searchAll(user,page);
 		int sum = userService.searchAllCount(user, page);
@@ -117,7 +117,7 @@ public class UserController extends BaseController{
 			LoginRecordEntity loginRecord = new LoginRecordEntity();
 			loginRecord.setC_createDate(DateUtil.getNow());
 			loginRecord.setC_loginIp(super.getIP(getRequest()));
-			loginRecord.setN_creater(getUser.getId());
+			loginRecord.setC_username(getUser.getC_username());
 			loginRecordService.add(loginRecord);
 		}
 		return map;

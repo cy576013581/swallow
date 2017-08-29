@@ -27,15 +27,17 @@ import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 @Controller
 @RequestMapping("/system/calendar")
-public class CalendarController {
+public class CalendarController extends BaseController{
 
 	@Autowired
 	private CalendarService calendarService;
 	
 	
 	@RequestMapping("/add")
-    public Map<String, Object> addCalendar(@ModelAttribute("calendar")CalendarEntity cal) {
-		int rows = calendarService.add(cal);
+	@ResponseBody
+    public Map<String, Object> add(@ModelAttribute("calendar")CalendarEntity calendar) {
+		calendar.setC_username(getLoginUserInfo().getC_username());
+		int rows = calendarService.add(calendar);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
 			map.put("flag", true);
@@ -46,7 +48,8 @@ public class CalendarController {
     }
 	
 	@RequestMapping("/update")
-    public Map<String, Object> updateCalendar(@ModelAttribute("calendar")CalendarEntity cal) {
+	@ResponseBody
+    public Map<String, Object> update(@ModelAttribute("calendar")CalendarEntity cal) {
 		int rows = calendarService.update(cal);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -58,7 +61,8 @@ public class CalendarController {
     }
 	
 	@RequestMapping("/delete")
-    public Map<String, Object> deletecalendar(long id) {
+	@ResponseBody
+    public Map<String, Object> delete(long id) {
 		int rows = calendarService.delete(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -71,7 +75,7 @@ public class CalendarController {
 	
 	@RequestMapping("/findAll")
 	@ResponseBody
-    public Map<String, Object> findAllcalendar() {
+    public Map<String, Object> findAll() {
 		List<CalendarEntity> list = calendarService.findCalendars();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rows", list);

@@ -1,4 +1,4 @@
-<#macro grid controller title fields rownumbers="true" singleSelect="true" width="1000px" height="500px" ed_width="350px" ed_height="330px">
+<#macro grid controller title fields rownumbers="true" singleSelect="true" idDb="true" width="1000px" height="500px" ed_width="350px" ed_height="330px">
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,9 +75,9 @@
 			for(var i = 0;i<map.size();i++){
 				json += map.key(i)+"="+getValues(map,"tb_",map.key(i))+"&";
 				//var arr = $("#tb_"+map.key(i)).attr("class");
-				//alert(arr);
+				//alert(map.key(i)+"="+getValues(map,"tb_",map.key(i)));
 			}
-			json += "&rows="+options.pageSize
+			json += "rows="+options.pageSize
 			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
                 url:"${controller}searchData?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
@@ -120,7 +120,7 @@
             	var reg = new RegExp('"','g');
             	jsonStr = jsonStr.substring(1,jsonStr.length-1).replace(reg,'');
             	var attr = jsonStr.split(",");
-            	console.log(attr);
+            	//console.log(attr);
             	for(var i=0;i<attr.length;i++){
             		var attr2 =  attr[i].split(":")
             		if(attr2[1] != "null" && attr2[1] != ""){
@@ -145,7 +145,7 @@
 		            			for(var x=2;x<attr2.length;x++){
 		            				attr2[1] += ":"+attr2[x];
 		            			}
-		            			alert(attr2[0]+":"+attr2[1]);
+		            			//alert(attr2[0]+":"+attr2[1]);
 		            			if(!needTurn(attr2[0],attr2[1])){
 		            				setValues(attr2[0],attr2[1]);
 		            			}
@@ -207,7 +207,10 @@
 		//实现双击编辑操作
 		function onDblClickRow(index,field,value){
 			//toastr.info('双击操作！');
-			editData();
+			if("${idDb}" == "true"){
+				editData();
+			}
+			
 		}
 		
 		
@@ -345,24 +348,24 @@
 				switch (type)
 				{
 					case "combobox":
-					  returnVal = $("#"+loc+key).combobox('getValue');//$("#tb_"+key)是我自定义的格式
-					  break;
+					  	returnVal = $("#"+loc+key).combobox('getValue');//$("#tb_"+key)是我自定义的格式
+					  	break;
 					case "numberbox":
-					  returnVal = $("#"+loc+key).numberbox('getValue');
-					  break;
+					  	returnVal = $("#"+loc+key).numberbox('getValue');
+					  	break;
 					case "datebox":
-					  returnVal = $("#"+loc+key).datebox('getValue');
-					  break;
+					  	returnVal = $("#"+loc+key).datebox('getValue');
+					  	break;
 					case "datetimebox":
-					  returnVal = $("#"+loc+key).datetimebox('getValue');
-					  break;
+					  	returnVal = $("#"+loc+key).datetimebox('getValue');
+					  	break;
 					case "combotree":
-					  returnVal = $("#"+loc+key).combotree('getValue');
-					  break;
+					  	returnVal = $("#"+loc+key).combotree('getValue');
+					  	break;
 					case "textbox":
-					  returnVal = $("#"+loc+key).textbox('getValue');
-					  //alert("#"+loc+key+":"+returnVal);
-					  break;
+					  	returnVal = $("#"+loc+key).textbox('getValue');
+					  	//alert("#"+loc+key+":"+returnVal);
+					  	break;
 				}
 			}
 			return returnVal;
@@ -416,9 +419,9 @@
     </div>
     <!--操作栏-->
     <div id="ft" style="padding:2px 5px;">
-        <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addData()">添加</a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editData()">编辑</a>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteData()">删除</a>
+        <a id="btn_add" href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addData()">添加</a>
+        <a id="btn_edit" href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editData()">编辑</a>
+        <a id="btn_remove" href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteData()">删除</a>
     </div>
     <!--编辑框-->
     <div id="dlg" class="easyui-dialog" title="编辑${title}信息" style="width:${ed_width};height:${ed_height};padding:10px"

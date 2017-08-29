@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cy.example.Vo.PageVo;
+import com.cy.example.carrier.PageCar;
 import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.mapper.LoginRecordMapper;
 import com.cy.example.service.LoginRecordService;
@@ -21,21 +21,21 @@ public class LoginRecordServiceImpl implements LoginRecordService{
 		return loginRecordMapper.add(loginRecord);
 	}
 
-	public List<LoginRecordEntity> findAll(PageVo page) {
+	public List<LoginRecordEntity> findAll(PageCar page) {
 		return loginRecordMapper.findAll(page);
 	}
 
-	public int findAllCount(PageVo page) {
+	public int findAllCount(PageCar page) {
 		return loginRecordMapper.findAllCount(page);
 	}
 
 	public List<LoginRecordEntity> searchAll(LoginRecordEntity loginRecord,
-			PageVo page) {
+			PageCar page) {
 		// TODO Auto-generated method stub
 		return loginRecordMapper.searchAll(loginRecord, page);
 	}
 
-	public int searchAllCount(LoginRecordEntity loginRecord, PageVo page) {
+	public int searchAllCount(LoginRecordEntity loginRecord, PageCar page) {
 		// TODO Auto-generated method stub
 		return loginRecordMapper.searchAllCount(loginRecord, page);
 	}

@@ -13,13 +13,13 @@ public class CalendarEntity extends BaseEntity{
 	private String c_title;
 
 	//开始时间 
-	private Date d_start;
+	private String d_start;
 
 	//结束时间
-	private Date d_end;
+	private String d_end;
 
 	//事件级别 
-	private int n_level;
+	private String n_level;
 
 	public String getC_username() {
 		return c_username;
@@ -37,31 +37,28 @@ public class CalendarEntity extends BaseEntity{
 		this.c_title = c_title;
 	}
 
-	public Date getD_start() {
+	public String getD_start() {
 		return d_start;
 	}
 
-	public void setD_start(Date d_start) {
+	public void setD_start(String d_start) {
 		this.d_start = d_start;
 	}
 
-	public Date getD_end() {
+	public String getD_end() {
 		return d_end;
 	}
 
-	public void setD_end(Date d_end) {
+	public void setD_end(String d_end) {
 		this.d_end = d_end;
 	}
 
-	public int getN_level() {
+	public String getN_level() {
 		return n_level;
 	}
 
-	public void setN_level(int n_level) {
+	public void setN_level(String n_level) {
 		this.n_level = n_level;
 	}
-
-	
-	
 	
 }

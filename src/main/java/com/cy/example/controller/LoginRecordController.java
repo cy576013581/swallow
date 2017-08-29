@@ -1,5 +1,6 @@
 package com.cy.example.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cy.example.Vo.PageVo;
+import com.cy.example.carrier.PageCar;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
@@ -28,21 +29,23 @@ public class LoginRecordController extends BaseController{
 	@Autowired
 	private LoginRecordService loginRecordService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping("/findAll")
 	@ResponseBody
-    public Map<String, Object> findAll(@ModelAttribute("pageVo")PageVo page) {
-//		System.out.print("================================="+page.toString()+page.getIndex());
+    public Map<String, Object> findAll(@ModelAttribute("page")PageCar page) {
 		List<LoginRecordEntity> list = loginRecordService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = loginRecordService.findAllCount(page);
-	map.put("rows", list);
+		map.put("rows", list);
 		map.put("total", sum);
 		return map;
     }
 	
 	@RequestMapping("/searchData")
 	@ResponseBody
-    public Map<String, Object> searchData(@ModelAttribute("loginRecord")LoginRecordEntity loginRecord,@ModelAttribute("pageVo")PageVo page) {
+    public Map<String, Object> searchData(@ModelAttribute("loginRecord")LoginRecordEntity loginRecord,@ModelAttribute("page")PageCar page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<LoginRecordEntity> list  = loginRecordService.searchAll(loginRecord,page);
 		int sum = loginRecordService.searchAllCount(loginRecord, page);

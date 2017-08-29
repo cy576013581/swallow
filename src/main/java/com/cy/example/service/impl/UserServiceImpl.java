@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cy.example.Vo.PageVo;
+import com.cy.example.carrier.PageCar;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.mapper.UserMapper;
 import com.cy.example.service.UserService;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
 	public UserEntity findUserById(Long id) {
 		return this.userMapper.findOneById(id);
 	}
-	public List<UserEntity> findAll(PageVo page) {
+	public List<UserEntity> findAll(PageCar page) {
 		return this.userMapper.findAll(page);
 	}
 	public UserEntity validate(UserEntity user) {
@@ -44,18 +44,22 @@ public class UserServiceImpl implements UserService{
 		return this.userMapper.validate(user);
 	}
 	
-	public List<UserEntity> searchAll(UserEntity user,PageVo page) {
+	public List<UserEntity> searchAll(UserEntity user,PageCar page) {
 		List<UserEntity> list = userMapper.searchAll(user,page);
 		return list;
 	}
 	
-	public int findAllCount(PageVo page){
+	public int findAllCount(PageCar page){
 		int sum = userMapper.findAllCount(page);
 		return sum;
 	}
-	public int searchAllCount(UserEntity user, PageVo page) {
+	public int searchAllCount(UserEntity user, PageCar page) {
 		// TODO Auto-generated method stub
 		int sum = userMapper.searchAllCount(user,page);
 		return sum;
+	}
+	public UserEntity findOneByUsername(String username) {
+		// TODO Auto-generated method stub
+		return this.userMapper.findOneByUsername(username);
 	}
 }

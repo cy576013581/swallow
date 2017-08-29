@@ -5,19 +5,16 @@
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
         <result column="c_loginIp" property="c_loginIp" jdbcType="VARCHAR"/>
-        <association property="user" javaType="com.cy.example.entity.UserEntity">  
-            <id column="n_creater" property="id"/>  
-            <id column="c_username" property="c_username"/>
-        </association>  
+        <result column="c_username" property="c_username" jdbcType="VARCHAR"/>
     </resultMap>
     
     <sql id="ColumnList" >
-        id, c_createDate, n_creater, c_loginIp
+        id, c_createDate, c_loginIp, c_username
     </sql>
     
     <select id="findAll" resultMap="BaseResultMap"  >
-	   select l.id, l.c_createDate, l.n_creater, l.c_loginIp,u.c_username
-	   from loginrecord l,users u where l.n_creater = u.id order by id limit #{page.index},#{page.rows}
+	   select <include refid="ColumnList" />
+	   from loginrecord order by id limit #{page.index},#{page.rows}
     </select>
     
     <select id="findAllCount" resultType="java.lang.Integer" >
@@ -25,23 +22,23 @@
 	   from loginrecord
     </select>
     
-    <select id="searchAll" resultMap="BaseResultMap"  >
-	   select l.id, l.c_createDate, l.n_creater, l.c_loginIp,u.c_username
-	   from loginrecord l,users u  
+    <select id="searchAll" resultMap="BaseResultMap">
+	   select <include refid="ColumnList" />
+	   from loginrecord
 	   where 1=1
-	   <if test="loginRecord.user != null"><if test="loginRecord.user.id != null"> and l.n_creater = #{loginRecord.user.id}</if></if>
-   	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp = #{loginRecord.c_loginIp}</if></if>
-   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(l.c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
-   	   order by u.id limit #{page.index},#{page.rows}
+	   <if test="loginRecord.c_username != null"><if test="loginRecord.c_username != null"> and c_username like CONCAT('%',#{loginRecord.c_username},'%')</if></if>
+   	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp like CONCAT('%',#{loginRecord.c_loginIp},'%')</if></if>
+   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
+   	   order by id limit #{page.index},#{page.rows}
     </select>  
     
     <select id="searchAllCount" resultType="java.lang.Integer" >
 	   select count(id)
 	   from loginrecord
 	   where 1=1
-	   <if test="loginRecord.user != null"><if test="loginRecord.user.id != null"> and l.n_creater = #{loginRecord.user.id}</if></if>
-   	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp = #{loginRecord.c_loginIp}</if></if>
-   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(l.c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
+	  <if test="loginRecord.c_username != null"><if test="loginRecord.c_username != null"> and c_username like CONCAT('%',#{loginRecord.c_username},'%')</if></if>
+   	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp like CONCAT('%',#{loginRecord.c_loginIp},'%')</if></if>
+   	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
    	   order by id limit #{page.index},#{page.rows}
     </select>
 
@@ -55,7 +52,7 @@
 
     <insert id="add" parameterType="com.cy.example.entity.UserEntity" >
        insert into 
-       		loginrecord( c_createDate, n_creater, c_loginIp) 
-       	values(#{c_createDate},#{n_creater},#{c_loginIp})
+       		loginrecord( c_createDate, c_username, c_loginIp) 
+       	values(#{c_createDate},#{c_username},#{c_loginIp})
     </insert>
 </mapper>

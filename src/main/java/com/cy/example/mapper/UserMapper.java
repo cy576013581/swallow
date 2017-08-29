@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
-import com.cy.example.Vo.PageVo;
+import com.cy.example.carrier.PageCar;
 import com.cy.example.entity.UserEntity;
 
 @Mapper
@@ -26,12 +26,14 @@ public interface UserMapper {
     UserEntity validate(UserEntity user);
  
     UserEntity findOneById(Long id);
+    
+    UserEntity findOneByUsername(String username);
  
-    List<UserEntity> findAll(@Param("page")PageVo page);
+    List<UserEntity> findAll(@Param("page")PageCar page);
     
-    int findAllCount(@Param("page")PageVo page);
+    int findAllCount(@Param("page")PageCar page);
     
-    int searchAllCount(@Param("user")UserEntity user,@Param("page")PageVo page);
+    int searchAllCount(@Param("user")UserEntity user,@Param("page")PageCar page);
     
-    List<UserEntity> searchAll(@Param("user")UserEntity user,@Param("page")PageVo page);
+    List<UserEntity> searchAll(@Param("user")UserEntity user,@Param("page")PageCar page);
 }
