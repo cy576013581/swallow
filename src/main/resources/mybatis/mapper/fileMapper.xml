@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.example.mapper.FileMapper" >
+    <resultMap id="BaseResultMap" type="com.cy.example.entity.FileEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="c_newFileName" property="c_newFileName" jdbcType="VARCHAR" />
+        <result column="c_oldFileName" property="c_oldFileName" jdbcType="VARCHAR" />
+        <result column="c_src" property="c_src" jdbcType="VARCHAR"/>
+        <result column="c_fileSize" property="c_fileSize" jdbcType="VARCHAR" />
+        <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
+        <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
+        <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
+        <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
+    </resultMap>
+    
+    <sql id="ColumnList" >
+        id, c_newFileName, c_oldFileName, c_src , c_fileSize
+    </sql>
+    
+    <sql id="BaseList" >
+        c_createDate, n_creater, c_updateDate, n_updater
+    </sql>
+    
+    
+
+    <select id="download" parameterType="java.lang.Long" resultMap="BaseResultMap" >
+       
+    </select>
+
+    <insert id="add" parameterType="com.cy.example.entity.FileEntity" >
+       insert into 
+       		files(c_newFileName, c_oldFileName, c_src , c_fileSize,<include refid="BaseList" />,n_deleted) 
+       	values(#{c_newFileName},#{c_oldFileName},#{c_src},#{c_fileSize},#{c_createDate},#{n_creater},#{c_updateDate},#{n_updater},0)
+    </insert>
+    
+    
+    <delete id="delete" parameterType="java.lang.Long" >
+       UPDATE 
+       		files 
+       SET
+       		n_deleted =1
+       where id = #{id}
+    </delete>
+</mapper>

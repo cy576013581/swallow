@@ -12,6 +12,11 @@ public class MenuController {
 		return "main/home";
     }
 	
+	@RequestMapping("/calendarManage")
+    public String calendarManage() {
+		return "calendarManage";
+    }
+	
 	@RequestMapping("/userManage")
     public String userManage() {
 		return "userManage";
@@ -20,5 +25,10 @@ public class MenuController {
 	@RequestMapping("/loginRecordManage")
     public String loginRecordManage() {
 		return "loginRecordManage";
+    }
+	
+	@RequestMapping("/uploadFile")
+    public String uploadFile() {
+		return "test_uploadFile";
     }
 }

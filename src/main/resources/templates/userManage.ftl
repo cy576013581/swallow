@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Auto Height for Tabs - jQuery EasyUI Demo</title>
+    <title>用户管理</title>
     
 </head>
 <body>

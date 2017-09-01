@@ -6,10 +6,10 @@
 		    <span><img src="../images/leftico01.png" /></span>管理信息
 		    </div>
 	    	<ul class="menuson">
-		        <li class="active"><cite></cite><a href="javascript:void(0);" onclick="">数据列表</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('日程管理','/menu/calendarManage')">日程管理</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('用户管理','/menu/userManage')">用户管理</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('登录记录','/menu/loginRecordManage')">登录记录</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="">图片列表</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('文件上传','/menu/uploadFile')">文件上传</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="">自定义</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="">常用工具</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="">信息管理</a><i></i></li>

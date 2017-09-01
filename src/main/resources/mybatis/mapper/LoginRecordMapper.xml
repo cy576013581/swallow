@@ -14,7 +14,7 @@
     
     <select id="findAll" resultMap="BaseResultMap"  >
 	   select <include refid="ColumnList" />
-	   from loginrecord order by id limit #{page.index},#{page.rows}
+	   from loginrecord order by c_createDate desc limit #{page.index},#{page.rows}
     </select>
     
     <select id="findAllCount" resultType="java.lang.Integer" >
