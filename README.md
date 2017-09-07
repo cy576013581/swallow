@@ -1,7 +1,7 @@
 # spring-boot
 初探spring-boot
-springMVC+Mybatis+freemarke+Mysql+redi<br>
-前端：整体easyui和ace admin、文件上传Dropzone.js、日历calendar
+springMVC+Mybatis+freemarke+Mysql+redis<br>
+前端：整体easyui和ace admin、文件上传Dropzone.js、日历calendar<br>
 这是spring-boot的学习框架，准备将其打造成个人的整体开发框架
 
 *添加个人日程管理
