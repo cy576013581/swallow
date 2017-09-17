@@ -38,10 +38,9 @@ public class UserServiceImpl implements UserService{
 	public List<UserEntity> findAll(PageCar page) {
 		return this.userMapper.findAll(page);
 	}
-	public UserEntity validate(UserEntity user) {
+	public UserEntity validate(String username,String pwd) {
 		// TODO Auto-generated method stub
-		user.setC_pwd(SecrecyUtil.encryptBasedDes(user.getC_pwd()));
-		return this.userMapper.validate(user);
+		return this.userMapper.validate(username,SecrecyUtil.encryptBasedDes(pwd));
 	}
 	
 	public List<UserEntity> searchAll(UserEntity user,PageCar page) {

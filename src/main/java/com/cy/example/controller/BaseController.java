@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -57,11 +58,6 @@ public class BaseController{
 		return ip;
 	}
 	
-	public UserEntity getLoginUserInfo(){
-//		System.out.println(getSession().getAttribute(WebConfig.LOGIN_USER).toString());
-		return (UserEntity) getSession().getAttribute(WebConfig.LOGIN_USER);
-	}
-
 	public HttpServletRequest getRequest(){
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		return request;
@@ -77,16 +73,24 @@ public class BaseController{
 	}
 	
 	public void add(BaseEntity entity) {
+		UserEntity user = (UserEntity)SecurityUtils.getSubject().getSession().getAttribute("currentUser");
 		entity.setC_createDate(DateUtil.getNow());
 		entity.setC_updateDate(DateUtil.getNow());
-		entity.setN_creater(getLoginUserInfo().getId());
-		entity.setN_updater(getLoginUserInfo().getId());
+		entity.setN_creater(user.getId());
+		entity.setN_updater(user.getId());
 		entity.setN_deleted(0);
     }
 	
 	public void update(BaseEntity entity) {
+		UserEntity user = (UserEntity)SecurityUtils.getSubject().getSession().getAttribute("currentUser");
 		entity.setC_updateDate(DateUtil.getNow());
-		entity.setN_updater(getLoginUserInfo().getId());
+		entity.setN_updater(user.getId());
     }
+	
+	public UserEntity getCurrentUser(){
+//		Long currentUserId = (Long) getRequest().getSession().getAttribute("currentUserId");
+		UserEntity currentUser = (UserEntity)SecurityUtils.getSubject().getSession().getAttribute("currentUser");
+		return currentUser;
+	}
 
 }

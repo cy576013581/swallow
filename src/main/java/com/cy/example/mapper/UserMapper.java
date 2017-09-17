@@ -23,7 +23,7 @@ public interface UserMapper {
  
     int delete(Long id);
     
-    UserEntity validate(UserEntity user);
+    UserEntity validate(String username,String pwd);
  
     UserEntity findOneById(Long id);
     

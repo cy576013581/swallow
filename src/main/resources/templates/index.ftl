@@ -26,11 +26,11 @@
 				alert("密码不能为空！");
 				return;
 			}
-			$.ajax({ //使用ajax与服务器异步交互
+			$.ajax({ //使用ajax与服务器异步交互 
                 url:"system/user/validate?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
                 type:"POST",
                 async:false,
-                data: {c_username:username,c_pwd:pwd}, //$('#yourformid').serialize()；向后台发送的form表单中的数据
+                data: {username:username,password:pwd}, //$('#yourformid').serialize()；向后台发送的form表单中的数据
                 dataType:"json", //接收返回的数据方式为json
                 error:function(XMLHttpRequest,textStatus,errorThrown){
                 }, //错误提示
@@ -38,10 +38,10 @@
                 success:function(data){ //data为交互成功后，后台返回的数据
                     var flag =data.flag;//服务器返回标记
                     if(flag){
-                    	alert("登录成功！");
+                    	alert(data.msg);
                     	window.location.href="/main";
                     }else {
-                    	alert("用户名或者密码错误！");
+                    	alert(data.msg);
 					}
                 }
             });

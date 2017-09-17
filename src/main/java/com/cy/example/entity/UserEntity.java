@@ -1,6 +1,13 @@
 package com.cy.example.entity;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.stereotype.Repository;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Repository
 public class UserEntity extends BaseEntity{
@@ -14,6 +21,10 @@ public class UserEntity extends BaseEntity{
 	private String n_age;
 	
 	private String n_sex;
+	
+	private int n_status;
+	
+	private List<SysRoleEntity> roleList;// 一个用户具有多个角色
 
 	public String getC_username() {
 		return c_username;
@@ -55,6 +66,22 @@ public class UserEntity extends BaseEntity{
 		this.n_sex = n_sex;
 	}
 
+	public int getN_status() {
+		return n_status;
+	}
+
+	public void setN_status(int n_status) {
+		this.n_status = n_status;
+	}
+
+	public List<SysRoleEntity> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<SysRoleEntity> roleList) {
+		this.roleList = roleList;
+	}
+
 	@Override
 	public String toString() {
 		return "User [c_username=" + c_username + ", c_pwd="
@@ -62,4 +89,17 @@ public class UserEntity extends BaseEntity{
 				+ ", n_sex=" + n_sex + "]";
 	}
 	
+    /*public Set<String> findRolesName() {
+        List<SysRoleEntity> roles = getRoleList();
+        Set<String> set = new HashSet<String>();
+        for (SysRoleEntity role : roles) {
+            set.add(role.getC_roleName());
+        }
+        return set;
+    }*/
+
+	public byte[] getCredentialsSalt() {
+		// TODO Auto-generated method stub
+		return this.c_username.getBytes();
+	}
 }

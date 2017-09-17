@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import netscape.javascript.JSObject;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.CalendarEntity;
 import com.cy.example.service.CalendarService;
+import com.cy.example.service.UserService;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 
@@ -31,6 +33,9 @@ public class CalendarController extends BaseController{
 
 	@Autowired
 	private CalendarService calendarService;
+	
+	@Autowired
+	private UserService userService;
 	
 	
 	@RequestMapping("/add")
@@ -43,7 +48,7 @@ public class CalendarController extends BaseController{
 		if(null == calendar.getC_title()){
 			calendar.setC_title("默认日程");
 		}
-		calendar.setC_username(getLoginUserInfo().getC_username());
+		calendar.setC_username(getCurrentUser().getC_username());
 		int rows = calendarService.add(calendar);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(rows>0){
@@ -84,7 +89,7 @@ public class CalendarController extends BaseController{
 	@RequestMapping("/searchAll")
 	@ResponseBody
     public Map<String, Object> searchAll(@ModelAttribute("cal")CalendarEntity cal,String start,String end){
-		cal.setC_username(getLoginUserInfo().getC_username());
+		cal.setC_username(getCurrentUser().getC_username());
 		List<CalendarEntity> list = calendarService.searchAll(cal);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rows", list);

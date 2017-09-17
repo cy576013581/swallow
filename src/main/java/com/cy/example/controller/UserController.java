@@ -4,6 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +25,10 @@ import com.cy.example.entity.UserEntity;
 import com.cy.example.service.LoginRecordService;
 import com.cy.example.service.UserService;
 import com.cy.example.service.impl.UserServiceImpl;
+import com.cy.example.utils.AuthRealm;
 import com.cy.example.utils.DateUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Controller
@@ -30,6 +40,8 @@ public class UserController extends BaseController{
 	
 	@Autowired
 	private LoginRecordService loginRecordService;
+
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@RequestMapping("/add")
 	@ResponseBody
@@ -81,9 +93,10 @@ public class UserController extends BaseController{
 	
 	@RequestMapping("/findAll")
 	@ResponseBody
-    public Map<String, Object> findAll(@ModelAttribute("pageVo")PageCar page) {
+    public Map<String, Object> findAll(@ModelAttribute("page")PageCar page) throws JsonProcessingException {
 //		System.out.print("================================="+page.toString()+page.getIndex());
 		List<UserEntity> list = userService.findAll(page);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = userService.findAllCount(page);
 		map.put("rows", list);
@@ -103,24 +116,42 @@ public class UserController extends BaseController{
     }
 	
 	
+	@SuppressWarnings("finally")
 	@RequestMapping("/validate")
 	@ResponseBody
-    public Map<String, Boolean> validate(@ModelAttribute("user")UserEntity user) {
-		UserEntity getUser = userService.validate(user);
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		if(null==getUser){//登录失败
-			map.put("flag",false);
-		}else{//登录成功
-			map.put("flag",true);
-			user.setC_pwd("");
-			getSession().setAttribute(WebConfig.LOGIN_USER, getUser);
+    public Map<String, Object> validate(String username,String password) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(username,password);
+		boolean flag = true;
+		String msg = "";
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(usernamePasswordToken);   //完成登录
+            UserEntity user=(UserEntity) subject.getPrincipal();
+//            getSession().setAttribute(WebConfig.LOGIN_USER, user);
 			LoginRecordEntity loginRecord = new LoginRecordEntity();
 			loginRecord.setC_createDate(DateUtil.getNow());
 			loginRecord.setC_loginIp(super.getIP(getRequest()));
-			loginRecord.setC_username(getUser.getC_username());
+			loginRecord.setC_username(user.getC_username());
 			loginRecordService.add(loginRecord);
-		}
-		return map;
+			msg = "登陆成功！";
+			map.put("flag",flag);
+        } catch(Exception exception) {
+        	if (exception instanceof UnknownAccountException) {
+	            logger.info("账号不存在： -- > UnknownAccountException");
+	            msg = "登录失败，用户账号不存在！";
+	        } else if (exception instanceof IncorrectCredentialsException) {
+	        	logger.info(" 密码不正确： -- >IncorrectCredentialsException");
+	            msg = "登录失败，用户密码不正确！";
+	        } else {
+	        	logger.info("else -- >" + exception);
+	            msg = "登录失败，发生未知错误："+exception;
+	        }
+        	map.put("flag",false);
+        }finally{
+        	map.put("msg",msg);
+        	return map;
+        }
     }
 	
 }

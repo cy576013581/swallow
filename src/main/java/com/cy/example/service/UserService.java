@@ -16,7 +16,7 @@ public interface UserService {
 	
 	public int delete(Long id);
 	
-	public UserEntity validate(UserEntity user);
+	public UserEntity validate(String username,String pwd);
 	
 	public UserEntity findUserById(Long id);
 	
