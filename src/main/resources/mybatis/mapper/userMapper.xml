@@ -13,12 +13,6 @@
         <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
         <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
         <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
-        <collection  property="roleList" type="com.cy.example.entity.SysRoleEntity">
-           	<id column="c_roleName" property="c_roleName"/>
-           	<collection  property="permisList" type="com.cy.example.entity.SysPermisEntity">
-	           	<id column="c_permisName" property="c_permisName"/>
-	        </collection>
-        </collection>
     </resultMap>
     
     <sql id="ColumnList" >

@@ -11,7 +11,6 @@ public class CalendarEntity extends BaseEntity{
 
 	//事件
 	private String c_title;
-
 	//开始时间 
 	private String c_start;
 
