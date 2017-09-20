@@ -23,3 +23,5 @@ springMVC+Mybatis+freemarke+Mysql+redis<br>
 *2017.9.1 calendar日程管理基本完成，添加文件上传模块
 
 *2017.9.17 添加shiro权限控制，权限分配尚未完成
+
+*2017.9.20 权限配置基本完成，无权限提示还需完善
