@@ -45,6 +45,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/logout", "logout");
 		// 这里自定义的权限拦截规则
 		filterChainDefinitionMap.put("/system/*/add", "perms[add]");
+		filterChainDefinitionMap.put("/system/*/delete", "perms[del]");
 		// filterChainDefinitionMap.put("/system/*/list", "perms[list]");
 		// <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 		filterChainDefinitionMap.put("/**", "authc");
@@ -58,7 +59,7 @@ public class ShiroConfig {
 		shiroFilterFactoryBean
 				.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
-		logger.info("***Shiro拦截器工厂类注入成功");
+		logger.info("--------------Shiro拦截器工厂类注入成功----------------");
 		return shiroFilterFactoryBean;
 	}
 
@@ -79,7 +80,7 @@ public class ShiroConfig {
 	@Bean(name = "securityManager")
 	public SecurityManager securityManager(
 			@Qualifier("authRealm") AuthRealm authRealm) {
-		logger.info("--------------shiro已经加载----------------");
+		logger.info("--------------shiro安全事务管理器已经加载----------------");
 		DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
 		manager.setRealm(authRealm);
 		return manager;

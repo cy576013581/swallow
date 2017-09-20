@@ -30,7 +30,7 @@ public class AuthRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
 		// TODO Auto-generated method stub
-		logger.info("***权限配置--授权");
+		logger.info("--------------权限配置——授权----------------");
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		UserEntity user = (UserEntity) principals.getPrimaryPrincipal();
 		for (SysRoleEntity role : user.getRoleList()) {
@@ -55,9 +55,13 @@ public class AuthRealm extends AuthorizingRealm {
 		logger.info("***用户身份验证");
 		// 获取用户的输入的账号.
 		String username = (String) token.getPrincipal();
+		if (StringUtil.IsNullOrEmptyT(username)) {
+			return null;
+		}
 		logger.info("***" + token.getCredentials());
 		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 		UserEntity user = userService.findOneByUsername(username);
+
 		logger.info("***登录user：" + user);
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
 				user, // 用户名

@@ -13,6 +13,14 @@
         <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
         <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
         <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
+        <collection property="roleList" ofType="com.cy.example.entity.SysRoleEntity">
+	    	<id column="r_id" property="id"/>
+	 		<result column="c_roleName" property="c_roleName" jdbcType="VARCHAR" />
+	 		<collection property="permisList" ofType="com.cy.example.entity.SysPermisEntity">
+		    	<id column="p_id" property="id"/>
+		 		<result column="c_permisName" property="c_permisName" jdbcType="VARCHAR" />
+    		</collection>
+    	</collection>
     </resultMap>
     
     <sql id="ColumnList" >
@@ -22,6 +30,37 @@
     <sql id="BaseList" >
         c_createDate, n_creater, c_updateDate, n_updater
     </sql>
+    
+    <select id="findOneByUsername" parameterType="java.lang.String" resultMap="BaseResultMap" >
+       SELECT
+			u.id,
+			c_username,
+			u.c_pwd,
+			u.c_phone,
+			u.n_age,
+			u.n_status,
+			u.c_createDate,
+			u.n_creater,
+			u.c_updateDate,
+			u.n_updater,
+			CASE
+		WHEN n_sex = 1 THEN
+			'男'
+		WHEN n_sex = 0 THEN
+			'女'
+		END AS n_sex,
+		r.c_roleName,
+		r.id as r_id,
+		p.id as p_id,
+		p.c_permisName
+		FROM
+			users u
+		LEFT JOIN sys_user_role ur ON u.id = ur.n_userId
+		LEFT JOIN sys_roles r ON ur.n_roleId = r.id
+		LEFT JOIN sys_role_permission rp ON rp.n_role_id = ur.n_roleId
+		LEFT JOIN sys_permission p ON p.id = rp.n_permission_id
+	   WHERE u.c_username = #{c_username} and n_deleted=0
+    </select>
     
     <select id="findAll" resultMap="BaseResultMap"  >
 	   select id, c_username, c_phone , n_age,
@@ -80,34 +119,7 @@
 	   WHERE id = #{id} and n_deleted=0
     </select>
     
-    <select id="findOneByUsername" parameterType="java.lang.String" resultMap="BaseResultMap" >
-       SELECT
-			u.id,
-			c_username,
-			u.c_pwd,
-			u.c_phone,
-			u.n_age,
-			u.n_status,
-			u.c_createDate,
-			u.n_creater,
-			u.c_updateDate,
-			u.n_updater,
-			CASE
-		WHEN n_sex = 1 THEN
-			'男'
-		WHEN n_sex = 0 THEN
-			'女'
-		END AS n_sex,
-		r.c_roleName,
-		p.c_permisName
-		FROM
-			users u
-		LEFT JOIN sys_user_role ur ON u.id = ur.n_userId
-		LEFT JOIN sys_roles r ON ur.n_roleId = r.id
-		LEFT JOIN sys_role_permission rp ON rp.n_role_id = ur.n_roleId
-		LEFT JOIN sys_permission p ON p.id = rp.n_permission_id
-	   WHERE u.c_username = #{c_username} and n_deleted=0
-    </select>
+    
 
     <insert id="add" parameterType="com.cy.example.entity.UserEntity" >
        insert into 
