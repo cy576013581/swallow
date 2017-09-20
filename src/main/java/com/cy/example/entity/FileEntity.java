@@ -1,15 +1,15 @@
 package com.cy.example.entity;
 
-public class FileEntity extends BaseEntity{
+public class FileEntity extends BaseEntity {
 
 	private String c_newFileName;
-	
+
 	private String c_oldFileName;
-	
+
 	private String c_src;
-	
+
 	private String c_fileSize;
-	
+
 	public FileEntity(String c_newFileName, String c_oldFileName, String c_src,
 			String c_fileSize) {
 		super();
@@ -18,13 +18,11 @@ public class FileEntity extends BaseEntity{
 		this.c_src = c_src;
 		this.c_fileSize = c_fileSize;
 	}
-	
+
 	public FileEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public String getC_newFileName() {
 		return c_newFileName;

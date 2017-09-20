@@ -1,12 +1,9 @@
 package com.cy.example.utils;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
-import java.security.Signature;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -18,13 +15,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SecrecyUtil {
-	
+
 	/**
 	 * DES算法密钥
 	 */
-	private static final byte[] DES_KEY = { 21, 1, -110, 82, -32, -85, -128, -65 };
+	private static final byte[] DES_KEY = { 21, 1, -110, 82, -32, -85, -128,
+			-65 };
 
-	
 	/**
 	 * 对数据通过公钥进行加密，并进行base64计算
 	 * 
@@ -44,7 +41,7 @@ public class SecrecyUtil {
 			data = encryptData(key, dataString.getBytes(encoding));
 			return new String(SecrecyUtil.base64Encode(data), encoding);
 		} catch (Exception e) {
-//			LogUtil.writeErrorLog(e.getMessage(), e);
+			// LogUtil.writeErrorLog(e.getMessage(), e);
 			return "";
 		}
 	}
@@ -69,7 +66,7 @@ public class SecrecyUtil {
 			data = encryptData(key, data);
 			return new String(SecrecyUtil.base64Encode(data), encoding);
 		} catch (Exception e) {
-//			LogUtil.writeErrorLog(e.getMessage(), e);
+			// LogUtil.writeErrorLog(e.getMessage(), e);
 			return "";
 		}
 	}
@@ -93,7 +90,7 @@ public class SecrecyUtil {
 			data = decryptData(key, data);
 			return new String(data, encoding);
 		} catch (Exception e) {
-//			LogUtil.writeErrorLog(e.getMessage(), e);
+			// LogUtil.writeErrorLog(e.getMessage(), e);
 			return "";
 		}
 	}
@@ -154,7 +151,7 @@ public class SecrecyUtil {
 			cipher.init(Cipher.DECRYPT_MODE, privateKey);
 			return cipher.doFinal(data);
 		} catch (Exception e) {
-//			LogUtil.writeErrorLog("解密失败", e);
+			// LogUtil.writeErrorLog("解密失败", e);
 		}
 		return null;
 	}
@@ -270,7 +267,6 @@ public class SecrecyUtil {
 		return tByte;
 	}
 
-	
 	/**
 	 * 数据加密，算法（DES）
 	 * 
@@ -292,7 +288,8 @@ public class SecrecyUtil {
 			Cipher cipher = Cipher.getInstance("DES");
 			cipher.init(Cipher.ENCRYPT_MODE, key, sr);
 			// 加密，并把字节数组编码成字符串
-			encryptedData = new sun.misc.BASE64Encoder().encode(cipher.doFinal(data.getBytes()));
+			encryptedData = new sun.misc.BASE64Encoder().encode(cipher
+					.doFinal(data.getBytes()));
 		} catch (Exception e) {
 			// log.error("加密错误，错误信息：", e);
 			throw new RuntimeException("加密错误，错误信息：", e);
@@ -321,7 +318,9 @@ public class SecrecyUtil {
 			Cipher cipher = Cipher.getInstance("DES");
 			cipher.init(Cipher.DECRYPT_MODE, key, sr);
 			// 把字符串解码为字节数组，并解密
-			decryptedData = new String(cipher.doFinal(new sun.misc.BASE64Decoder().decodeBuffer(cryptData)));
+			decryptedData = new String(
+					cipher.doFinal(new sun.misc.BASE64Decoder()
+							.decodeBuffer(cryptData)));
 		} catch (Exception e) {
 			// log.error("解密错误，错误信息：", e);
 			throw new RuntimeException("解密错误，错误信息：", e);

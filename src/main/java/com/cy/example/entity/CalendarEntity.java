@@ -1,23 +1,22 @@
 package com.cy.example.entity;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CalendarEntity extends BaseEntity{
-	//用户 
+public class CalendarEntity extends BaseEntity {
+	// 用户
 	private String c_username;
 
-	//事件
+	// 事件
 	private String c_title;
-	//开始时间 
+
+	// 开始时间
 	private String c_start;
 
-	//结束时间
+	// 结束时间
 	private String c_end;
 
-	//背景颜色默认为#3a87ad
+	// 背景颜色默认为#3a87ad
 	private String c_color;
 
 	public String getC_username() {
@@ -60,6 +59,4 @@ public class CalendarEntity extends BaseEntity{
 		this.c_color = c_color;
 	}
 
-
-	
 }

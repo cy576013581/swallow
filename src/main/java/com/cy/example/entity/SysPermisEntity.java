@@ -2,11 +2,11 @@ package com.cy.example.entity;
 
 import java.util.List;
 
-public class SysPermisEntity extends BaseEntity{
+public class SysPermisEntity extends BaseEntity {
 
 	private String c_permisName;
 
-    private List<SysRoleEntity> roles;// 一个权限对应一个角色
+	private List<SysRoleEntity> roles;// 一个权限对应一个角色
 
 	public String getC_permisName() {
 		return c_permisName;
@@ -24,6 +24,4 @@ public class SysPermisEntity extends BaseEntity{
 		this.roles = roles;
 	}
 
-	
-    
 }

@@ -3,8 +3,8 @@ package com.cy.example.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SysRoleEntity extends BaseEntity{
-	
+public class SysRoleEntity extends BaseEntity {
+
 	private String c_roleName;
 
 	private List<SysPermisEntity> permisList;// 一个角色对应多个权限
@@ -34,16 +34,14 @@ public class SysRoleEntity extends BaseEntity{
 	public void setUserList(List<UserEntity> userList) {
 		this.userList = userList;
 	}
-	
+
 	public List<String> getPermissionsName() {
-        List<String> list = new ArrayList<String>();
-        List<SysPermisEntity> perlist = getPermisList();
-        for (SysPermisEntity per : perlist) {
-            list.add(per.getC_permisName());
-        }
-        return list;
-    }
-	
-	
+		List<String> list = new ArrayList<String>();
+		List<SysPermisEntity> perlist = getPermisList();
+		for (SysPermisEntity per : perlist) {
+			list.add(per.getC_permisName());
+		}
+		return list;
+	}
 
 }
