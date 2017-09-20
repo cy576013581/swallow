@@ -77,19 +77,20 @@ public class UserEntity extends BaseEntity {
 		this.roleList = roleList;
 	}
 
-	@Override
-	public String toString() {
-		return "User [c_username=" + c_username + ", c_pwd=" + c_pwd
-				+ ", c_phone=" + c_phone + ", n_age=" + n_age + ", n_sex="
-				+ n_sex + "]";
-	}
-
 	/*
 	 * public Set<String> findRolesName() { List<SysRoleEntity> roles =
 	 * getRoleList(); Set<String> set = new HashSet<String>(); for
 	 * (SysRoleEntity role : roles) { set.add(role.getC_roleName()); } return
 	 * set; }
 	 */
+
+	@Override
+	public String toString() {
+		return "UserEntity [c_username=" + c_username + ", c_pwd=" + c_pwd
+				+ ", c_phone=" + c_phone + ", n_age=" + n_age + ", n_sex="
+				+ n_sex + ", n_status=" + n_status + ", roleList=" + roleList
+				+ "]";
+	}
 
 	public byte[] getCredentialsSalt() {
 		// TODO Auto-generated method stub

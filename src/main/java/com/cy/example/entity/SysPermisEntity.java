@@ -24,4 +24,10 @@ public class SysPermisEntity extends BaseEntity {
 		this.roles = roles;
 	}
 
+	@Override
+	public String toString() {
+		return "SysPermisEntity [c_permisName=" + c_permisName + ", roles="
+				+ roles + "]";
+	}
+
 }

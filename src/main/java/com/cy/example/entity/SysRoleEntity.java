@@ -44,4 +44,10 @@ public class SysRoleEntity extends BaseEntity {
 		return list;
 	}
 
+	@Override
+	public String toString() {
+		return "SysRoleEntity [c_roleName=" + c_roleName + ", permisList="
+				+ permisList + ", userList=" + userList + "]";
+	}
+
 }

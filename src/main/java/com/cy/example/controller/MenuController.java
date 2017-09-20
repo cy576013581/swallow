@@ -8,27 +8,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MenuController {
 
 	@RequestMapping("/home")
-    public String showHome() {
+	public String showHome() {
 		return "main/home";
-    }
-	
+	}
+
 	@RequestMapping("/calendarManage")
-    public String calendarManage() {
+	public String calendarManage() {
 		return "calendarManage";
-    }
-	
+	}
+
 	@RequestMapping("/userManage")
-    public String userManage() {
+	public String userManage() {
 		return "userManage";
-    }
-	
+	}
+
 	@RequestMapping("/loginRecordManage")
-    public String loginRecordManage() {
+	public String loginRecordManage() {
 		return "loginRecordManage";
-    }
-	
+	}
+
 	@RequestMapping("/uploadFile")
-    public String uploadFile() {
+	public String uploadFile() {
 		return "test_uploadFile";
-    }
+	}
+
+	/*
+	 * 无权限界面
+	 */
+	@RequestMapping("/403")
+	public String error403() {
+		return "error403";
+	}
 }

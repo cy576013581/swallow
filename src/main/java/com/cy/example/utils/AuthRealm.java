@@ -39,6 +39,7 @@ public class AuthRealm extends AuthorizingRealm {
 				authorizationInfo.addStringPermission(p.getC_permisName());
 			}
 		}
+		logger.debug(user.toString());
 		return authorizationInfo;
 	}
 
