@@ -1,7 +1,9 @@
 # spring-boot
-初探spring-boot
+更名为swallow
+后台：<br>
 springMVC+Mybatis+freemarke+Mysql+redis<br>
-前端：整体easyui和ace admin、文件上传Dropzone.js、日历calendar<br>
+前端：<br>
+整体：easyui和ace admin<br>文件上传：Dropzone.js<br>日历：calendar<br>弹窗：layer<br>消息提示：toarst
 这是spring-boot的学习框架，准备将其打造成个人的整体开发框架
 
 *添加个人日程管理
