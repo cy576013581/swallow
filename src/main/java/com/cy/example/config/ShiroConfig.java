@@ -55,7 +55,7 @@ public class ShiroConfig {
 		// shiroFilterFactoryBean.setSuccessUrl("/main");
 
 		// 未授权界面;
-		shiroFilterFactoryBean.setUnauthorizedUrl("/menu/403");
+		// shiroFilterFactoryBean.setUnauthorizedUrl("/menu/403");
 		shiroFilterFactoryBean
 				.setFilterChainDefinitionMap(filterChainDefinitionMap);
 

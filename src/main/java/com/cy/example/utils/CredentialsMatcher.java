@@ -11,28 +11,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.mapper.UserMapper;
 
-public class CredentialsMatcher extends SimpleCredentialsMatcher{
+public class CredentialsMatcher extends SimpleCredentialsMatcher {
 
 	@Autowired
 	private UserMapper userMapper;
-	
-    @Override
-    public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
-        UsernamePasswordToken utoken=(UsernamePasswordToken) token;
-        //获得用户输入的密码:(可以采用加盐(salt)的方式去检验)
-        String inPassword = new String(utoken.getPassword());
-        //获得数据库中的密码
-        
-        String dbPassword=(String) info.getCredentials();
-        //进行密码的比对
-        boolean flag = false;
-        if(this.equals(inPassword, dbPassword)){
-        	flag = true;
-        	PrincipalCollection principals = info.getPrincipals();
-        	UserEntity user  = (UserEntity)principals.getPrimaryPrincipal();
-        	SecurityUtils.getSubject().getSession().setAttribute("currentUser", user);
-        }
-        return flag;
-    }
-    
+
+	@Override
+	public boolean doCredentialsMatch(AuthenticationToken token,
+			AuthenticationInfo info) {
+		UsernamePasswordToken utoken = (UsernamePasswordToken) token;
+		// 获得用户输入的密码:(可以采用加盐(salt)的方式去检验)
+		String inPassword = new String(utoken.getPassword());
+
+		inPassword = MD5Util.GetMD5Code(inPassword);
+		// 获得数据库中的密码
+
+		String dbPassword = (String) info.getCredentials();
+		// 进行密码的比对
+		boolean flag = false;
+		if (this.equals(inPassword, dbPassword)) {
+			flag = true;
+			PrincipalCollection principals = info.getPrincipals();
+			UserEntity user = (UserEntity) principals.getPrimaryPrincipal();
+			SecurityUtils.getSubject().getSession()
+					.setAttribute("currentUser", user);
+		}
+		return flag;
+	}
+
 }

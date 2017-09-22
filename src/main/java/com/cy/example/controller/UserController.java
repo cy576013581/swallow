@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cy.example.carrier.PageCar;
+import com.cy.example.config.WebConfig;
 import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.service.LoginRecordService;
@@ -47,8 +48,10 @@ public class UserController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {
 			map.put("flag", true);
+			map.put("msg", "添加成功！");
 		} else {
 			map.put("flag", false);
+			map.put("msg", "添加失败！");
 		}
 		return map;
 	}
@@ -61,8 +64,10 @@ public class UserController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {
 			map.put("flag", true);
+			map.put("msg", "更新成功！");
 		} else {
 			map.put("flag", false);
+			map.put("msg", "更新失败！");
 		}
 		return map;
 	}
@@ -74,8 +79,10 @@ public class UserController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {
 			map.put("flag", true);
+			map.put("msg", "删除成功！");
 		} else {
 			map.put("flag", false);
+			map.put("msg", "删除失败！");
 		}
 		return map;
 	}
@@ -127,7 +134,7 @@ public class UserController extends BaseController {
 		try {
 			subject.login(usernamePasswordToken); // 完成登录
 			UserEntity user = (UserEntity) subject.getPrincipal();
-			// getSession().setAttribute(WebConfig.LOGIN_USER, user);
+			subject.getSession().setAttribute(WebConfig.LOGIN_USER, user);
 			LoginRecordEntity loginRecord = new LoginRecordEntity();
 			loginRecord.setC_createDate(DateUtil.getNow());
 			loginRecord.setC_loginIp(super.getIP(getRequest()));

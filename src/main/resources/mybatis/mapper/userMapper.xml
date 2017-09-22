@@ -102,14 +102,6 @@
    	   order by id limit #{page.index},#{page.rows}
     </select>
 
-    <select id="validate" parameterType="com.cy.example.entity.UserEntity" resultMap="BaseResultMap"  >
-	  select <include refid="ColumnList" />,<include refid="BaseList" />,
-	   case when n_sex=1 then '男'
-	   when n_sex=0 then '女' end as n_sex 
-	   from users where c_username = #{c_username} and c_pwd = #{c_pwd} and n_deleted=0
-    </select>
-    
-
     <select id="findOneById" parameterType="java.lang.Long" resultMap="BaseResultMap" >
         SELECT 
        <include refid="ColumnList" />,

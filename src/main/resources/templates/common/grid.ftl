@@ -55,10 +55,10 @@
 		                    var flag =data.flag;//服务器返回标记
 		                    if(flag){
 		                    	layer.closeAll('dialog');
-		                    	toastr.success('删除成功！');
+		                    	toastr.success(data.msg);
 		                    	$('#dg').datagrid('reload');
 		                    }else {
-		                    	toastr.error('删除失败！');
+		                    	toastr.error(data.msg);
 							}
 		                }
 		            });
@@ -166,18 +166,15 @@
 		function dlgBtnClick(){
 			var url;
 			var json = "";
-			var toastStr ="";
 			for(var i = 0;i<editMap.size();i++){
 				json += editMap.key(i)+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
 			}
 			if(operation == 1){
 				url = "${controller}add?s="+new Date().getTime();
 				json = json.substring(0,json.length-1);
-				toastStr = "添加";
 			}else if(operation == 2){
 				url = "${controller}update?s="+new Date().getTime();
 				json += "id="+$("#ed_id").val();
-				toastStr = "更新";
 			}
 			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
@@ -193,11 +190,11 @@
 					var flag =data.flag;//服务器返回标记
                     if(flag){
                     	$('#dlg').dialog("close");
-                    	toastr.success(toastStr+"成功!");
+                    	toastr.success(data.msg);
                     	$('#dlg').dialog("close");
                     	$('#dg').datagrid('reload');
                     }else {
-                    	toastr.error(toastStr+'失败！');
+                    	toastr.error(data.msg);
 					}
                 }
             });
