@@ -3,6 +3,8 @@ package com.cy.example.config;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.Filter;
+
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.cy.example.filter.CyAuthenticationFilter;
 import com.cy.example.utils.AuthRealm;
 import com.cy.example.utils.CredentialsMatcher;
 
@@ -30,6 +33,11 @@ public class ShiroConfig {
 	@Bean(name = "shiroFilter")
 	public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        
+        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();//获取filters  
+        //将自定义 的ShiroFilterFactoryBean注入shiroFilter
+        filters.put("perms", new CyAuthenticationFilter());
+        // 必须设置SecuritManager  
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		// 拦截器.
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();

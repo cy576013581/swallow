@@ -93,6 +93,12 @@
 			<version>1.4.0</version>
 		</dependency>
         
+        <!-- json转换支持 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.15</version>
+        </dependency>
         
 	</dependencies>
 
@@ -101,6 +107,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
 			</plugin>
 			
 			<!-- 热启动配置 -->
