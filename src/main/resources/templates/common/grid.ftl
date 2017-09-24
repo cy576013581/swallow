@@ -59,6 +59,7 @@
 		                    	$('#dg').datagrid('reload');
 		                    }else {
 		                    	toastr.error(data.msg);
+		                    	layer.closeAll('dialog');
 							}
 		                }
 		            });
