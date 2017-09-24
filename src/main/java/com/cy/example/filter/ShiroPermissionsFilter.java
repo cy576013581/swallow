@@ -16,10 +16,10 @@ import org.slf4j.LoggerFactory;
 import com.cy.example.utils.JsonUtil;
 import com.cy.example.utils.StringUtil;
 
-public class CyAuthenticationFilter extends PermissionsAuthorizationFilter {
+public class ShiroPermissionsFilter extends PermissionsAuthorizationFilter {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(CyAuthenticationFilter.class);
+			.getLogger(ShiroPermissionsFilter.class);
 	
 	/**
      * shiro认证perms资源失败后回调方法

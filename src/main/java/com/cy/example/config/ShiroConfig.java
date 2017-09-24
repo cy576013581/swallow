@@ -17,7 +17,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.cy.example.filter.CyAuthenticationFilter;
+import com.cy.example.filter.ShiroPermissionsFilter;
+import com.cy.example.filter.ShiroLoginFilter;
 import com.cy.example.utils.AuthRealm;
 import com.cy.example.utils.CredentialsMatcher;
 
@@ -36,7 +37,9 @@ public class ShiroConfig {
         
         Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();//获取filters  
         //将自定义 的ShiroFilterFactoryBean注入shiroFilter
-        filters.put("perms", new CyAuthenticationFilter());
+        filters.put("perms", new ShiroPermissionsFilter());
+        
+        filters.put("anon", new ShiroLoginFilter());
         // 必须设置SecuritManager  
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		// 拦截器.

@@ -104,11 +104,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			
 			<!-- 热启动配置 -->
 			<plugin>
 	            <groupId>org.springframework.boot</groupId>

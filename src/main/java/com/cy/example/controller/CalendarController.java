@@ -40,8 +40,10 @@ public class CalendarController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {
 			map.put("flag", true);
+			map.put("msg", "添加成功！");
 		} else {
 			map.put("flag", false);
+			map.put("msg", "添加失败！");
 		}
 		return map;
 	}
@@ -54,8 +56,10 @@ public class CalendarController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {
 			map.put("flag", true);
+			map.put("msg", "修改成功！");
 		} else {
 			map.put("flag", false);
+			map.put("msg", "修改失败！");
 		}
 		return map;
 	}
@@ -67,8 +71,10 @@ public class CalendarController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {
 			map.put("flag", true);
+			map.put("msg", "删除成功！");
 		} else {
 			map.put("flag", false);
+			map.put("msg", "删除失败！");
 		}
 		return map;
 	}
