@@ -25,6 +25,7 @@ import com.cy.example.entity.UserEntity;
 import com.cy.example.service.LoginRecordService;
 import com.cy.example.service.UserService;
 import com.cy.example.utils.DateUtil;
+import com.cy.example.utils.MD5Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller
@@ -126,6 +127,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> validate(String username, String password) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		password = MD5Util.GetMD5Code(password);
 		UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
 				username, password);
 		boolean flag = true;
