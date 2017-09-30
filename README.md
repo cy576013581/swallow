@@ -37,3 +37,5 @@
 *2017.9.29 shiro登录全部完成	add by cy
 
 *2017.9.30 集成shiro之后，去除之前的默认的拦截器	add by cy
+
+*2017.9.30 tabs菜单，双击事件   add  by  zyj
