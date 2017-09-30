@@ -35,3 +35,5 @@
 *2017.9.24 shiro权限异常返回json，权限配置完成	add by cy
 
 *2017.9.29 shiro登录全部完成	add by cy
+
+*2017.9.30 集成shiro之后，去除之前的默认的拦截器	add by cy

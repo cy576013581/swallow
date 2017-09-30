@@ -64,6 +64,14 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.0</version>
         </dependency>
+        
+        <!-- mybatisplus配置 -->
+        <dependency>
+		    <groupId>com.baomidou</groupId>
+		    <artifactId>mybatisplus-spring-boot-starter</artifactId>
+		    <version>1.0.4</version>
+		</dependency>
+
 		
 		<!-- Mysql配置 -->
 		<dependency>
