@@ -14,7 +14,7 @@
 		function addTabs(title,url){
 			if($("#mainTabs").tabs('exists', title))
 			{
-				$('#mainTabs').select(title);
+				$('#mainTabs').tabs('select',title);
 			}
 			else
 			{
