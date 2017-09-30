@@ -11,6 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.cy.example.config.WebConfig;
 import com.cy.example.entity.BaseEntity;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.utils.DateUtil;
@@ -74,7 +75,7 @@ public class BaseController {
 
 	public void add(BaseEntity entity) {
 		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
-				.getAttribute("currentUser");
+				.getAttribute(WebConfig.LOGIN_USER);
 		entity.setC_createDate(DateUtil.getNow());
 		entity.setC_updateDate(DateUtil.getNow());
 		entity.setN_creater(user.getId());
@@ -84,14 +85,15 @@ public class BaseController {
 
 	public void update(BaseEntity entity) {
 		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
-				.getAttribute("currentUser");
+				.getAttribute(WebConfig.LOGIN_USER);
 		entity.setC_updateDate(DateUtil.getNow());
 		entity.setN_updater(user.getId());
 	}
 
 	public UserEntity getCurrentUser() {
+
 		UserEntity currentUser = (UserEntity) SecurityUtils.getSubject()
-				.getSession().getAttribute("currentUser");
+				.getSession().getAttribute(WebConfig.LOGIN_USER);
 		return currentUser;
 	}
 

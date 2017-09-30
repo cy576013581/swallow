@@ -1,20 +1,18 @@
 <div id="left" style="background:#f0f9fd;">
-	<div class="lefttop"><span></span>通讯录</div>
+	<div class="lefttop"><span></span>菜单</div>
 	<dl class="leftmenu">
 	    <dd>
 		    <div class="title">
-		    <span><img src="../images/leftico01.png" /></span>管理信息
+		    <span><img src="../images/leftico01.png" /></span>系统设置
 		    </div>
 	    	<ul class="menuson">
 		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('日程管理','/menu/calendarManage')">日程管理</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('用户管理','/menu/userManage')">用户管理</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('登录记录','/menu/loginRecordManage')">登录记录</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('用户管理','/menu/userManage')">用户管理</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="">权限管理</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="">角色管理</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="addTab('文件上传','/menu/uploadFile')">文件上传</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="">自定义</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="">常用工具</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="">信息管理</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="">Tab页</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="">404页面</a><i></i></li>
+		       
 	        </ul>    
 	    </dd>
 			    

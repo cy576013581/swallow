@@ -64,6 +64,14 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.0</version>
         </dependency>
+        
+        <!-- mybatisplus配置 -->
+        <dependency>
+		    <groupId>com.baomidou</groupId>
+		    <artifactId>mybatisplus-spring-boot-starter</artifactId>
+		    <version>1.0.4</version>
+		</dependency>
+
 		
 		<!-- Mysql配置 -->
 		<dependency>
@@ -93,16 +101,17 @@
 			<version>1.4.0</version>
 		</dependency>
         
+        <!-- json转换支持 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.15</version>
+        </dependency>
         
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			
 			<!-- 热启动配置 -->
 			<plugin>
 	            <groupId>org.springframework.boot</groupId>

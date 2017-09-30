@@ -241,9 +241,9 @@
 								var flag =data.flag;//服务器返回标记
 								if(flag){
 									$('#calendar').fullCalendar('refetchEvents');
-									toastr.success("添加成功！");
+									toastr.success(data.msg);
 								}else {
-									toastr.error("添加失败！");
+									toastr.error(data.msg);
 								}
 							}
 						});
@@ -272,9 +272,9 @@
 							success:function(data){ //data为交互成功后，后台返回的数据
 								var flag =data.flag;//服务器返回标记
 								if(flag){
-									toastr.success("修改成功！");
+									toastr.success(data.msg);
 								}else {
-									toastr.error("修改失败！");
+									toastr.error(data.msg);
 								}
 							}
 						});
@@ -290,9 +290,9 @@
 							success:function(data){ //data为交互成功后，后台返回的数据
 								var flag =data.flag;//服务器返回标记
 								if(flag){
-									toastr.success("修改成功！");
+									toastr.success(data.msg);
 								}else {
-									toastr.error("修改失败！");
+									toastr.error(data.msg);
 								}
 							}
 						});
