@@ -1,4 +1,4 @@
-package com.cy.example;
+package com.cy.example.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 

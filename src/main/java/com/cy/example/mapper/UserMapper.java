@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.cy.example.SuperMapper;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.entity.UserEntity;
 
