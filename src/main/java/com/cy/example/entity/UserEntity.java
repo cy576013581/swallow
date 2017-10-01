@@ -2,10 +2,12 @@ package com.cy.example.entity;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
 
-@Repository
-public class UserEntity extends BaseEntity {
+@TableName("users")
+@SuppressWarnings("serial")
+public class UserEntity extends SuperEntity<UserEntity> {
 
 	private String c_username;
 
@@ -19,6 +21,7 @@ public class UserEntity extends BaseEntity {
 
 	private int n_status;
 
+	@TableField(exist = false)
 	private List<SysRoleEntity> roleList;// 一个用户具有多个角色
 
 	public String getC_username() {

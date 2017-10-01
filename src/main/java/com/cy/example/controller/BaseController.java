@@ -12,7 +12,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.cy.example.config.WebConfig;
-import com.cy.example.entity.BaseEntity;
+import com.cy.example.entity.SuperEntity;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.utils.DateUtil;
 
@@ -73,7 +73,7 @@ public class BaseController {
 		return getRequest().getSession();
 	}
 
-	public void add(BaseEntity entity) {
+	public void add(SuperEntity entity) {
 		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		entity.setC_createDate(DateUtil.getNow());
@@ -83,7 +83,7 @@ public class BaseController {
 		entity.setN_deleted(0);
 	}
 
-	public void update(BaseEntity entity) {
+	public void update(SuperEntity entity) {
 		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		entity.setC_updateDate(DateUtil.getNow());

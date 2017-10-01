@@ -1,12 +1,13 @@
 package com.cy.example.entity;
 
-import org.springframework.stereotype.Repository;
+import com.baomidou.mybatisplus.annotations.TableName;
 
-@Repository
-public class LoginRecordEntity extends BaseEntity {
+@TableName("loginrecord")
+@SuppressWarnings("serial")
+public class LoginRecordEntity extends SuperEntity<LoginRecordEntity> {
 
 	private String c_loginIp;
-
+	
 	private String c_username;
 
 	public String getC_username() {

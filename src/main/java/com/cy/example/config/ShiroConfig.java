@@ -26,7 +26,7 @@ public class ShiroConfig {
 			.getLogger(ShiroConfig.class);
 
 	@Bean
-	public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
+	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         
         Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();//获取filters  
@@ -75,7 +75,6 @@ public class ShiroConfig {
 	@Bean
 	public AuthRealm authRealm() {
 		AuthRealm authRealm = new AuthRealm();
-//		authRealm.setCredentialsMatcher(matcher);
 		return authRealm;
 	}
 

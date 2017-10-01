@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.cy.example.entity.FileEntity;
-import com.cy.example.service.FileService;
+import com.cy.example.service.IFileService;
 
 @Controller
 @RequestMapping("/system/file")
@@ -30,7 +30,7 @@ public class FileController extends BaseController {
 	private String src;
 
 	@Autowired
-	private FileService fileService;
+	private IFileService fileService;
 
 	@RequestMapping("/upload")
 	@ResponseBody
@@ -65,7 +65,7 @@ public class FileController extends BaseController {
 				}
 				try {
 					file.transferTo(dest);
-					fileService.add(entity);
+					fileService.insert(entity);
 				} catch (Exception e) {
 					e.printStackTrace();
 					// return "false";

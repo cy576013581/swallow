@@ -3,7 +3,11 @@ package com.cy.example.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SysRoleEntity extends BaseEntity {
+import com.baomidou.mybatisplus.annotations.TableName;
+
+@TableName("sys_roles")
+@SuppressWarnings("serial")
+public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 
 	private String c_roleName;
 

@@ -12,33 +12,4 @@
         <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
         <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
     </resultMap>
-    
-    <sql id="ColumnList" >
-        id, c_newFileName, c_oldFileName, c_src , c_fileSize
-    </sql>
-    
-    <sql id="BaseList" >
-        c_createDate, n_creater, c_updateDate, n_updater
-    </sql>
-    
-    
-
-    <select id="download" parameterType="java.lang.Long" resultMap="BaseResultMap" >
-       
-    </select>
-
-    <insert id="add" parameterType="com.cy.example.entity.FileEntity" >
-       insert into 
-       		files(c_newFileName, c_oldFileName, c_src , c_fileSize,<include refid="BaseList" />,n_deleted) 
-       	values(#{c_newFileName},#{c_oldFileName},#{c_src},#{c_fileSize},#{c_createDate},#{n_creater},#{c_updateDate},#{n_updater},0)
-    </insert>
-    
-    
-    <delete id="delete" parameterType="java.lang.Long" >
-       UPDATE 
-       		files 
-       SET
-       		n_deleted =1
-       where id = #{id}
-    </delete>
 </mapper>

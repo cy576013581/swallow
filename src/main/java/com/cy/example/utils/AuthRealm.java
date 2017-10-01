@@ -16,12 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.cy.example.entity.SysPermisEntity;
 import com.cy.example.entity.SysRoleEntity;
 import com.cy.example.entity.UserEntity;
-import com.cy.example.service.UserService;
+import com.cy.example.service.IUserService;
 
 public class AuthRealm extends AuthorizingRealm {
 
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(AuthRealm.class);

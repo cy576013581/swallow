@@ -1,6 +1,6 @@
 package com.cy.example.carrier;
 
-public class PageCar {
+public class PageCa {
 	
 	private int page=1;
 	

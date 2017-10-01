@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cy.example.entity.CalendarEntity;
-import com.cy.example.service.CalendarService;
-import com.cy.example.service.UserService;
+import com.cy.example.service.ICalendarService;
+import com.cy.example.service.IUserService;
 
 @Controller
 @RequestMapping("/system/calendar")
 public class CalendarController extends BaseController {
 
 	@Autowired
-	private CalendarService calendarService;
+	private ICalendarService calendarService;
 
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 
 	@RequestMapping("/add")
 	@ResponseBody
@@ -36,9 +36,9 @@ public class CalendarController extends BaseController {
 			calendar.setC_title("默认日程");
 		}
 		calendar.setC_username(getCurrentUser().getC_username());
-		int rows = calendarService.add(calendar);
+		boolean flag = calendarService.insert(calendar);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (rows > 0) {
+		if (flag) {
 			map.put("flag", true);
 			map.put("msg", "添加成功！");
 		} else {
@@ -67,9 +67,9 @@ public class CalendarController extends BaseController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public Map<String, Object> delete(long id) {
-		int rows = calendarService.delete(id);
+		boolean rows = calendarService.deleteById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (rows > 0) {
+		if (rows) {
 			map.put("flag", true);
 			map.put("msg", "删除成功！");
 		} else {

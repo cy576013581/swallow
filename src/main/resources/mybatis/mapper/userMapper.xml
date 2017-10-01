@@ -62,18 +62,6 @@
 	   WHERE u.c_username = #{c_username} and n_deleted=0
     </select>
     
-    <select id="findAll" resultMap="BaseResultMap"  >
-	   select id, c_username, c_phone , n_age,
-	   case when n_sex=1 then '男'
-	   when n_sex=0 then '女' end as n_sex ,<include refid="BaseList" />
-	   from users where n_deleted=0 order by id limit #{page.index},#{page.rows}
-    </select>
-    
-    <select id="findAllCount" resultType="java.lang.Integer" >
-	   select count(id)
-	   from users where n_deleted=0
-    </select>
-    
     <select id="searchAll" resultMap="BaseResultMap"  >
 	   select id, c_username, c_phone , n_age,
 	   case when n_sex=1 then '男'
@@ -102,32 +90,6 @@
    	   order by id limit #{page.index},#{page.rows}
     </select>
 
-    <select id="findOneById" parameterType="java.lang.Long" resultMap="BaseResultMap" >
-        SELECT 
-       <include refid="ColumnList" />,
-	   case when n_sex=1 then '男'
-	   when n_sex=0 then '女' end as n_sex ,<include refid="BaseList" />
-	   FROM users
-	   WHERE id = #{id} and n_deleted=0
-    </select>
-    
-    
-
-    <insert id="add" parameterType="com.cy.example.entity.UserEntity" >
-       insert into 
-       		users(c_username, c_pwd,c_phone,n_age,n_sex,<include refid="BaseList" />,n_deleted) 
-       	values(#{c_username},
-        <choose>
-			<when test="c_pwd == ''">
-               '123456',
-	        </when>
-	        <otherwise>
-	              #{c_pwd},
-	        </otherwise>
-		</choose>
-		#{c_phone},#{n_age},#{n_sex},#{c_createDate},#{n_creater},#{c_updateDate},#{n_updater},0)
-    </insert>
-    
     <update id="update" parameterType="com.cy.example.entity.UserEntity" >
        UPDATE 
        		users 
@@ -146,12 +108,4 @@
        WHERE 
        		id = #{id}
     </update>
-    
-    <delete id="delete" parameterType="java.lang.Long" >
-       UPDATE 
-       		users 
-       SET
-       		n_deleted =1
-       where id = #{id}
-    </delete>
 </mapper>

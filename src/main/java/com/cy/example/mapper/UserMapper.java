@@ -5,31 +5,23 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.cy.example.carrier.PageCar;
+import com.cy.example.SuperMapper;
+import com.cy.example.carrier.PageCa;
+import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
 
 @Mapper
-public interface UserMapper {
-
-	int add(UserEntity user);
-
+public interface UserMapper extends SuperMapper<UserEntity>{
+	
 	int update(UserEntity user);
-
-	int delete(Long id);
 
 	UserEntity validate(String username, String pwd);
 
-	UserEntity findOneById(Long id);
-
 	UserEntity findOneByUsername(String username);
 
-	List<UserEntity> findAll(@Param("page") PageCar page);
-
-	int findAllCount(@Param("page") PageCar page);
-
 	int searchAllCount(@Param("user") UserEntity user,
-			@Param("page") PageCar page);
+			@Param("page") PageCa page);
 
 	List<UserEntity> searchAll(@Param("user") UserEntity user,
-			@Param("page") PageCar page);
+			@Param("page") PageCa page);
 }

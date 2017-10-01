@@ -5,39 +5,28 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cy.example.carrier.PageCar;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.cy.example.carrier.PageCa;
 import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.mapper.LoginRecordMapper;
-import com.cy.example.service.LoginRecordService;
+import com.cy.example.service.ILoginRecordService;
 
 @Service
-public class LoginRecordServiceImpl implements LoginRecordService{
-
+public class LoginRecordServiceImpl extends ServiceImpl<LoginRecordMapper, LoginRecordEntity>
+	implements ILoginRecordService{
+	
 	@Autowired
 	private LoginRecordMapper loginRecordMapper;
 	
-	public int add(LoginRecordEntity loginRecord) {
-		// TODO Auto-generated method stub
-		return loginRecordMapper.add(loginRecord);
-	}
-
-	public List<LoginRecordEntity> findAll(PageCar page) {
-		return loginRecordMapper.findAll(page);
-	}
-
-	public int findAllCount(PageCar page) {
-		return loginRecordMapper.findAllCount(page);
-	}
 
 	public List<LoginRecordEntity> searchAll(LoginRecordEntity loginRecord,
-			PageCar page) {
+			PageCa page) {
 		// TODO Auto-generated method stub
 		return loginRecordMapper.searchAll(loginRecord, page);
 	}
 
-	public int searchAllCount(LoginRecordEntity loginRecord, PageCar page) {
+	public int searchAllCount(LoginRecordEntity loginRecord, PageCa page) {
 		// TODO Auto-generated method stub
 		return loginRecordMapper.searchAllCount(loginRecord, page);
 	}
-
 }

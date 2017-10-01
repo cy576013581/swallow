@@ -30,12 +30,6 @@
    	   order by id
     </select>  
 
-    <insert id="add" parameterType="com.cy.example.entity.UserEntity" >
-       insert into 
-       		calendars(c_username, c_title, c_start , c_end , c_color,<include refid="BaseList" />,n_deleted) 
-       	values(#{c_username},#{c_title},#{c_start},#{c_end},#{c_color},#{c_createDate},#{n_creater},#{c_updateDate},#{n_updater},0)
-    </insert>
-    
     <update id="update" parameterType="com.cy.example.entity.UserEntity" >
        UPDATE 
        		calendars 
@@ -70,12 +64,4 @@
        WHERE 
        		id = #{id}
     </update>
-    
-    <delete id="delete" parameterType="java.lang.Long" >
-       UPDATE 
-       		calendars 
-       SET
-       		n_deleted =1
-       where id = #{id}
-    </delete>
 </mapper>

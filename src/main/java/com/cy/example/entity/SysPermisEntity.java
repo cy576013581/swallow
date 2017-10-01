@@ -2,7 +2,11 @@ package com.cy.example.entity;
 
 import java.util.List;
 
-public class SysPermisEntity extends BaseEntity {
+import com.baomidou.mybatisplus.annotations.TableName;
+
+@TableName("sys_permission")
+@SuppressWarnings("serial")
+public class SysPermisEntity extends SuperEntity<SysPermisEntity> {
 
 	private String c_permisName;
 

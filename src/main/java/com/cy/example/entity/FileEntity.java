@@ -1,6 +1,10 @@
 package com.cy.example.entity;
 
-public class FileEntity extends BaseEntity {
+import com.baomidou.mybatisplus.annotations.TableName;
+
+@TableName("files")
+@SuppressWarnings("serial")
+public class FileEntity extends SuperEntity<FileEntity> {
 
 	private String c_newFileName;
 

@@ -12,16 +12,6 @@
         id, c_createDate, c_loginIp, c_username
     </sql>
     
-    <select id="findAll" resultMap="BaseResultMap"  >
-	   select <include refid="ColumnList" />
-	   from loginrecord order by c_createDate desc limit #{page.index},#{page.rows}
-    </select>
-    
-    <select id="findAllCount" resultType="java.lang.Integer" >
-	   select count(id)
-	   from loginrecord
-    </select>
-    
     <select id="searchAll" resultMap="BaseResultMap">
 	   select <include refid="ColumnList" />
 	   from loginrecord
@@ -41,18 +31,4 @@
    	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
    	   order by id limit #{page.index},#{page.rows}
     </select>
-
-
-    <select id="findOneById" parameterType="java.lang.Long" resultMap="BaseResultMap" >
-        SELECT 
-       <include refid="ColumnList" />
-	   FROM loginrecord
-	   WHERE id = #{id}
-    </select>
-
-    <insert id="add" parameterType="com.cy.example.entity.UserEntity" >
-       insert into 
-       		loginrecord( c_createDate, c_username, c_loginIp) 
-       	values(#{c_createDate},#{c_username},#{c_loginIp})
-    </insert>
 </mapper>

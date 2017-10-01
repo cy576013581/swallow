@@ -5,16 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.cy.example.SuperMapper;
 import com.cy.example.entity.CalendarEntity;
 
 @Mapper
-public interface CalendarMapper {
-
-	int add(CalendarEntity cal);
+public interface CalendarMapper extends SuperMapper<CalendarEntity>{
 
 	int update(CalendarEntity cal);
-
-	int delete(Long id);
 
 	List<CalendarEntity> searchAll(@Param("cal") CalendarEntity cal);
 }

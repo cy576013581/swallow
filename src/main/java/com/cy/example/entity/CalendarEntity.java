@@ -1,9 +1,10 @@
 package com.cy.example.entity;
 
-import org.springframework.stereotype.Repository;
+import com.baomidou.mybatisplus.annotations.TableName;
 
-@Repository
-public class CalendarEntity extends BaseEntity {
+@TableName("calendars")
+@SuppressWarnings("serial")
+public class CalendarEntity extends SuperEntity<CalendarEntity> {
 	// 用户
 	private String c_username;
 

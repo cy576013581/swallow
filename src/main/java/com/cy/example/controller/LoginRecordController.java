@@ -10,28 +10,31 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cy.example.carrier.PageCar;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.cy.example.carrier.PageCa;
 import com.cy.example.entity.LoginRecordEntity;
-import com.cy.example.service.LoginRecordService;
-import com.cy.example.service.UserService;
+import com.cy.example.service.ILoginRecordService;
+import com.cy.example.service.IUserService;
 
 @Controller
 @RequestMapping("/system/loginRecord")
 public class LoginRecordController extends BaseController {
 
 	@Autowired
-	private LoginRecordService loginRecordService;
+	private ILoginRecordService loginRecordService;
 
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 
 	@RequestMapping("/findAll")
 	@ResponseBody
-	public Map<String, Object> findAll(@ModelAttribute("page") PageCar page) {
-		List<LoginRecordEntity> list = loginRecordService.findAll(page);
+	public Map<String, Object> findAll(int page, int rows) {
+		Page<LoginRecordEntity> list = loginRecordService.selectPage(new Page<LoginRecordEntity>(page, rows)
+				, new EntityWrapper<LoginRecordEntity>());
 		Map<String, Object> map = new HashMap<String, Object>();
-		int sum = loginRecordService.findAllCount(page);
-		map.put("rows", list);
+		int sum = loginRecordService.selectCount(new EntityWrapper<LoginRecordEntity>());
+		map.put("rows", list.getRecords());
 		map.put("total", sum);
 		return map;
 	}
@@ -40,7 +43,7 @@ public class LoginRecordController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> searchData(
 			@ModelAttribute("loginRecord") LoginRecordEntity loginRecord,
-			@ModelAttribute("page") PageCar page) {
+			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<LoginRecordEntity> list = loginRecordService.searchAll(
 				loginRecord, page);

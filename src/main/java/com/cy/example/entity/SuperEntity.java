@@ -1,6 +1,10 @@
 package com.cy.example.entity;
 
-public class BaseEntity {
+import java.io.Serializable;
+
+import com.baomidou.mybatisplus.activerecord.Model;
+
+public class SuperEntity<T extends Model> extends Model<T>{
 
 	protected long id;
 
@@ -60,6 +64,12 @@ public class BaseEntity {
 
 	public void setN_deleted(Integer n_deleted) {
 		this.n_deleted = n_deleted;
+	}
+
+	@Override
+	protected Serializable pkVal() {
+		// TODO Auto-generated method stub
+		return this.id;
 	}
 
 }

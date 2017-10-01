@@ -6,6 +6,6 @@ import org.springframework.context.annotation.Configuration;
 public class WebConfig{
 
 	public static String LOGIN_USER = "loginUser";
-
+	
 	
 }
