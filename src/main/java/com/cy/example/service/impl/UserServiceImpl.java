@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
-import com.cy.example.mapper.LoginRecordMapper;
 import com.cy.example.mapper.UserMapper;
 import com.cy.example.service.IUserService;
 import com.cy.example.utils.MD5Util;
