@@ -18,11 +18,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 	@Autowired
 	private UserMapper userMapper;
 	
-	public int update(UserEntity user) {
+	public int updateMy(UserEntity user) {
 		if (null != user.getC_pwd() || "" != user.getC_pwd()) {
 			user.setC_pwd(MD5Util.GetMD5Code(user.getC_pwd()));
 		}
-		return this.userMapper.update(user);
+		return this.userMapper.updateMy(user);
 	}
 
 	public List<UserEntity> searchAll(UserEntity user, PageCa page) {

@@ -61,7 +61,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("user") UserEntity user) {
 		super.update(user);
-		int rows = userService.update(user);
+		int rows = userService.updateMy(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {
 			map.put("flag", true);

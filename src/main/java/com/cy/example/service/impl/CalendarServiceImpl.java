@@ -17,8 +17,8 @@ public class CalendarServiceImpl extends ServiceImpl<CalendarMapper, CalendarEnt
 	@Autowired
 	private CalendarMapper calendarMapper;
 	
-	public int update(CalendarEntity cal) {
-		return this.calendarMapper.update(cal);
+	public int updateMy(CalendarEntity cal) {
+		return this.calendarMapper.updateMy(cal);
 	}
 	
 	public List<CalendarEntity> searchAll(CalendarEntity cal) {

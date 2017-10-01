@@ -30,7 +30,7 @@
    	   order by id
     </select>  
 
-    <update id="update" parameterType="com.cy.example.entity.UserEntity" >
+    <update id="updateMy" parameterType="com.cy.example.entity.UserEntity" >
        UPDATE 
        		calendars 
        SET 

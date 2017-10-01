@@ -8,7 +8,7 @@ import com.cy.example.entity.UserEntity;
 
 public interface IUserService extends IService<UserEntity>{
 	
-	public int update(UserEntity user);
+	public int updateMy(UserEntity user);
 
 	public UserEntity findOneByUsername(String username);
 

@@ -90,7 +90,7 @@
    	   order by id limit #{page.index},#{page.rows}
     </select>
 
-    <update id="update" parameterType="com.cy.example.entity.UserEntity" >
+    <update id="updateMy" parameterType="com.cy.example.entity.UserEntity" >
        UPDATE 
        		users 
        SET 

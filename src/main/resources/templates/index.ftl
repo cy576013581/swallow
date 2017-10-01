@@ -84,6 +84,6 @@
 			    </ul>
 	    </div>
     </div>
-    <div class="loginbm">版权所有  cheny</div>
+    <div class="loginbm">版权所有  swallow</div>
 </body>
 </html>

@@ -52,7 +52,7 @@ public class CalendarController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("cal") CalendarEntity cal) {
 		super.update(cal);
-		int rows = calendarService.update(cal);
+		int rows = calendarService.updateMy(cal);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {
 			map.put("flag", true);

@@ -12,7 +12,7 @@ import com.cy.example.entity.UserEntity;
 @Mapper
 public interface UserMapper extends SuperMapper<UserEntity>{
 	
-	int update(UserEntity user);
+	int updateMy(UserEntity user);
 
 	UserEntity validate(String username, String pwd);
 

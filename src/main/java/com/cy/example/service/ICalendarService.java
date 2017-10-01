@@ -7,7 +7,7 @@ import com.cy.example.entity.CalendarEntity;
 
 public interface ICalendarService extends IService<CalendarEntity>{
 
-	public int update(CalendarEntity cal);
+	public int updateMy(CalendarEntity cal);
 	
 	public List<CalendarEntity> searchAll(CalendarEntity cal);
 }
