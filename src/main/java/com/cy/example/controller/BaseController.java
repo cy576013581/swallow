@@ -73,7 +73,7 @@ public class BaseController {
 		return getRequest().getSession();
 	}
 
-	public void add(SuperEntity entity) {
+	public void add(SuperEntity<?> entity) {
 		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		entity.setC_createDate(DateUtil.getNow());
@@ -83,7 +83,7 @@ public class BaseController {
 		entity.setN_deleted(0);
 	}
 
-	public void update(SuperEntity entity) {
+	public void update(SuperEntity<?> entity) {
 		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		entity.setC_updateDate(DateUtil.getNow());
