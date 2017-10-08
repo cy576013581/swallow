@@ -2,6 +2,7 @@ package com.cy.example.entity;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 @TableName("sys_permission")
@@ -10,6 +11,7 @@ public class SysPermisEntity extends SuperEntity<SysPermisEntity> {
 
 	private String c_permisName;
 
+	@TableField(exist = false)
 	private List<SysRoleEntity> roles;// 一个权限对应一个角色
 
 	public String getC_permisName() {

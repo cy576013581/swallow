@@ -10,7 +10,7 @@
 		        <li><cite></cite><a href="javascript:void(0);" onclick="addTabs('登录记录','/menu/loginRecordManage')">登录记录</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="addTabs('用户管理','/menu/userManage')">用户管理</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="">权限管理</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="">角色管理</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="addTabs('角色管理','/menu/roleManage')">角色管理</a><i></i></li>
 		        <li><cite></cite><a href="javascript:void(0);" onclick="addTabs('文件上传','/menu/uploadFile')">文件上传</a><i></i></li>
 		       
 	        </ul>    

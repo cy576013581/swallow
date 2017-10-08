@@ -31,12 +31,10 @@ public class MenuController {
 	public String uploadFile() {
 		return "test_uploadFile";
 	}
-
-	/*
-	 * 无权限界面
-	 */
-	@RequestMapping("/403")
-	public String error403() {
-		return "error403";
+	
+	@RequestMapping("/roleManage")
+	public String roleManage() {
+		return "roleManage";
 	}
+
 }

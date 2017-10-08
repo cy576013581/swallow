@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.example.mapper.RoleMapper" >
+    <resultMap id="BaseResultMap" type="com.cy.example.entity.SysRoleEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
+        <result column="c_roleName" property="c_roleName" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <sql id="ColumnList" >
+        id, c_createDate,c_roleName
+    </sql>
+    
+    <select id="searchAll" resultMap="BaseResultMap">
+	   select <include refid="ColumnList" />
+	   from sys_roles
+	   where 1=1
+	   <if test="role.c_roleName != null"><if test="role.c_roleName != null"> and c_roleName like CONCAT('%',#{role.c_roleName},'%')</if></if>
+   	   <if test="role.c_createDate != ''"><if test="role.c_createDate != null">	and substr(c_createDate,1,10) = #{role.c_createDate}</if></if>
+   	   order by id limit #{page.index},#{page.rows}
+    </select>  
+    
+    <select id="searchAllCount" resultType="java.lang.Integer" >
+	   select count(id)
+	   from sys_roles
+	   where 1=1
+	   <if test="role.c_roleName != null"><if test="role.c_roleName != null"> and c_roleName like CONCAT('%',#{role.c_roleName},'%')</if></if>
+   	   <if test="role.c_createDate != ''"><if test="role.c_createDate != null">	and substr(c_createDate,1,10) = #{role.c_createDate}</if></if>
+   	   order by id limit #{page.index},#{page.rows}
+    </select>
+</mapper>

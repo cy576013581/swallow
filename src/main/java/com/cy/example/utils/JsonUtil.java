@@ -1,5 +1,6 @@
 package com.cy.example.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -90,4 +91,19 @@ public class JsonUtil {
 	        String s = JSONObject.toJSONString(m);  
 	        return s;  
 	    }  
+	    
+	    /*
+	     * 除去null的变量
+	     */
+	    public static <T> List<T> removeNull(List<? extends T> oldList) {
+	        // 临时集合
+	        List<T> listTemp = new ArrayList();
+	        for (int i = 0;i < oldList.size(); i++) {
+	         // 保存不为空的元素
+	          if (oldList.get(i) != null) {
+	        	  listTemp.add(oldList.get(i));
+	          }
+	        }
+	        return listTemp; 
+	    }
 }

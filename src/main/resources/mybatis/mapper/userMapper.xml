@@ -59,7 +59,7 @@
 		LEFT JOIN sys_roles r ON ur.n_roleId = r.id
 		LEFT JOIN sys_role_permission rp ON rp.n_role_id = ur.n_roleId
 		LEFT JOIN sys_permission p ON p.id = rp.n_permission_id
-	   WHERE u.c_username = #{c_username} and n_deleted=0
+	   WHERE u.c_username = #{c_username} and u.n_deleted=0
     </select>
     
     <select id="searchAll" resultMap="BaseResultMap"  >

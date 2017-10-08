@@ -48,10 +48,10 @@ public class UserController extends BaseController {
 		boolean flag = userService.insert(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
-			map.put("flag", true);
+			map.put("flag", flag);
 			map.put("msg", "添加成功！");
 		} else {
-			map.put("flag", false);
+			map.put("flag", flag);
 			map.put("msg", "添加失败！");
 		}
 		return map;
