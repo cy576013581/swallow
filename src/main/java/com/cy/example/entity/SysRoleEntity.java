@@ -13,7 +13,7 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 	private String c_roleName;
 
 	@TableField(exist = false)
-	private List<SysPermisEntity> permisList;// 一个角色对应多个权限
+	private List<SysPermissionEntity> permisList;// 一个角色对应多个权限
 
 	@TableField(exist = false)
 	private List<UserEntity> userList;// 一个角色对应多个用户
@@ -26,11 +26,11 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 		this.c_roleName = c_roleName;
 	}
 
-	public List<SysPermisEntity> getPermisList() {
+	public List<SysPermissionEntity> getPermisList() {
 		return permisList;
 	}
 
-	public void setPermisList(List<SysPermisEntity> permisList) {
+	public void setPermisList(List<SysPermissionEntity> permisList) {
 		this.permisList = permisList;
 	}
 
@@ -44,8 +44,8 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 
 	public List<String> getPermissionsName() {
 		List<String> list = new ArrayList<String>();
-		List<SysPermisEntity> perlist = getPermisList();
-		for (SysPermisEntity per : perlist) {
+		List<SysPermissionEntity> perlist = getPermisList();
+		for (SysPermissionEntity per : perlist) {
 			list.add(per.getC_permisName());
 		}
 		return list;

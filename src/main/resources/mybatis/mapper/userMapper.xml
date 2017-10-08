@@ -16,7 +16,7 @@
         <collection property="roleList" ofType="com.cy.example.entity.SysRoleEntity">
 	    	<id column="r_id" property="id"/>
 	 		<result column="c_roleName" property="c_roleName" jdbcType="VARCHAR" />
-	 		<collection property="permisList" ofType="com.cy.example.entity.SysPermisEntity">
+	 		<collection property="permisList" ofType="com.cy.example.entity.SysPermissionEntity">
 		    	<id column="p_id" property="id"/>
 		 		<result column="c_permisName" property="c_permisName" jdbcType="VARCHAR" />
     		</collection>

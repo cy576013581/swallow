@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 @TableName("sys_permission")
 @SuppressWarnings("serial")
-public class SysPermisEntity extends SuperEntity<SysPermisEntity> {
+public class SysPermissionEntity extends SuperEntity<SysPermissionEntity> {
 
 	private String c_permisName;
 

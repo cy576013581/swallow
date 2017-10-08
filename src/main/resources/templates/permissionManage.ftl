@@ -7,8 +7,8 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/role/" title="角色管理" width="1100px" height="500px"
-		fields="id: ,c_roleName:角色名称">
+	<@loginRecord.grid controller="/system/permission/" title="权限管理" width="1100px" height="500px"
+		fields="id: ,c_permisName:权限名称">
 		
 	</@loginRecord.grid>
 	

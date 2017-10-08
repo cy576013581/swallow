@@ -17,20 +17,21 @@ import com.cy.example.carrier.PageCa;
 import com.cy.example.entity.SysPermissionEntity;
 import com.cy.example.entity.SysRoleEntity;
 import com.cy.example.entity.UserEntity;
+import com.cy.example.service.IPermissionService;
 import com.cy.example.service.IRoleService;
 
 @Controller
-@RequestMapping("/system/role")
-public class RoleController extends BaseController {
+@RequestMapping("/system/permission")
+public class PermissionController extends BaseController {
 
 	@Autowired
-	private IRoleService roleService;
+	private IPermissionService permissionService;
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public Map<String, Object> add(@ModelAttribute("role") SysRoleEntity role) {
-		super.add(role);
-		boolean flag = roleService.insert(role);
+	public Map<String, Object> add(@ModelAttribute("per") SysPermissionEntity per) {
+		super.add(per);
+		boolean flag = permissionService.insert(per);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -44,9 +45,9 @@ public class RoleController extends BaseController {
 
 	@RequestMapping("/update")
 	@ResponseBody
-	public Map<String, Object> update(@ModelAttribute("role") SysRoleEntity role) {
-		super.update(role);
-		boolean flag = roleService.updateById(role);
+	public Map<String, Object> update(@ModelAttribute("per") SysPermissionEntity per) {
+		super.update(per);
+		boolean flag = permissionService.updateById(per);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -60,8 +61,8 @@ public class RoleController extends BaseController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("role") SysRoleEntity role) {
-		boolean flag = roleService.deleteById(role.getId());
+	public Map<String, Object> delete(@ModelAttribute("per") SysPermissionEntity per) {
+		boolean flag = permissionService.deleteById(per.getId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -76,14 +77,13 @@ public class RoleController extends BaseController {
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public Map<String, Object> findAll(int page, int rows) {
-		Page<SysRoleEntity> list = roleService.selectPage(new Page<SysRoleEntity>(page, rows)
-				, new EntityWrapper<SysRoleEntity>());
+		Page<SysPermissionEntity> list = permissionService.selectPage(new Page<SysPermissionEntity>(page, rows)
+				, new EntityWrapper<SysPermissionEntity>());
 		Map<String, Object> map = new HashMap<String, Object>();
-		int sum = roleService.selectCount(new EntityWrapper<SysRoleEntity>());
-		List<SysRoleEntity> data = list.getRecords();
-		for(SysRoleEntity entity:data){
-			entity.setPermisList(new ArrayList<SysPermissionEntity>());
-			entity.setUserList(new ArrayList<UserEntity>());
+		int sum = permissionService.selectCount(new EntityWrapper<SysPermissionEntity>());
+		List<SysPermissionEntity> data = list.getRecords();
+		for(SysPermissionEntity entity:data){
+			entity.setRoles(new ArrayList<SysRoleEntity>());
 		}
 		map.put("rows", list.getRecords());
 		map.put("total", sum);
@@ -93,15 +93,14 @@ public class RoleController extends BaseController {
 	@RequestMapping("/searchData")
 	@ResponseBody
 	public Map<String, Object> searchData(
-			@ModelAttribute("role") SysRoleEntity role,
+			@ModelAttribute("per") SysPermissionEntity per,
 			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<SysRoleEntity> list = roleService.searchAll(
-				role, page);
-		int sum = roleService.searchAllCount(role, page);
-		for(SysRoleEntity entity:list){
-			entity.setPermisList(new ArrayList<SysPermissionEntity>());
-			entity.setUserList(new ArrayList<UserEntity>());
+		List<SysPermissionEntity> list = permissionService.searchAll(
+				per, page);
+		int sum = permissionService.searchAllCount(per, page);
+		for(SysPermissionEntity entity:list){
+			entity.setRoles(new ArrayList<SysRoleEntity>());
 		}
 		map.put("rows", list);
 		map.put("total", sum);
