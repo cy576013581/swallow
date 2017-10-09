@@ -383,12 +383,13 @@
                 <#list fields?split(",") as x>  
 			        <#list x?split(":") as y>
 			         	<#if (y_index ==0)>
-			         		<#if ("${y}" == "id")>
-								<th data-options="field:'${y}',hidden:true">
-							<#else>	
-								<th data-options="field:'${y}',width:150">
-							</#if>
-						<#else>
+			         		<th data-options="field:'${y}',width:150,
+						
+						</#if>
+						<#if (y_index ==1)>
+							hidden: ${y}">
+						</#if>
+						<#if (y_index ==2)>
 							${y}</th>
 						</#if>
 			        </#list> 
@@ -401,14 +402,12 @@
         <#list fields?split(",") as x>  
         	<#if (x_index !=0)>
 		        <#list x?split(":")?reverse  as y>
-		         	<#if (y_index ==0)>
-		         		<#if ("${y}" != "id")>
-							<span>&emsp;${y}:
-						</#if>
-					<#else>
-						<#if ("${y}" != " ")>
-							<input id="tb_${y}" name="${y}" class="easyui-textbox" style="width:120px"></span>
-						</#if>
+		         	<#if (y_index ==0 && "${y}" != "id")>
+						<span>&emsp;${y}:
+					
+					</#if>
+					<#if (y_index ==2 && "${y}" != " ")>
+						<input id="tb_${y}" name="${y}" class="easyui-textbox" style="width:120px"></span>
 					</#if>
 		        </#list> 
 		    </#if>
@@ -446,14 +445,11 @@
 		        <#list fields?split(",") as x>  
 		        	<#if (x_index !=0)>
 				        <#list x?split(":")?reverse  as y>
-				         	<#if (y_index ==0)>
-				         		<#if ("${y}" != "id")>
-									<div style='margin-bottom:20px'>${y}:
-								</#if>
-							<#else>
-								<#if ("${y}" != " ")>
-									<input id="ed_${y}" name="${y}" class="easyui-textbox" style="width:120px;margin-top:10px"></div>
-								</#if>
+							<#if (y_index ==0 && "${y}" != "id")>
+								<div style='margin-bottom:20px'>${y}:
+							</#if>
+							<#if (y_index ==2 && "${y}" != " ")>
+								<input id="ed_${y}" name="${y}" class="easyui-textbox" style="width:120px;margin-top:10px"></div>
 							</#if>
 				        </#list> 
 				    </#if>
