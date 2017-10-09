@@ -130,8 +130,8 @@
 	<div id="top" style="background:url(../images/topbg.gif) repeat-x;width:100%;height:auto;overflow:hidden;">
 		<#include "/main/top.ftl">
 	</div>
-	<!-- 侧边栏-->
-	<div width="100%" >
+	<div id="box" width="100%" >
+		<!-- 左部菜单-->
 		<#include "/main/left.ftl">
 		<!-- 右部主界面栏-->
 		<div id="main">

@@ -76,7 +76,7 @@ h2{font-weight:normal;}
 /*left.html*/
 .lefttop{background:url(../images/lefttop.gif) repeat-x;height:40px;color:#fff;font-size:14px;line-height:40px;}
 .lefttop span{margin-left:8px; margin-top:10px;margin-right:8px; background:url(../images/leftico.png) no-repeat; width:20px; height:21px;float:left;}
-.leftmenu{width:187px;padding-bottom: 9999px;margin-bottom: -9999px; overflow:hidden; background:url(../images/leftline.gif) repeat-y right;}
+.leftmenu{width:100%;padding-bottom: 9999px;margin-bottom: -9999px; overflow:hidden; background:url(../images/leftline.gif) repeat-y right;}
 .leftmenu dd{background:url(../images/leftmenubg.gif) repeat-x;line-height:35px;font-weight:bold;font-size:14px;border-right:solid 1px #b7d5df;}
 .leftmenu dd span{float:left;margin:10px 8px 0 12px;}
 .leftmenu dd .menuson{display:none;}
@@ -297,5 +297,6 @@ h2{font-weight:normal;}
 .scbtn{width:85px;height:35px; background:url(../images/btnbg.png) no-repeat center; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;border-radius:3px; behavior:url(js/pie.htc);}
 
 body{position: relation;}
-#left{position: absolute;top: 88px;left:0px;}
-#main{position: absolute;top:88px;left:187px;right: 0px;bottom: 0px;background:#das;}
+#box{position: relation;}
+#left{position: absolute;top: 88px;left:0px;width:18%}
+#main{position: absolute;top:88px;left:18%;right: 0px;bottom: 0px;background:#das;}
