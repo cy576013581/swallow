@@ -1,15 +1,14 @@
 # swallow
-***
-##后台：<br>
-   **springMVC
-   **Mybatis
-   **freemarke
-   **Mysql
-   **redis
-   **MybatisPlus
+## 后台：<br>
+   ** springMVC
+   ** Mybatis
+   ** freemarke
+   ** Mysql
+   ** redis
+   ** MybatisPlus
    ***
-##前端：<br>
-   **整体：easyui和ace admin<br>文件上传：Dropzone.js<br>日历：calendar<br>弹窗：layer<br>消息提示：toarst**
+## 前端：<br>
+   ** 整体：easyui和ace admin<br>文件上传：Dropzone.js<br>日历：calendar<br>弹窗：layer<br>消息提示：toarst
 ***
 
 
