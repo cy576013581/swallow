@@ -8,7 +8,7 @@
 </head>
 <body>
 	<@loginRecord.grid controller="/system/permission/" title="权限管理" width="1100px" height="500px"
-		fields="id: ,c_permisName:权限名称">
+		fields="id: ,c_permisCode:权限代码,c_permisName:权限名称">
 		
 	</@loginRecord.grid>
 	

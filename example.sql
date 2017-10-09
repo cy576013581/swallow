@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2017-10-09 13:47:51
+Date: 2017-10-09 14:15:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,7 @@ CREATE TABLE `calendars` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of calendars
@@ -48,6 +48,8 @@ INSERT INTO `calendars` VALUES ('28', 'admin', '默认日程', '2017-08-25', '20
 INSERT INTO `calendars` VALUES ('29', 'admin', '任务', '2017-08-26', '2017-08-27', '#3a87ad', '2017-08-29 19:40:27', '8', '2017-08-29 19:40:27', '8', '0');
 INSERT INTO `calendars` VALUES ('30', 'admin', '国庆放假了呀！！！！！！！！！！！！！！！！！！', '2017-10-01', '2017-10-08', '#3a87ad', '2017-09-01 13:23:03', '8', '2017-09-01 13:23:03', '8', '0');
 INSERT INTO `calendars` VALUES ('31', 'admin', '共高吼吼', '2017-09-06', '2017-09-07', '#3a87ad', '2017-09-23 09:51:48', '8', '2017-09-23 09:51:48', '8', '0');
+INSERT INTO `calendars` VALUES ('32', 'admin', '9099', '2017-10-09', '2017-10-09', '#3a87ad', '2017-10-09 13:52:11', '8', '2017-10-09 13:52:11', '8', '0');
+INSERT INTO `calendars` VALUES ('33', 'admin', '000', '2017-10-10', '2017-10-10', '#3a87ad', '2017-10-09 13:52:19', '8', '2017-10-09 13:52:19', '8', '0');
 
 -- ----------------------------
 -- Table structure for files
@@ -87,7 +89,7 @@ CREATE TABLE `loginrecord` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of loginrecord
@@ -98,6 +100,10 @@ INSERT INTO `loginrecord` VALUES ('9', 'admin', '192.168.1.4', '2017-08-01 11:00
 INSERT INTO `loginrecord` VALUES ('10', 'admin', '192.168.1.4', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
 INSERT INTO `loginrecord` VALUES ('11', 'admin', '192.168.1.4', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
 INSERT INTO `loginrecord` VALUES ('12', 'admin', '192.168.1.4', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `loginrecord` VALUES ('117', 'admin', '192.168.153.128', '2017-10-09 13:51:33', '8', '2017-10-09 13:51:33', '8', '0');
+INSERT INTO `loginrecord` VALUES ('118', 'admin', '192.168.153.128', '2017-10-09 14:00:32', '8', '2017-10-09 14:00:32', '8', '0');
+INSERT INTO `loginrecord` VALUES ('119', 'admin', '192.168.153.128', '2017-10-09 14:11:32', '8', '2017-10-09 14:11:32', '8', '0');
+INSERT INTO `loginrecord` VALUES ('120', 'admin', '192.168.153.128', '2017-10-09 14:12:50', '8', '2017-10-09 14:12:50', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -105,7 +111,8 @@ INSERT INTO `loginrecord` VALUES ('12', 'admin', '192.168.1.4', '2017-08-01 11:0
 DROP TABLE IF EXISTS `sys_permission`;
 CREATE TABLE `sys_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `c_permisName` varchar(255) NOT NULL,
+  `c_permisCode` varchar(255) NOT NULL,
+  `c_permisName` varchar(255) DEFAULT NULL,
   `c_createDate` varchar(255) DEFAULT NULL,
   `n_creater` bigint(20) DEFAULT NULL,
   `c_updateDate` varchar(255) DEFAULT NULL,
@@ -117,12 +124,10 @@ CREATE TABLE `sys_permission` (
 -- ----------------------------
 -- Records of sys_permission
 -- ----------------------------
-INSERT INTO `sys_permission` VALUES ('1', 'add', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_permission` VALUES ('2', 'del', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_permission` VALUES ('3', 'update', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_permission` VALUES ('4', 'list', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_permission` VALUES ('5', 'user:list', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_permission` VALUES ('6', 'user:update', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_permission` VALUES ('1', 'add', '添加', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_permission` VALUES ('2', 'del', '删除', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_permission` VALUES ('3', 'update', '更新', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_permission` VALUES ('4', 'list', '列表显示', '2017-08-01 11:00:05', '0', '2017-10-09 14:13:45', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_roles
@@ -130,6 +135,7 @@ INSERT INTO `sys_permission` VALUES ('6', 'user:update', '2017-08-01 11:00:05', 
 DROP TABLE IF EXISTS `sys_roles`;
 CREATE TABLE `sys_roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `c_roleCode` varchar(255) DEFAULT NULL,
   `c_roleName` varchar(255) NOT NULL,
   `c_createDate` varchar(255) DEFAULT NULL,
   `n_creater` bigint(20) DEFAULT NULL,
@@ -142,9 +148,9 @@ CREATE TABLE `sys_roles` (
 -- ----------------------------
 -- Records of sys_roles
 -- ----------------------------
-INSERT INTO `sys_roles` VALUES ('1', 'admin', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_roles` VALUES ('2', 'manege', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_roles` VALUES ('3', 'normal', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_roles` VALUES ('1', 'admin', '系统管理员', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_roles` VALUES ('2', 'manege', '管理员', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_roles` VALUES ('3', 'normal', '普通用户', '2017-08-01 11:00:05', '0', '2017-10-09 14:14:13', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_role_permission

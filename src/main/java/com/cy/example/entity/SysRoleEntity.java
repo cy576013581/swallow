@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.annotations.TableName;
 @SuppressWarnings("serial")
 public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 
+	private String c_roleCode;
+	
 	private String c_roleName;
 
 	@TableField(exist = false)
@@ -17,13 +19,21 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 
 	@TableField(exist = false)
 	private List<UserEntity> userList;// 一个角色对应多个用户
-
+	
 	public String getC_roleName() {
 		return c_roleName;
 	}
 
 	public void setC_roleName(String c_roleName) {
 		this.c_roleName = c_roleName;
+	}
+
+	public String getC_roleCode() {
+		return c_roleCode;
+	}
+
+	public void setC_roleCode(String c_roleCode) {
+		this.c_roleCode = c_roleCode;
 	}
 
 	public List<SysPermissionEntity> getPermisList() {
@@ -51,10 +61,6 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 		return list;
 	}
 
-	@Override
-	public String toString() {
-		return "SysRoleEntity [c_roleName=" + c_roleName + ", permisList="
-				+ permisList + ", userList=" + userList + "]";
-	}
+
 
 }

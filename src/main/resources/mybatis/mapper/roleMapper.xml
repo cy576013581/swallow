@@ -5,10 +5,11 @@
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
         <result column="c_roleName" property="c_roleName" jdbcType="VARCHAR"/>
+        <result column="c_roleCode" property="c_roleCode" jdbcType="VARCHAR"/>
     </resultMap>
     
     <sql id="ColumnList" >
-        id, c_createDate,c_roleName
+        id, c_createDate,c_roleName,c_roleCode
     </sql>
     
     <select id="searchAll" resultMap="BaseResultMap">
@@ -16,6 +17,7 @@
 	   from sys_roles
 	   where 1=1
 	   <if test="role.c_roleName != null"><if test="role.c_roleName != null"> and c_roleName like CONCAT('%',#{role.c_roleName},'%')</if></if>
+	   <if test="role.c_roleCode != null"><if test="role.c_roleCode != null"> and c_roleCode like CONCAT('%',#{role.c_roleCode},'%')</if></if>
    	   <if test="role.c_createDate != ''"><if test="role.c_createDate != null">	and substr(c_createDate,1,10) = #{role.c_createDate}</if></if>
    	   order by id limit #{page.index},#{page.rows}
     </select>  
@@ -25,6 +27,7 @@
 	   from sys_roles
 	   where 1=1
 	   <if test="role.c_roleName != null"><if test="role.c_roleName != null"> and c_roleName like CONCAT('%',#{role.c_roleName},'%')</if></if>
+	   <if test="role.c_roleCode != null"><if test="role.c_roleCode != null"> and c_roleCode like CONCAT('%',#{role.c_roleCode},'%')</if></if>
    	   <if test="role.c_createDate != ''"><if test="role.c_createDate != null">	and substr(c_createDate,1,10) = #{role.c_createDate}</if></if>
    	   order by id limit #{page.index},#{page.rows}
     </select>
