@@ -16,7 +16,7 @@
 ***
 
 
-##开发日志<br>
+## 开发日志<br>
 - 2017.8.22 添加Redis缓存、测试实例和安全加密工具类	add by cy
 
 - 2017.8.23 mybatis添加mapperxml、grid修改下拉框bug	add by cy
