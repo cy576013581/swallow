@@ -32,8 +32,12 @@ h2{font-weight:normal;}
 .logintop ul li a{color:#afc5d2;}
 .logintop ul li a:hover{color:#fff;}
 .loginbody{background:url(../images/loginbg3.png) no-repeat center center; width:100%; height:585px; overflow:hidden; position:absolute; top:47px;}
-.systemlogo{background:url(../images/loginlogo.png) no-repeat center;width:100%; height:71px; margin-top:75px;}
-.loginbox{width:692px; height:336px; background:url(../images/logininfo.png) no-repeat; margin-top:30px;}
+
+.logobox{width:100%;text-align: center;margin-top:100px;}
+.systemlogo{width:70px; height:70px;}
+.systemname{color: #fff;font-size: 15pt;margin-top: 10px}
+
+.loginbox{width:692px; height:336px; background:url(../images/logininfo.png) no-repeat; margin-top:50px;}
 .loginbox ul{margin-top:88px; margin-left:285px;}
 .loginbox ul li{margin-bottom:25px;}
 .loginbox ul li label{color:#687f92; padding-left:25px;}
@@ -214,13 +218,6 @@ h2{font-weight:normal;}
 .toollist li a:hover{background:#eef4f7;border-right:solid 1px #d0d5d7;border-bottom:solid 1px #d0d5d7;}
 .toollist li h2{line-height:35px;}
 .tooladd{margin-top:25px; width:20px; height:20px; float:left; display:block;}
-
-/*error 404*/
-.error{background:url(../images/404.png) no-repeat; width:490px; margin-top:75px;padding-top:65px;}
-.error h2{font-size:22px; padding-left:154px;}
-.error p{padding-left:154px; line-height:35px;color:#717678;}
-.reindex{padding-left:154px;}
-.reindex a{width:115px; height:35px; font-size:14px; font-weight:bold; color:#fff; background:#3c95c8; display:block; line-height:35px; text-align:center;border-radius: 3px; behavior:url(js/pie.htc);margin-top:20px;}
 
 /*computer*/
 .comtitle{padding:20px; clear:both;}

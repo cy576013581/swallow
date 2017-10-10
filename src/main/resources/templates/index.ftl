@@ -66,16 +66,19 @@
 
 
 	<div class="logintop">    
-	    <span>欢迎登录后台管理界面平台</span>    
+	    <span>欢迎登录${SYS_NAME}</span>    
 	    <ul>
-	    <li><a href="#">回首页</a></li>
 	    <li><a href="#">帮助</a></li>
 	    <li><a href="#">关于</a></li>
 	    </ul>    
 	</div>
 	    
 	<div class="loginbody">
-	    <span class="systemlogo"></span> 
+	    
+	    <div class="logobox">
+	   		<img class="systemlogo" src="../images/swallow.png"> 
+	   		<div class="systemname">${SYS_NAME}</div> 
+	    </div>
 	    <div class="loginbox">
 			    <ul>
 				    <li><input name="c_username" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>

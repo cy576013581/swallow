@@ -2,6 +2,7 @@ package com.cy.example.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,13 @@ import com.cy.example.entity.UserEntity;
 
 @Controller
 public class IndexController {
+	
+	@Value("${swallow.system.name}")
+	private String SYS_NAME;
 
 	@RequestMapping("/index")
-	public String showIndex() {
+	public String showIndex(ModelMap map) {
+		map.put("SYS_NAME", SYS_NAME);
 		return "index";
 	}
 
