@@ -54,3 +54,5 @@
 - 2017.10.8 添加权限、角色管理   add  by  cy
 
 - 2017.10.9 添加权限、角色的中文名称字段，添加建库sql，grid模板添加列的hidden   add  by  cy
+
+- 2017.10.10 集成druid数据源   add  by  cy

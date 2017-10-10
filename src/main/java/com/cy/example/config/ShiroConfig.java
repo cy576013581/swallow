@@ -45,7 +45,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/lib/**", "anon");
 
 		filterChainDefinitionMap.put("/index", "anon");
-		
+		filterChainDefinitionMap.put("/druid/**", "anon");
 		filterChainDefinitionMap.put("/system/user/validate", "anon");
 		// 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");

@@ -17,7 +17,7 @@ import com.cy.example.utils.RedisClient;
 @Configuration
 public class RedisConfig {
 
-	private Logger logger = LoggerFactory.getLogger(RedisClient.class);
+	private Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
 	@Bean(name = "jedis.pool")
 	@Autowired
