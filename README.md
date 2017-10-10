@@ -6,6 +6,7 @@
    #### redis<br>
    #### MybatisPlus<br>
    #### Mysql<br>
+   #### Druid<br>
    ***
 ## 前端：<br>
    #### 整体：easyui和ace admin<br>
