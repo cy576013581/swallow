@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -151,6 +152,9 @@ public class UserController extends BaseController {
 			} else if (exception instanceof IncorrectCredentialsException) {
 				logger.info(" 密码不正确： -- >IncorrectCredentialsException");
 				msg = "登录失败，用户密码不正确！";
+			} else if (exception instanceof LockedAccountException) {
+				logger.info(" 用户被锁定： -- >LockedAccountException");
+				msg = "登录失败，用户被锁定！";
 			} else {
 				logger.info("else -- >" + exception);
 				msg = "登录失败，发生未知错误：" + exception;

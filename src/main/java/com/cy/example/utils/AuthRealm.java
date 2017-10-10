@@ -3,7 +3,9 @@ package com.cy.example.utils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -57,12 +59,16 @@ public class AuthRealm extends AuthorizingRealm {
 		// 获取用户的输入的账号.
 		String username = (String) token.getPrincipal();
 		if (StringUtil.IsNullOrEmptyT(username)) {
-			return null;
+			throw new UnknownAccountException();
 		}
+        
 		logger.info("***" + token.getCredentials());
 		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 		UserEntity user = userService.findOneByUsername(username);
-
+		if (user.getN_status() == 0) {
+            // 用户被管理员锁定抛出异常
+            throw new LockedAccountException();
+        }
 		logger.info("***登录user：" + user);
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
 				user, // 用户名
