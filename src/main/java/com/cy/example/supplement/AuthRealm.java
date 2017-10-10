@@ -1,4 +1,4 @@
-package com.cy.example.utils;
+package com.cy.example.supplement;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -19,6 +19,7 @@ import com.cy.example.entity.SysPermissionEntity;
 import com.cy.example.entity.SysRoleEntity;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.service.IUserService;
+import com.cy.example.util.StringUtil;
 
 public class AuthRealm extends AuthorizingRealm {
 
@@ -61,7 +62,12 @@ public class AuthRealm extends AuthorizingRealm {
 		if (StringUtil.IsNullOrEmptyT(username)) {
 			throw new UnknownAccountException();
 		}
-        
+        /*
+         * 在这里写错误登陆次数的限制代码
+         */
+		
+		
+		
 		logger.info("***" + token.getCredentials());
 		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 		UserEntity user = userService.findOneByUsername(username);

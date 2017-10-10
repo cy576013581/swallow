@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.cy.example.filter.ShiroPermissionsFilter;
-import com.cy.example.utils.AuthRealm;
+import com.cy.example.supplement.AuthRealm;
 
 /*
  * Shiro 配置

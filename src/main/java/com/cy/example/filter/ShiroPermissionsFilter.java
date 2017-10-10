@@ -13,8 +13,8 @@ import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.cy.example.utils.JsonUtil;
-import com.cy.example.utils.StringUtil;
+import com.cy.example.util.JsonUtil;
+import com.cy.example.util.StringUtil;
 
 public class ShiroPermissionsFilter extends PermissionsAuthorizationFilter {
 

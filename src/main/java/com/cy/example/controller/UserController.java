@@ -26,7 +26,7 @@ import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.service.ILoginRecordService;
 import com.cy.example.service.IUserService;
-import com.cy.example.utils.MD5Util;
+import com.cy.example.util.MD5Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Controller

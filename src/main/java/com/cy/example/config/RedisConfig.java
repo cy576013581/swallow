@@ -12,7 +12,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
 
-import com.cy.example.utils.RedisClient;
+import com.cy.example.supplement.RedisClient;
 
 @Configuration
 public class RedisConfig {

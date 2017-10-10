@@ -1,4 +1,4 @@
-package com.cy.example.utils;
+package com.cy.example.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -14,7 +14,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.SuperEntity;
 import com.cy.example.entity.UserEntity;
-import com.cy.example.utils.DateUtil;
+import com.cy.example.util.DateUtil;
 
 /**
  * 
