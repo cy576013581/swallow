@@ -5,8 +5,9 @@
    #### freemarke<br>
    #### redis<br>
    #### MybatisPlus<br>
+   #### Druid<br>
    #### Mysql<br>
-   #### Druid<br>
+   
    ***
 ## 前端：<br>
    #### 整体：easyui和ace admin<br>
