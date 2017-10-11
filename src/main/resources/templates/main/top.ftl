@@ -1,5 +1,6 @@
 <div class="topleft">
-    <a href="main.html" target="_parent"><img src="../images/logo.png" title="系统首页" /></a>
+    <a href="main.html" target="_parent"><img src="../images/swallow.png" style="float: left;height:50px;width:50px;" title="系统首页" /></a>
+	<div style="color: #fff;font-size: 14pt;float: left;height: 50px;line-height: 50px;margin-left: 20px;">${SYS_NAME}</div>
 </div>
 <!--      
 <ul class="nav">

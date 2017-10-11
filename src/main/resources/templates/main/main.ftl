@@ -127,7 +127,7 @@
 </head>
 <body>
 	<!-- 顶部栏-->
-	<div id="top" style="background:url(../images/topbg.gif) repeat-x;width:100%;height:auto;overflow:hidden;">
+	<div id="top" style="background:#066cae;width:100%;height:auto;overflow:hidden;">
 		<#include "/main/top.ftl">
 	</div>
 	<div id="box" width="100%" >

@@ -27,6 +27,7 @@ public class IndexController {
 		UserEntity user = (UserEntity) session
 				.getAttribute(WebConfig.LOGIN_USER);
 		map.put("user", user);
+		map.put("SYS_NAME", SYS_NAME);
 		return "main/main";
 	}
 

@@ -60,7 +60,7 @@ public class AuthRealm extends AuthorizingRealm {
 		// 获取用户的输入的账号.
 		String username = (String) token.getPrincipal();
 		if (StringUtil.IsNullOrEmptyT(username)) {
-			throw new UnknownAccountException();
+			return null;
 		}
         /*
          * 在这里写错误登陆次数的限制代码
@@ -71,6 +71,9 @@ public class AuthRealm extends AuthorizingRealm {
 		logger.info("***" + token.getCredentials());
 		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 		UserEntity user = userService.findOneByUsername(username);
+		if(null == user){
+			throw new UnknownAccountException();
+		}
 		if (user.getN_status() == 0) {
             // 用户被管理员锁定抛出异常
             throw new LockedAccountException();
