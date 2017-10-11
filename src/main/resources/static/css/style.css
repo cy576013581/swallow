@@ -33,11 +33,11 @@ h2{font-weight:normal;}
 .logintop ul li a:hover{color:#fff;}
 .loginbody{background:url(../images/loginbg3.png) no-repeat center center; width:100%; height:585px; overflow:hidden; position:absolute; top:47px;}
 
-.logobox{width:100%;text-align: center;margin-top:100px;}
-.systemlogo{width:70px; height:70px;}
-.systemname{color: #fff;font-size: 15pt;margin-top: 10px}
+.logobox{width:100%;text-align: center;margin-top:50px;height:60px;}
+.systemlogo{width:60px; height:60px;float: left;}
+.systemname{color: #fff;font-size: 18pt;float: left;height: 60px;line-height: 60px;margin-left: 20px;}
 
-.loginbox{width:692px; height:336px; background:url(../images/logininfo.png) no-repeat; margin-top:50px;}
+.loginbox{width:692px; height:336px; background:url(../images/logininfo.png) no-repeat; margin-top:40px;}
 .loginbox ul{margin-top:88px; margin-left:285px;}
 .loginbox ul li{margin-bottom:25px;}
 .loginbox ul li label{color:#687f92; padding-left:25px;}

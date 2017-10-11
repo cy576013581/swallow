@@ -76,8 +76,10 @@
 	<div class="loginbody">
 	    
 	    <div class="logobox">
-	   		<img class="systemlogo" src="../images/swallow.png"> 
-	   		<div class="systemname">${SYS_NAME}</div> 
+	   		<div style="display:inline-block;">
+		   		<img class="systemlogo" src="../images/swallow.png">
+		   		<div class="systemname">${SYS_NAME}</div> 
+	   		</div>
 	    </div>
 	    <div class="loginbox">
 			    <ul>
