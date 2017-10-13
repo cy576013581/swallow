@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 127.0.0.1_3306
+Source Server         : 本地
 Source Server Version : 50626
-Source Host           : 127.0.0.1:3306
+Source Host           : localhost:3306
 Source Database       : example
 
 Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2017-10-09 14:15:09
+Date: 2017-10-13 22:53:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -89,7 +89,7 @@ CREATE TABLE `loginrecord` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of loginrecord
@@ -104,6 +104,10 @@ INSERT INTO `loginrecord` VALUES ('117', 'admin', '192.168.153.128', '2017-10-09
 INSERT INTO `loginrecord` VALUES ('118', 'admin', '192.168.153.128', '2017-10-09 14:00:32', '8', '2017-10-09 14:00:32', '8', '0');
 INSERT INTO `loginrecord` VALUES ('119', 'admin', '192.168.153.128', '2017-10-09 14:11:32', '8', '2017-10-09 14:11:32', '8', '0');
 INSERT INTO `loginrecord` VALUES ('120', 'admin', '192.168.153.128', '2017-10-09 14:12:50', '8', '2017-10-09 14:12:50', '8', '0');
+INSERT INTO `loginrecord` VALUES ('121', 'admin', '192.168.0.100', '2017-10-11 19:54:42', '8', '2017-10-11 19:54:42', '8', '0');
+INSERT INTO `loginrecord` VALUES ('122', 'admin', '192.168.0.100', '2017-10-11 22:11:57', '8', '2017-10-11 22:11:57', '8', '0');
+INSERT INTO `loginrecord` VALUES ('123', 'admin', '192.168.0.100', '2017-10-11 22:18:51', '8', '2017-10-11 22:18:51', '8', '0');
+INSERT INTO `loginrecord` VALUES ('124', 'admin', '192.168.0.100', '2017-10-11 22:22:28', '8', '2017-10-11 22:22:28', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -119,14 +123,14 @@ CREATE TABLE `sys_permission` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_permission
 -- ----------------------------
-INSERT INTO `sys_permission` VALUES ('1', 'add', '添加', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_permission` VALUES ('2', 'del', '删除', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_permission` VALUES ('3', 'update', '更新', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_permission` VALUES ('1', 'add', '添加', '2017-08-01 11:00:05', '0', '2017-10-11 19:55:20', '8', '0');
+INSERT INTO `sys_permission` VALUES ('2', 'del', '删除', '2017-08-01 11:00:05', '0', '2017-10-11 19:55:17', '8', '0');
+INSERT INTO `sys_permission` VALUES ('3', 'update', '更新', '2017-08-01 11:00:05', '0', '2017-10-11 19:55:11', '8', '0');
 INSERT INTO `sys_permission` VALUES ('4', 'list', '列表显示', '2017-08-01 11:00:05', '0', '2017-10-09 14:13:45', '8', '0');
 
 -- ----------------------------
@@ -148,9 +152,9 @@ CREATE TABLE `sys_roles` (
 -- ----------------------------
 -- Records of sys_roles
 -- ----------------------------
-INSERT INTO `sys_roles` VALUES ('1', 'admin', '系统管理员', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_roles` VALUES ('2', 'manege', '管理员', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
-INSERT INTO `sys_roles` VALUES ('3', 'normal', '普通用户', '2017-08-01 11:00:05', '0', '2017-10-09 14:14:13', '8', '0');
+INSERT INTO `sys_roles` VALUES ('1', 'admin', '系统管理员', '2017-08-01 11:00:05', '0', '2017-10-11 19:55:23', '8', '0');
+INSERT INTO `sys_roles` VALUES ('2', 'manege', '管理员', '2017-08-01 11:00:05', '0', '2017-10-11 19:55:26', '8', '0');
+INSERT INTO `sys_roles` VALUES ('3', 'normal', '普通用户', '2017-08-01 11:00:05', '0', '2017-10-11 19:55:28', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_role_permission
@@ -183,13 +187,18 @@ CREATE TABLE `sys_user_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `n_userId` int(11) NOT NULL,
   `n_roleId` int(11) NOT NULL,
+  `c_createDate` varchar(255) DEFAULT NULL,
+  `n_creater` bigint(20) DEFAULT NULL,
+  `c_updateDate` varchar(255) DEFAULT NULL,
+  `n_updater` bigint(20) DEFAULT NULL,
+  `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('1', '8', '1');
+INSERT INTO `sys_user_role` VALUES ('1', '8', '1', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
 
 -- ----------------------------
 -- Table structure for users
@@ -209,7 +218,7 @@ CREATE TABLE `users` (
   `n_deleted` int(11) DEFAULT NULL,
   `n_status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
