@@ -18,12 +18,11 @@
 			    
 	    <dd>
 		    <div class="title">
-		    	<span><img src="../images/leftico02.png" /></span>其他设置
+		    	<span><img src="../images/leftico02.png" /></span>权限设置
 		    </div>
 		    <ul class="menuson">
-		        <li><cite></cite><a href="#">编辑内容</a><i></i></li>
-		        <li><cite></cite><a href="#">发布信息</a><i></i></li>
-		        <li><cite></cite><a href="#">档案列表显示</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="addTabs('用户关联角色','/menu/user_roleManage')">用户关联角色</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="addTabs('角色关联权限','/menu/role_permis')">角色关联权限</a><i></i></li>
 	        </ul>     
 	    </dd> 
 			    

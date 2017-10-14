@@ -8,7 +8,7 @@
 </head>
 <body>
 	<@loginRecord.grid controller="/system/user_role/" title="角色管理" width="1100px" height="500px"
-		fields="id:true: ,c_roleCode:false:角色代码,c_roleName:false:角色名称,c_createDate:false:创建时间,c_updateDate:false:更新时间">
+		fields="id:true: ,n_userId:false:用户ID,c_username:false:用户名称,n_roleId:false:角色ID,c_roleName:false:角色名称,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
 	</@loginRecord.grid>
 	
@@ -19,6 +19,8 @@
 		    modifyQueryElem("c_updateDate","datebox");
 		    hideEditElem("c_createDate");
 		    hideEditElem("c_updateDate");
+		    hideEditElem("n_userId");
+		    hideEditElem("n_roleId");
 		}
 		
 		

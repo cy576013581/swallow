@@ -115,9 +115,12 @@
                     closeTab(this, item.name);
                 }
             });
+            
             //双击tabs事件
     		$('#mainTabs').tabs('bindDblclick', function(index, title){
-    		 	$("#mainTabs").tabs("close", index);
+    			/*if("主页" != title){
+    				$("#mainTabs").tabs("close", index);
+    			}*/
   			});
 		
 		});

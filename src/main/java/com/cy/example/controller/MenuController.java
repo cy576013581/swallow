@@ -41,5 +41,10 @@ public class MenuController {
 	public String permissionManage() {
 		return "permissionManage";
 	}
+	
+	@RequestMapping("/user_roleManage")
+	public String user_roleManage() {
+		return "user_roleManage";
+	}
 
 }
