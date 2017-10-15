@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2017-10-13 22:53:45
+Date: 2017-10-15 21:04:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -89,7 +89,7 @@ CREATE TABLE `loginrecord` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of loginrecord
@@ -108,6 +108,31 @@ INSERT INTO `loginrecord` VALUES ('121', 'admin', '192.168.0.100', '2017-10-11 1
 INSERT INTO `loginrecord` VALUES ('122', 'admin', '192.168.0.100', '2017-10-11 22:11:57', '8', '2017-10-11 22:11:57', '8', '0');
 INSERT INTO `loginrecord` VALUES ('123', 'admin', '192.168.0.100', '2017-10-11 22:18:51', '8', '2017-10-11 22:18:51', '8', '0');
 INSERT INTO `loginrecord` VALUES ('124', 'admin', '192.168.0.100', '2017-10-11 22:22:28', '8', '2017-10-11 22:22:28', '8', '0');
+INSERT INTO `loginrecord` VALUES ('125', 'admin', '192.168.0.101', '2017-10-14 20:37:30', '8', '2017-10-14 20:37:30', '8', '0');
+INSERT INTO `loginrecord` VALUES ('126', 'admin', '192.168.0.101', '2017-10-14 21:11:51', '8', '2017-10-14 21:11:51', '8', '0');
+INSERT INTO `loginrecord` VALUES ('127', 'admin', '192.168.0.101', '2017-10-14 23:19:52', '8', '2017-10-14 23:19:52', '8', '0');
+INSERT INTO `loginrecord` VALUES ('128', 'admin', '192.168.0.101', '2017-10-14 23:23:46', '8', '2017-10-14 23:23:46', '8', '0');
+INSERT INTO `loginrecord` VALUES ('129', 'admin', '192.168.0.101', '2017-10-15 13:20:23', '8', '2017-10-15 13:20:23', '8', '0');
+INSERT INTO `loginrecord` VALUES ('130', 'admin', '192.168.0.101', '2017-10-15 13:49:23', '8', '2017-10-15 13:49:23', '8', '0');
+INSERT INTO `loginrecord` VALUES ('131', 'admin', '192.168.0.101', '2017-10-15 14:32:08', '8', '2017-10-15 14:32:08', '8', '0');
+INSERT INTO `loginrecord` VALUES ('132', 'admin', '192.168.0.101', '2017-10-15 15:21:32', '8', '2017-10-15 15:21:32', '8', '0');
+INSERT INTO `loginrecord` VALUES ('133', 'admin', '192.168.0.101', '2017-10-15 16:18:06', '8', '2017-10-15 16:18:06', '8', '0');
+INSERT INTO `loginrecord` VALUES ('134', 'admin', '192.168.0.101', '2017-10-15 16:26:10', '8', '2017-10-15 16:26:10', '8', '0');
+INSERT INTO `loginrecord` VALUES ('135', 'admin', '192.168.0.101', '2017-10-15 16:28:41', '8', '2017-10-15 16:28:41', '8', '0');
+INSERT INTO `loginrecord` VALUES ('136', 'admin', '192.168.0.101', '2017-10-15 16:29:42', '8', '2017-10-15 16:29:42', '8', '0');
+INSERT INTO `loginrecord` VALUES ('137', 'admin', '192.168.0.101', '2017-10-15 16:32:32', '8', '2017-10-15 16:32:32', '8', '0');
+INSERT INTO `loginrecord` VALUES ('138', 'admin', '192.168.0.101', '2017-10-15 16:32:33', '8', '2017-10-15 16:32:33', '8', '0');
+INSERT INTO `loginrecord` VALUES ('139', 'admin', '192.168.0.101', '2017-10-15 16:51:33', '8', '2017-10-15 16:51:33', '8', '0');
+INSERT INTO `loginrecord` VALUES ('140', 'admin', '192.168.0.101', '2017-10-15 19:37:31', '8', '2017-10-15 19:37:31', '8', '0');
+INSERT INTO `loginrecord` VALUES ('141', 'admin', '192.168.0.101', '2017-10-15 19:41:25', '8', '2017-10-15 19:41:25', '8', '0');
+INSERT INTO `loginrecord` VALUES ('142', 'admin', '192.168.0.101', '2017-10-15 19:46:22', '8', '2017-10-15 19:46:22', '8', '0');
+INSERT INTO `loginrecord` VALUES ('143', 'admin', '192.168.0.101', '2017-10-15 19:48:15', '8', '2017-10-15 19:48:15', '8', '0');
+INSERT INTO `loginrecord` VALUES ('144', 'admin', '192.168.0.101', '2017-10-15 20:02:23', '8', '2017-10-15 20:02:23', '8', '0');
+INSERT INTO `loginrecord` VALUES ('145', 'admin', '192.168.0.101', '2017-10-15 20:48:28', '8', '2017-10-15 20:48:28', '8', '0');
+INSERT INTO `loginrecord` VALUES ('146', 'admin', '192.168.0.101', '2017-10-15 20:49:52', '8', '2017-10-15 20:49:52', '8', '0');
+INSERT INTO `loginrecord` VALUES ('147', 'admin', '192.168.0.101', '2017-10-15 20:52:24', '8', '2017-10-15 20:52:24', '8', '0');
+INSERT INTO `loginrecord` VALUES ('148', 'admin', '192.168.0.101', '2017-10-15 20:54:31', '8', '2017-10-15 20:54:31', '8', '0');
+INSERT INTO `loginrecord` VALUES ('149', 'admin', '192.168.0.101', '2017-10-15 20:57:29', '8', '2017-10-15 20:57:29', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -162,22 +187,23 @@ INSERT INTO `sys_roles` VALUES ('3', 'normal', '普通用户', '2017-08-01 11:00
 DROP TABLE IF EXISTS `sys_role_permission`;
 CREATE TABLE `sys_role_permission` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `n_permission_id` bigint(20) NOT NULL,
-  `n_role_id` bigint(20) NOT NULL,
+  `n_permisId` bigint(20) NOT NULL,
+  `n_roleId` bigint(20) NOT NULL,
+  `c_createDate` varchar(255) DEFAULT NULL,
+  `n_creater` bigint(20) DEFAULT NULL,
+  `c_updateDate` varchar(255) DEFAULT NULL,
+  `n_updater` bigint(20) DEFAULT NULL,
+  `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_role_permission
 -- ----------------------------
-INSERT INTO `sys_role_permission` VALUES ('3', '3', '1');
-INSERT INTO `sys_role_permission` VALUES ('4', '4', '1');
-INSERT INTO `sys_role_permission` VALUES ('5', '1', '2');
-INSERT INTO `sys_role_permission` VALUES ('6', '2', '2');
-INSERT INTO `sys_role_permission` VALUES ('7', '3', '2');
-INSERT INTO `sys_role_permission` VALUES ('8', '4', '2');
-INSERT INTO `sys_role_permission` VALUES ('9', '3', '3');
-INSERT INTO `sys_role_permission` VALUES ('10', '1', '1');
+INSERT INTO `sys_role_permission` VALUES ('3', '3', '1', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('4', '4', '1', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('10', '1', '1', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('11', '2', '1', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -193,12 +219,12 @@ CREATE TABLE `sys_user_role` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('1', '8', '1', '2017-08-01 11:00:05', '8', '2017-08-01 11:00:05', '8', '0');
+INSERT INTO `sys_user_role` VALUES ('1', '8', '1', '2017-08-01 11:00:05', '8', '2017-10-15 21:00:03', '8', '0');
 
 -- ----------------------------
 -- Table structure for users
@@ -218,9 +244,10 @@ CREATE TABLE `users` (
   `n_deleted` int(11) DEFAULT NULL,
   `n_status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('8', 'admin', 'c4ca4238a0b92382', '1', '12', '0', '2017-08-01 11:00:05', '8', '2017-09-23 10:47:57', '8', '0', '1');
+INSERT INTO `users` VALUES ('9', '1', '1', '1', '1', '1', '2017-10-15 16:29:50', '8', '2017-10-15 16:29:50', '8', '0', '0');
