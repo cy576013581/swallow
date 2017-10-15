@@ -22,7 +22,7 @@
 		    </div>
 		    <ul class="menuson">
 		        <li><cite></cite><a href="javascript:void(0);" onclick="addTabs('用户关联角色','/menu/user_roleManage')">用户关联角色</a><i></i></li>
-		        <li><cite></cite><a href="javascript:void(0);" onclick="addTabs('角色关联权限','/menu/role_permis')">角色关联权限</a><i></i></li>
+		        <li><cite></cite><a href="javascript:void(0);" onclick="addTabs('角色关联权限','/menu/role_permisManage')">角色关联权限</a><i></i></li>
 	        </ul>     
 	    </dd> 
 			    

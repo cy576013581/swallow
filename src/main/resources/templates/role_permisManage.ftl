@@ -7,8 +7,8 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/user_role/" title="角色管理" width="1100px" height="500px"
-		fields="id:true: ,n_userId:true:用户ID,c_username:false:用户名称,n_roleId:true:角色ID,c_roleName:false:角色名称,c_createDate:false:创建时间,c_updateDate:false:更新时间">
+	<@loginRecord.grid controller="/system/role_permis/" title="角色关联权限管理" width="1100px" height="500px"
+		fields="id:true: ,n_roleId:true:角色ID,c_roleName:false:角色名称,n_permisId:true:权限ID,c_permisName:false:权限名称,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
 	</@loginRecord.grid>
 	
@@ -19,30 +19,30 @@
 		    modifyQueryElem("c_updateDate","datebox");
 		    hideEditElem("c_createDate");
 		    hideEditElem("c_updateDate");
-		    hideEditElem("n_userId");
+		    hideEditElem("n_permisId");
 		    hideEditElem("n_roleId");
-		    hideQueryElem("n_userId");
+		    hideQueryElem("n_permisId");
 		    hideQueryElem("n_roleId");
-		    modifyElem("tb_","c_username","combobox",
+		    modifyElem("tb_","c_permisName","combobox",
 		    	'['+
-		    	<#list userList as x> 
-		    		'{"id":"${x.id}","text":"${x.c_username}"},'+
+		    	<#list permisList as x> 
+		    		'{"id":"${x.id}","text":"${x.c_permisName}"},'+
 			    </#list>
 			    '{"id":" ","text":"全部","selected":true}]'
 		    );
-		    modifyElem("ed_","c_username","combobox",
-		    	<#list userList as x> 
+		    modifyElem("ed_","c_permisName","combobox",
+		    	<#list permisList as x> 
 		    		<#if x_index == 0 && !x_has_next>
-		    			'[{"id":"${x.id}","text":"${x.c_username}","selected":true}]'
+		    			'[{"id":"${x.id}","text":"${x.c_permisName}","selected":true}]'
 		    		</#if>
 		    		<#if x_index == 0 && x_has_next>
-		    			'[{"id":"${x.id}","text":"${x.c_username}","selected":true},'+
+		    			'[{"id":"${x.id}","text":"${x.c_permisName}","selected":true},'+
 		    		</#if>
 		    		<#if x_index != 0 && x_has_next>
-		    			'{"id":"${x.id}","text":"${x.c_username}"},'+
+		    			'{"id":"${x.id}","text":"${x.c_permisName}"},'+
 		    		</#if>
 		    		<#if x_index != 0 && !x_has_next>
-		    			'{"id":"${x.id}","text":"${x.c_username}"}]'
+		    			'{"id":"${x.id}","text":"${x.c_permisName}"}]'
 		    		</#if>
 			    </#list>
 			);
@@ -69,7 +69,6 @@
 		    		<#if x_index != 0 && !x_has_next>
 		    			'{"id":"${x.id}","text":"${x.c_roleName}"}]'
 		    		</#if>
-		    		
 			    </#list>
 		    );
 		    

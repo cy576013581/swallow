@@ -89,12 +89,6 @@ public class UserController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/find")
-	public Map<String, Object> findOne() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		return map;
-	}
-
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public Map<String, Object> findAll(int page, int rows)
