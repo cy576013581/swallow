@@ -42,7 +42,7 @@ public class Role_PermisController extends BaseController {
 			}
 		}else{
 			map.put("flag", false);
-			map.put("msg", "添加失败，该用户已经存在角色！");
+			map.put("msg", "添加失败，该角色已经存在此权限！");
 		}
 		
 		
@@ -55,14 +55,21 @@ public class Role_PermisController extends BaseController {
 		rp.setN_roleId(Long.valueOf(" ".equals(rp.getC_roleName()) ? "0" : rp.getC_roleName()));
 		rp.setN_permisId(Long.valueOf(" ".equals(rp.getC_permisName()) ? "0" : rp.getC_permisName()));
 		super.update(rp);
-		boolean flag = rpService.updateById(rp);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (flag) {
-			map.put("flag", flag);
-			map.put("msg", "更新成功！");
-		} else {
-			map.put("flag", flag);
-			map.put("msg", "更新失败！");
+		Role_Permis_Ca user = rpService.selectOne(new EntityWrapper<Role_Permis_Ca>().eq("n_roleId", rp.getN_roleId())
+				.eq("n_permisId", rp.getN_permisId()));
+		if(null == user){
+			boolean flag = rpService.updateById(rp);
+			if (flag) {
+				map.put("flag", flag);
+				map.put("msg", "更新成功！");
+			} else {
+				map.put("flag", flag);
+				map.put("msg", "更新失败！");
+			}
+		}else{
+			map.put("flag", false);
+			map.put("msg", "添加失败，该角色已经存在此权限！");
 		}
 		return map;
 	}

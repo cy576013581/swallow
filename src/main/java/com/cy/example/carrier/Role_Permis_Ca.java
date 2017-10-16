@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
 
-@TableName("sys_user_role")
+@TableName("sys_role_permission")
 @SuppressWarnings("serial")
 public class Role_Permis_Ca extends SuperEntity<Role_Permis_Ca>{
 

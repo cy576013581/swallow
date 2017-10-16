@@ -56,14 +56,20 @@ public class User_RoleController extends BaseController {
 		ur.setN_userId(Long.valueOf(ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
 		super.update(ur);
-		boolean flag = urService.updateById(ur);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (flag) {
-			map.put("flag", flag);
-			map.put("msg", "更新成功！");
-		} else {
-			map.put("flag", flag);
-			map.put("msg", "更新失败！");
+		User_Role_Ca user = urService.selectOne(new EntityWrapper<User_Role_Ca>().eq("n_userId", ur.getN_userId()));
+		if(null == user){
+			boolean flag = urService.updateById(ur);
+			if (flag) {
+				map.put("flag", flag);
+				map.put("msg", "更新成功！");
+			} else {
+				map.put("flag", flag);
+				map.put("msg", "更新失败！");
+			}
+		}else{
+			map.put("flag", false);
+			map.put("msg", "添加失败，该用户已经存在角色！");
 		}
 		return map;
 	}
