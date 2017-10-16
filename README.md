@@ -11,7 +11,7 @@
    ***
 ## 前端：<br>
    #### 整体：easyui和ace admin<br>
-   #### 文件上传：Dropzone.js<br>
+   #### 文件上传：Dropzone.js   or  Web Uploader<br>
    #### 日历：calendar<br>
    #### 弹窗：layer<br>
    #### 消息提示：toarst
