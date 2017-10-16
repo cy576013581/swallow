@@ -15,10 +15,10 @@
         <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
         <collection property="roleList" ofType="com.cy.example.entity.SysRoleEntity">
 	    	<id column="r_id" property="id"/>
-	 		<result column="c_roleName" property="c_roleName" jdbcType="VARCHAR" />
+	 		<result column="c_roleCode" property="c_roleCode" jdbcType="VARCHAR" />
 	 		<collection property="permisList" ofType="com.cy.example.entity.SysPermissionEntity">
 		    	<id column="p_id" property="id"/>
-		 		<result column="c_permisName" property="c_permisName" jdbcType="VARCHAR" />
+		 		<result column="c_permisCode" property="c_permisCode" jdbcType="VARCHAR" />
     		</collection>
     	</collection>
     </resultMap>
@@ -49,10 +49,10 @@
 		WHEN n_sex = 0 THEN
 			'女'
 		END AS n_sex,
-		r.c_roleName,
+		r.c_roleCode,
 		r.id as r_id,
 		p.id as p_id,
-		p.c_permisName
+		p.c_permisCode
 		FROM
 			users u
 		LEFT JOIN sys_user_role ur ON u.id = ur.n_userId

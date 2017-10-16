@@ -50,10 +50,10 @@ public class ShiroConfig {
 		// 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
 		// 这里自定义的权限拦截规则
-//		filterChainDefinitionMap.put("/system/*/add", "perms[add]");
-//		filterChainDefinitionMap.put("/system/*/delete", "perms[del]");
-//		filterChainDefinitionMap.put("/system/*/update", "perms[update]");
-//		filterChainDefinitionMap.put("/system/*/list", "perms[list]");
+		filterChainDefinitionMap.put("/system/*/add","authc,perms[add]");
+		filterChainDefinitionMap.put("/system/*/delete","authc,perms[del]");
+		filterChainDefinitionMap.put("/system/*/update","authc,perms[update]");
+		filterChainDefinitionMap.put("/system/*/list","authc,perms[list]");
 		// filterChainDefinitionMap.put("/system/*/list", "perms[list]");
 		// <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 		filterChainDefinitionMap.put("/**", "authc");
