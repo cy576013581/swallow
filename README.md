@@ -2,7 +2,7 @@
 ## 后台：<br>
    #### springMVC<br>
    #### Mybatis<br>
-   #### freemarke<br>
+   #### freemarker<br>
    #### redis<br>
    #### MybatisPlus<br>
    #### Druid<br>
