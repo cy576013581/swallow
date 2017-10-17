@@ -77,14 +77,10 @@ public class RoleController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> findAll(int page, int rows) {
 		Page<SysRoleEntity> list = roleService.selectPage(new Page<SysRoleEntity>(page, rows)
-				, new EntityWrapper<SysRoleEntity>());
+				, new EntityWrapper<SysRoleEntity>().setSqlSelect("c_roleCode,c_roleName,c_createDate,c_updateDate,id"));
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = roleService.selectCount(new EntityWrapper<SysRoleEntity>());
 		List<SysRoleEntity> data = list.getRecords();
-		for(SysRoleEntity entity:data){
-			entity.setPermisList(new ArrayList<SysPermissionEntity>());
-			entity.setUserList(new ArrayList<UserEntity>());
-		}
 		map.put("rows", list.getRecords());
 		map.put("total", sum);
 		return map;
@@ -99,10 +95,6 @@ public class RoleController extends BaseController {
 		List<SysRoleEntity> list = roleService.searchAll(
 				role, page);
 		int sum = roleService.searchAllCount(role, page);
-		for(SysRoleEntity entity:list){
-			entity.setPermisList(new ArrayList<SysPermissionEntity>());
-			entity.setUserList(new ArrayList<UserEntity>());
-		}
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;

@@ -8,17 +8,26 @@
     <link rel="stylesheet" type="text/css" href="../lib/easyui/themes/icon.css">
     <link href="../lib/toastr/toastr.css" rel="stylesheet"/>
     <script type="text/javascript" src="../lib/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/layer/layer.js"></script>
+    <script language="javascript">
+		var index = layer.load(1, {
+		  shade: [0.5,'#D4D4D4'] //0.1透明度的白色背景
+		});
+	</script>
     <script type="text/javascript" src="../lib/easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../lib/easyui/locale/easyui-lang-zh_CN.js"></script>
-    <script type="text/javascript" src="../lib/layer/layer.js"></script>
+    
     <script type="text/javascript" src="../lib/toastr/toastr.js"></script>
     <script type="text/javascript" src="../js/map.js"></script>
     <script language="javascript">
+    	//loading层
+		
     	var map =new Map();
 		var editMap =new Map();
 		//操作类型,1代表添加操作,2代表编辑操作
 		var operation = 1;
 		$(function(){
+			
 		    <#list fields?split(",") as x>  
 		    	<#if (x_index !=0)>
 			        <#list x?split(":") as y>
@@ -31,6 +40,13 @@
 		        </#if>
 		    </#list>
 		    change();
+		    $('#dg').datagrid({
+				onLoadSuccess: function(){
+					$("#box").show();
+					layer.close(index);
+				}
+			});
+		    
 		});  
 		
 		
@@ -374,7 +390,8 @@
 	</script>
 </head>
 <body>
-	<table id="dg" class="easyui-datagrid" title="${title}信息管理" style="width:${width};height:${height}"
+	<div id="box" style="display:none;">
+		<table id="dg" class="easyui-datagrid" title="${title}信息管理" style="width:${width};height:${height}"
             data-options="rownumbers:${rownumbers},singleSelect:${singleSelect},
             url:'${controller}findAll',method:'get',toolbar:'#tb,#ft',pagination:'true',nowrap:'true',
             onDblClickRow: onDblClickRow">
@@ -456,6 +473,7 @@
 			    </#list>
 		    <div>
     </div>
+	</div>
 </body>
 </html>
 </#macro>

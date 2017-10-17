@@ -82,9 +82,9 @@ public class PermissionController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = permissionService.selectCount(new EntityWrapper<SysPermissionEntity>());
 		List<SysPermissionEntity> data = list.getRecords();
-		for(SysPermissionEntity entity:data){
+		/*for(SysPermissionEntity entity:data){
 			entity.setRoles(new ArrayList<SysRoleEntity>());
-		}
+		}*/
 		map.put("rows", list.getRecords());
 		map.put("total", sum);
 		return map;
@@ -99,9 +99,9 @@ public class PermissionController extends BaseController {
 		List<SysPermissionEntity> list = permissionService.searchAll(
 				per, page);
 		int sum = permissionService.searchAllCount(per, page);
-		for(SysPermissionEntity entity:list){
+		/*for(SysPermissionEntity entity:list){
 			entity.setRoles(new ArrayList<SysRoleEntity>());
-		}
+		}*/
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;

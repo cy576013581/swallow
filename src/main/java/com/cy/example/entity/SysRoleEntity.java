@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @TableName("sys_roles")
 @SuppressWarnings("serial")
@@ -15,9 +17,11 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 	private String c_roleName;
 
 	@TableField(exist = false)
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT ) 
 	private List<SysPermissionEntity> permisList;// 一个角色对应多个权限
 
 	@TableField(exist = false)
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT ) 
 	private List<UserEntity> userList;// 一个角色对应多个用户
 	
 	public String getC_roleName() {
@@ -50,15 +54,6 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 
 	public void setUserList(List<UserEntity> userList) {
 		this.userList = userList;
-	}
-
-	public List<String> getPermissionsName() {
-		List<String> list = new ArrayList<String>();
-		List<SysPermissionEntity> perlist = getPermisList();
-		for (SysPermissionEntity per : perlist) {
-			list.add(per.getC_permisName());
-		}
-		return list;
 	}
 
 
