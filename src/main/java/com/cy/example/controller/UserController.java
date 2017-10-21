@@ -41,11 +41,31 @@ public class UserController extends BaseController {
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(UserController.class);
+	
+	@RequestMapping("/lock")
+	@ResponseBody
+	public Map<String, Object> lock(long id,String n_status) {
+		UserEntity user = userService.selectById(id);
+		String msg = "";
+		user.setN_status(n_status);
+		super.update(user);
+		boolean flag = userService.updateById(user);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (flag) {
+			map.put("flag", flag);
+			map.put("msg", msg+"成功！");
+		} else {
+			map.put("flag", flag);
+			map.put("msg", msg+"失败！");
+		}
+		return map;
+	}
 
 	@RequestMapping("/add")
 	@ResponseBody
 	public Map<String, Object> add(@ModelAttribute("user") UserEntity user) {
 		super.add(user);
+		user.setN_status("1");
 		boolean flag = userService.insert(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
@@ -62,6 +82,16 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("user") UserEntity user) {
 		super.update(user);
+		if("男".equals(user.getN_sex())){
+			user.setN_sex("1");
+		}else if("女".equals(user.getN_sex())){
+			user.setN_sex("0");
+		}
+		if("可用".equals(user.getN_status())){
+			user.setN_status("1");
+		}else if("锁定".equals(user.getN_sex())){
+			user.setN_status("0");
+		}
 		int rows = userService.updateMy(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {
@@ -99,7 +129,21 @@ public class UserController extends BaseController {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = userService.selectCount(new EntityWrapper<UserEntity>());
-		map.put("rows", list.getRecords());
+		
+		List<UserEntity> data = list.getRecords();
+		for(UserEntity entity : data){
+			if("1".equals(entity.getN_sex())){
+				entity.setN_sex("男");
+			}else if("0".equals(entity.getN_sex())){
+				entity.setN_sex("女");
+			}
+			if("1".equals(entity.getN_status())){
+				entity.setN_status("可用");
+			}else if("0".equals(entity.getN_status())){
+				entity.setN_status("锁定");
+			}
+		}
+		map.put("rows", data);
 		map.put("total", sum);
 		return map;
 	}

@@ -8,7 +8,7 @@
         <result column="c_phone" property="c_phone" jdbcType="VARCHAR"/>
         <result column="n_age" property="n_age" jdbcType="INTEGER" />
         <result column="n_sex" property="n_sex" jdbcType="INTEGER" />
-        <result column="n_status" property="n_status" jdbcType="INTEGER" />
+        <result column="n_status" property="n_status" jdbcType="VARCHAR" />
         <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
         <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
         <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
@@ -24,7 +24,7 @@
     </resultMap>
     
     <sql id="ColumnList" >
-        id, c_username, c_pwd, c_phone , n_age, n_status
+        id, c_username, c_pwd, c_phone , n_age
     </sql>
     
     <sql id="BaseList" >
@@ -65,7 +65,9 @@
     <select id="searchAll" resultMap="BaseResultMap"  >
 	   select id, c_username, c_phone , n_age,
 	   case when n_sex=1 then '男'
-	   when n_sex=0 then '女' end as n_sex ,<include refid="BaseList" />
+	   when n_sex=0 then '女' end as n_sex ,
+	   case when n_status=1 then '可用'
+	   when n_status=0 then '锁定' end as n_status ,<include refid="BaseList" />
 	   from users
 	   where n_deleted=0 
 	   <if test="user.c_username != ''"><if test="user.c_username != null"> and c_username like CONCAT('%',#{user.c_username},'%')</if></if>

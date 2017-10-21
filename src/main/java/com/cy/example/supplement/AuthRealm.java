@@ -74,7 +74,7 @@ public class AuthRealm extends AuthorizingRealm {
 		if(null == user){
 			throw new UnknownAccountException();
 		}
-		if (user.getN_status() == 0) {
+		if ("0".equals(user.getN_status())) {
             // 用户被管理员锁定抛出异常
             throw new LockedAccountException();
         }

@@ -16,6 +16,8 @@ import org.springframework.util.StringUtils;
 
 import com.baomidou.mybatisplus.MybatisConfiguration;
 import com.baomidou.mybatisplus.MybatisXMLLanguageDriver;
+import com.baomidou.mybatisplus.entity.GlobalConfiguration;
+import com.baomidou.mybatisplus.mapper.LogicSqlInjector;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean;
 
@@ -35,6 +37,18 @@ public class MybatisPlusConfig {
 
     @Autowired(required = false)
     private DatabaseIdProvider databaseIdProvider;
+    
+    /*
+     * 逻辑删除
+     */
+    @Bean
+    public GlobalConfiguration globalConfiguration() {
+        GlobalConfiguration conf = new GlobalConfiguration(new LogicSqlInjector());
+        conf.setLogicDeleteValue("1");
+        conf.setLogicNotDeleteValue("0");
+        conf.setIdType(2);
+        return conf;
+    }
 
     /**
      *   mybatis-plus分页插件

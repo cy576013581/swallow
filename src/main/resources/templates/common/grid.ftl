@@ -195,7 +195,7 @@
 			}
 			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
-                url:url, //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+                url:url+"?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
                 type:"POST",
                 data: json, 
                 dataType:"json",
@@ -415,16 +415,16 @@
         </thead>
     </table>
     <!--查询栏-->	
-    <div id="tb" style="padding:10px 10px;">
+    <div id="tb" style="padding:20px 10px;">
         <#list fields?split(",") as x>  
         	<#if (x_index !=0)>
 		        <#list x?split(":")?reverse  as y>
 		         	<#if (y_index ==0 && "${y}" != "id")>
-						<span>&emsp;${y}:
+						<span>${y}:
 					
 					</#if>
 					<#if (y_index ==2 && "${y}" != " ")>
-						<input id="tb_${y}" name="${y}" class="easyui-textbox" style="width:120px"></span>
+						<input id="tb_${y}" name="${y}" class="easyui-textbox" style="width:120px"></span>&emsp;
 					</#if>
 		        </#list> 
 		    </#if>

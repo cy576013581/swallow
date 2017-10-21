@@ -3,6 +3,7 @@ package com.cy.example.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 
 public class SuperEntity<T extends Model> extends Model<T>{
 
@@ -16,7 +17,8 @@ public class SuperEntity<T extends Model> extends Model<T>{
 
 	protected long n_updater;
 	// 是否删除
-	protected Integer n_deleted = 0;
+	@TableLogic
+	protected Integer n_deleted;
 
 	public long getId() {
 		return id;

@@ -66,3 +66,5 @@
 - 2017.10.16 修改shiro的权限控制BUG add  by  cy
 
 - 2017.10.17 查询结果的List中的bean中有变量是null使用@JsonInclude(JsonInclude.Include.NON_NULL)排除,grid页面加载优化 add  by  cy
+
+- 2017.10.22 STORY14：页面管理添加用户锁定/解锁功能   add  by  cy

@@ -19,7 +19,7 @@ public class UserEntity extends SuperEntity<UserEntity> {
 
 	private String n_sex;
 
-	private int n_status;
+	private String n_status;
 
 	@TableField(exist = false)
 	private List<SysRoleEntity> roleList;// 一个用户具有多个角色
@@ -64,11 +64,11 @@ public class UserEntity extends SuperEntity<UserEntity> {
 		this.n_sex = n_sex;
 	}
 
-	public int getN_status() {
+	public String getN_status() {
 		return n_status;
 	}
 
-	public void setN_status(int n_status) {
+	public void setN_status(String n_status) {
 		this.n_status = n_status;
 	}
 
