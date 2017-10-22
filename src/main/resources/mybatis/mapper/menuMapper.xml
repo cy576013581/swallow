@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.example.mapper.MenuMapper" >
+    <resultMap id="BaseResultMap" type="com.cy.example.entity.SysMenuEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="c_url" property="c_url" jdbcType="VARCHAR" />
+        <result column="c_menuName" property="c_menuName" jdbcType="VARCHAR"/>
+        <result column="c_node" property="c_node" jdbcType="VARCHAR"/>
+        <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
+        <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
+        <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
+        <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
+    </resultMap>
+    
+    <sql id="ColumnList" >
+        id, c_url,c_menuName,c_node
+    </sql>
+    
+    <!-- <select id="findMenuByNode" resultMap="BaseResultMap">
+	   select <include refid="ColumnList" />
+	   from sys_menu
+	   where c_node = '[root]' and c_menuName = #{menu.c_menuName}
+    </select> -->
+    
+    <select id="findAll" resultMap="BaseResultMap">
+	   select <include refid="ColumnList" />
+	   from sys_menu
+	   where n_deleted =0
+    </select>
+    
+    <select id="findRoot" resultMap="BaseResultMap">
+	   select <include refid="ColumnList" />
+	   from sys_menu
+	   where c_node = '[root]'
+    </select>
+    
+    <select id="searchAll" resultMap="BaseResultMap">
+	   select <include refid="ColumnList" />,c_createDate,c_updateDate
+	   from sys_menu
+	   where 1=1
+	   <if test="menu.c_url != null"><if test="menu.c_url != null"> and c_url like CONCAT('%',#{menu.c_url},'%')</if></if>
+	   <if test="menu.c_menuName != null"><if test="menu.c_menuName != null"> and c_menuName like CONCAT('%',#{menu.c_menuName},'%')</if></if>
+   	   <if test="menu.c_node != ''"><if test="menu.c_node != null">	and c_node like CONCAT('%',#{menu.c_node},'%')</if></if>
+   	   <if test="menu.c_createDate != ''"><if test="menu.c_createDate != null">	and substr(c_createDate,1,10) = #{menu.c_createDate}</if></if>
+   	   <if test="menu.c_updateDate != ''"><if test="menu.c_updateDate != null">	and substr(c_updateDate,1,10) = #{menu.c_updateDate}</if></if>
+   	   order by id limit #{page.index},#{page.rows}
+    </select>  
+    
+    <select id="searchAllCount" resultType="java.lang.Integer" >
+	   select count(id)
+	   from sys_menu
+	   where 1=1
+	   <if test="menu.c_url != null"><if test="menu.c_url != null"> and c_url like CONCAT('%',#{menu.c_url},'%')</if></if>
+	   <if test="menu.c_menuName != null"><if test="menu.c_menuName != null"> and c_menuName like CONCAT('%',#{menu.c_menuName},'%')</if></if>
+   	   <if test="menu.c_node != ''"><if test="menu.c_node != null">	and c_node like CONCAT('%',#{menu.c_node},'%')</if></if>
+   	   <if test="menu.c_createDate != ''"><if test="menu.c_createDate != null">	and substr(c_createDate,1,10) = #{menu.c_createDate}</if></if>
+   	   <if test="menu.c_updateDate != ''"><if test="menu.c_updateDate != null">	and substr(c_updateDate,1,10) = #{menu.c_updateDate}</if></if>
+   	   order by id limit #{page.index},#{page.rows}
+    </select>
+</mapper>

@@ -1,6 +1,5 @@
 package com.cy.example.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +14,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.entity.SysPermissionEntity;
-import com.cy.example.entity.SysRoleEntity;
-import com.cy.example.entity.UserEntity;
 import com.cy.example.service.IPermissionService;
-import com.cy.example.service.IRoleService;
 
 @Controller
 @RequestMapping("/system/permission")
@@ -81,7 +77,6 @@ public class PermissionController extends BaseController {
 				, new EntityWrapper<SysPermissionEntity>());
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = permissionService.selectCount(new EntityWrapper<SysPermissionEntity>());
-		List<SysPermissionEntity> data = list.getRecords();
 		/*for(SysPermissionEntity entity:data){
 			entity.setRoles(new ArrayList<SysRoleEntity>());
 		}*/

@@ -1,84 +1,112 @@
 package com.cy.example.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.cy.example.entity.SysPermissionEntity;
-import com.cy.example.entity.SysRoleEntity;
-import com.cy.example.entity.UserEntity;
-import com.cy.example.service.IPermissionService;
-import com.cy.example.service.IRoleService;
-import com.cy.example.service.IUserService;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.cy.example.carrier.PageCa;
+import com.cy.example.entity.SysMenuEntity;
+import com.cy.example.service.IMenuService;
 
 @Controller
-@RequestMapping("/menu")
-public class MenuController {
+@RequestMapping("/system/menu")
+public class MenuController extends BaseController{
 	
 	@Autowired
-	private IPermissionService permisService;
+	private IMenuService menuService;
 	
-	@Autowired
-	private IUserService userService;
-	
-	@Autowired
-	private IRoleService roleService;
-
-	@RequestMapping("/home")
-	public String showHome() {
-		return "main/home";
-	}
-
-	@RequestMapping("/calendarManage")
-	public String calendarManage() {
-		return "calendarManage";
-	}
-
-	@RequestMapping("/userManage")
-	public String userManage() {
-		return "userManage";
+	@RequestMapping("/add")
+	@ResponseBody
+	public Map<String, Object> add(@ModelAttribute("menu") SysMenuEntity menu) {
+		super.add(menu);
+		boolean flag = menuService.insert(menu);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (flag) {
+			map.put("flag", flag);
+			map.put("msg", "添加成功！");
+		} else {
+			map.put("flag", flag);
+			map.put("msg", "添加失败！");
+		}
+		return map;
 	}
 
-	@RequestMapping("/loginRecordManage")
-	public String loginRecordManage() {
-		return "loginRecordManage";
+	@RequestMapping("/update")
+	@ResponseBody
+	public Map<String, Object> update(@ModelAttribute("menu") SysMenuEntity menu) {
+		super.update(menu);
+		boolean flag = menuService.updateById(menu);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (flag) {
+			map.put("flag", flag);
+			map.put("msg", "更新成功！");
+		} else {
+			map.put("flag", flag);
+			map.put("msg", "更新失败！");
+		}
+		return map;
 	}
 
-	@RequestMapping("/uploadFile")
-	public String uploadFile() {
-		return "test_uploadFile";
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Map<String, Object> delete(@ModelAttribute("menu") SysMenuEntity menu) {
+		boolean flag = menuService.deleteById(menu.getId());
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (flag) {
+			map.put("flag", flag);
+			map.put("msg", "删除成功！");
+		} else {
+			map.put("flag", flag);
+			map.put("msg", "删除失败！");
+		}
+		return map;
 	}
-	
-	@RequestMapping("/roleManage")
-	public String roleManage() {
-		return "roleManage";
+
+	@RequestMapping("/findAll")
+	@ResponseBody
+	public Map<String, Object> findAll(int page, int rows) {
+		Page<SysMenuEntity> list = menuService.selectPage(new Page<SysMenuEntity>(page, rows)
+				, new EntityWrapper<SysMenuEntity>());
+		Map<String, Object> map = new HashMap<String, Object>();
+		int sum = menuService.selectCount(new EntityWrapper<SysMenuEntity>());
+		List<SysMenuEntity> data = list.getRecords();
+		for(SysMenuEntity entity : data){
+			if(!"[root]".equals(entity.getC_node())){
+				SysMenuEntity en = menuService.selectById(entity.getC_node());
+				entity.setC_node(en.getC_menuName());
+			}
+		}
+		map.put("rows", data);
+		map.put("total", sum);
+		return map;
 	}
-	
-	@RequestMapping("/permissionManage")
-	public String permissionManage() {
-		return "permissionManage";
-	}
-	
-	@RequestMapping("/user_roleManage")
-	public String user_roleManage(ModelMap map) {
-		List<UserEntity> userList = userService.selectList(new EntityWrapper<UserEntity>());
-		List<SysRoleEntity> roleList = roleService.selectList(new EntityWrapper<SysRoleEntity>());
-		map.put("userList", userList);
-		map.put("roleList", roleList);
-		return "user_roleManage";
-	}
-	
-	@RequestMapping("/role_permisManage")
-	public String role_permisManage(ModelMap map) {
-		List<SysPermissionEntity> permisList = permisService.selectList(new EntityWrapper<SysPermissionEntity>());
-		List<SysRoleEntity> roleList = roleService.selectList(new EntityWrapper<SysRoleEntity>());
-		map.put("permisList", permisList);
-		map.put("roleList", roleList);
-		return "role_permisManage";
+
+	@RequestMapping("/searchData")
+	@ResponseBody
+	public Map<String, Object> searchData(
+			@ModelAttribute("menu") SysMenuEntity menu,
+			@ModelAttribute("page") PageCa page) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<SysMenuEntity> list = menuService.searchAll(
+				menu, page);
+		for(SysMenuEntity entity : list){
+			if(!"[root]".equals(entity.getC_node())){
+				SysMenuEntity en = menuService.selectById(entity.getC_node());
+				entity.setC_node(en.getC_menuName());
+			}
+		}
+		int sum = menuService.searchAllCount(menu, page);
+		map.put("rows", list);
+		map.put("total", sum);
+		return map;
 	}
 
 }
