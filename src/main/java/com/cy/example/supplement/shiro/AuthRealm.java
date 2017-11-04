@@ -1,4 +1,4 @@
-package com.cy.example.supplement;
+package com.cy.example.supplement.shiro;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

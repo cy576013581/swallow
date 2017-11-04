@@ -26,7 +26,7 @@ import com.cy.example.service.IFileService;
 @RequestMapping("/system/file")
 public class FileController extends BaseController {
 
-	@Value("${cy.uploadfile.src}")
+	@Value("${swallow.uploadfile.src}")
 	private String src;
 
 	@Autowired

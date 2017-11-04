@@ -1,4 +1,4 @@
-package com.cy.example.supplement;
+package com.cy.example.supplement.redis;
 
 import java.util.List;
 import java.util.Map;
