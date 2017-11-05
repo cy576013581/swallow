@@ -1,27 +1,39 @@
 package com.cy.example.entity;
 
+import com.baomidou.mybatisplus.annotations.TableName;
 
+@TableName("sys_rule")
+@SuppressWarnings("serial")
 public class SysRuleEntity extends SuperEntity<SysRuleEntity>{
 
-	private String url;
+	private String c_url;
 	
-	private String permission;
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getPermission() {
-		return permission;
-	}
-
-	public void setPermission(String permission) {
-		this.permission = permission;
-	}
+	private String c_permission;
 	
+	private int n_order;
+
+	public String getC_url() {
+		return c_url;
+	}
+
+	public void setC_url(String c_url) {
+		this.c_url = c_url;
+	}
+
+	public String getC_permission() {
+		return c_permission;
+	}
+
+	public void setC_permission(String c_permission) {
+		this.c_permission = c_permission;
+	}
+
+	public int getN_order() {
+		return n_order;
+	}
+
+	public void setN_order(int n_order) {
+		this.n_order = n_order;
+	}
 	
 }
