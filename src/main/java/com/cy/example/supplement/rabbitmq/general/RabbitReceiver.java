@@ -2,12 +2,10 @@ package com.cy.example.supplement.rabbitmq.general;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import com.cy.example.controller.UserController;
 import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.service.ILoginRecordService;
 

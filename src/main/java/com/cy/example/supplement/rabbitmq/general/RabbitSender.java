@@ -6,6 +6,7 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.cy.example.config.RabbitConfig;
 import com.cy.example.entity.LoginRecordEntity;
 
 
@@ -18,11 +19,9 @@ public class RabbitSender {
 	@Autowired
 	private AmqpTemplate rabbitTemplate;
 	
-	
-
 	public void send(LoginRecordEntity loginRecord) {
 		logger.info("发送对象信息: " + loginRecord.toString());
-		this.rabbitTemplate.convertAndSend("loginRecord", loginRecord);
+		this.rabbitTemplate.convertAndSend(RabbitConfig.QUEUE_LOGINRECORD, loginRecord);
 	}
 	
 }
