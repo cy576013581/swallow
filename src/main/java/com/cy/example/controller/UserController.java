@@ -37,8 +37,9 @@ public class UserController extends BaseController {
 	@Autowired
 	private IUserService userService;
 
-	@Autowired
-	private ILoginRecordService loginRecordService;
+	
+	@Autowired  
+    private RabbitSender sender;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(UserController.class);
@@ -183,7 +184,6 @@ public class UserController extends BaseController {
 			loginRecord.setC_username(user.getC_username());
 //			loginRecordService.insert(loginRecord);
 			//采用消息中心的通知添加
-			RabbitSender sender = new RabbitSender();
 			sender.send(loginRecord);
 			msg = "登陆成功！";
 			map.put("flag", flag);
