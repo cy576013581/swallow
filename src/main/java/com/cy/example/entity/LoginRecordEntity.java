@@ -26,4 +26,11 @@ public class LoginRecordEntity extends SuperEntity<LoginRecordEntity> {
 		this.c_loginIp = c_loginIp;
 	}
 
+	@Override
+	public String toString() {
+		return "LoginRecordEntity [c_loginIp=" + c_loginIp + ", c_username="
+				+ c_username + "]";
+	}
+
+	
 }

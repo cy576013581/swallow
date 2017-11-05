@@ -4,15 +4,15 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-import com.cy.example.entity.UserEntity;
+import com.cy.example.entity.LoginRecordEntity;
 
 @Component
-@RabbitListener(queues = "user")
+@RabbitListener(queues = "loginRecord")
 public class RabbitReceiver {
 
     @RabbitHandler
-    public void process(UserEntity user) {
-        System.out.println("Receiver object : " + user);
+    public void process(LoginRecordEntity loginRecordEntity) {
+        System.out.println("Receiver object : " + loginRecordEntity);
     }
 
 }

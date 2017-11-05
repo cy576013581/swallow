@@ -26,6 +26,7 @@ import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.service.ILoginRecordService;
 import com.cy.example.service.IUserService;
+import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -180,7 +181,10 @@ public class UserController extends BaseController {
 			super.add(loginRecord);
 			loginRecord.setC_loginIp(super.getIP(getRequest()));
 			loginRecord.setC_username(user.getC_username());
-			loginRecordService.insert(loginRecord);
+//			loginRecordService.insert(loginRecord);
+			//采用消息中心的通知添加
+			RabbitSender sender = new RabbitSender();
+			sender.send(loginRecord);
 			msg = "登陆成功！";
 			map.put("flag", flag);
 		} catch (Exception exception) {

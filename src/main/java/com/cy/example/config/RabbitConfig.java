@@ -7,9 +7,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
+	/*
+	 * 登录记录队列
+	 */
     @Bean
     public Queue Queue() {
-        return new Queue("user");
+        return new Queue("loginRecord");
     }
 
 }
