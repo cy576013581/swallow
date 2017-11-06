@@ -1,13 +1,15 @@
 
 # swallow
 ## 后台：<br>
-   #### springMVC<br>
+   #### SpringMVC<br>
    #### Mybatis<br>
-   #### freemarker<br>
-   #### redis<br>
+   #### Freemarker<br>
+   #### Shiro<br>
+   #### Redis<br>
    #### MybatisPlus<br>
    #### Druid<br>
    #### Mysql<br>
+   #### FastJSON<br>
    #### RabbitMQ<br>
    ***
 ## 前端：<br>
