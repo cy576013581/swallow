@@ -1,21 +1,15 @@
 package com.cy.example.supplement.rabbitmq;
 
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.cy.example.entity.LoginRecordEntity;
-import com.cy.example.entity.UserEntity;
-import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SenderTest {
 
-	@Autowired
+	/*@Autowired
 	private RabbitSender sender;
 
 	@Test
@@ -23,6 +17,6 @@ public class SenderTest {
 		LoginRecordEntity user=new LoginRecordEntity();
 		user.setC_username("swallow");
 		sender.send(user);
-	}
+	}*/
 
 }
