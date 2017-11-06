@@ -5,11 +5,11 @@
    #### Mybatis<br>
    #### Freemarker<br>
    #### Shiro<br>
-   #### Redis<br>
    #### MybatisPlus<br>
    #### Druid<br>
    #### Mysql<br>
    #### FastJSON<br>
+   #### Redis<br>
    #### RabbitMQ<br>
    ***
 ## 前端：<br>
