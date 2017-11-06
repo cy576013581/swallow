@@ -18,7 +18,7 @@ public class DruidConfig {
 	 */
 
 	@Bean
-	public ServletRegistrationBean DruidStatViewServle2() {
+	public ServletRegistrationBean DruidStatViewServle() {
 
 		// org.springframework.boot.context.embedded.ServletRegistrationBean提供类的进行注册.
 
@@ -50,7 +50,7 @@ public class DruidConfig {
 	 */
 
 	@Bean
-	public FilterRegistrationBean druidStatFilter2() {
+	public FilterRegistrationBean druidStatFilter() {
 
 		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(
 				new WebStatFilter());
