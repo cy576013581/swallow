@@ -75,3 +75,5 @@
 - 2017.10.28 STORY20：添加MP代码生成器   add  by  cy
 
 - 2017.11.05 STORY21：集成RabbitMQ，并且将插入登录信息放到消息队列实现   add  by  cy
+
+- 2017.11.06 集成activiti环境 add  by  cy
