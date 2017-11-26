@@ -38,6 +38,7 @@
 			u.c_pwd,
 			u.c_phone,
 			u.n_age,
+			u.c_email,
 			u.n_status,
 			u.c_createDate,
 			u.n_creater,
@@ -72,6 +73,7 @@
 	   where n_deleted=0 
 	   <if test="user.c_username != ''"><if test="user.c_username != null"> and c_username like CONCAT('%',#{user.c_username},'%')</if></if>
    	   <if test="user.c_phone != ''"><if test="user.c_phone != null"> and c_phone like CONCAT('%',#{user.c_phone},'%')</if></if>
+   	   <if test="user.c_email != ''"><if test="user.c_email != null"> and c_email like CONCAT('%',#{user.c_email},'%')</if></if>
    	   <if test="user.n_age != ''"><if test="user.n_age != null">	and n_age = #{user.n_age}</if></if>
    	   <if test="user.n_sex != ''"><if test="user.n_sex != null">  and n_sex = #{user.n_sex}</if></if>
  	   <if test="user.c_createDate != ''"><if test="user.c_createDate != null">	and substr(c_createDate,1,10) = #{user.c_createDate}</if></if>
@@ -104,6 +106,7 @@
        	c_phone = #{c_phone},
        	n_age = #{n_age},
        	n_sex = #{n_sex},
+       	c_email = #{c_email},
        	c_username = #{c_username},
        	c_updateDate = #{c_updateDate},
        	n_updater = #{n_updater}

@@ -24,9 +24,7 @@ import com.cy.example.carrier.PageCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.LoginRecordEntity;
 import com.cy.example.entity.UserEntity;
-import com.cy.example.service.ILoginRecordService;
 import com.cy.example.service.IUserService;
-import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -36,10 +34,6 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private IUserService userService;
-
-	
-	@Autowired  
-    private RabbitSender sender;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(UserController.class);
@@ -182,9 +176,8 @@ public class UserController extends BaseController {
 			super.add(loginRecord);
 			loginRecord.setC_loginIp(super.getIP(getRequest()));
 			loginRecord.setC_username(user.getC_username());
-//			loginRecordService.insert(loginRecord);
 			//采用消息中心的通知添加
-			sender.send(loginRecord);
+//			sender.send(loginRecord);
 			msg = "登陆成功！";
 			map.put("flag", flag);
 		} catch (Exception exception) {

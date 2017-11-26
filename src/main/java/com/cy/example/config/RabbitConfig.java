@@ -15,16 +15,16 @@ public class RabbitConfig {
 	
 	/*
 	 * 登录记录队列
-	 */
+	 
     @Bean
     public Queue Queue() {
         return new Queue(RabbitConfig.QUEUE_LOGINRECORD);
     }
     
     
-    /*
+    
      * 订阅模式
-     */
+     
     @Bean
     public Queue AMessage() {
         return new Queue("fanout.A");
@@ -61,9 +61,9 @@ public class RabbitConfig {
     }
     
     
-    /*
+    
      * topic 是RabbitMQ中最灵活的一种方式，可以根据routing_key自由的绑定不同的队列
-     */
+     
 
     final static String message = "topic.message";
     final static String messages = "topic.messages";
@@ -91,5 +91,5 @@ public class RabbitConfig {
     @Bean
     Binding bindingExchangeMessages(Queue queueMessages, TopicExchange exchange) {
         return BindingBuilder.bind(queueMessages).to(exchange).with("topic.#");
-    }
+    }*/
 }

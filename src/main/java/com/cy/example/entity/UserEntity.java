@@ -14,6 +14,8 @@ public class UserEntity extends SuperEntity<UserEntity> {
 	private String c_pwd;
 
 	private String c_phone;
+	
+	private String c_email;
 
 	private String n_age;
 
@@ -80,12 +82,13 @@ public class UserEntity extends SuperEntity<UserEntity> {
 		this.roleList = roleList;
 	}
 
-	/*
-	 * public Set<String> findRolesName() { List<SysRoleEntity> roles =
-	 * getRoleList(); Set<String> set = new HashSet<String>(); for
-	 * (SysRoleEntity role : roles) { set.add(role.getC_roleName()); } return
-	 * set; }
-	 */
+	public String getC_email() {
+		return c_email;
+	}
+
+	public void setC_email(String c_email) {
+		this.c_email = c_email;
+	}
 
 	@Override
 	public String toString() {

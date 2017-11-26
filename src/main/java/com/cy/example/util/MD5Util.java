@@ -61,6 +61,6 @@ public class MD5Util {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(MD5Util.GetMD5Code("1"));
+		System.out.println(MD5Util.GetMD5Code("1"));//c4ca4238a0b92382
 	}
 }
