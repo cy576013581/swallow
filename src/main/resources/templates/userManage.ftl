@@ -7,7 +7,7 @@
     
 </head>
 <body>
-	<@userGrid.grid controller="/system/user/" title="用户" width="100%" height="500px"
+	<@userGrid.grid controller="/system/user/" title="用户" width="1300px" height="500px"
 		fields="id:true: ,c_username:false:用户名,c_phone:false:联系方式,c_email:false:电子邮箱,n_age:false:年龄,n_sex:false:性别,n_status:false:用户状态,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
 	</@userGrid.grid>

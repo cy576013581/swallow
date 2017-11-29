@@ -19,8 +19,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 	private UserMapper userMapper;
 	
 	public int updateMy(UserEntity user) {
-		if (null != user.getC_pwd() || "" != user.getC_pwd()) {
+		if (null != user.getC_pwd() && "" != user.getC_pwd()) {
 			user.setC_pwd(MD5Util.GetMD5Code(user.getC_pwd()));
+		}else{
+			user.setC_pwd(null);
 		}
 		return this.userMapper.updateMy(user);
 	}
