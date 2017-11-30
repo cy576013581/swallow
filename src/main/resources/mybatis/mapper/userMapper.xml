@@ -99,9 +99,7 @@
        		users 
        SET 
        	<if test="c_pwd != null">
-       		<if test="c_pwd != '' ">
-       			c_pwd = #{c_pwd},
-       		</if> 
+       		c_pwd = #{c_pwd},
        	</if>
        	c_phone = #{c_phone},
        	n_age = #{n_age},
