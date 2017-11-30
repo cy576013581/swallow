@@ -41,7 +41,7 @@ public class MailServiceImpl implements IMailService{
 
         try {
             mailSender.send(message);
-            logger.info("简单邮件已经发送。");
+            logger.info("发送给"+to+"邮件已经发送。");
         } catch (Exception e) {
             logger.error("发送纯文本邮件时发生异常！", e);
         }
@@ -63,7 +63,7 @@ public class MailServiceImpl implements IMailService{
             helper.setText(content, true);
 
             mailSender.send(message);
-            logger.info("html邮件发送成功");
+            logger.info("发送给"+to+"邮件已经发送。");
         } catch (MessagingException e) {
             logger.error("发送html邮件时发生异常！", e);
         }
@@ -88,7 +88,7 @@ public class MailServiceImpl implements IMailService{
             helper.addAttachment(fileName, file);
 
             mailSender.send(message);
-            logger.info("带附件的邮件已经发送。");
+            logger.info("发送给"+to+"邮件已经发送。");
         } catch (MessagingException e) {
             logger.error("发送带附件的邮件时发生异常！", e);
         }
@@ -112,7 +112,7 @@ public class MailServiceImpl implements IMailService{
             helper.addInline(rscId, res);
 
             mailSender.send(message);
-            logger.info("嵌入静态资源的邮件已经发送。");
+            logger.info("发送给"+to+"邮件已经发送。");
         } catch (MessagingException e) {
             logger.error("发送嵌入静态资源的邮件时发生异常！", e);
         }

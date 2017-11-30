@@ -27,13 +27,13 @@ public class MailServiceTest {
                 "    <h3>hello world ! 这是一封Html邮件!</h3>\n" +
                 "</body>\n" +
                 "</html>";
-        mailService.sendHtmlMail("ityouknow@126.com","test simple mail",content);
+        mailService.sendHtmlMail("pjchenyang@qq.com","test simple mail",content);
     }
     
     @Test
     public void sendAttachmentsMail() {
-        String filePath="e:\\tmp\\application.log";
-        mailService.sendAttachmentsMail("ityouknow@126.com", "主题：带附件的邮件", "有附件，请查收！", filePath);
+        String filePath="c:\\application.txt";
+        mailService.sendAttachmentsMail("pjchenyang@qq.com", "主题：带附件的邮件", "有附件，请查收！", filePath);
     }
     
     @Test
@@ -42,6 +42,6 @@ public class MailServiceTest {
         String content="<html><body>这是有图片的邮件：<img src=\'cid:" + rscId + "\' ></body></html>";
         String imgPath = "C:\\Users\\summer\\Pictures\\favicon.png";
         //添加多个图片可以使用多条 <img src='cid:" + rscId + "' > 和 helper.addInline(rscId, res) 来实现
-        mailService.sendInlineResourceMail("ityouknow@126.com", "主题：这是有图片的邮件", content, imgPath, rscId);
+        mailService.sendInlineResourceMail("pjchenyang@qq.com", "主题：这是有图片的邮件", content, imgPath, rscId);
     }
 }
