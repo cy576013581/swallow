@@ -17,7 +17,7 @@ public class ReportScheduler {
 	private RabbitSender rabbitSender;
 
 	//@Scheduled(fixedRate = 6000)
-    @Scheduled(cron="0 0 24 * * ?")   //每天24点执行
+    @Scheduled(cron="0 0 0 * * ?")   //每天24点执行
     public void reportCurrentTime() {
     	String content = "";
     	MailEntity mail = new MailEntity();
