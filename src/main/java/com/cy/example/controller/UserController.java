@@ -23,8 +23,11 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.LoginRecordEntity;
+import com.cy.example.entity.MailEntity;
 import com.cy.example.entity.UserEntity;
+import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
+import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -34,9 +37,38 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private IUserService userService;
+	
+	@Autowired
+	private IMailService mailService;
+	
+	@Autowired
+	private RabbitSender rabbitSender;
 
 	private static final Logger logger = LoggerFactory
 			.getLogger(UserController.class);
+	
+	@RequestMapping("/register")
+	@ResponseBody
+	public Map<String, Object> register(@ModelAttribute("user") UserEntity user) {
+		super.add(user);
+		user.setN_status("0");
+		boolean flag = userService.insert(user);
+		MailEntity mail = new MailEntity();
+		//后面优化为给数据库中的管理员发送
+		mail.setTo("pjchenyang@qq.com");
+//    	mail.setSubject("用户:"+user.getC_username()+"的注册审核提醒");
+    	mail.setContent(user.toStringCN());
+		rabbitSender.sendMail(mail);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (flag) {
+			map.put("flag", flag);
+			map.put("msg", "注册成功！请等待管理员激活！");
+		} else {
+			map.put("flag", flag);
+			map.put("msg", "注册失败！");
+		}
+		return map;
+	}
 	
 	@RequestMapping("/lock")
 	@ResponseBody
@@ -177,7 +209,7 @@ public class UserController extends BaseController {
 			loginRecord.setC_loginIp(super.getIP(getRequest()));
 			loginRecord.setC_username(user.getC_username());
 			//采用消息中心的通知添加
-//			sender.send(loginRecord);
+//			rabbitSender.sendLoginRecord(loginRecord);
 			msg = "登陆成功！";
 			map.put("flag", flag);
 		} catch (Exception exception) {

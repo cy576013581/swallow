@@ -90,14 +90,23 @@ public class UserEntity extends SuperEntity<UserEntity> {
 		this.c_email = c_email;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "UserEntity [c_username=" + c_username + ", c_pwd=" + c_pwd
-				+ ", c_phone=" + c_phone + ", n_age=" + n_age + ", n_sex="
-				+ n_sex + ", n_status=" + n_status + ", roleList=" + roleList
-				+ "]";
+				+ ", c_phone=" + c_phone + ", c_email=" + c_email + ", n_age="
+				+ n_age + ", n_sex=" + n_sex + ", n_status=" + n_status
+				+ ", roleList=" + roleList + "]";
 	}
 
+	public String toStringCN() {
+		return "注册用户信息： [姓名=" + c_username
+				+ ", 联系方式=" + c_phone + ", 邮件=" + c_email + ", 年龄="
+				+ n_age + ", 性别=" + n_sex + ", 状态=" + n_status + "]";
+	}
+	
+	
 	public byte[] getCredentialsSalt() {
 		// TODO Auto-generated method stub
 		return this.c_username.getBytes();

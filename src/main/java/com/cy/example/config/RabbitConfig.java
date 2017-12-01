@@ -13,6 +13,16 @@ public class RabbitConfig {
 
 	public static String QUEUE_LOGINRECORD = "loginRecord";
 	
+	public static String QUEUE_MAIL = "mail";
+	
+	/*
+	 * 邮件通知队列
+	 */
+	/*@Bean
+    public Queue Queue() {
+        return new Queue(RabbitConfig.QUEUE_MAIL);
+    }*/
+	
 	/*
 	 * 登录记录队列
 	 

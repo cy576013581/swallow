@@ -1,13 +1,15 @@
 package com.cy.example.service;
 
+import com.cy.example.entity.MailEntity;
+
 public interface IMailService {
 
-	public void sendSimpleMail(String to, String subject, String content);
+	public void sendSimpleMail(MailEntity mail);
 	
-	public void sendHtmlMail(String to, String subject, String content);
+	public void sendHtmlMail(MailEntity mail);
 	
-	public void sendAttachmentsMail(String to, String subject, String content, String filePath);
+	public void sendAttachmentsMail(MailEntity mail);
 	
-	public void sendInlineResourceMail(String to, String subject, String content, String rscPath, String rscId);
+	public void sendInlineResourceMail(MailEntity mail);
 
 }
