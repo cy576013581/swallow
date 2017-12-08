@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2017-11-26 17:08:09
+Date: 2017-12-08 17:25:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -672,7 +672,7 @@ CREATE TABLE `calendars` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of calendars
@@ -813,7 +813,7 @@ CREATE TABLE `sys_menu` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -830,6 +830,8 @@ INSERT INTO `sys_menu` VALUES ('12', '', '系统工具', '[root]', '2017-10-22 1
 INSERT INTO `sys_menu` VALUES ('13', '/menu/uploadFile', '文件上传', '12', '2017-10-22 15:42:15', '8', '2017-10-22 15:42:15', '8', '0');
 INSERT INTO `sys_menu` VALUES ('14', '/menu/user_roleManage', '用户关联角色', '4', '2017-10-22 15:42:36', '8', '2017-10-22 15:42:36', '8', '0');
 INSERT INTO `sys_menu` VALUES ('15', '/menu/role_permisManage', '角色关联权限', '4', '2017-10-22 15:42:57', '8', '2017-10-22 15:42:57', '8', '0');
+INSERT INTO `sys_menu` VALUES ('16', '', '工作流', '[root]', '2017-12-07 19:09:08', '8', '2017-12-07 19:09:08', '8', '0');
+INSERT INTO `sys_menu` VALUES ('17', '/menu/workflow/deployManage', '部署管理', '16', '2017-12-07 19:09:37', '0', '2017-12-08 09:38:09', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -918,7 +920,7 @@ CREATE TABLE `sys_user_role` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user_role
@@ -944,10 +946,10 @@ CREATE TABLE `users` (
   `n_deleted` int(11) DEFAULT NULL,
   `n_status` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('8', 'admin', 'd41d8cd98f00b204', 'pjchenyang@qq.com', '1', '12', '1', '2017-08-01 11:00:05', '8', '2017-11-26 16:12:31', '8', '0', '1');
+INSERT INTO `users` VALUES ('8', 'admin', 'c4ca4238a0b92382', 'pjchenyang@qq.com', '1', '12', '1', '2017-08-01 11:00:05', '8', '2017-11-26 16:12:31', '8', '0', '1');
 INSERT INTO `users` VALUES ('9', '1', 'c4ca4238a0b92382', '1323', '1', '111', '0', '2017-10-15 16:29:50', '8', '2017-11-26 15:49:12', '8', '0', '0');
