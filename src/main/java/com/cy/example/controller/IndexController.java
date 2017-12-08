@@ -137,4 +137,10 @@ public class IndexController {
 		map.put("roleList", roleList);
 		return "role_permisManage";
 	}
+	
+	@RequestMapping("/menu/workflow/deployManage")
+	public String deployManage(ModelMap map) {
+		
+		return "workflow/deployManage";
+	}
 }

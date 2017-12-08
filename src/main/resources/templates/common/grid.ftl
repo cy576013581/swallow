@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" type="text/css" href="../lib/easyui/themes/material/easyui.css">
-    <link rel="stylesheet" type="text/css" href="../lib/easyui/themes/icon.css">
-    <link href="../lib/toastr/toastr.css" rel="stylesheet"/>
-    <script type="text/javascript" src="../lib/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="../lib/layer/layer.js"></script>
+    <link rel="stylesheet" type="text/css" href="/lib/easyui/themes/material/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/lib/easyui/themes/icon.css">
+    <link href="/lib/toastr/toastr.css" rel="stylesheet"/>
+    <script type="text/javascript" src="/lib/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/layer/layer.js"></script>
     <script language="javascript">
 		var index = layer.load(1, {
 		  shade: [0.5,'#D4D4D4'] //0.1透明度的白色背景
 		});
 	</script>
-    <script type="text/javascript" src="../lib/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="../lib/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="/lib/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/lib/easyui/locale/easyui-lang-zh_CN.js"></script>
     
-    <script type="text/javascript" src="../lib/toastr/toastr.js"></script>
-    <script type="text/javascript" src="../js/map.js"></script>
+    <script type="text/javascript" src="/lib/toastr/toastr.js"></script>
+    <script type="text/javascript" src="/js/map.js"></script>
     <script language="javascript">
     	//loading层
 		

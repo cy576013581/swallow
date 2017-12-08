@@ -44,8 +44,8 @@ public class UserController extends BaseController {
 	@Autowired
 	private RabbitSender rabbitSender;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(UserController.class);
+	private final Logger logger = LoggerFactory
+			.getLogger(this.getClass());
 	
 	@RequestMapping("/register")
 	@ResponseBody
