@@ -15,7 +15,7 @@
 	<script language="javascript">
 		//重写grid的change事件
 		function change(){
-			addEditElem("c_pwd","密码");
+			addEditElem("c_pwd","密码","textbox","");
 			modifyElem("tb_","n_sex","combobox",'[{"id":"","text":"全部","selected":true},{"id":"1","text":"男"},{"id":"0","text":"女"}]');
 		    modifyElem("ed_","n_sex","combobox",'[{"id":"1","text":"男","selected":true},{"id":"0","text":"女"}]');
 		    modifyElem("tb_","n_status","combobox",'[{"id":"","text":"全部","selected":true},{"id":"1","text":"可用"},{"id":"0","text":"锁定"}]');

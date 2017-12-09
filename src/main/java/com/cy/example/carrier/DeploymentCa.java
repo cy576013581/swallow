@@ -4,19 +4,21 @@ import java.util.Date;
 
 import org.activiti.engine.repository.Deployment;
 
+import com.cy.example.util.DateUtil;
+
 public class DeploymentCa {
 	
 	private String id;
 	
 	private String name;
 	
-	private Date deploymentTime;
+	private String deploymentTime;
 	
 	public void transfor(Deployment deploy){
 		DeploymentCa ca = new DeploymentCa();
 		this.id = deploy.getId();
 		this.name = deploy.getName();
-		this.deploymentTime = deploy.getDeploymentTime();
+		this.deploymentTime = DateUtil.format(deploy.getDeploymentTime());
 	}
 
 	public String getId() {
@@ -35,11 +37,11 @@ public class DeploymentCa {
 		this.name = name;
 	}
 
-	public Date getDeploymentTime() {
+	public String getDeploymentTime() {
 		return deploymentTime;
 	}
 
-	public void setDeploymentTime(Date deploymentTime) {
+	public void setDeploymentTime(String deploymentTime) {
 		this.deploymentTime = deploymentTime;
 	}
 	

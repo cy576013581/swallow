@@ -18,5 +18,7 @@ public interface IWorkFlowService {
 	public List<Deployment> searchAll(Deployment deployment, PageCa page);
 
 	public void deploy(MultipartFile file, String filename);
+	
+	public void deleteDeploy(String id,boolean cascade);
 
 }

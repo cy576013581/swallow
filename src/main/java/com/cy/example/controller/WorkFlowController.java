@@ -1,7 +1,5 @@
 package com.cy.example.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,12 +30,25 @@ public class WorkFlowController extends BaseController {
 	@Autowired
 	private IWorkFlowService workFlowService;
 	
-	@RequestMapping("/deploy")
-	public String deploy(@RequestParam("name") String name,  
+	@RequestMapping("/delete")
+	@ResponseBody
+	public Map<String, Object> delete(@RequestParam("id") String id) {
+		workFlowService.deleteDeploy(id, true);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", true);
+		map.put("msg", "删除成功！");
+		return map;
+	}
+	
+	@RequestMapping("/add")
+	@ResponseBody
+	public String add(@RequestParam("name") String name,  
 	        @RequestParam("file") MultipartFile file) {
 		workFlowService.deploy(file, name);
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+		map.put("flag", true);
+		map.put("msg", "部署成功！");
+			
 		return "workflow/deployManage";
 	}
 	

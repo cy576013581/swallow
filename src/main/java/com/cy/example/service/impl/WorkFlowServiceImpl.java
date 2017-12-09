@@ -46,6 +46,11 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
      *
      */
     
+    //删除流程定义
+	public void deleteDeploy(String id,boolean cascade) {
+		repositoryService.deleteDeployment(id, cascade);
+	}
+    
     /**部署流程定义*/
 	public void deploy(MultipartFile file, String filename) {
 		try {

@@ -284,9 +284,13 @@
 		function change(){
 		}
 		
-		function addEditElem(id,name){
+		//extend : 扩展字段
+		//type : 控件类型
+		//name : 控件名称
+		//id : 控件key
+		function addEditElem(id,name,type,extend){
 			var parent = $("#dlg_box");
-			var childen = $("<span>"+name+": <input id='ed_"+id+"' name='"+id+"' class='easyui-textbox' style='width:120px;margin-top:10px'></span></br></br>");
+			var childen = $("<span>"+name+": <input id='ed_"+id+"' name='"+id+"' class='easyui-"+type+"' style='width:120px;margin-top:10px'" + extend + "></span></br></br>");
 			parent.append(childen);
 			$.parser.parse(childen);
 			editMap.put(id,"textbox");
@@ -380,6 +384,10 @@
 					  	returnVal = $("#"+loc+key).textbox('getValue');
 					  	//alert("#"+loc+key+":"+returnVal);
 					  	break;
+					case "filebox":
+					  	returnVal = $("#"+loc+key).textbox('getValue');
+					  	//alert("#"+loc+key+":"+returnVal);
+					  	break;
 				}
 			}
 			return returnVal;
@@ -458,19 +466,21 @@
                 closed:true
             ">
             <div id="dlg_box" style="margin-left:50px;margin-top:20px">
-            	<input type="text" id="ed_id" style="display:none">
-		        <#list fields?split(",") as x>  
-		        	<#if (x_index !=0)>
-				        <#list x?split(":")?reverse  as y>
-							<#if (y_index ==0 && "${y}" != "id")>
-								<div style='margin-bottom:20px'>${y}:
-							</#if>
-							<#if (y_index ==2 && "${y}" != " ")>
-								<input id="ed_${y}" name="${y}" class="easyui-textbox" style="width:120px;margin-top:10px"></div>
-							</#if>
-				        </#list> 
-				    </#if>
-			    </#list>
+            	<form id="form" method="post" enctype="multipart/form-data">  
+	            	<input type="text" id="ed_id" style="display:none">
+			        <#list fields?split(",") as x>  
+			        	<#if (x_index !=0)>
+					        <#list x?split(":")?reverse  as y>
+								<#if (y_index ==0 && "${y}" != "id")>
+									<div style='margin-bottom:20px'>${y}:
+								</#if>
+								<#if (y_index ==2 && "${y}" != " ")>
+									<input id="ed_${y}" name="${y}" class="easyui-textbox" style="width:120px;margin-top:10px"></div>
+								</#if>
+					        </#list> 
+					    </#if>
+				    </#list>
+			    </form>  
 		    <div>
     </div>
 	</div>
