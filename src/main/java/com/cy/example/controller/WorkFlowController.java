@@ -2,6 +2,7 @@ package com.cy.example.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.service.IWorkFlowService;
 
@@ -31,11 +33,9 @@ public class WorkFlowController extends BaseController {
 	private IWorkFlowService workFlowService;
 	
 	@RequestMapping("/deploy")
-	@ResponseBody
 	public String deploy(@RequestParam("name") String name,  
 	        @RequestParam("file") MultipartFile file) {
-		File toolFile = null;
-		workFlowService.deploy(toolFile, name);
+		workFlowService.deploy(file, name);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		return "workflow/deployManage";
@@ -45,9 +45,15 @@ public class WorkFlowController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
 		List<Deployment> list = workFlowService.getDeploymentList(page);
+		List<DeploymentCa> data = new ArrayList<DeploymentCa>();
+		for(Deployment dep : list){
+			DeploymentCa ca = new DeploymentCa();
+			ca.transfor(dep);
+			data.add(ca);
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("rows", list);
-		map.put("total", list.size());
+		map.put("rows", data);
+		map.put("total", data.size());
 		
 		return map;
 	}

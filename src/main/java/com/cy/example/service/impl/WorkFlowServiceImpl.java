@@ -16,6 +16,7 @@ import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cy.example.carrier.PageCa;
 import com.cy.example.service.IWorkFlowService;
@@ -46,10 +47,10 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
      */
     
     /**部署流程定义*/
-	public void deploy(File file, String filename) {
+	public void deploy(MultipartFile file, String filename) {
 		try {
 			//2：将File类型的文件转化成ZipInputStream流
-			ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(file));
+			ZipInputStream zipInputStream = new ZipInputStream(file.getInputStream());
 			repositoryService.createDeployment()//创建部署对象
 							.name(filename)//添加部署名称
 							.addZipInputStream(zipInputStream)//
