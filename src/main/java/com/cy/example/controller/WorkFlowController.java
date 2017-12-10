@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.activiti.engine.repository.Deployment;
+import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
@@ -43,8 +49,20 @@ public class WorkFlowController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public String add(@RequestParam("name") String name,  
-	        @RequestParam("file") MultipartFile file) {
-		workFlowService.deploy(file, name);
+			MultipartFile file) {
+//		workFlowService.deploy(file, name);
+//		ShiroHttpServletRequest shiroRequest = (ShiroHttpServletRequest) request;
+//		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();  
+//	    MultipartHttpServletRequest multipartRequest = commonsMultipartResolver.resolveMultipart((HttpServletRequest) shiroRequest.getRequest());  
+//		MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+//
+//		MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
+		System.out.println("");
+//		List<MultipartFile> files = ((MultipartHttpServletRequest) request)
+//				.getFiles("file");
+		
+//		MultipartFile file = multipartRequest.getFile("file");
+//	    workFlowService.deploy(file, name);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", true);
 		map.put("msg", "部署成功！");

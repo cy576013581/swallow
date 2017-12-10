@@ -110,16 +110,16 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("user") UserEntity user) {
 		super.update(user);
-		if("男".equals(user.getN_sex())){
+		/*if("男".equals(user.getN_sex())){
 			user.setN_sex("1");
 		}else if("女".equals(user.getN_sex())){
 			user.setN_sex("0");
-		}
-		if("可用".equals(user.getN_status())){
+		}*/
+		/*if("可用".equals(user.getN_status())){
 			user.setN_status("1");
 		}else if("锁定".equals(user.getN_sex())){
 			user.setN_status("0");
-		}
+		}*/
 		int rows = userService.updateMy(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {

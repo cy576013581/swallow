@@ -182,22 +182,24 @@
 		//编辑之后的确定按钮事件
 		function dlgBtnClick(){
 			var url;
-			var json = "";
+			/*var json = "";
 			for(var i = 0;i<editMap.size();i++){
 				json += editMap.key(i)+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
-			}
+			}*/
 			if(operation == 1){
-				url = "${controller}add?s="+new Date().getTime();
-				json = json.substring(0,json.length-1);
+				url = "${controller}add";
+				//json = json.substring(0,json.length-1);
 			}else if(operation == 2){
-				url = "${controller}update?s="+new Date().getTime();
-				json += "id="+$("#ed_id").val();
+				url = "${controller}update";
+				//json += "id="+$("#ed_id").val();
 			}
-			//alert(json);
+			//alert($('#form').serialize());
 			$.ajax({ //使用ajax与服务器异步交互
                 url:url+"?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
-                type:"POST",
-                data: json, 
+                type: "POST",
+                //data: json, 
+                //contentType: "multipart/form-data",
+                data: $('#form').serialize(),
                 dataType:"json",
                 error:function(XMLHttpRequest,textStatus,errorThrown){
                 	toastr.error('网络连接失败！');
@@ -257,7 +259,7 @@
 			if(type == "combobox" || type == "combotree"){
 				var parent = $("#"+loc+id).parent();
 				$("#"+loc+id).textbox("destroy");
-				var children = $("<input id='"+loc+id+"' type= 'text' class='easyui-"+type+"' style='width:120px' valueField='id' textField='text' panelHeight='auto'>");
+				var children = $("<input id='"+loc+id+"' name='"+id+"' type= 'text' class='easyui-"+type+"' style='width:120px' valueField='id' textField='text' panelHeight='auto'>");
 				parent.append(children);
 				$.parser.parse(parent);
 				if(loc == "ed_"){
@@ -289,7 +291,7 @@
 		//name : 控件名称
 		//id : 控件key
 		function addEditElem(id,name,type,extend){
-			var parent = $("#dlg_box");
+			var parent = $("#form");
 			var childen = $("<span>"+name+": <input id='ed_"+id+"' name='"+id+"' class='easyui-"+type+"' style='width:120px;margin-top:10px'" + extend + "></span></br></br>");
 			parent.append(childen);
 			$.parser.parse(childen);
@@ -467,7 +469,7 @@
             ">
             <div id="dlg_box" style="margin-left:50px;margin-top:20px">
             	<form id="form" method="post" enctype="multipart/form-data">  
-	            	<input type="text" id="ed_id" style="display:none">
+	            	<input type="text" id="ed_id" name="id" style="display:none">
 			        <#list fields?split(",") as x>  
 			        	<#if (x_index !=0)>
 					        <#list x?split(":")?reverse  as y>
