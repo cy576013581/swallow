@@ -92,3 +92,8 @@
 
 - 2017.12.10 优化了grid提交方式，流程部署后台文件的接收需要更改  add  by  cy  
 
+- 2017.12.11 暂时放弃用在grid集成中提交文件，放到后期优化，原因是集成shiro之后HttpServletRequest变成ShiroHttpServletRequest，
+			  转换又因为springboot内置的文件上传和commons-fileupload冲突  add  by  cy  
+			  
+- 2017.12.11 文件部署完成  add  by  cy  
+

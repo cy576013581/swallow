@@ -6,6 +6,7 @@ import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 
 public interface IWorkFlowService {
@@ -14,7 +15,7 @@ public interface IWorkFlowService {
 
 	public List<Deployment> getDeploymentList(PageCa page);
 
-	public List<Deployment> searchAll(Deployment deployment, PageCa page);
+	public List<Deployment> searchAll(DeploymentCa deployment, PageCa page);
 
 	public void deploy(MultipartFile file, String filename);
 	

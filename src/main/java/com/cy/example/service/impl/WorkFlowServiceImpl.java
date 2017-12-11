@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.service.IWorkFlowService;
 
@@ -62,8 +63,7 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 			e.printStackTrace();
 		}
 	}
-    
-    
+	
     public List<Deployment> getDeploymentList(PageCa page){
     	List<Deployment> list = repositoryService.createDeploymentQuery()
     					.orderByDeploymenTime().asc()
@@ -71,13 +71,19 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
     	return list;
     }
     
-    public List<Deployment> searchAll(Deployment deployment, PageCa page) {
+    public List<Deployment> searchAll(DeploymentCa deployment, PageCa page) {
 		// TODO Auto-generated method stub
 		List<Deployment> list = repositoryService.createDeploymentQuery()
-				.orderByDeploymenTime().asc()
+				.deploymentNameLike("%" + deployment.getName() + "%")
+				.orderByDeploymentName().asc()
 				.listPage(page.getIndex(), page.getRows());
 		return list;
 	}
+    
+    /*
+     * 流程定义方法区========================================
+     *
+     */
     
     /**查询流程定义的信息，对应表（act_re_procdef）*/
 	public List<ProcessDefinition> getProcessDefinitionList(PageCa page) {
