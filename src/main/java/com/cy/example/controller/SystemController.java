@@ -26,7 +26,7 @@ import com.cy.example.service.IRoleService;
 import com.cy.example.service.IUserService;
 
 @Controller
-public class IndexController {
+public class SystemController {
 	
 	@Autowired
 	private IPermissionService permisService;
@@ -142,5 +142,10 @@ public class IndexController {
 	public String deployManage(ModelMap map) {
 		
 		return "workflow/deployManage";
+	}
+	
+	@RequestMapping("/menu/workflow/processDefinitionManage")
+	public String processDefinitionManage(ModelMap map) {
+		return "workflow/processDefinitionManage";
 	}
 }

@@ -1,5 +1,7 @@
 package com.cy.example.service.impl;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipInputStream;
 
@@ -12,12 +14,14 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
+import com.cy.example.carrier.ProcessDefinitionCa;
 import com.cy.example.service.IWorkFlowService;
 
 @Service
@@ -71,7 +75,7 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
     	return list;
     }
     
-    public List<Deployment> searchAll(DeploymentCa deployment, PageCa page) {
+    public List<Deployment> searchAllDeployment(DeploymentCa deployment, PageCa page) {
 		// TODO Auto-generated method stub
 		List<Deployment> list = repositoryService.createDeploymentQuery()
 				.deploymentNameLike("%" + deployment.getName() + "%")
@@ -90,6 +94,37 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 		List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery()//创建流程定义查询
 							.orderByProcessDefinitionVersion().asc()//
 							.listPage(page.getIndex(), page.getRows());
+		return list;
+	}
+
+	public InputStream findImageInputStream(String deploymentId,
+			String diagramResourceName) {
+		// TODO Auto-generated method stub
+		return repositoryService.getResourceAsStream(deploymentId, diagramResourceName);
+	}
+
+	public List<ProcessDefinition> searchAllProcessDefinition(
+			ProcessDefinitionCa process, PageCa page) {
+		// TODO Auto-generated method stub
+		List<ProcessDefinition> list =  new ArrayList<ProcessDefinition>();
+				
+		ProcessDefinitionQuery query = repositoryService.createProcessDefinitionQuery();
+		if(null != process.getKey() && !"".equals(process.getKey())){
+			query.processDefinitionKeyLike("%" + process.getKey() + "%");
+		}
+		if(null != process.getName() && !"".equals(process.getName())){
+			query.processDefinitionNameLike("%" + process.getName() + "%");
+		}
+		if(null != process.getResourceName() && !"".equals(process.getResourceName())){
+			query.processDefinitionResourceNameLike("%" + process.getResourceName() + "%");
+		}
+		if(null != process.getVersion() && !"".equals(process.getVersion())){
+			query.processDefinitionVersion(Integer.valueOf(process.getVersion()));
+		}
+		
+		list = query.orderByProcessDefinitionId().asc()
+				.listPage(page.getIndex(), page.getRows());
+				
 		return list;
 	}
 

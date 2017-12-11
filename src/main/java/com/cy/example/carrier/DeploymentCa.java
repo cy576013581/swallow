@@ -1,7 +1,5 @@
 package com.cy.example.carrier;
 
-import java.util.Date;
-
 import org.activiti.engine.repository.Deployment;
 
 import com.cy.example.util.DateUtil;
@@ -15,7 +13,6 @@ public class DeploymentCa {
 	private String deploymentTime;
 	
 	public void transfor(Deployment deploy){
-		DeploymentCa ca = new DeploymentCa();
 		this.id = deploy.getId();
 		this.name = deploy.getName();
 		this.deploymentTime = DateUtil.format(deploy.getDeploymentTime());

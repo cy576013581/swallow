@@ -298,6 +298,17 @@
 			editMap.put(id,"textbox");
 		}
 		
+		// 添加操作栏按钮
+		function addFtElem(id,name,iconClsName,functionName){
+			var parent = $("#ft");
+			var childen = $("<a id='"+id+"' href='#' class='easyui-linkbutton' plain='true' onclick='"+functionName+"'>"+name+"</a>");
+			childen.linkbutton({    
+			    iconCls: iconClsName,
+			    plain:  true
+			});  
+			parent.append(childen);
+		}
+		
 		//根据id修改编辑框输入框类型
 		function modifyEditElem(id,type){
 			if(type == "datebox" || type == "combobox" || type == "combotree" || type == "numberbox" ||
@@ -469,7 +480,7 @@
             ">
             <div id="dlg_box" style="margin-left:50px;margin-top:20px">
             	<form id="form" method="post" enctype="multipart/form-data">  
-	            	<input type="text" id="ed_id" name="id" style="display:none">
+	            	<input type="text" id="ed_id" name="id" style="display:none" value="0">
 			        <#list fields?split(",") as x>  
 			        	<#if (x_index !=0)>
 					        <#list x?split(":")?reverse  as y>
