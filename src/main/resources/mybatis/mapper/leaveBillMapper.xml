@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.example.mapper.LeaveBillMapper" >
+    <resultMap id="BaseResultMap" type="com.cy.example.entity.LeaveBillEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="c_leaveReason" property="c_leaveReason" jdbcType="VARCHAR" />
+        <result column="c_startTime" property="c_startTime" jdbcType="VARCHAR" />
+        <result column="c_endTime" property="c_endTime" jdbcType="VARCHAR"/>
+        <result column="c_leaveDays" property="c_leaveDays" jdbcType="VARCHAR" />
+        <result column="c_remarks" property="c_remarks" jdbcType="VARCHAR" />
+        <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
+        <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
+        <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
+        <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
+        <collection property="user" ofType="com.cy.example.entity.UserEntity">
+	    	<id column="u_id" property="id"/>
+	 		<result column="c_username" property="c_username" jdbcType="VARCHAR" />
+	        <result column="c_phone" property="c_phone" jdbcType="VARCHAR"/>
+	        <result column="n_age" property="n_age" jdbcType="INTEGER" />
+	        <result column="n_sex" property="n_sex" jdbcType="INTEGER" />
+    	</collection>
+    </resultMap>
+    
+   <sql id="ColumnList" >
+        c_leaveReason, c_startTime, c_endTime , c_leaveDays ,c_remarks
+    </sql>
+    
+    <sql id="BaseList" >
+        a.id, a.c_createDate, a.n_creater, a.c_updateDate, a.n_updater
+    </sql>
+    
+    <sql id="userList" >
+        u.id as u_id, c_username, c_phone, n_age, n_sex
+    </sql>
+    
+    <select id="findOneById" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+       SELECT <include refid="ColumnList" />,<include refid="BaseList" />,<include refid="userList" />
+       FROM leave_bill a left join users u
+       on a.u_id = u.id
+	   WHERE a.id = #{id} and a.n_deleted=0
+    </select>
+    
+    <select id="findAll" resultMap="BaseResultMap"  >
+	   SELECT <include refid="ColumnList" />,<include refid="BaseList" />,<include refid="userList" />
+       FROM leave_bill a left join users u
+       on a.u_id = u.id
+       where a.n_deleted=0
+   	   order by a.c_updateDate limit #{page.index},#{page.rows}
+    </select>  
+    
+    <select id="findAllCount" resultType="java.lang.Integer" >
+	   select count(id)
+	   from leave_bill
+	   where n_deleted=0
+    </select>
+
+
+</mapper>

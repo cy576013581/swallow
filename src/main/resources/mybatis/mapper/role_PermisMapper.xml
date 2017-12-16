@@ -40,7 +40,6 @@
 	   <if test="rp.n_roleId != ''"><if test="rp.n_roleId != '0'"> and n_roleId = #{rp.n_roleId}</if></if>
 	   <if test="rp.c_createDate != ''"><if test="rp.c_createDate != null">	and substr(c_createDate,1,10) = #{rp.c_createDate}</if></if>
    	   <if test="rp.c_updateDate != ''"><if test="rp.c_updateDate != null">  and substr(c_updateDate,1,10) = #{rp. c_updateDate}</if></if>
-   	   order by id limit #{page.index},#{page.rows}
     </select>
     
     <select id="findAll" resultMap="BaseResultMap">
@@ -58,6 +57,5 @@
 	   select count(id)
 	   from sys_role_permission
 	   where n_deleted = 0
-   	   order by id limit #{page.index},#{page.rows}
     </select>
 </mapper>

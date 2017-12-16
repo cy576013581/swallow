@@ -12,7 +12,7 @@ public interface IUserService extends IService<UserEntity>{
 
 	public UserEntity findOneByUsername(String username);
 
-	public int searchAllCount(UserEntity user, PageCa page);
+	public int searchAllCount(UserEntity user);
 
 	public List<UserEntity> searchAll(UserEntity user, PageCa page);
 }

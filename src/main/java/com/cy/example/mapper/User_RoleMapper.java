@@ -11,8 +11,7 @@ import com.cy.example.carrier.User_Role_Ca;
 @Mapper
 public interface User_RoleMapper extends SuperMapper<User_Role_Ca> {
 
-	int searchAllCount(@Param("ur") User_Role_Ca ur,
-			@Param("page") PageCa page);
+	int searchAllCount(@Param("ur") User_Role_Ca ur);
 
 	List<User_Role_Ca> searchAll(
 			@Param("ur") User_Role_Ca ur,

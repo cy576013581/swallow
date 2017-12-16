@@ -47,7 +47,7 @@ public class LoginRecordController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<LoginRecordEntity> list = loginRecordService.searchAll(
 				loginRecord, page);
-		int sum = loginRecordService.searchAllCount(loginRecord, page);
+		int sum = loginRecordService.searchAllCount(loginRecord);
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;

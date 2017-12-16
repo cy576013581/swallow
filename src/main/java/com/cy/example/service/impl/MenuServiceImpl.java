@@ -18,9 +18,9 @@ implements IMenuService{
 	@Autowired
 	private MenuMapper mapper;
 
-	public int searchAllCount(SysMenuEntity menu, PageCa page) {
+	public int searchAllCount(SysMenuEntity menu) {
 		// TODO Auto-generated method stub
-		return mapper.searchAllCount(menu, page);
+		return mapper.searchAllCount(menu);
 	}
 
 	public List<SysMenuEntity> searchAll(SysMenuEntity menu, PageCa page) {

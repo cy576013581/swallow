@@ -50,17 +50,6 @@ public class ProcessDefinitionController extends BaseController {
 		in.close();
 	}
 	
-	@RequestMapping("/delete")
-	@ResponseBody
-	public Map<String, Object> delete(@RequestParam("id") String id) {
-		workFlowService.deleteDeploy(id, true);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("flag", true);
-		map.put("msg", "删除成功！");
-		return map;
-	}
-	
-	
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {

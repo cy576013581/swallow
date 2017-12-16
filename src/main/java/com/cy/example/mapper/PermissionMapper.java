@@ -11,8 +11,7 @@ import com.cy.example.entity.SysPermissionEntity;
 @Mapper
 public interface PermissionMapper extends SuperMapper<SysPermissionEntity> {
 
-	int searchAllCount(@Param("permission") SysPermissionEntity permission,
-			@Param("page") PageCa page);
+	int searchAllCount(@Param("permission") SysPermissionEntity permission);
 
 	List<SysPermissionEntity> searchAll(
 			@Param("permission") SysPermissionEntity role,

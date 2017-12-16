@@ -25,8 +25,8 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPerm
 		return permissionMapper.searchAll(permission, page);
 	}
 
-	public int searchAllCount(SysPermissionEntity permission, PageCa page) {
+	public int searchAllCount(SysPermissionEntity permission) {
 		// TODO Auto-generated method stub
-		return permissionMapper.searchAllCount(permission, page);
+		return permissionMapper.searchAllCount(permission);
 	}
 }

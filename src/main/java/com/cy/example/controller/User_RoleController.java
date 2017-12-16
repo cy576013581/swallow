@@ -110,7 +110,7 @@ public class User_RoleController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<User_Role_Ca> list = urService.searchAll(
 				ur, page);
-		int sum = urService.searchAllCount(ur, page);
+		int sum = urService.searchAllCount(ur);
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;

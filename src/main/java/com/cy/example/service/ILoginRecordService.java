@@ -10,5 +10,5 @@ public interface ILoginRecordService extends IService<LoginRecordEntity> {
 	
 	List<LoginRecordEntity> searchAll(LoginRecordEntity loginRecord, PageCa page);
 
-	int searchAllCount(LoginRecordEntity loginRecord, PageCa page);
+	int searchAllCount(LoginRecordEntity loginRecord);
 }

@@ -10,5 +10,5 @@ public interface IPermissionService extends IService<SysPermissionEntity> {
 	
 	List<SysPermissionEntity> searchAll(SysPermissionEntity permission, PageCa page);
 
-	int searchAllCount(SysPermissionEntity permission, PageCa page);
+	int searchAllCount(SysPermissionEntity permission);
 }

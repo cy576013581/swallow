@@ -91,7 +91,6 @@
    	   <if test="user.n_sex != ''"><if test="user.n_sex != null">  and n_sex = #{user.n_sex}</if></if>
  	   <if test="user.c_createDate != ''"><if test="user.c_createDate != null">	and substr(c_createDate,1,10) = #{user.c_createDate}</if></if>
    	   <if test="user.c_updateDate != ''"><if test="user.c_updateDate != null">  and substr(c_updateDate,1,10) = #{user.c_updateDate}</if></if>
-   	   order by id limit #{page.index},#{page.rows}
     </select>
 
     <update id="updateMy" parameterType="com.cy.example.entity.UserEntity" >

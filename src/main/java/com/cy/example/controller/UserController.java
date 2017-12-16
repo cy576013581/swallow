@@ -183,7 +183,7 @@ public class UserController extends BaseController {
 			@ModelAttribute("pageVo") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<UserEntity> users = userService.searchAll(user, page);
-		int sum = userService.searchAllCount(user, page);
+		int sum = userService.searchAllCount(user);
 		map.put("rows", users);
 		map.put("total", sum);
 		return map;

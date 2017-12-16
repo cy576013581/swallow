@@ -110,7 +110,7 @@ public class Role_PermisController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Role_Permis_Ca> list = rpService.searchAll(
 				rp, page);
-		int sum = rpService.searchAllCount(rp, page);
+		int sum = rpService.searchAllCount(rp);
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;

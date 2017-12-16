@@ -25,8 +25,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, SysRoleEntity>
 		return roleMapper.searchAll(role, page);
 	}
 
-	public int searchAllCount(SysRoleEntity role, PageCa page) {
+	public int searchAllCount(SysRoleEntity role) {
 		// TODO Auto-generated method stub
-		return roleMapper.searchAllCount(role, page);
+		return roleMapper.searchAllCount(role);
 	}
 }

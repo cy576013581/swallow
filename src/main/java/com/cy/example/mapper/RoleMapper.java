@@ -11,8 +11,7 @@ import com.cy.example.entity.SysRoleEntity;
 @Mapper
 public interface RoleMapper extends SuperMapper<SysRoleEntity> {
 
-	int searchAllCount(@Param("role") SysRoleEntity role,
-			@Param("page") PageCa page);
+	int searchAllCount(@Param("role") SysRoleEntity role);
 
 	List<SysRoleEntity> searchAll(
 			@Param("role") SysRoleEntity role,

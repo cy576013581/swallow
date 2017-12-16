@@ -11,8 +11,7 @@ import com.cy.example.entity.LoginRecordEntity;
 @Mapper
 public interface LoginRecordMapper extends SuperMapper<LoginRecordEntity> {
 
-	int searchAllCount(@Param("loginRecord") LoginRecordEntity loginRecord,
-			@Param("page") PageCa page);
+	int searchAllCount(@Param("loginRecord") LoginRecordEntity loginRecord);
 
 	List<LoginRecordEntity> searchAll(
 			@Param("loginRecord") LoginRecordEntity loginRecord,

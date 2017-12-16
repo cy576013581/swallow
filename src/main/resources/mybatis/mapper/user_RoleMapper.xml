@@ -58,6 +58,5 @@
 	   select count(id)
 	   from sys_user_role
 	   where n_deleted = 0
-   	   order by id limit #{page.index},#{page.rows}
     </select>
 </mapper>

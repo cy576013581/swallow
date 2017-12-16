@@ -25,8 +25,8 @@ public class LoginRecordServiceImpl extends ServiceImpl<LoginRecordMapper, Login
 		return loginRecordMapper.searchAll(loginRecord, page);
 	}
 
-	public int searchAllCount(LoginRecordEntity loginRecord, PageCa page) {
+	public int searchAllCount(LoginRecordEntity loginRecord) {
 		// TODO Auto-generated method stub
-		return loginRecordMapper.searchAllCount(loginRecord, page);
+		return loginRecordMapper.searchAllCount(loginRecord);
 	}
 }

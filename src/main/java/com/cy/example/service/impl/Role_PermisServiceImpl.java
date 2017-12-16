@@ -23,9 +23,9 @@ public class Role_PermisServiceImpl extends ServiceImpl<Role_PermisMapper, Role_
 		return mapper.searchAll(rp, page);
 	}
 
-	public int searchAllCount(Role_Permis_Ca rp, PageCa page) {
+	public int searchAllCount(Role_Permis_Ca rp) {
 		// TODO Auto-generated method stub
-		return mapper.searchAllCount(rp, page);
+		return mapper.searchAllCount(rp);
 	}
 
 	public int findAllCount(PageCa page) {

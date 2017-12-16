@@ -94,7 +94,7 @@ public class RoleController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysRoleEntity> list = roleService.searchAll(
 				role, page);
-		int sum = roleService.searchAllCount(role, page);
+		int sum = roleService.searchAllCount(role);
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;

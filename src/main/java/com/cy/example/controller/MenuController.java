@@ -103,7 +103,7 @@ public class MenuController extends BaseController{
 				entity.setC_node(en.getC_menuName());
 			}
 		}
-		int sum = menuService.searchAllCount(menu, page);
+		int sum = menuService.searchAllCount(menu);
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;

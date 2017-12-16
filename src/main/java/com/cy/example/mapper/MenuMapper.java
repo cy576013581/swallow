@@ -11,8 +11,7 @@ import com.cy.example.entity.SysMenuEntity;
 @Mapper
 public interface MenuMapper extends SuperMapper<SysMenuEntity>{
 
-	int searchAllCount(@Param("menu") SysMenuEntity menu,
-			@Param("page") PageCa page);
+	int searchAllCount(@Param("menu") SysMenuEntity menu);
 
 	List<SysMenuEntity> searchAll(
 			@Param("menu") SysMenuEntity menu,

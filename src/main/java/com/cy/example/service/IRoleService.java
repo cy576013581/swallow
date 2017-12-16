@@ -10,5 +10,5 @@ public interface IRoleService extends IService<SysRoleEntity> {
 	
 	List<SysRoleEntity> searchAll(SysRoleEntity sysRole, PageCa page);
 
-	int searchAllCount(SysRoleEntity sysRole, PageCa page);
+	int searchAllCount(SysRoleEntity sysRole);
 }

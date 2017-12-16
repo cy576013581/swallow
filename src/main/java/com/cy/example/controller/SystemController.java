@@ -148,4 +148,9 @@ public class SystemController {
 	public String processDefinitionManage(ModelMap map) {
 		return "workflow/processDefinitionManage";
 	}
+	
+	@RequestMapping("/menu/workflow/leaveBillManage")
+	public String leaveBillManage(ModelMap map) {
+		return "workflow/leaveBillManage";
+	}
 }

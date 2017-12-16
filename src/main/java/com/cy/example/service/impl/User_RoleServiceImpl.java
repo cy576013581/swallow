@@ -25,9 +25,9 @@ public class User_RoleServiceImpl extends ServiceImpl<User_RoleMapper, User_Role
 		return mapper.searchAll(ur, page);
 	}
 
-	public int searchAllCount(User_Role_Ca ur, PageCa page) {
+	public int searchAllCount(User_Role_Ca ur) {
 		// TODO Auto-generated method stub
-		return mapper.searchAllCount(ur, page);
+		return mapper.searchAllCount(ur);
 	}
 
 	public int findAllCount(PageCa page) {

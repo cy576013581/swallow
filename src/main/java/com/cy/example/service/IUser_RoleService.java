@@ -10,7 +10,7 @@ public interface IUser_RoleService extends IService<User_Role_Ca> {
 	
 	List<User_Role_Ca> searchAll(User_Role_Ca ur, PageCa page);
 
-	int searchAllCount(User_Role_Ca ur, PageCa page);
+	int searchAllCount(User_Role_Ca ur);
 	
 	int findAllCount(PageCa page);
 

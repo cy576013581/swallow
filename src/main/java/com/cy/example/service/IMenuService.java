@@ -8,7 +8,7 @@ import com.cy.example.entity.SysMenuEntity;
 
 public interface IMenuService extends IService<SysMenuEntity>{
 
-	int searchAllCount(SysMenuEntity menu,PageCa page);
+	int searchAllCount(SysMenuEntity menu);
 
 	List<SysMenuEntity> searchAll(SysMenuEntity menu,PageCa page);
 	

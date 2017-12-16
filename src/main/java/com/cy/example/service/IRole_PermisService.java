@@ -10,7 +10,7 @@ public interface IRole_PermisService extends IService<Role_Permis_Ca> {
 	
 	List<Role_Permis_Ca> searchAll(Role_Permis_Ca rp, PageCa page);
 
-	int searchAllCount(Role_Permis_Ca rp, PageCa page);
+	int searchAllCount(Role_Permis_Ca rp);
 	
 	int findAllCount(PageCa page);
 

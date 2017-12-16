@@ -17,8 +17,7 @@ public interface UserMapper extends SuperMapper<UserEntity>{
 
 	UserEntity findOneByUsername(String username);
 
-	int searchAllCount(@Param("user") UserEntity user,
-			@Param("page") PageCa page);
+	int searchAllCount(@Param("user") UserEntity user);
 
 	List<UserEntity> searchAll(@Param("user") UserEntity user,
 			@Param("page") PageCa page);

@@ -33,9 +33,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 	}
 
 
-	public int searchAllCount(UserEntity user, PageCa page) {
+	public int searchAllCount(UserEntity user) {
 		// TODO Auto-generated method stub
-		int sum = userMapper.searchAllCount(user, page);
+		int sum = userMapper.searchAllCount(user);
 		return sum;
 	}
 
