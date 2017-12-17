@@ -35,14 +35,14 @@
     
     <select id="findOneById" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
        SELECT <include refid="ColumnList" />,<include refid="BaseList" />,<include refid="userList" />
-       FROM leave_bill a left join users u
+       FROM bill_leave a left join users u
        on a.u_id = u.id
 	   WHERE a.id = #{id} and a.n_deleted=0
     </select>
     
     <select id="findAll" resultMap="BaseResultMap"  >
 	   SELECT <include refid="ColumnList" />,<include refid="BaseList" />,<include refid="userList" />
-       FROM leave_bill a left join users u
+       FROM bill_leave a left join users u
        on a.u_id = u.id
        where a.n_deleted=0
    	   order by a.c_updateDate limit #{page.index},#{page.rows}
@@ -50,7 +50,7 @@
     
     <select id="findAllCount" resultType="java.lang.Integer" >
 	   select count(id)
-	   from leave_bill
+	   from bill_leave
 	   where n_deleted=0
     </select>
 

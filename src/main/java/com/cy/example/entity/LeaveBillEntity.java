@@ -2,7 +2,7 @@ package com.cy.example.entity;
 
 import com.baomidou.mybatisplus.annotations.TableName;
 
-@TableName("leave_bill")
+@TableName("bill_leave")
 public class LeaveBillEntity  extends SuperEntity<LeaveBillEntity> {
 
 	/**

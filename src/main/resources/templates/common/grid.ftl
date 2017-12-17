@@ -20,6 +20,8 @@
     <script type="text/javascript" src="/lib/toastr/toastr.js"></script>
     <script type="text/javascript" src="/js/map.js"></script>
     <script language="javascript">
+    
+    
     	//loading层
 		
     	var map =new Map();
@@ -32,7 +34,7 @@
 		    	<#if (x_index !=0)>
 			        <#list x?split(":") as y>
 			         	<#if (y_index ==0)>
-							var key = "${y}";
+							var key = "${y?replace('.','_')}";
 						</#if>
 						map.put(key,"textbox");
 						editMap.put(key,"textbox");
@@ -232,14 +234,19 @@
 		
 		
 		//根据id隐藏查询框搜索条件
-		function hideQueryElem(id){
-			//$("#tb_"+id).parent().hide();
-			$("#tb_"+id).parent().remove();
-			map.remove(id);
+		function hideQueryElem(ids){
+			var arr = ids.split(',');
+			//console.log(arr);
+			for(var index = 0;index < arr.length;index++){
+				var id = arr[index].replace(".", "_");
+				$("#tb_"+id).parent().remove();
+				map.remove(id);
+			}
 		}
 		
 		//根据id修改查询框输入框类型
 		function modifyQueryElem(id,type){
+			id = id.replace(".", "_");
 			if(type == "datebox" || type == "numberbox" || type == "datetimebox"){
 				var parent = $("#tb_"+id).parent();
 				$("#tb_"+id).textbox("destroy");
@@ -256,6 +263,7 @@
 		
 		*/
 		function modifyElem(loc,id,type,data){
+			id = id.replace(".", "_");
 			if(type == "combobox" || type == "combotree"){
 				var parent = $("#"+loc+id).parent();
 				$("#"+loc+id).textbox("destroy");
@@ -278,9 +286,14 @@
 		}
 		
 		//根据id隐藏编辑框搜索条件
-		function hideEditElem(id){
-			$("#ed_"+id).parent().remove();
-			editMap.remove(id);
+		function hideEditElem(ids){
+			var arr = ids.split(',');
+			//console.log(arr);
+			for(var index = 0;index < arr.length;index++){
+				var id = arr[index].replace(".", "_");
+				$("#ed_"+id).parent().remove();
+				editMap.remove(id);
+			}
 		}
 		
 		function change(){
@@ -291,6 +304,7 @@
 		//name : 控件名称
 		//id : 控件key
 		function addEditElem(id,name,type,extend){
+			id = id.replace(".", "_");
 			var parent = $("#form");
 			var childen = $("<span>"+name+": <input id='ed_"+id+"' name='"+id+"' class='easyui-"+type+"' style='width:120px;margin-top:10px'" + extend + "></span></br></br>");
 			parent.append(childen);
@@ -300,6 +314,7 @@
 		
 		// 添加操作栏按钮
 		function addFtElem(id,name,iconClsName,functionName){
+			id = id.replace(".", "_");
 			var parent = $("#ft");
 			var childen = $("<a id='"+id+"' href='#' class='easyui-linkbutton' plain='true' onclick='"+functionName+"'>"+name+"</a>");
 			childen.linkbutton({    
@@ -311,6 +326,7 @@
 		
 		//根据id修改编辑框输入框类型
 		function modifyEditElem(id,type){
+			id = id.replace(".", "_");
 			if(type == "datebox" || type == "combobox" || type == "combotree" || type == "numberbox" ||
 			 	type == "datetimebox"){
 				var parent = $("#ed_"+id).parent();
@@ -445,7 +461,7 @@
 					
 					</#if>
 					<#if (y_index ==2 && "${y}" != " ")>
-						<input id="tb_${y}" name="${y}" class="easyui-textbox" style="width:120px"></span>&emsp;
+						<input id="tb_${y?replace('.','_')}" name="${y}" class="easyui-textbox" style="width:120px"></span>&emsp;
 					</#if>
 		        </#list> 
 		    </#if>
@@ -488,7 +504,7 @@
 									<div style='margin-bottom:20px'>${y}:
 								</#if>
 								<#if (y_index ==2 && "${y}" != " ")>
-									<input id="ed_${y}" name="${y}" class="easyui-textbox" style="width:120px;margin-top:10px"></div>
+									<input id="ed_${y?replace('.','_')}" name="${y}" class="easyui-textbox" style="width:120px;margin-top:10px"></div>
 								</#if>
 					        </#list> 
 					    </#if>
