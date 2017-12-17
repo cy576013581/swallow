@@ -182,26 +182,27 @@
 		}
 		
 		//编辑之后的确定按钮事件
+		//用表单不支持把时间类型的数据筛选进来
 		function dlgBtnClick(){
 			var url;
-			/*var json = "";
+			var json = "";
 			for(var i = 0;i<editMap.size();i++){
 				json += editMap.key(i)+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
-			}*/
+			}
 			if(operation == 1){
 				url = "${controller}add";
-				//json = json.substring(0,json.length-1);
+				json = json.substring(0,json.length-1);
 			}else if(operation == 2){
 				url = "${controller}update";
-				//json += "id="+$("#ed_id").val();
+				json += "id="+$("#ed_id").val();
 			}
 			//alert($('#form').serialize());
 			$.ajax({ //使用ajax与服务器异步交互
                 url:url+"?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
                 type: "POST",
-                //data: json, 
+                data: json, 
                 //contentType: "multipart/form-data",
-                data: $('#form').serialize(),
+                //data: $('#form').serialize(),
                 dataType:"json",
                 error:function(XMLHttpRequest,textStatus,errorThrown){
                 	toastr.error('网络连接失败！');
@@ -231,8 +232,6 @@
 			
 		}
 		
-		
-		
 		//根据id隐藏查询框搜索条件
 		function hideQueryElem(ids){
 			var arr = ids.split(',');
@@ -260,7 +259,7 @@
 		//根据id修改输入框类型
 		/*
 		loc:控件位置，值为tb_和ed_，分别代表工具栏和查询栏
-		
+		示例：modifyElem("tb_","n_status","combobox",'[{"id":"","text":"全部","selected":true},{"id":"1","text":"可用"},{"id":"0","text":"锁定"}]');
 		*/
 		function modifyElem(loc,id,type,data){
 			id = id.replace(".", "_");

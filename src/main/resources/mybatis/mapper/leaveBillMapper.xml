@@ -8,6 +8,7 @@
         <result column="c_endTime" property="c_endTime" jdbcType="VARCHAR"/>
         <result column="c_leaveDays" property="c_leaveDays" jdbcType="VARCHAR" />
         <result column="c_remarks" property="c_remarks" jdbcType="VARCHAR" />
+        <result column="n_status" property="n_status" jdbcType="VARCHAR" />
         <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
         <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
         <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
@@ -26,12 +27,27 @@
     </sql>
     
     <sql id="BaseList" >
-        a.id, a.c_createDate, a.n_creater, a.c_updateDate, a.n_updater
+        a.id, a.c_createDate, a.n_creater, a.c_updateDate, a.n_updater,a.n_status
     </sql>
     
     <sql id="userList" >
         u.id as u_id, c_username, c_phone, n_age, n_sex
     </sql>
+    
+    <update id="updateMy" parameterType="com.cy.example.entity.UserEntity" >
+       update
+       		bill_leave 
+       set n_status = #{bill.n_status},
+       c_updateDate = #{bill.c_updateDate}
+       where id = #{bill.id}
+    </update>
+    
+    <update id="insert" parameterType="com.cy.example.entity.UserEntity" >
+       insert 
+       		bill_leave 
+       (c_leaveReason, c_startTime, c_endTime , c_leaveDays ,c_remarks, u_id, c_createDate, n_creater, c_updateDate, n_updater,n_deleted,n_status)
+       values(#{c_leaveReason}, #{c_startTime}, #{c_endTime}, #{c_leaveDays} ,#{c_remarks}, #{user.id}, #{c_createDate}, #{n_creater}, #{c_updateDate}, #{n_updater},0,0)
+    </update>
     
     <select id="findOneById" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
        SELECT <include refid="ColumnList" />,<include refid="BaseList" />,<include refid="userList" />

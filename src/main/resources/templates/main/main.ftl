@@ -3,11 +3,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>信息管理系统界面</title>
-	<link rel="stylesheet" type="text/css" href="../lib/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="../lib/easyui/themes/icon.css">
-    <link href="../css/style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="../lib/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="../lib/easyui/jquery.easyui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="lib/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="lib/easyui/themes/icon.css">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="lib/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript">
 		
 		//增加tabs

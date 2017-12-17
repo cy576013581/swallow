@@ -21,6 +21,9 @@ public class LeaveBillEntity  extends SuperEntity<LeaveBillEntity> {
 	private String c_remarks;
 	
 	private UserEntity user;
+	
+	//0：未提交   1：审核中    2：审核通过
+	private String n_status;
 
 	public String getC_leaveReason() {
 		return c_leaveReason;
@@ -73,6 +76,34 @@ public class LeaveBillEntity  extends SuperEntity<LeaveBillEntity> {
 	public void setUser(UserEntity user) {
 		this.user = user;
 	}
+
+	public String getN_status() {
+		//0：未提交   1：审核中    2：审核通过
+		/*if("0".equals(n_status)){
+			return "未提交";
+		}else if("1".equals(n_status)){
+			return "审核中";
+		}else if("2".equals(n_status)){
+			return "审核通过";
+		}else{
+			return n_status;
+		}*/
+		return n_status;
+	}
+
+	public void setN_status(String n_status) {
+		/*if("未提交".equals(n_status)){
+			this.n_status = "0";
+		}else if("审核中".equals(n_status)){
+			this.n_status = "1";
+		}else if("审核通过".equals(n_status)){
+			this.n_status = "2";
+		}else{
+			this.n_status = n_status;
+		}*/
+		this.n_status = n_status;
+	}
+	
 	
 
 }

@@ -11,7 +11,9 @@ import com.cy.example.entity.LeaveBillEntity;
 @Mapper
 public interface LeaveBillMapper extends SuperMapper<LeaveBillEntity> {
 
-	int findAllCount();
+	public int findAllCount();
 
-	List<LeaveBillEntity> findAll(@Param("page") PageCa page);
+	public List<LeaveBillEntity> findAll(@Param("page") PageCa page);
+
+	public boolean updateMy(@Param("bill")LeaveBillEntity bill);
 }

@@ -15,4 +15,6 @@ public interface ILeaveBillService extends IService<LeaveBillEntity>{
 	public List<LeaveBillEntity> searchAll(LeaveBillEntity bill, PageCa page);
 
 	public int searchAllCount(LeaveBillEntity bill);
+	
+	public boolean updateMy(LeaveBillEntity bill);
 }
