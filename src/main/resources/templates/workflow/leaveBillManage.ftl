@@ -17,11 +17,8 @@
 		function change(){
 			modifyQueryElem("c_startTime","datetimebox");
 		    modifyQueryElem("c_endTime","datetimebox");
-		    hideQueryElem("user.id,user.c_username,c_remarks,c_updateDate,c_createDate");
-		    hideEditElem("c_createDate");
-		    hideEditElem("c_updateDate");
-		    hideEditElem("user.c_username");
-		    hideEditElem("user.id");
+		    hideQueryElem("user.id,c_remarks,c_updateDate,c_createDate");
+		    hideEditElem("user.id,user.c_username,c_updateDate,c_createDate");
 		}
 		
 		

@@ -23,9 +23,7 @@
 		    modifyQueryElem("c_createDate","datebox");
 		    modifyQueryElem("c_updateDate","datebox");
 		    hideQueryElem("n_age");
-		    hideEditElem("c_createDate");
-		    hideEditElem("c_updateDate");
-		    hideEditElem("n_status");
+		    hideEditElem("c_createDate,c_updateDate,n_status");
 		    
 		    //添加解锁按钮
 		    var button = $("<a id='btn_lock' href='#' class='easyui-linkbutton' onclick='lockUser()'>锁定/解锁</a>");

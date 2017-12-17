@@ -17,8 +17,7 @@
 		function change(){
 			modifyQueryElem("c_createDate","datebox");
 		    modifyQueryElem("c_updateDate","datebox");
-		    hideEditElem("c_createDate");
-		    hideEditElem("c_updateDate");
+		    hideEditElem("c_createDate,c_updateDate");
 		}
 		
 		

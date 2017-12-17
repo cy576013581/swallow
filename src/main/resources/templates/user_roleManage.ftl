@@ -17,12 +17,8 @@
 		function change(){
 			modifyQueryElem("c_createDate","datebox");
 		    modifyQueryElem("c_updateDate","datebox");
-		    hideEditElem("c_createDate");
-		    hideEditElem("c_updateDate");
-		    hideEditElem("n_userId");
-		    hideEditElem("n_roleId");
-		    hideQueryElem("n_userId");
-		    hideQueryElem("n_roleId");
+		    hideEditElem("c_createDate,c_updateDate,n_userId,n_roleId");
+		    hideQueryElem("n_userId,n_roleId");
 		    modifyElem("tb_","c_username","combobox",
 		    	'['+
 		    	<#list userList as x> 
