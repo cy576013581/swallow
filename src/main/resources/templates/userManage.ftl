@@ -26,13 +26,7 @@
 		    hideEditElem("c_createDate,c_updateDate,n_status");
 		    
 		    //添加解锁按钮
-		    var button = $("<a id='btn_lock' href='#' class='easyui-linkbutton' onclick='lockUser()'>锁定/解锁</a>");
-			button.linkbutton({    
-			    iconCls: 'icon-lock',
-			    plain:  true
-			});  
-			var ft = $("#ft");
-			ft.append(button);
+			addFtElem("btn_lock","锁定/解锁","icon-lock","lockUser()");
 		}
 		
 		//在下拉框中需要转义--重写

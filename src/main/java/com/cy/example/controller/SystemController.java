@@ -153,4 +153,9 @@ public class SystemController {
 	public String leaveBillManage(ModelMap map) {
 		return "workflow/leaveBillManage";
 	}
+	
+	@RequestMapping("/menu/workflow/taskManage")
+	public String taskManage(ModelMap map) {
+		return "workflow/taskManage";
+	}
 }

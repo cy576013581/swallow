@@ -23,13 +23,8 @@
 		    modifyEditElem("c_startTime","datebox");
 		    modifyEditElem("c_endTime","datebox");
 		    //添加解锁按钮
-		    var button = $("<a id='btn_submit' href='#' class='easyui-linkbutton' onclick='submitBill()'>审核</a>");
-			button.linkbutton({    
-			    iconCls: 'icon-ok',
-			    plain:  true
-			});  
-			var ft = $("#ft");
-			ft.append(button);
+			addFtElem("btn_submit","审核","icon-ok","submitBill()");
+			
 			$('#dg').datagrid({
 				onClickRow: function(index, row){
 					if("未提交" == row.n_status){
