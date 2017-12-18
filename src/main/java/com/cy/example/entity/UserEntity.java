@@ -25,6 +25,8 @@ public class UserEntity extends SuperEntity<UserEntity> {
 
 	@TableField(exist = false)
 	private List<SysRoleEntity> roleList;// 一个用户具有多个角色
+	
+	private UserEntity n_superior;
 
 	public String getC_username() {
 		return c_username;
@@ -90,7 +92,13 @@ public class UserEntity extends SuperEntity<UserEntity> {
 		this.c_email = c_email;
 	}
 
-	
+	public UserEntity getN_superior() {
+		return n_superior;
+	}
+
+	public void setN_superior(UserEntity n_superior) {
+		this.n_superior = n_superior;
+	}
 
 	@Override
 	public String toString() {

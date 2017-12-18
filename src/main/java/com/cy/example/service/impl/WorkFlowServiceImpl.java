@@ -2,7 +2,9 @@ package com.cy.example.service.impl;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 import org.activiti.engine.HistoryService;
@@ -15,6 +17,8 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
+import org.activiti.engine.task.Task;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.ProcessDefinitionCa;
+import com.cy.example.config.WebConfig;
+import com.cy.example.entity.LeaveBillEntity;
+import com.cy.example.entity.SuperEntity;
+import com.cy.example.entity.UserEntity;
 import com.cy.example.service.IWorkFlowService;
 
 @Service
@@ -127,6 +135,52 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 				
 		return list;
 	}
+
+	public void startProcessDefinition(LeaveBillEntity entity) {
+		// TODO Auto-generated method stub
+		//1：使用当前对象获取到流程定义的key（对象的名称就是流程定义的key）
+		String key  = entity.getClass().getSimpleName().replaceAll("Entity", "");
+		
+		/**
+		 * 2：从Session中获取当前任务的办理人，使用流程变量设置下一个任务的办理人
+			    * inputUser是流程变量的名称，
+			    * 获取的办理人是流程变量的值
+		 */
+		Map<String, Object> variables = new HashMap<String,Object>();
+		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+				.getAttribute(WebConfig.LOGIN_USER);
+		variables.put("inputUser", user.getId());//表示惟一用户
+		/**
+		 * 3：	(1)使用流程变量设置字符串（格式：LeaveBill.id的形式），通过设置，让启动的流程（流程实例）关联业务
+   				(2)使用正在执行对象表中的一个字段BUSINESS_KEY（Activiti提供的一个字段），让启动的流程（流程实例）关联业务
+		 */
+		//格式：LeaveBill.id的形式（使用流程变量）
+		String objId = key+"."+entity.getId();
+		variables.put("objId", objId);
+		//4：使用流程定义的key，启动流程实例，同时设置流程变量，同时向正在执行的执行对象表中的字段BUSINESS_KEY添加业务数据，同时让流程关联业务
+		runtimeService.startProcessInstanceByKey(key,objId,variables);
+	}
+	
+	/**使用当前用户名查询正在执行的任务表，获取当前任务的集合List<Task>*/
+	public List<Task> findTaskListByName(String id) {
+		List<Task> list = taskService.createTaskQuery()//
+					.taskAssignee(String.valueOf(id))//指定个人任务查询
+					.orderByTaskCreateTime().asc()//
+					.list();
+		return list;
+	}
+	
+	/**使用当前用户名查询正在执行的任务表，获取当前任务的集合List<Task>*/
+	public boolean compeleteTask(String taskId) {
+		Map<String, Object> variables = new HashMap<String,Object>();
+		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+				.getAttribute(WebConfig.LOGIN_USER);
+		variables.put("inputUser", user.getN_superior().getId());//表示上级用户
+		taskService.complete(taskId, variables);
+		return true;
+		
+	}
+
 
 	
 }

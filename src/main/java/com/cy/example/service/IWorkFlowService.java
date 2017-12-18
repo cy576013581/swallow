@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.task.Task;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.ProcessDefinitionCa;
+import com.cy.example.entity.LeaveBillEntity;
+import com.cy.example.entity.SuperEntity;
 
 public interface IWorkFlowService {
 
@@ -29,5 +32,11 @@ public interface IWorkFlowService {
 	public List<ProcessDefinition> getProcessDefinitionList(PageCa page);
 	
 	public List<ProcessDefinition> searchAllProcessDefinition(ProcessDefinitionCa process, PageCa page);
+	
+	public void startProcessDefinition(LeaveBillEntity entity);
+
+	public List<Task> findTaskListByName(String id);
+
+	public boolean compeleteTask(String taskId);
 
 }
