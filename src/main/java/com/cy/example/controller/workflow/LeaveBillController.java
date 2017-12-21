@@ -57,7 +57,7 @@ public class LeaveBillController extends BaseController {
 		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		bill.setUser(user);
-		boolean flag = billService.insert(bill);
+		boolean flag = billService.insertMy(bill);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);

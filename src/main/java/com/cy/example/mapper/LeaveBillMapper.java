@@ -16,4 +16,6 @@ public interface LeaveBillMapper extends SuperMapper<LeaveBillEntity> {
 	public List<LeaveBillEntity> findAll(@Param("page") PageCa page);
 
 	public boolean updateMy(@Param("bill")LeaveBillEntity bill);
+	
+	public boolean insertMy(@Param("bill")LeaveBillEntity bill);
 }

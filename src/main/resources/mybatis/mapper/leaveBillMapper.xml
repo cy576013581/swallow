@@ -42,7 +42,7 @@
        where id = #{bill.id}
     </update>
     
-    <update id="insert" parameterType="com.cy.example.entity.UserEntity" >
+    <update id="insertMy" parameterType="com.cy.example.entity.UserEntity" >
        insert 
        		bill_leave 
        (c_leaveReason, c_startTime, c_endTime , c_leaveDays ,c_remarks, u_id, c_createDate, n_creater, c_updateDate, n_updater,n_deleted,n_status)

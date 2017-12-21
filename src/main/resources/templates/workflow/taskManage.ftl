@@ -7,8 +7,8 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/task/" title="个人任务" width="1100px" height="400px"
-		fields="id:true: ,name:false:任务名称,createTime:false:创建时间,assignee:false:办理人">
+	<@loginRecord.grid controller="/system/task/" title="个人任务" width="1100px" height="400px" idDb="false"
+		fields="id:true: ,assignee.id:true: ,name:false:任务名称,createTime:false:创建时间,assignee.c_username:false:办理人">
 		
 	</@loginRecord.grid>
 	
@@ -24,6 +24,8 @@
 		    
 		    addFtElem("btn_submit","审核","icon-ok","submitTask()");
 		    addFtElem("btn_look","查看当前流程图","icon-large-smartart","lookFlowChart()");
+		    
+		    hideQueryElem("assignee.id,createTime,assignee.c_username")
 		}
 		
 		function submitTask(){

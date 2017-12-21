@@ -18,6 +18,7 @@ import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.activiti.engine.task.Task;
+import org.activiti.engine.task.TaskQuery;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.ProcessDefinitionCa;
+import com.cy.example.carrier.TaskCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.LeaveBillEntity;
 import com.cy.example.entity.SuperEntity;
@@ -162,7 +164,7 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 	}
 	
 	/**使用当前用户名查询正在执行的任务表，获取当前任务的集合List<Task>*/
-	public List<Task> findTaskListByName(String id) {
+	public List<Task> findAllTask(String id) {
 		List<Task> list = taskService.createTaskQuery()//
 					.taskAssignee(String.valueOf(id))//指定个人任务查询
 					.orderByTaskCreateTime().asc()//
@@ -179,6 +181,16 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 		taskService.complete(taskId, variables);
 		return true;
 		
+	}
+
+	public List<Task> searchAllTask(TaskCa task, String id) {
+		// TODO Auto-generated method stub
+		TaskQuery query = taskService.createTaskQuery().taskAssignee(String.valueOf(id));
+		if(null != task.getName() && !"".equals(task.getName())){
+			query.processDefinitionNameLike("%" + task.getName() + "%");
+		}
+		List<Task> list = query.orderByTaskCreateTime().asc().list();
+		return list;
 	}
 
 

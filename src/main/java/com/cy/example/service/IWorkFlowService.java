@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.ProcessDefinitionCa;
+import com.cy.example.carrier.TaskCa;
 import com.cy.example.entity.LeaveBillEntity;
 import com.cy.example.entity.SuperEntity;
 
@@ -35,7 +36,9 @@ public interface IWorkFlowService {
 	
 	public void startProcessDefinition(LeaveBillEntity entity);
 
-	public List<Task> findTaskListByName(String id);
+	public List<Task> findAllTask(String id);
+	
+	public List<Task> searchAllTask(TaskCa task,String id);
 
 	public boolean compeleteTask(String taskId);
 

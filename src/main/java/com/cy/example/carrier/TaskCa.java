@@ -1,8 +1,8 @@
 package com.cy.example.carrier;
 
-import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.task.Task;
 
+import com.cy.example.entity.UserEntity;
 import com.cy.example.util.DateUtil;
 
 public class TaskCa {
@@ -13,13 +13,12 @@ public class TaskCa {
 	
 	private String createTime;
 	
-	private String assignee;
+	private UserEntity assignee;
 	
 	public void transfor(Task task){
 		this.id = task.getId();
 		this.name = task.getName();
 		this.createTime = DateUtil.format(task.getCreateTime());
-		this.assignee = task.getAssignee();
 	}
 
 	public String getId() {
@@ -46,12 +45,13 @@ public class TaskCa {
 		this.createTime = createTime;
 	}
 
-	public String getAssignee() {
+	public UserEntity getAssignee() {
 		return assignee;
 	}
 
-	public void setAssignee(String assignee) {
+	public void setAssignee(UserEntity assignee) {
 		this.assignee = assignee;
 	}
+
 	
 }

@@ -62,4 +62,11 @@ public class LeaveBillServiceImpl extends ServiceImpl<LeaveBillMapper, LeaveBill
 		
 		return true;
 	}
+	
+	public boolean insertMy(LeaveBillEntity bill) {
+		// TODO Auto-generated method stub
+		billMapper.insertMy(bill);
+		
+		return true;
+	}
 }

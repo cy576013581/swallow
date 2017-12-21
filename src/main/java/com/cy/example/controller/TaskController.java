@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -16,13 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.TaskCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.UserEntity;
+import com.cy.example.service.IUserService;
 import com.cy.example.service.IWorkFlowService;
 
 @Controller
@@ -31,6 +29,9 @@ public class TaskController extends BaseController {
 
 	private final Logger logger = LoggerFactory
 			.getLogger(this.getClass());
+	
+	@Autowired
+	private IUserService userService;
 	
 	@Autowired
 	private IWorkFlowService workFlowService;
@@ -50,11 +51,12 @@ public class TaskController extends BaseController {
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
 		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
-		List<Task> list = workFlowService.findTaskListByName(String.valueOf(user.getId()));
+		List<Task> list = workFlowService.findAllTask(String.valueOf(user.getId()));
 		List<TaskCa> data = new ArrayList<TaskCa>();
-		for(Task dep : list){
+		for(Task task : list){
 			TaskCa ca = new TaskCa();
-			ca.transfor(dep);
+			ca.transfor(task);
+			ca.setAssignee(user);
 			data.add(ca);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -71,11 +73,12 @@ public class TaskController extends BaseController {
 			@ModelAttribute("page") PageCa page) {
 		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
-		List<Task> list = workFlowService.findTaskListByName(String.valueOf(user.getId()));
+		List<Task> list = workFlowService.searchAllTask(task, String.valueOf(user.getId()));
 		List<TaskCa> data = new ArrayList<TaskCa>();
-		for(Task dep : list){
+		for(Task tool : list){
 			TaskCa ca = new TaskCa();
-			ca.transfor(dep);
+			ca.transfor(tool);
+			ca.setAssignee(user);
 			data.add(ca);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
