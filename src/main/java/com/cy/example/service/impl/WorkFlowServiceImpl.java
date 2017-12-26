@@ -174,11 +174,7 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 	
 	/**使用当前用户名查询正在执行的任务表，获取当前任务的集合List<Task>*/
 	public boolean compeleteTask(String taskId) {
-		Map<String, Object> variables = new HashMap<String,Object>();
-		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
-				.getAttribute(WebConfig.LOGIN_USER);
-		variables.put("inputUser", user.getN_superior().getId());//表示上级用户
-		taskService.complete(taskId, variables);
+		taskService.complete(taskId);
 		return true;
 		
 	}

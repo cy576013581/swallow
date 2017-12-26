@@ -23,7 +23,7 @@
 		    modifyEditElem("c_startTime","datebox");
 		    modifyEditElem("c_endTime","datebox");
 		    //添加解锁按钮
-			addFtElem("btn_submit","审核","icon-ok","submitBill()");
+			addFtElem("btn_submit","提交","icon-ok","submitBill()");
 			
 			$('#dg').datagrid({
 				onClickRow: function(index, row){

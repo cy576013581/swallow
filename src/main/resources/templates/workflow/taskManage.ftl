@@ -47,7 +47,7 @@
 							var flag =data.flag;//服务器返回标记
 		                    if(flag){
 		                    	layer.closeAll('dialog');
-		                    	toastr.success(msg+data.msg);
+		                    	toastr.success(data.msg);
 		                    	$('#dg').datagrid('reload');
 		                    }else {
 		                    	toastr.error(data.msg);
