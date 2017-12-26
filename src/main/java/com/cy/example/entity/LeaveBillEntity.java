@@ -103,7 +103,5 @@ public class LeaveBillEntity  extends SuperEntity<LeaveBillEntity> {
 		}*/
 		this.n_status = n_status;
 	}
-	
-	
 
 }

@@ -18,4 +18,6 @@ public interface LeaveBillMapper extends SuperMapper<LeaveBillEntity> {
 	public boolean updateMy(@Param("bill")LeaveBillEntity bill);
 	
 	public boolean insertMy(@Param("bill")LeaveBillEntity bill);
+	
+	public LeaveBillEntity findOneById(@Param("id")int id);
 }

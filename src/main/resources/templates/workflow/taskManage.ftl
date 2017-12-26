@@ -22,10 +22,25 @@
 		    $("#btn_edit").remove();
 		    $("#btn_remove").remove();
 		    
-		    addFtElem("btn_submit","审核","icon-ok","submitTask()");
+		    addFtElem("btn_submit","审核","icon-ok","getInfo()");
 		    addFtElem("btn_look","查看当前流程图","icon-large-smartart","lookFlowChart()");
 		    
 		    hideQueryElem("assignee.id,createTime,assignee.c_username")
+		}
+		
+		function getInfo(){
+			var row = $('#dg').datagrid('getSelected');
+            if (row){
+            	layer.open({
+					 type: 2,
+					 area: ['700px', '450px'],
+					 fixed: false, //不固定
+					 maxmin: true,
+					 content: "/system/task/getBillInfo?id="+row.id
+				});
+            }else{
+				toastr.warning('在操作之前请先选中行！');
+            }
 		}
 		
 		function submitTask(){

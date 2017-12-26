@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,5 +42,13 @@ public interface IWorkFlowService {
 	public List<Task> searchAllTask(TaskCa task,String id);
 
 	public boolean compeleteTask(String taskId);
+
+	List<String> findOutComeListByTaskId(String taskId);
+
+	LeaveBillEntity findLeaveBillByTaskId(String taskId);
+
+	List<Comment> findCommentByTaskId(String taskId);
+
+	List<Comment> findCommentByLeaveBillId(int id);
 
 }

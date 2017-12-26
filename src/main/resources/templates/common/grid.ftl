@@ -427,7 +427,7 @@
 </head>
 <body>
 	<div id="box" style="display:none;">
-		<table id="dg" class="easyui-datagrid" title="${title}信息管理" style="width:${width};height:${height}"
+		<table id="dg" class="easyui-datagrid" title="${title}" style="width:${width};height:${height}"
             data-options="rownumbers:${rownumbers},singleSelect:${singleSelect},
             url:'${controller}findAll',method:'get',toolbar:'#tb,#ft',pagination:'true',nowrap:'true',
             onDblClickRow: onDblClickRow">
