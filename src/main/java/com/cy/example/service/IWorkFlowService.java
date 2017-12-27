@@ -13,6 +13,7 @@ import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.ProcessDefinitionCa;
 import com.cy.example.carrier.TaskCa;
+import com.cy.example.carrier.WorkFLowCa;
 import com.cy.example.entity.LeaveBillEntity;
 import com.cy.example.entity.SuperEntity;
 
@@ -41,7 +42,7 @@ public interface IWorkFlowService {
 	
 	public List<Task> searchAllTask(TaskCa task,String id);
 
-	public boolean compeleteTask(String taskId);
+	public boolean compeleteTask(WorkFLowCa workflow);
 
 	List<String> findOutComeListByTaskId(String taskId);
 

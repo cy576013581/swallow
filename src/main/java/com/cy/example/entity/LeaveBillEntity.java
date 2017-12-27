@@ -24,6 +24,19 @@ public class LeaveBillEntity  extends SuperEntity<LeaveBillEntity> {
 	
 	//0：未提交   1：审核中    2：审核通过
 	private String n_status;
+	
+	
+
+	public LeaveBillEntity() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public LeaveBillEntity(String n_status,String c_updateDate) {
+		super();
+		this.n_status = n_status;
+		this.c_updateDate = c_updateDate;
+	}
 
 	public String getC_leaveReason() {
 		return c_leaveReason;

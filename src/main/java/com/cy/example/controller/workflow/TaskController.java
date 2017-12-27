@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cy.example.carrier.CommentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.TaskCa;
+import com.cy.example.carrier.WorkFLowCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.LeaveBillEntity;
@@ -47,8 +48,8 @@ public class TaskController extends BaseController {
 		List<Comment> list = workFlowService.findCommentByTaskId(id);
 		List<CommentCa> data = new ArrayList<CommentCa>();
 		if(list.size()>0){
-			UserEntity user = userService.selectById(id);
 			for(Comment task : list){
+				UserEntity user = userService.selectById(task.getUserId());
 				CommentCa ca = new CommentCa();
 				ca.transfor(task);
 				ca.setUser(user);
@@ -74,8 +75,8 @@ public class TaskController extends BaseController {
 	
 	@RequestMapping("/submit")
 	@ResponseBody
-	public Map<String, Object> submit(@RequestParam("id") String id) {
-		workFlowService.compeleteTask(id);
+	public Map<String, Object> submit(@ModelAttribute("workflow")WorkFLowCa workflow) {
+		workFlowService.compeleteTask(workflow);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", true);
 		map.put("msg", "审核成功！");

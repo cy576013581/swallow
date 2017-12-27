@@ -40,6 +40,23 @@
 						$('#btn_remove').linkbutton('disable');
 						$('#btn_submit').linkbutton('disable');
 					}
+				},
+				onDblClickRow: function(index, row){
+					if("未提交" == row.n_status){
+	            		$('#btn_edit').linkbutton('enable');
+						$('#btn_remove').linkbutton('enable');
+						$('#btn_submit').linkbutton('enable');
+						editData();
+					}else if("审核中" == row.n_status){
+						$('#btn_edit').linkbutton('disable');
+						$('#btn_remove').linkbutton('disable');
+						$('#btn_submit').linkbutton('disable');
+					}else if("审核通过" == row.n_status){
+						$('#btn_edit').linkbutton('disable');
+						$('#btn_remove').linkbutton('disable');
+						$('#btn_submit').linkbutton('disable');
+						
+					}
 				}
 			});
 			

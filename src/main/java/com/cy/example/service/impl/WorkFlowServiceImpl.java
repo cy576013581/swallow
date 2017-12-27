@@ -15,6 +15,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricVariableInstance;
+import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmTransition;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
@@ -34,12 +35,14 @@ import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.ProcessDefinitionCa;
 import com.cy.example.carrier.TaskCa;
+import com.cy.example.carrier.WorkFLowCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.LeaveBillEntity;
 import com.cy.example.entity.SuperEntity;
 import com.cy.example.entity.UserEntity;
 import com.cy.example.mapper.LeaveBillMapper;
 import com.cy.example.service.IWorkFlowService;
+import com.cy.example.util.DateUtil;
 import com.cy.example.util.StringUtil;
 
 @Service
@@ -178,14 +181,71 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 	public List<Task> findAllTask(String id) {
 		List<Task> list = taskService.createTaskQuery()//
 					.taskAssignee(String.valueOf(id))//指定个人任务查询
-					.orderByTaskCreateTime().asc()//
+					.orderByTaskCreateTime().desc()//
 					.list();
 		return list;
 	}
 	
-	/**使用当前用户名查询正在执行的任务表，获取当前任务的集合List<Task>*/
-	public boolean compeleteTask(String taskId) {
-		taskService.complete(taskId);
+	public boolean compeleteTask(WorkFLowCa workflow) {
+		
+		//获取任务ID
+		String taskId = workflow.getTaskId();
+		//获取连线的名称
+		String outcome = workflow.getOutcome();
+		//批注信息
+		String message = workflow.getComment();
+		//获取请假单ID
+		Long id = workflow.getId();
+		
+		/**
+		 * 1：在完成之前，添加一个批注信息，向act_hi_comment表中添加数据，用于记录对当前申请人的一些审核信息
+		 */
+		//使用任务ID，查询任务对象，获取流程流程实例ID
+		Task task = taskService.createTaskQuery()//
+						.taskId(taskId)//使用任务ID查询
+						.singleResult();
+		//获取流程实例ID
+		String processInstanceId = task.getProcessInstanceId();
+		/**
+		 * 注意：添加批注的时候，由于Activiti底层代码是使用：
+		 * 		String userId = Authentication.getAuthenticatedUserId();
+			    CommentEntity comment = new CommentEntity();
+			    comment.setUserId(userId);
+			  所有需要从Session中获取当前登录人，作为该任务的办理人（审核人），对应act_hi_comment表中的User_ID的字段，不过不添加审核人，该字段为null
+			 所以要求，添加配置执行使用Authentication.setAuthenticatedUserId();添加当前任务的审核人
+		 * */
+		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+				.getAttribute(WebConfig.LOGIN_USER);
+		Authentication.setAuthenticatedUserId(String.valueOf(user.getId()));
+		taskService.addComment(taskId, processInstanceId, message);
+		/**
+		 * 2：如果连线的名称是“默认提交”，那么就不需要设置，如果不是，就需要设置流程变量
+		 * 在完成任务之前，设置流程变量，按照连线的名称，去完成任务
+				 流程变量的名称：outcome
+				 流程变量的值：连线的名称
+		 */
+		Map<String, Object> variables = new HashMap<String,Object>();
+		if(outcome!=null && !outcome.equals("默认提交")){
+			variables.put("outcome", outcome);
+		}
+
+		//3：使用任务ID，完成当前人的个人任务，同时流程变量
+		taskService.complete(taskId, variables);
+		//4：当任务完成之后，需要指定下一个任务的办理人（使用类）-----已经开发完成
+		
+		/**
+		 * 5：在完成任务之后，判断流程是否结束
+   			如果流程结束了，更新请假单表的状态从1变成2（审核中-->审核完成）
+		 */
+		ProcessInstance pi = runtimeService.createProcessInstanceQuery()//
+						.processInstanceId(processInstanceId)//使用流程实例ID查询
+						.singleResult();
+		//流程结束了
+		if(pi==null){
+			LeaveBillEntity bill = new LeaveBillEntity("2", DateUtil.getNow());
+			//更新请假单表的状态从1变成2（审核中-->审核完成）
+			billMapper.updateMy(bill);
+		}
 		return true;
 		
 	}
