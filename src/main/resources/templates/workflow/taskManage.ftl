@@ -48,10 +48,11 @@
             if (row){
             	layer.open({
 					 type: 2,
+					 title: "流程图",
 					 area: ['700px', '450px'],
 					 fixed: false, //不固定
 					 maxmin: true,
-					 content: "/system/process/lookFlowChart?id="+row.id
+					 content: "/system/task/getFlowChart?taskId="+row.id
 				});
             }else{
 				toastr.warning('在操作之前请先选中行！');

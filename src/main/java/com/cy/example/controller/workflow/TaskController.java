@@ -1,10 +1,14 @@
 package com.cy.example.controller.workflow;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
@@ -41,6 +45,31 @@ public class TaskController extends BaseController {
 	
 	@Autowired
 	private IWorkFlowService workFlowService;
+	
+	@RequestMapping("/getFlowChart")
+	public String getFlowChart(@RequestParam("taskId") String taskId,ModelMap map) throws IOException {
+		Map<String, Object> address = workFlowService.findCoordingByTask(taskId);
+		ProcessDefinition pd = workFlowService.findProcessDefinitionByTaskId(taskId);
+		map.put("address", address);
+		map.put("deploymentId", pd.getDeploymentId());
+		map.put("diagramResourceName", pd.getDiagramResourceName());
+		return "workflow/flowChart";
+	}
+	
+	@RequestMapping("/lookFlowChart")
+	public void lookFlowChart(@RequestParam("deploymentId") String deploymentId,
+			@RequestParam("diagramResourceName") String diagramResourceName) throws IOException {
+		//2：获取资源文件表（act_ge_bytearray）中资源图片输入流InputStream
+		InputStream in = workFlowService.findImageInputStream(deploymentId,diagramResourceName);
+		//3：从response对象获取输出流
+		OutputStream out = getResponse().getOutputStream();
+		//4：将输入流中的数据读取出来，写到输出流中
+		for(int b=-1;(b=in.read())!=-1;){
+			out.write(b);
+		}
+		out.close();
+		in.close();
+	}
 	
 	@RequestMapping("/findComment")
 	@ResponseBody

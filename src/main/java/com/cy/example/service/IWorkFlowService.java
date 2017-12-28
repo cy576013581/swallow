@@ -2,6 +2,7 @@ package com.cy.example.service;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
@@ -51,5 +52,9 @@ public interface IWorkFlowService {
 	List<Comment> findCommentByTaskId(String taskId);
 
 	List<Comment> findCommentByLeaveBillId(int id);
+
+	Map<String, Object> findCoordingByTask(String taskId);
+
+	ProcessDefinition findProcessDefinitionByTaskId(String taskId);
 
 }

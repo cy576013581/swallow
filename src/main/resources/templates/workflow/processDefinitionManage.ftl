@@ -30,6 +30,7 @@
             if (row){
             	layer.open({
 					 type: 2,
+					 title: '流程图',
 					 area: ['700px', '450px'],
 					 fixed: false, //不固定
 					 maxmin: true,

@@ -377,4 +377,54 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 		return list;
 	}
 	
+	/**1：获取任务ID，获取任务对象，使用任务对象获取流程定义ID，查询流程定义对象*/
+	public ProcessDefinition findProcessDefinitionByTaskId(String taskId) {
+		//使用任务ID，查询任务对象
+		Task task = taskService.createTaskQuery()//
+					.taskId(taskId)//使用任务ID查询
+					.singleResult();
+		//获取流程定义ID
+		String processDefinitionId = task.getProcessDefinitionId();
+		//查询流程定义的对象
+		ProcessDefinition pd = repositoryService.createProcessDefinitionQuery()//创建流程定义查询对象，对应表act_re_procdef 
+					.processDefinitionId(processDefinitionId)//使用流程定义ID查询
+					.singleResult();
+		return pd;
+	}
+	
+	
+	/**
+	 * 二：查看当前活动，获取当期活动对应的坐标x,y,width,height，将4个值存放到Map<String,Object>中
+		 map集合的key：表示坐标x,y,width,height
+		 map集合的value：表示坐标对应的值
+	 */
+	public Map<String, Object> findCoordingByTask(String taskId) {
+		//存放坐标
+		Map<String, Object> map = new HashMap<String,Object>();
+		//使用任务ID，查询任务对象
+		Task task = taskService.createTaskQuery()//
+					.taskId(taskId)//使用任务ID查询
+					.singleResult();
+		//获取流程定义的ID
+		String processDefinitionId = task.getProcessDefinitionId();
+		//获取流程定义的实体对象（对应.bpmn文件中的数据）
+		ProcessDefinitionEntity processDefinitionEntity = (ProcessDefinitionEntity)repositoryService.getProcessDefinition(processDefinitionId);
+		//流程实例ID
+		String processInstanceId = task.getProcessInstanceId();
+		//使用流程实例ID，查询正在执行的执行对象表，获取当前活动对应的流程实例对象
+		ProcessInstance pi = runtimeService.createProcessInstanceQuery()//创建流程实例查询
+					.processInstanceId(processInstanceId)//使用流程实例ID查询
+					.singleResult();
+		//获取当前活动的ID
+		String activityId = pi.getActivityId();
+		//获取当前活动对象
+		ActivityImpl activityImpl = processDefinitionEntity.findActivity(activityId);//活动ID
+		//获取坐标
+		map.put("x", activityImpl.getX());
+		map.put("y", activityImpl.getY());
+		map.put("width", activityImpl.getWidth());
+		map.put("height", activityImpl.getHeight());
+		return map;
+	}
+	
 }
