@@ -1,9 +1,10 @@
-package com.cy.example.entity;
+package com.cy.example.entity.system;
 
 import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.cy.example.entity.SuperEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @TableName("sys_permission")

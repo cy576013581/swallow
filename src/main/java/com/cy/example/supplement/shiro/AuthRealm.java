@@ -15,9 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cy.example.entity.SysPermissionEntity;
-import com.cy.example.entity.SysRoleEntity;
-import com.cy.example.entity.UserEntity;
+import com.cy.example.entity.system.SysPermissionEntity;
+import com.cy.example.entity.system.SysRoleEntity;
+import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.service.IUserService;
 import com.cy.example.util.StringUtil;
 
@@ -35,7 +35,7 @@ public class AuthRealm extends AuthorizingRealm {
 		// TODO Auto-generated method stub
 		logger.info("--------------权限配置——授权----------------");
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-		UserEntity user = (UserEntity) principals.getPrimaryPrincipal();
+		SysUserEntity user = (SysUserEntity) principals.getPrimaryPrincipal();
 		for (SysRoleEntity role : user.getRoleList()) {
 			authorizationInfo.addRole(role.getC_roleCode());
 			for (SysPermissionEntity p : role.getPermisList()) {
@@ -70,7 +70,7 @@ public class AuthRealm extends AuthorizingRealm {
 		
 		logger.info("***" + token.getCredentials());
 		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-		UserEntity user = userService.findOneByUsername(username);
+		SysUserEntity user = userService.findOneByUsername(username);
 		if(null == user){
 			throw new UnknownAccountException();
 		}

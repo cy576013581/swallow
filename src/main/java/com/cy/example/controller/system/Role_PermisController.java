@@ -1,4 +1,4 @@
-package com.cy.example.controller;
+package com.cy.example.controller.system;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,29 +11,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.carrier.User_Role_Ca;
-import com.cy.example.entity.UserEntity;
-import com.cy.example.service.IUser_RoleService;
+import com.cy.example.carrier.Role_Permis_Ca;
+import com.cy.example.controller.BaseController;
+import com.cy.example.service.IRole_PermisService;
 
 @Controller
-@RequestMapping("/system/user_role")
-public class User_RoleController extends BaseController {
+@RequestMapping("/system/role_permis")
+public class Role_PermisController extends BaseController {
 
 	@Autowired
-	private IUser_RoleService urService;
+	private IRole_PermisService rpService;
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public Map<String, Object> add(@ModelAttribute("ur") User_Role_Ca ur) {
-		ur.setN_userId(Long.valueOf(ur.getC_username()));
-		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
-		super.add(ur);
+	public Map<String, Object> add(@ModelAttribute("rp") Role_Permis_Ca rp) {
+		rp.setN_roleId(Long.valueOf(" ".equals(rp.getC_roleName()) ? "0" : rp.getC_roleName()));
+		rp.setN_permisId(Long.valueOf(" ".equals(rp.getC_permisName()) ? "0" : rp.getC_permisName()));
+		super.add(rp);
 		Map<String, Object> map = new HashMap<String, Object>();
-		User_Role_Ca user = urService.selectOne(new EntityWrapper<User_Role_Ca>().eq("n_userId", ur.getN_userId()));
+		Role_Permis_Ca user = rpService.selectOne(new EntityWrapper<Role_Permis_Ca>().eq("n_roleId", rp.getN_roleId())
+				.eq("n_permisId", rp.getN_permisId()));
 		if(null == user){
-			boolean flag = urService.insert(ur);
+			boolean flag = rpService.insert(rp);
 			if (flag) {
 				map.put("flag", flag);
 				map.put("msg", "添加成功！");
@@ -43,7 +43,7 @@ public class User_RoleController extends BaseController {
 			}
 		}else{
 			map.put("flag", false);
-			map.put("msg", "添加失败，该用户已经存在角色！");
+			map.put("msg", "添加失败，该角色已经存在此权限！");
 		}
 		
 		
@@ -52,14 +52,15 @@ public class User_RoleController extends BaseController {
 
 	@RequestMapping("/update")
 	@ResponseBody
-	public Map<String, Object> update(@ModelAttribute("ur") User_Role_Ca ur) {
-		ur.setN_userId(Long.valueOf(ur.getC_username()));
-		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
-		super.update(ur);
+	public Map<String, Object> update(@ModelAttribute("rp") Role_Permis_Ca rp) {
+		rp.setN_roleId(Long.valueOf(" ".equals(rp.getC_roleName()) ? "0" : rp.getC_roleName()));
+		rp.setN_permisId(Long.valueOf(" ".equals(rp.getC_permisName()) ? "0" : rp.getC_permisName()));
+		super.update(rp);
 		Map<String, Object> map = new HashMap<String, Object>();
-		User_Role_Ca user = urService.selectOne(new EntityWrapper<User_Role_Ca>().eq("n_userId", ur.getN_userId()));
+		Role_Permis_Ca user = rpService.selectOne(new EntityWrapper<Role_Permis_Ca>().eq("n_roleId", rp.getN_roleId())
+				.eq("n_permisId", rp.getN_permisId()));
 		if(null == user){
-			boolean flag = urService.updateById(ur);
+			boolean flag = rpService.updateById(rp);
 			if (flag) {
 				map.put("flag", flag);
 				map.put("msg", "更新成功！");
@@ -69,15 +70,15 @@ public class User_RoleController extends BaseController {
 			}
 		}else{
 			map.put("flag", false);
-			map.put("msg", "添加失败，该用户已经存在角色！");
+			map.put("msg", "添加失败，该角色已经存在此权限！");
 		}
 		return map;
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("ur") User_Role_Ca ur) {
-		boolean flag = urService.deleteById(ur.getId());
+	public Map<String, Object> delete(@ModelAttribute("rp") Role_Permis_Ca rp) {
+		boolean flag = rpService.deleteById(rp.getId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -92,9 +93,9 @@ public class User_RoleController extends BaseController {
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
-		List<User_Role_Ca> list = urService.findAll(page);
+		List<Role_Permis_Ca> list = rpService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
-		int sum = urService.findAllCount(page);
+		int sum = rpService.findAllCount(page);
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;
@@ -103,14 +104,14 @@ public class User_RoleController extends BaseController {
 	@RequestMapping("/searchData")
 	@ResponseBody
 	public Map<String, Object> searchData(
-			@ModelAttribute("ur") User_Role_Ca ur,
+			@ModelAttribute("rp") Role_Permis_Ca rp,
 			@ModelAttribute("page") PageCa page) {
-		ur.setN_userId(Long.valueOf(" ".equals(ur.getC_username()) ? "0" : ur.getC_username()));
-		ur.setN_roleId(Long.valueOf(" ".equals(ur.getC_roleName()) ? "0" : ur.getC_roleName()));
+		rp.setN_roleId(Long.valueOf(" ".equals(rp.getC_roleName()) ? "0" : rp.getC_roleName()));
+		rp.setN_permisId(Long.valueOf(" ".equals(rp.getC_permisName()) ? "0" : rp.getC_permisName()));
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<User_Role_Ca> list = urService.searchAll(
-				ur, page);
-		int sum = urService.searchAllCount(ur);
+		List<Role_Permis_Ca> list = rpService.searchAll(
+				rp, page);
+		int sum = rpService.searchAllCount(rp);
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;

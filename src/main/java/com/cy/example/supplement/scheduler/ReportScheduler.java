@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import com.cy.example.entity.MailEntity;
+import com.cy.example.entity.system.MailEntity;
 import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.DateUtil;
 

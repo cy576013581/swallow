@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.LeaveBillEntity;
+import com.cy.example.entity.workflow.LeaveBillEntity;
 
 public interface ILeaveBillService extends IService<LeaveBillEntity>{
 

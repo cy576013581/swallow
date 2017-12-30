@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cy.example.config.RabbitConfig;
-import com.cy.example.entity.LoginRecordEntity;
-import com.cy.example.entity.MailEntity;
+import com.cy.example.entity.system.LoginRecordEntity;
+import com.cy.example.entity.system.MailEntity;
 
 
 @Component

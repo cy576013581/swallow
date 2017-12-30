@@ -1,5 +1,6 @@
-package com.cy.example.controller;
+package com.cy.example.controller.system;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,21 +14,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.SysMenuEntity;
-import com.cy.example.service.IMenuService;
+import com.cy.example.controller.BaseController;
+import com.cy.example.entity.system.SysPermissionEntity;
+import com.cy.example.entity.system.SysRoleEntity;
+import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.service.IRoleService;
 
 @Controller
-@RequestMapping("/system/menu")
-public class MenuController extends BaseController{
-	
+@RequestMapping("/system/role")
+public class RoleController extends BaseController {
+
 	@Autowired
-	private IMenuService menuService;
+	private IRoleService roleService;
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public Map<String, Object> add(@ModelAttribute("menu") SysMenuEntity menu) {
-		super.add(menu);
-		boolean flag = menuService.insert(menu);
+	public Map<String, Object> add(@ModelAttribute("role") SysRoleEntity role) {
+		super.add(role);
+		boolean flag = roleService.insert(role);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -41,9 +45,9 @@ public class MenuController extends BaseController{
 
 	@RequestMapping("/update")
 	@ResponseBody
-	public Map<String, Object> update(@ModelAttribute("menu") SysMenuEntity menu) {
-		super.update(menu);
-		boolean flag = menuService.updateById(menu);
+	public Map<String, Object> update(@ModelAttribute("role") SysRoleEntity role) {
+		super.update(role);
+		boolean flag = roleService.updateById(role);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -57,8 +61,8 @@ public class MenuController extends BaseController{
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("menu") SysMenuEntity menu) {
-		boolean flag = menuService.deleteById(menu.getId());
+	public Map<String, Object> delete(@ModelAttribute("role") SysRoleEntity role) {
+		boolean flag = roleService.deleteById(role.getId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -73,18 +77,12 @@ public class MenuController extends BaseController{
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public Map<String, Object> findAll(int page, int rows) {
-		Page<SysMenuEntity> list = menuService.selectPage(new Page<SysMenuEntity>(page, rows)
-				, new EntityWrapper<SysMenuEntity>());
+		Page<SysRoleEntity> list = roleService.selectPage(new Page<SysRoleEntity>(page, rows)
+				, new EntityWrapper<SysRoleEntity>().setSqlSelect("c_roleCode,c_roleName,c_createDate,c_updateDate,id"));
 		Map<String, Object> map = new HashMap<String, Object>();
-		int sum = menuService.selectCount(new EntityWrapper<SysMenuEntity>());
-		List<SysMenuEntity> data = list.getRecords();
-		for(SysMenuEntity entity : data){
-			if(!"[root]".equals(entity.getC_node())){
-				SysMenuEntity en = menuService.selectById(entity.getC_node());
-				entity.setC_node(en.getC_menuName());
-			}
-		}
-		map.put("rows", data);
+		int sum = roleService.selectCount(new EntityWrapper<SysRoleEntity>());
+		List<SysRoleEntity> data = list.getRecords();
+		map.put("rows", list.getRecords());
 		map.put("total", sum);
 		return map;
 	}
@@ -92,18 +90,12 @@ public class MenuController extends BaseController{
 	@RequestMapping("/searchData")
 	@ResponseBody
 	public Map<String, Object> searchData(
-			@ModelAttribute("menu") SysMenuEntity menu,
+			@ModelAttribute("role") SysRoleEntity role,
 			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<SysMenuEntity> list = menuService.searchAll(
-				menu, page);
-		for(SysMenuEntity entity : list){
-			if(!"[root]".equals(entity.getC_node())){
-				SysMenuEntity en = menuService.selectById(entity.getC_node());
-				entity.setC_node(en.getC_menuName());
-			}
-		}
-		int sum = menuService.searchAllCount(menu);
+		List<SysRoleEntity> list = roleService.searchAll(
+				role, page);
+		int sum = roleService.searchAllCount(role);
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;

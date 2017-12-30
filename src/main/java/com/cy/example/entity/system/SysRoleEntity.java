@@ -1,10 +1,11 @@
-package com.cy.example.entity;
+package com.cy.example.entity.system;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.cy.example.entity.SuperEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -22,7 +23,7 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 
 	@TableField(exist = false)
 	@JsonInclude(JsonInclude.Include.NON_DEFAULT ) 
-	private List<UserEntity> userList;// 一个角色对应多个用户
+	private List<SysUserEntity> userList;// 一个角色对应多个用户
 	
 	public String getC_roleName() {
 		return c_roleName;
@@ -48,11 +49,11 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 		this.permisList = permisList;
 	}
 
-	public List<UserEntity> getUserList() {
+	public List<SysUserEntity> getUserList() {
 		return userList;
 	}
 
-	public void setUserList(List<UserEntity> userList) {
+	public void setUserList(List<SysUserEntity> userList) {
 		this.userList = userList;
 	}
 

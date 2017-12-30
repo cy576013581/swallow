@@ -3,7 +3,7 @@ package com.cy.example.carrier;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 
-import com.cy.example.entity.UserEntity;
+import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.util.DateUtil;
 
 public class CommentCa {
@@ -14,7 +14,7 @@ public class CommentCa {
 	
 	private String message;
 	
-	private UserEntity user;
+	private SysUserEntity user;
 	
 	public void transfor(Comment comment){
 		this.id = comment.getId();
@@ -46,11 +46,11 @@ public class CommentCa {
 		this.message = message;
 	}
 
-	public UserEntity getUser() {
+	public SysUserEntity getUser() {
 		return user;
 	}
 
-	public void setUser(UserEntity user) {
+	public void setUser(SysUserEntity user) {
 		this.user = user;
 	}
 	

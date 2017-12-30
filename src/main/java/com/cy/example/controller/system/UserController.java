@@ -1,4 +1,4 @@
-package com.cy.example.controller;
+package com.cy.example.controller.system;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +22,10 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.config.WebConfig;
-import com.cy.example.entity.LoginRecordEntity;
-import com.cy.example.entity.MailEntity;
-import com.cy.example.entity.UserEntity;
+import com.cy.example.controller.BaseController;
+import com.cy.example.entity.system.LoginRecordEntity;
+import com.cy.example.entity.system.MailEntity;
+import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
 import com.cy.example.supplement.rabbitmq.general.RabbitSender;
@@ -49,7 +50,7 @@ public class UserController extends BaseController {
 	
 	@RequestMapping("/register")
 	@ResponseBody
-	public Map<String, Object> register(@ModelAttribute("user") UserEntity user) {
+	public Map<String, Object> register(@ModelAttribute("user") SysUserEntity user) {
 		super.add(user);
 		user.setN_status("0");
 		boolean flag = userService.insert(user);
@@ -73,7 +74,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/lock")
 	@ResponseBody
 	public Map<String, Object> lock(long id,String n_status) {
-		UserEntity user = userService.selectById(id);
+		SysUserEntity user = userService.selectById(id);
 		String msg = "";
 		user.setN_status(n_status);
 		super.update(user);
@@ -91,7 +92,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public Map<String, Object> add(@ModelAttribute("user") UserEntity user) {
+	public Map<String, Object> add(@ModelAttribute("user") SysUserEntity user) {
 		super.add(user);
 		user.setN_status("1");
 		boolean flag = userService.insert(user);
@@ -108,7 +109,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/update")
 	@ResponseBody
-	public Map<String, Object> update(@ModelAttribute("user") UserEntity user) {
+	public Map<String, Object> update(@ModelAttribute("user") SysUserEntity user) {
 		super.update(user);
 		/*if("男".equals(user.getN_sex())){
 			user.setN_sex("1");
@@ -134,7 +135,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("user") UserEntity user) {
+	public Map<String, Object> delete(@ModelAttribute("user") SysUserEntity user) {
 		boolean flag = userService.deleteById(user.getId());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
@@ -152,14 +153,14 @@ public class UserController extends BaseController {
 	public Map<String, Object> findAll(int page, int rows)
 			throws JsonProcessingException {
 		// System.out.print("================================="+page.toString()+page.getIndex());
-		Page<UserEntity> list = userService.selectPage(new Page<UserEntity>(page, rows)
-				, new EntityWrapper<UserEntity>());
+		Page<SysUserEntity> list = userService.selectPage(new Page<SysUserEntity>(page, rows)
+				, new EntityWrapper<SysUserEntity>());
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		int sum = userService.selectCount(new EntityWrapper<UserEntity>());
+		int sum = userService.selectCount(new EntityWrapper<SysUserEntity>());
 		
-		List<UserEntity> data = list.getRecords();
-		for(UserEntity entity : data){
+		List<SysUserEntity> data = list.getRecords();
+		for(SysUserEntity entity : data){
 			if("1".equals(entity.getN_sex())){
 				entity.setN_sex("男");
 			}else if("0".equals(entity.getN_sex())){
@@ -179,10 +180,10 @@ public class UserController extends BaseController {
 	@RequestMapping("/searchData")
 	@ResponseBody
 	public Map<String, Object> searchData(
-			@ModelAttribute("user") UserEntity user,
+			@ModelAttribute("user") SysUserEntity user,
 			@ModelAttribute("pageVo") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UserEntity> users = userService.searchAll(user, page);
+		List<SysUserEntity> users = userService.searchAll(user, page);
 		int sum = userService.searchAllCount(user);
 		map.put("rows", users);
 		map.put("total", sum);
@@ -202,7 +203,7 @@ public class UserController extends BaseController {
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			subject.login(usernamePasswordToken); // 完成登录
-			UserEntity user = (UserEntity) subject.getPrincipal();
+			SysUserEntity user = (SysUserEntity) subject.getPrincipal();
 			subject.getSession().setAttribute(WebConfig.LOGIN_USER, user);
 			LoginRecordEntity loginRecord = new LoginRecordEntity();
 			super.add(loginRecord);

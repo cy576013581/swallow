@@ -1,6 +1,7 @@
-package com.cy.example.entity;
+package com.cy.example.entity.system;
 
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.cy.example.entity.SuperEntity;
 
 @TableName("sys_menu")
 @SuppressWarnings("serial")

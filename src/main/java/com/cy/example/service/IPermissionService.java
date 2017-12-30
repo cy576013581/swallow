@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.SysPermissionEntity;
+import com.cy.example.entity.system.SysPermissionEntity;
 
 public interface IPermissionService extends IService<SysPermissionEntity> {
 	

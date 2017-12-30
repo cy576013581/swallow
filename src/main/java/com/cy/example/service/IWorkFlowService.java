@@ -15,8 +15,8 @@ import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.ProcessDefinitionCa;
 import com.cy.example.carrier.TaskCa;
 import com.cy.example.carrier.WorkFLowCa;
-import com.cy.example.entity.LeaveBillEntity;
 import com.cy.example.entity.SuperEntity;
+import com.cy.example.entity.workflow.LeaveBillEntity;
 
 public interface IWorkFlowService {
 

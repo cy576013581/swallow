@@ -1,6 +1,6 @@
 package com.cy.example.service;
 
-import com.cy.example.entity.MailEntity;
+import com.cy.example.entity.system.MailEntity;
 
 public interface IMailService {
 

@@ -1,6 +1,8 @@
-package com.cy.example.entity;
+package com.cy.example.entity.workflow;
 
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.cy.example.entity.SuperEntity;
+import com.cy.example.entity.system.SysUserEntity;
 
 @TableName("bill_leave")
 public class LeaveBillEntity  extends SuperEntity<LeaveBillEntity> {
@@ -20,7 +22,7 @@ public class LeaveBillEntity  extends SuperEntity<LeaveBillEntity> {
 	
 	private String c_remarks;
 	
-	private UserEntity user;
+	private SysUserEntity user;
 	
 	//0：未提交   1：审核中    2：审核通过
 	private String n_status;
@@ -82,11 +84,11 @@ public class LeaveBillEntity  extends SuperEntity<LeaveBillEntity> {
 		return serialVersionUID;
 	}
 
-	public UserEntity getUser() {
+	public SysUserEntity getUser() {
 		return user;
 	}
 
-	public void setUser(UserEntity user) {
+	public void setUser(SysUserEntity user) {
 		this.user = user;
 	}
 

@@ -15,7 +15,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-import com.cy.example.entity.MailEntity;
+import com.cy.example.entity.system.MailEntity;
 import com.cy.example.service.IMailService;
 
 @Component

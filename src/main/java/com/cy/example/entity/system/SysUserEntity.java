@@ -1,13 +1,14 @@
-package com.cy.example.entity;
+package com.cy.example.entity.system;
 
 import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.cy.example.entity.SuperEntity;
 
 @TableName("users")
 @SuppressWarnings("serial")
-public class UserEntity extends SuperEntity<UserEntity> {
+public class SysUserEntity extends SuperEntity<SysUserEntity> {
 
 	private String c_username;
 
@@ -26,7 +27,7 @@ public class UserEntity extends SuperEntity<UserEntity> {
 	@TableField(exist = false)
 	private List<SysRoleEntity> roleList;// 一个用户具有多个角色
 	
-	private UserEntity n_superior;
+	private SysUserEntity n_superior;
 
 	public String getC_username() {
 		return c_username;
@@ -92,11 +93,11 @@ public class UserEntity extends SuperEntity<UserEntity> {
 		this.c_email = c_email;
 	}
 
-	public UserEntity getN_superior() {
+	public SysUserEntity getN_superior() {
 		return n_superior;
 	}
 
-	public void setN_superior(UserEntity n_superior) {
+	public void setN_superior(SysUserEntity n_superior) {
 		this.n_superior = n_superior;
 	}
 

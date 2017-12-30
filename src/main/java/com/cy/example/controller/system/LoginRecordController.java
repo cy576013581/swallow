@@ -1,4 +1,4 @@
-package com.cy.example.controller;
+package com.cy.example.controller.system;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.LoginRecordEntity;
+import com.cy.example.controller.BaseController;
+import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.service.ILoginRecordService;
 import com.cy.example.service.IUserService;
 

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.SysPermissionEntity;
-import com.cy.example.mapper.PermissionMapper;
+import com.cy.example.entity.system.SysPermissionEntity;
+import com.cy.example.mapper.system.PermissionMapper;
 import com.cy.example.service.IPermissionService;
 
 @Service

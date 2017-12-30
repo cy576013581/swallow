@@ -16,8 +16,8 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;
-import com.cy.example.entity.LeaveBillEntity;
-import com.cy.example.entity.UserEntity;
+import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.entity.workflow.LeaveBillEntity;
 import com.cy.example.service.ILeaveBillService;
 
 @Controller
@@ -54,7 +54,7 @@ public class LeaveBillController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> add(@ModelAttribute("bill") LeaveBillEntity bill) {
 		super.add(bill);
-		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		bill.setUser(user);
 		boolean flag = billService.insertMy(bill);

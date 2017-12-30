@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.Role_Permis_Ca;
-import com.cy.example.mapper.Role_PermisMapper;
+import com.cy.example.mapper.system.Role_PermisMapper;
 import com.cy.example.service.IRole_PermisService;
 
 @Service

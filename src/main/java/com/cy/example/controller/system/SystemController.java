@@ -1,4 +1,4 @@
-package com.cy.example.controller;
+package com.cy.example.controller.system;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.config.WebConfig;
-import com.cy.example.entity.SysMenuEntity;
-import com.cy.example.entity.SysPermissionEntity;
-import com.cy.example.entity.SysRoleEntity;
-import com.cy.example.entity.UserEntity;
+import com.cy.example.entity.system.SysMenuEntity;
+import com.cy.example.entity.system.SysPermissionEntity;
+import com.cy.example.entity.system.SysRoleEntity;
+import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.service.IMenuService;
 import com.cy.example.service.IPermissionService;
 import com.cy.example.service.IRoleService;
@@ -51,7 +51,7 @@ public class SystemController {
 
 	@RequestMapping("/main")
 	public String showMain(HttpSession session, ModelMap map) {
-		UserEntity user = (UserEntity) session
+		SysUserEntity user = (SysUserEntity) session
 				.getAttribute(WebConfig.LOGIN_USER);
 		List<SysMenuEntity> menuList = menuService.findAll();
 		Map<String, List<SysMenuEntity>> data = new HashMap<String, List<SysMenuEntity>>();
@@ -122,7 +122,7 @@ public class SystemController {
 	
 	@RequestMapping("/menu/user_roleManage")
 	public String user_roleManage(ModelMap map) {
-		List<UserEntity> userList = userService.selectList(new EntityWrapper<UserEntity>());
+		List<SysUserEntity> userList = userService.selectList(new EntityWrapper<SysUserEntity>());
 		List<SysRoleEntity> roleList = roleService.selectList(new EntityWrapper<SysRoleEntity>());
 		map.put("userList", userList);
 		map.put("roleList", roleList);
