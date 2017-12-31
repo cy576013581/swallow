@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.SysRoleEntity;
+import com.cy.example.entity.system.SysRoleEntity;
 
 public interface IRoleService extends IService<SysRoleEntity> {
 	

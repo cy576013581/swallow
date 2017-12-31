@@ -28,8 +28,8 @@ import com.cy.example.carrier.TaskCa;
 import com.cy.example.carrier.WorkFLowCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;
-import com.cy.example.entity.LeaveBillEntity;
-import com.cy.example.entity.UserEntity;
+import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.entity.workflow.LeaveBillEntity;
 import com.cy.example.service.IUserService;
 import com.cy.example.service.IWorkFlowService;
 
@@ -78,7 +78,7 @@ public class TaskController extends BaseController {
 		List<CommentCa> data = new ArrayList<CommentCa>();
 		if(list.size()>0){
 			for(Comment task : list){
-				UserEntity user = userService.selectById(task.getUserId());
+				SysUserEntity user = userService.selectById(task.getUserId());
 				CommentCa ca = new CommentCa();
 				ca.transfor(task);
 				ca.setUser(user);
@@ -115,7 +115,7 @@ public class TaskController extends BaseController {
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
-		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		List<Task> list = workFlowService.findAllTask(String.valueOf(user.getId()));
 		List<TaskCa> data = new ArrayList<TaskCa>();
@@ -137,7 +137,7 @@ public class TaskController extends BaseController {
 	public Map<String, Object> searchData(
 			@ModelAttribute("task") TaskCa task,
 			@ModelAttribute("page") PageCa page) {
-		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		List<Task> list = workFlowService.searchAllTask(task, String.valueOf(user.getId()));
 		List<TaskCa> data = new ArrayList<TaskCa>();

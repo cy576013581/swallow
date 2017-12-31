@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.SuperEntity;
-import com.cy.example.entity.UserEntity;
+import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.util.DateUtil;
 
 /**
@@ -74,7 +74,7 @@ public class BaseController {
 	}
 
 	public void add(SuperEntity<?> entity) {
-		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		entity.setC_createDate(DateUtil.getNow());
 		entity.setC_updateDate(DateUtil.getNow());
@@ -84,15 +84,15 @@ public class BaseController {
 	}
 
 	public void update(SuperEntity<?> entity) {
-		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		entity.setC_updateDate(DateUtil.getNow());
 		entity.setN_updater(user.getId());
 	}
 
-	public UserEntity getCurrentUser() {
+	public SysUserEntity getCurrentUser() {
 
-		UserEntity currentUser = (UserEntity) SecurityUtils.getSubject()
+		SysUserEntity currentUser = (SysUserEntity) SecurityUtils.getSubject()
 				.getSession().getAttribute(WebConfig.LOGIN_USER);
 		return currentUser;
 	}

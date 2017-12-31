@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.LeaveBillEntity;
-import com.cy.example.mapper.LeaveBillMapper;
+import com.cy.example.entity.workflow.LeaveBillEntity;
+import com.cy.example.mapper.workflow.LeaveBillMapper;
 import com.cy.example.service.ILeaveBillService;
 import com.cy.example.service.IWorkFlowService;
 

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.SysMenuEntity;
-import com.cy.example.mapper.MenuMapper;
+import com.cy.example.entity.system.SysMenuEntity;
+import com.cy.example.mapper.system.MenuMapper;
 import com.cy.example.service.IMenuService;
 
 @Service

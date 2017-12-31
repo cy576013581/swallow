@@ -2,7 +2,7 @@ package com.cy.example.carrier;
 
 import org.activiti.engine.task.Task;
 
-import com.cy.example.entity.UserEntity;
+import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.util.DateUtil;
 
 public class TaskCa {
@@ -13,7 +13,7 @@ public class TaskCa {
 	
 	private String createTime;
 	
-	private UserEntity assignee;
+	private SysUserEntity assignee;
 	
 	public void transfor(Task task){
 		this.id = task.getId();
@@ -45,11 +45,11 @@ public class TaskCa {
 		this.createTime = createTime;
 	}
 
-	public UserEntity getAssignee() {
+	public SysUserEntity getAssignee() {
 		return assignee;
 	}
 
-	public void setAssignee(UserEntity assignee) {
+	public void setAssignee(SysUserEntity assignee) {
 		this.assignee = assignee;
 	}
 

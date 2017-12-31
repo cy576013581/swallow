@@ -6,8 +6,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import com.cy.example.entity.LoginRecordEntity;
-import com.cy.example.entity.MailEntity;
+import com.cy.example.entity.system.LoginRecordEntity;
+import com.cy.example.entity.system.MailEntity;
 import com.cy.example.service.ILoginRecordService;
 import com.cy.example.service.IMailService;
 

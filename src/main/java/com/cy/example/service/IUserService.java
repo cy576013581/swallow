@@ -4,15 +4,15 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.UserEntity;
+import com.cy.example.entity.system.SysUserEntity;
 
-public interface IUserService extends IService<UserEntity>{
+public interface IUserService extends IService<SysUserEntity>{
 	
-	public int updateMy(UserEntity user);
+	public int updateMy(SysUserEntity user);
 
-	public UserEntity findOneByUsername(String username);
+	public SysUserEntity findOneByUsername(String username);
 
-	public int searchAllCount(UserEntity user);
+	public int searchAllCount(SysUserEntity user);
 
-	public List<UserEntity> searchAll(UserEntity user, PageCa page);
+	public List<SysUserEntity> searchAll(SysUserEntity user, PageCa page);
 }

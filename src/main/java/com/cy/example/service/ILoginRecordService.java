@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.cy.example.carrier.PageCa;
-import com.cy.example.entity.LoginRecordEntity;
+import com.cy.example.entity.system.LoginRecordEntity;
 
 public interface ILoginRecordService extends IService<LoginRecordEntity> {
 	

@@ -37,10 +37,10 @@ import com.cy.example.carrier.ProcessDefinitionCa;
 import com.cy.example.carrier.TaskCa;
 import com.cy.example.carrier.WorkFLowCa;
 import com.cy.example.config.WebConfig;
-import com.cy.example.entity.LeaveBillEntity;
 import com.cy.example.entity.SuperEntity;
-import com.cy.example.entity.UserEntity;
-import com.cy.example.mapper.LeaveBillMapper;
+import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.entity.workflow.LeaveBillEntity;
+import com.cy.example.mapper.workflow.LeaveBillMapper;
 import com.cy.example.service.IWorkFlowService;
 import com.cy.example.util.DateUtil;
 import com.cy.example.util.StringUtil;
@@ -163,7 +163,7 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 			    * 获取的办理人是流程变量的值
 		 */
 		Map<String, Object> variables = new HashMap<String,Object>();
-		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		variables.put("inputUser", user.getId());//表示惟一用户
 		/**
@@ -214,7 +214,7 @@ public class WorkFlowServiceImpl implements IWorkFlowService{
 			  所有需要从Session中获取当前登录人，作为该任务的办理人（审核人），对应act_hi_comment表中的User_ID的字段，不过不添加审核人，该字段为null
 			 所以要求，添加配置执行使用Authentication.setAuthenticatedUserId();添加当前任务的审核人
 		 * */
-		UserEntity user = (UserEntity) SecurityUtils.getSubject().getSession()
+		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		Authentication.setAuthenticatedUserId(String.valueOf(user.getId()));
 		taskService.addComment(taskId, processInstanceId, message);
