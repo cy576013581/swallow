@@ -69,7 +69,7 @@ public class SystemController {
 		map.put("user", user);
 		map.put("menuList", data);
 		map.put("SYS_NAME", SYS_NAME);
-		return "main/main";
+		return "main/main2";
 	}
 
 	@RequestMapping("/loginOut")
