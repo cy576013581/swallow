@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cy.example.mapper.UserMapper" >
-    <resultMap id="BaseResultMap" type="com.cy.example.entity.UserEntity" >
+<mapper namespace="com.cy.example.mapper.system.UserMapper" >
+    <resultMap id="BaseResultMap" type="com.cy.example.entity.system.SysUserEntity" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="c_username" property="c_username" jdbcType="VARCHAR" />
         <result column="c_pwd" property="c_pwd" jdbcType="VARCHAR" />
@@ -13,15 +13,15 @@
         <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
         <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
         <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
-        <collection property="roleList" ofType="com.cy.example.entity.SysRoleEntity">
+        <collection property="roleList" ofType="com.cy.example.entity.system.SysRoleEntity">
 	    	<id column="r_id" property="id"/>
 	 		<result column="c_roleCode" property="c_roleCode" jdbcType="VARCHAR" />
-	 		<collection property="permisList" ofType="com.cy.example.entity.SysPermissionEntity">
+	 		<collection property="permisList" ofType="com.cy.example.entity.system.SysPermissionEntity">
 		    	<id column="p_id" property="id"/>
 		 		<result column="c_permisCode" property="c_permisCode" jdbcType="VARCHAR" />
     		</collection>
     	</collection>
-    	<collection property="n_superior" ofType="com.cy.example.entity.UserEntity">
+    	<collection property="n_superior" ofType="com.cy.example.entity.system.SysUserEntity">
 	    	<id column="u1_id" property="id"/>
 	 		<result column="u1_c_username" property="c_username" jdbcType="VARCHAR" />
     	</collection>
@@ -102,7 +102,7 @@
    	   <if test="user.c_updateDate != ''"><if test="user.c_updateDate != null">  and substr(c_updateDate,1,10) = #{user.c_updateDate}</if></if>
     </select>
 
-    <update id="updateMy" parameterType="com.cy.example.entity.UserEntity" >
+    <update id="updateMy" parameterType="com.cy.example.entity.system.SysUserEntity" >
        UPDATE 
        		users 
        SET 

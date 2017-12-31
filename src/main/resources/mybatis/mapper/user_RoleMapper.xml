@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cy.example.mapper.User_RoleMapper" >
+<mapper namespace="com.cy.example.mapper.system.User_RoleMapper" >
     <resultMap id="BaseResultMap" type="com.cy.example.carrier.User_Role_Ca" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="n_userId" property="n_userId" jdbcType="BIGINT"/>
