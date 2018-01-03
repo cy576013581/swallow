@@ -9,6 +9,7 @@
         <result column="n_age" property="n_age" jdbcType="INTEGER" />
         <result column="tranfo_n_sex" property="n_sex" jdbcType="INTEGER" />
         <result column="n_status" property="n_status" jdbcType="VARCHAR" />
+        <result column="c_email" property="c_email" jdbcType="VARCHAR" />
         <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
         <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
         <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
@@ -25,14 +26,19 @@
 	    	<id column="u1_id" property="id"/>
 	 		<result column="u1_c_username" property="c_username" jdbcType="VARCHAR" />
     	</collection>
+    	<collection property="n_departmentId" ofType="com.cy.example.entity.system.SysDepartmentEntity">
+	    	<id column="d_id" property="id"/>
+	 		<result column="d_c_departName" property="c_departName" jdbcType="VARCHAR" />
+	 		<result column="d_c_departCode" property="c_departCode" jdbcType="VARCHAR" />
+    	</collection>
     </resultMap>
     
     <sql id="ColumnList" >
-        id, c_username, c_pwd, c_phone , n_age
+        u.id, u.c_username, u.c_pwd, u.c_phone , u.n_age
     </sql>
     
     <sql id="BaseList" >
-        c_createDate, n_creater, c_updateDate, n_updater
+        u.c_createDate, u.n_creater, u.c_updateDate, u.n_updater
     </sql>
     
     <select id="findOneByUsername" parameterType="java.lang.String" resultMap="BaseResultMap" >
@@ -61,7 +67,10 @@
 			
 			u1.c_username as u1_c_username,
 			u.n_superior,
-			u1.id as u1_id
+			u1.id as u1_id,
+			d.id as d_id,
+			d.c_departName as d_c_departName,
+			d.c_departCode as d_c_departCode
 		FROM
 			users u
 		LEFT JOIN sys_user_role ur ON u.id = ur.n_userId
@@ -69,17 +78,22 @@
 		LEFT JOIN sys_role_permission rp ON rp.n_roleId = ur.n_roleId
 		LEFT JOIN sys_permission p ON p.id = rp.n_permisId
 		LEFT JOIN users u1 on u.n_superior = u1.id
+		LEFT JOIN sys_department d on u.n_departmentId = d.id
 	   WHERE u.c_username = #{c_username} and u.n_deleted=0
     </select>
     
     <select id="searchAll" resultMap="BaseResultMap"  >
-	   select id, c_username, c_phone , n_age,
-	   case when n_sex=1 then '男'
-	   when n_sex=0 then '女' end as n_sex ,
-	   case when n_status=1 then '可用'
-	   when n_status=0 then '锁定' end as n_status ,<include refid="BaseList" />
-	   from users
-	   where n_deleted=0 
+	   select u.id, u.c_username, u.c_phone , u.n_age,u.c_email,
+	   case when u.n_sex=1 then '男'
+	   when u.n_sex=0 then '女' end as tranfo_n_sex ,
+	   case when u.n_status=1 then '可用'
+	   when u.n_status=0 then '锁定' end as n_status ,<include refid="BaseList" />,
+	   d.id as d_id,
+	   d.c_departName as d_c_departName,
+	   d.c_departCode as d_c_departCode
+	   from users u
+	   LEFT JOIN sys_department d on u.n_departmentId = d.id
+	   where u.n_deleted=0 
 	   <if test="user.c_username != ''"><if test="user.c_username != null"> and c_username like CONCAT('%',#{user.c_username},'%')</if></if>
    	   <if test="user.c_phone != ''"><if test="user.c_phone != null"> and c_phone like CONCAT('%',#{user.c_phone},'%')</if></if>
    	   <if test="user.c_email != ''"><if test="user.c_email != null"> and c_email like CONCAT('%',#{user.c_email},'%')</if></if>
@@ -100,6 +114,27 @@
    	   <if test="user.n_sex != ''"><if test="user.n_sex != null">  and n_sex = #{user.n_sex}</if></if>
  	   <if test="user.c_createDate != ''"><if test="user.c_createDate != null">	and substr(c_createDate,1,10) = #{user.c_createDate}</if></if>
    	   <if test="user.c_updateDate != ''"><if test="user.c_updateDate != null">  and substr(c_updateDate,1,10) = #{user.c_updateDate}</if></if>
+    </select>
+    
+    <select id="findAll" resultMap="BaseResultMap"  >
+	   select u.id, u.c_username, u.c_phone , u.n_age,u.c_email,
+	   case when u.n_sex=1 then '男'
+	   when u.n_sex=0 then '女' end as tranfo_n_sex ,
+	   case when u.n_status=1 then '可用'
+	   when u.n_status=0 then '锁定' end as n_status ,<include refid="BaseList" />,
+	   d.id as d_id,
+	   d.c_departName as d_c_departName,
+	   d.c_departCode as d_c_departCode
+	   from users u
+	   LEFT JOIN sys_department d on u.n_departmentId = d.id
+	   where u.n_deleted=0 
+   	   order by id limit #{page.index},#{page.rows}
+    </select>  
+    
+    <select id="findAllCount" resultType="java.lang.Integer" >
+	   select count(id)
+	   from users
+	   where n_deleted=0
     </select>
 
     <update id="updateMy" parameterType="com.cy.example.entity.system.SysUserEntity" >

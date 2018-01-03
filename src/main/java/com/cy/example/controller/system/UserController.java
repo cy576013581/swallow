@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;
@@ -150,17 +149,15 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/findAll")
 	@ResponseBody
-	public Map<String, Object> findAll(int page, int rows)
+	public Map<String, Object> findAll(@ModelAttribute("page") PageCa page)
 			throws JsonProcessingException {
 		// System.out.print("================================="+page.toString()+page.getIndex());
-		Page<SysUserEntity> list = userService.selectPage(new Page<SysUserEntity>(page, rows)
-				, new EntityWrapper<SysUserEntity>());
+		List<SysUserEntity> list = userService.findAll(page);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = userService.selectCount(new EntityWrapper<SysUserEntity>());
 		
-		List<SysUserEntity> data = list.getRecords();
-		for(SysUserEntity entity : data){
+		for(SysUserEntity entity : list){
 			if("1".equals(entity.getN_sex())){
 				entity.setN_sex("男");
 			}else if("0".equals(entity.getN_sex())){
@@ -172,7 +169,7 @@ public class UserController extends BaseController {
 				entity.setN_status("锁定");
 			}
 		}
-		map.put("rows", data);
+		map.put("rows", list);
 		map.put("total", sum);
 		return map;
 	}
@@ -181,7 +178,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> searchData(
 			@ModelAttribute("user") SysUserEntity user,
-			@ModelAttribute("pageVo") PageCa page) {
+			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysUserEntity> users = userService.searchAll(user, page);
 		int sum = userService.searchAllCount(user);

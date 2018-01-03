@@ -44,4 +44,14 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
 		return this.userMapper.findOneByUsername(username);
 	}
 
+	public int findAllCount() {
+		// TODO Auto-generated method stub
+		return userMapper.findAllCount();
+	}
+
+	public List<SysUserEntity> findAll(PageCa page) {
+		// TODO Auto-generated method stub
+		return userMapper.findAll(page);
+	}
+
 }

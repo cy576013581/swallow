@@ -22,4 +22,8 @@ public interface UserMapper extends SuperMapper<SysUserEntity>{
 
 	List<SysUserEntity> searchAll(@Param("user") SysUserEntity user,
 			@Param("page") PageCa page);
+	
+	int findAllCount();
+
+	List<SysUserEntity> findAll(@Param("page") PageCa page);
 }

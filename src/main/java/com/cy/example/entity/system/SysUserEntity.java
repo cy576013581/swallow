@@ -23,6 +23,8 @@ public class SysUserEntity extends SuperEntity<SysUserEntity> {
 	private String n_sex;
 
 	private String n_status;
+	
+	private SysDepartmentEntity n_departmentId;
 
 	@TableField(exist = false)
 	private List<SysRoleEntity> roleList;// 一个用户具有多个角色
@@ -99,6 +101,14 @@ public class SysUserEntity extends SuperEntity<SysUserEntity> {
 
 	public void setN_superior(SysUserEntity n_superior) {
 		this.n_superior = n_superior;
+	}
+
+	public SysDepartmentEntity getN_departmentId() {
+		return n_departmentId;
+	}
+
+	public void setN_departmentId(SysDepartmentEntity n_departmentId) {
+		this.n_departmentId = n_departmentId;
 	}
 
 	@Override

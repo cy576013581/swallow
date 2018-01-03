@@ -7,8 +7,8 @@
     
 </head>
 <body>
-	<@userGrid.grid controller="/system/user/" title="用户" width="1300px" height="500px"
-		fields="id:true: ,c_username:false:用户名,c_phone:false:联系方式,c_email:false:电子邮箱,n_age:false:年龄,n_sex:false:性别,n_status:false:用户状态,c_createDate:false:创建时间,c_updateDate:false:更新时间">
+	<@userGrid.grid controller="/system/user/" title="用户" width="1450px" height="500px"
+		fields="id:true: ,n_departmentId.id:true: ,c_username:false:用户名,n_departmentId.c_departName:false:所属部门,c_phone:false:联系方式,c_email:false:电子邮箱,n_age:false:年龄,n_sex:false:性别,n_status:false:用户状态,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
 	</@userGrid.grid>
 	
@@ -22,11 +22,27 @@
 		    
 		    modifyQueryElem("c_createDate","datebox");
 		    modifyQueryElem("c_updateDate","datebox");
-		    hideQueryElem("n_age");
-		    hideEditElem("c_createDate,c_updateDate,n_status");
+		    hideQueryElem("n_age,n_departmentId.id");
+		    hideEditElem("c_createDate,c_updateDate,n_status,n_departmentId.id");
 		    
 		    //添加解锁按钮
 			addFtElem("btn_lock","锁定/解锁","icon-lock","lockUser()");
+			
+			//departList
+			modifyElem("tb_","n_departmentId.c_departName","combobox",
+		    	'['+
+		    	<#list departList as x> 
+		    		'{"id":"${x.id}","text":"${x.c_departName}"},'+
+			    </#list>
+			    '{"id":" ","text":"全部","selected":true}]'
+		    );
+		    modifyElem("ed_","n_departmentId.c_departName","combobox",
+		    	'['+
+		    	<#list departList as x> 
+		    		'{"id":"${x.id}","text":"${x.c_departName}"},'+
+			    </#list>
+			    '{"id":" ","text":"全部","selected":true}]'
+		    );
 		}
 		
 		//在下拉框中需要转义--重写

@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.config.WebConfig;
+import com.cy.example.entity.system.SysDepartmentEntity;
 import com.cy.example.entity.system.SysMenuEntity;
 import com.cy.example.entity.system.SysPermissionEntity;
 import com.cy.example.entity.system.SysRoleEntity;
 import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.service.IDepartmentService;
 import com.cy.example.service.IMenuService;
 import com.cy.example.service.IPermissionService;
 import com.cy.example.service.IRoleService;
@@ -39,6 +41,9 @@ public class SystemController {
 	
 	@Autowired
 	private IMenuService menuService;
+	
+	@Autowired
+	private IDepartmentService departmentService;
 	
 	@Value("${swallow.system.name}")
 	private String SYS_NAME;
@@ -161,6 +166,9 @@ public class SystemController {
 	
 	@RequestMapping("/menu/departmentManage")
 	public String departmentManage(ModelMap map) {
+		 List<SysDepartmentEntity> departList = departmentService.selectList(new EntityWrapper<SysDepartmentEntity>());
+		 map.put("departList", departList); 
+		 System.out.println("===================================="+departList.size());
 		return "departmentManage";
 	}
 }
