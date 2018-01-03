@@ -12,7 +12,7 @@ import com.cy.example.mapper.system.Role_PermisMapper;
 import com.cy.example.service.IRole_PermisService;
 
 @Service
-public class Role_PermisServiceImpl extends ServiceImpl<Role_PermisMapper, Role_Permis_Ca>
+public class Role_PermisService extends ServiceImpl<Role_PermisMapper, Role_Permis_Ca>
 	implements IRole_PermisService{
 	
 	@Autowired

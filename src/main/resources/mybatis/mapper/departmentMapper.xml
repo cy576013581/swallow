@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.example.mapper.system.DepartmentMapper" >
+    <resultMap id="BaseResultMap" type="com.cy.example.entity.system.SysDepartmentEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="c_departName" property="c_departName" jdbcType="VARCHAR"/>
+        <result column="c_departCode" property="c_departCode" jdbcType="VARCHAR"/>
+        <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
+        <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
+        <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
+        <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
+    </resultMap>
+    
+    <sql id="ColumnList" >
+        id, c_departName,c_departCode,c_createDate,n_creater,c_updateDate,n_updater
+    </sql>
+    
+    <select id="searchAll" resultMap="BaseResultMap">
+	   select <include refid="ColumnList" />
+	   from sys_department
+	   where 1=1
+	   <if test="depart.c_departName != null"><if test="depart.c_departName != null"> and c_departName like CONCAT('%',#{c_departName},'%')</if></if>
+	   <if test="depart.c_departCode != null"><if test="depart.c_departCode != null"> and c_departCode like CONCAT('%',#{c_departCode},'%')</if></if>
+   	   order by id limit #{page.index},#{page.rows}
+    </select>  
+    
+    <select id="searchAllCount" resultType="java.lang.Integer" >
+	   select count(id)
+	   from sys_department
+	   where 1=1
+	   <if test="depart.c_departName != null"><if test="depart.c_departName != null"> and c_departName like CONCAT('%',#{c_departName},'%')</if></if>
+	   <if test="depart.c_departCode != null"><if test="depart.c_departCode != null"> and c_departCode like CONCAT('%',#{c_departCode},'%')</if></if>
+    </select>
+</mapper>

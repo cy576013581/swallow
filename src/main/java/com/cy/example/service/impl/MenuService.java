@@ -12,7 +12,7 @@ import com.cy.example.mapper.system.MenuMapper;
 import com.cy.example.service.IMenuService;
 
 @Service
-public class MenuServiceImpl extends ServiceImpl<MenuMapper, SysMenuEntity>
+public class MenuService extends ServiceImpl<MenuMapper, SysMenuEntity>
 implements IMenuService{
 	
 	@Autowired

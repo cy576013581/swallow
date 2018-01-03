@@ -12,7 +12,7 @@ import com.cy.example.mapper.system.RoleMapper;
 import com.cy.example.service.IRoleService;
 
 @Service
-public class RoleServiceImpl extends ServiceImpl<RoleMapper, SysRoleEntity>
+public class RoleService extends ServiceImpl<RoleMapper, SysRoleEntity>
 	implements IRoleService{
 	
 	@Autowired

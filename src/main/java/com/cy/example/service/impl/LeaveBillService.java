@@ -14,7 +14,7 @@ import com.cy.example.service.ILeaveBillService;
 import com.cy.example.service.IWorkFlowService;
 
 @Service
-public class LeaveBillServiceImpl extends ServiceImpl<LeaveBillMapper, LeaveBillEntity>
+public class LeaveBillService extends ServiceImpl<LeaveBillMapper, LeaveBillEntity>
 	implements ILeaveBillService{
 	
 	@Autowired

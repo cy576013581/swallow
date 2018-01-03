@@ -19,7 +19,7 @@ import com.cy.example.entity.system.MailEntity;
 import com.cy.example.service.IMailService;
 
 @Component
-public class MailServiceImpl implements IMailService{
+public class MailService implements IMailService{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

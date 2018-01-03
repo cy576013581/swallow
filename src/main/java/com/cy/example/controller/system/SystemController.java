@@ -69,7 +69,7 @@ public class SystemController {
 		map.put("user", user);
 		map.put("menuList", data);
 		map.put("SYS_NAME", SYS_NAME);
-		return "main/main2";
+		return "main/main";
 	}
 
 	@RequestMapping("/loginOut")
@@ -157,5 +157,10 @@ public class SystemController {
 	@RequestMapping("/menu/workflow/taskManage")
 	public String taskManage(ModelMap map) {
 		return "workflow/taskManage";
+	}
+	
+	@RequestMapping("/menu/departmentManage")
+	public String departmentManage(ModelMap map) {
+		return "departmentManage";
 	}
 }

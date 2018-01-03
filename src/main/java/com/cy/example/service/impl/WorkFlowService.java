@@ -46,7 +46,7 @@ import com.cy.example.util.DateUtil;
 import com.cy.example.util.StringUtil;
 
 @Service
-public class WorkFlowServiceImpl implements IWorkFlowService{
+public class WorkFlowService implements IWorkFlowService{
 	/** 运行时Service */  
     @Autowired  
     private RuntimeService runtimeService;  

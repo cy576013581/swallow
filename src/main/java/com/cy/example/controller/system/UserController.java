@@ -57,7 +57,7 @@ public class UserController extends BaseController {
 		MailEntity mail = new MailEntity();
 		//后面优化为给数据库中的管理员发送
 		mail.setTo("pjchenyang@qq.com");
-//    	mail.setSubject("用户:"+user.getC_username()+"的注册审核提醒");
+    	mail.setSubject("用户:"+user.getC_username()+"的注册审核提醒");
     	mail.setContent(user.toStringCN());
 		rabbitSender.sendMail(mail);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -210,7 +210,7 @@ public class UserController extends BaseController {
 			loginRecord.setC_loginIp(super.getIP(getRequest()));
 			loginRecord.setC_username(user.getC_username());
 			//采用消息中心的通知添加
-//			rabbitSender.sendLoginRecord(loginRecord);
+			rabbitSender.sendLoginRecord(loginRecord);
 			msg = "登陆成功！";
 			map.put("flag", flag);
 		} catch (Exception exception) {

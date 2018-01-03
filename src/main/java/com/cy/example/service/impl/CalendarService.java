@@ -11,7 +11,7 @@ import com.cy.example.mapper.CalendarMapper;
 import com.cy.example.service.ICalendarService;
 
 @Service
-public class CalendarServiceImpl extends ServiceImpl<CalendarMapper, CalendarEntity>
+public class CalendarService extends ServiceImpl<CalendarMapper, CalendarEntity>
 	implements ICalendarService{
 
 	@Autowired

@@ -13,7 +13,7 @@ import com.cy.example.service.IUserService;
 import com.cy.example.util.MD5Util;
 
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, SysUserEntity> implements IUserService {
+public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implements IUserService {
 
 	@Autowired
 	private UserMapper userMapper;

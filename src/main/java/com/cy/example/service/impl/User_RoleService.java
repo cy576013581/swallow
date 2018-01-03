@@ -14,7 +14,7 @@ import com.cy.example.mapper.system.User_RoleMapper;
 import com.cy.example.service.IUser_RoleService;
 
 @Service
-public class User_RoleServiceImpl extends ServiceImpl<User_RoleMapper, User_Role_Ca>
+public class User_RoleService extends ServiceImpl<User_RoleMapper, User_Role_Ca>
 	implements IUser_RoleService{
 	
 	@Autowired

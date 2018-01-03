@@ -12,7 +12,7 @@ import com.cy.example.mapper.system.LoginRecordMapper;
 import com.cy.example.service.ILoginRecordService;
 
 @Service
-public class LoginRecordServiceImpl extends ServiceImpl<LoginRecordMapper, LoginRecordEntity>
+public class LoginRecordService extends ServiceImpl<LoginRecordMapper, LoginRecordEntity>
 	implements ILoginRecordService{
 	
 	@Autowired

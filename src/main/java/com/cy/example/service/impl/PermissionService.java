@@ -12,7 +12,7 @@ import com.cy.example.mapper.system.PermissionMapper;
 import com.cy.example.service.IPermissionService;
 
 @Service
-public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, SysPermissionEntity>
+public class PermissionService extends ServiceImpl<PermissionMapper, SysPermissionEntity>
 	implements IPermissionService{
 	
 	@Autowired
