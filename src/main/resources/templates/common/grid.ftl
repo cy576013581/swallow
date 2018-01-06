@@ -26,6 +26,8 @@
 		
     	var map =new Map();
 		var editMap =new Map();
+		//需要进行对象的转换操作的，由于easyui不支持.取值导致
+		var tranMap =new Map();
 		//操作类型,1代表添加操作,2代表编辑操作
 		var operation = 1;
 		$(function(){
@@ -35,6 +37,9 @@
 			        <#list x?split(":") as y>
 			         	<#if (y_index ==0)>
 							var key = "${y?replace('.','_')}";
+						</#if>
+						<#if y?contains(".")>
+							tranMap.put("${y?replace('.','_')}","${y}");
 						</#if>
 						map.put(key,"textbox");
 						editMap.put(key,"textbox");
@@ -134,7 +139,6 @@
 			//console.log(row);
             if (row){
             	operation = 2;
-            	
             	var jsonStr = JSON.stringify(row);
             	var reg = new RegExp('"','g');
             	jsonStr = jsonStr.substring(1,jsonStr.length-1).replace(reg,'');
@@ -187,7 +191,13 @@
 			var url;
 			var json = "";
 			for(var i = 0;i<editMap.size();i++){
-				json += editMap.key(i)+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
+				var key = editMap.key(i);
+				alert(editMap.keys());
+				if(tranMap.contains(key)){
+					alert(key);
+					key = tranMap.get(key);
+				}
+				json += key+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
 			}
 			if(operation == 1){
 				url = "${controller}add";
@@ -196,7 +206,7 @@
 				url = "${controller}update";
 				json += "id="+$("#ed_id").val();
 			}
-			//alert($('#form').serialize());
+			alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
                 url:url+"?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
                 type: "POST",

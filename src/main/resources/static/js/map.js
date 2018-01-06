@@ -39,6 +39,14 @@ function Map() {
        }  
        return value.join(",");  
      };  
+     
+     this.keys=function(){  
+         var keys=[]  
+        for (var i = 0; i < this.arr.length; i++) {  
+        	keys.push(this.arr[i].key);  
+        }  
+        return keys.join(",");  
+      }; 
 	 
      this.remove = function(key) {  
        var v;  

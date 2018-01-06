@@ -94,7 +94,9 @@ public class SystemController {
 	}
 
 	@RequestMapping("/menu/userManage")
-	public String userManage() {
+	public String userManage(ModelMap map) {
+		List<SysDepartmentEntity> departList = departmentService.selectList(new EntityWrapper<SysDepartmentEntity>());
+		map.put("departList", departList); 
 		return "userManage";
 	}
 	
@@ -166,9 +168,6 @@ public class SystemController {
 	
 	@RequestMapping("/menu/departmentManage")
 	public String departmentManage(ModelMap map) {
-		 List<SysDepartmentEntity> departList = departmentService.selectList(new EntityWrapper<SysDepartmentEntity>());
-		 map.put("departList", departList); 
-		 System.out.println("===================================="+departList.size());
 		return "departmentManage";
 	}
 }

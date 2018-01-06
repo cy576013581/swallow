@@ -37,18 +37,29 @@
 			    '{"id":" ","text":"全部","selected":true}]'
 		    );
 		    modifyElem("ed_","n_departmentId.c_departName","combobox",
-		    	'['+
+			    '['+
 		    	<#list departList as x> 
-		    		'{"id":"${x.id}","text":"${x.c_departName}"},'+
+		    		<#if !x_has_next>
+		    			'{"id":"${x.id}","text":"${x.c_departName}"}'
+		    		</#if>
+
+		    		<#if x_has_next>
+		    			'{"id":"${x.id}","text":"${x.c_departName}"},'+
+		    		</#if>
 			    </#list>
-			    '{"id":" ","text":"全部","selected":true}]'
+			    + ']'
 		    );
 		}
 		
 		//在下拉框中需要转义--重写
+		//转义json中带对象的
+		//转义密码
 		function needTurn(key,value){
 			if(key == "c_pwd"){
 				setValues(key,"");
+				return true;
+			}if(key == "c_departName"){
+				setValues("n_departmentId_c_departName",value);
 				return true;
 			}else{
 				return false;
