@@ -190,14 +190,15 @@
 		function dlgBtnClick(){
 			var url;
 			var json = "";
+			/*for(var i = 0;i<tranMap.size();i++){
+					alert(tranMap.key(i));
+			}*/
 			for(var i = 0;i<editMap.size();i++){
 				var key = editMap.key(i);
-				alert(editMap.keys());
-				if(tranMap.contains(key)){
-					alert(key);
+				if(tranMap.contains(key)>-1){
 					key = tranMap.get(key);
 				}
-				json += key+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
+				json = json + key+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
 			}
 			if(operation == 1){
 				url = "${controller}add";
@@ -206,7 +207,7 @@
 				url = "${controller}update";
 				json += "id="+$("#ed_id").val();
 			}
-			alert(json);
+			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
                 url:url+"?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
                 type: "POST",

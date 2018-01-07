@@ -120,6 +120,7 @@ public class UserController extends BaseController {
 		}else if("锁定".equals(user.getN_sex())){
 			user.setN_status("0");
 		}*/
+		user.getN_departmentId().setId(Long.valueOf(user.getN_departmentId().getC_departName()));
 		int rows = userService.updateMy(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows > 0) {

@@ -150,7 +150,8 @@
        	c_email = #{c_email},
        	c_username = #{c_username},
        	c_updateDate = #{c_updateDate},
-       	n_updater = #{n_updater}
+       	n_updater = #{n_updater},
+       	n_departmentId = #{n_departmentId.id}
        WHERE 
        		id = #{id}
     </update>
