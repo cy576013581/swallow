@@ -16,7 +16,7 @@ import redis.clients.jedis.JedisPool;
 @Component
 public class RedisClient {
 
-	private Logger logger = LoggerFactory.getLogger(RedisClient.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private JedisPool pool;

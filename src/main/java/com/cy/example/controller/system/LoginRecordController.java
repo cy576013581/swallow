@@ -32,7 +32,7 @@ public class LoginRecordController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> findAll(int page, int rows) {
 		Page<LoginRecordEntity> list = loginRecordService.selectPage(new Page<LoginRecordEntity>(page, rows)
-				, new EntityWrapper<LoginRecordEntity>());
+				, new EntityWrapper<LoginRecordEntity>().orderBy("c_createDate",false));
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = loginRecordService.selectCount(new EntityWrapper<LoginRecordEntity>());
 		map.put("rows", list.getRecords());
