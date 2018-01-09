@@ -65,12 +65,16 @@ public class AuthRealm extends AuthorizingRealm {
         /*
          * 在这里写错误登陆次数的限制代码
          */
-		
+		SysUserEntity user = userService.findOneByUsername(username);
+		/*SysUserEntity user = userService.getUserCache(username);
+		if(null == user){
+			user = userService.findOneByUsername(username);
+			userService.insertUserCache(user);
+		}*/
 		
 		
 		logger.info("***" + token.getCredentials());
 		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-		SysUserEntity user = userService.findOneByUsername(username);
 		if(null == user){
 			throw new UnknownAccountException();
 		}

@@ -23,16 +23,16 @@ public class RabbitReceiver {
 	@Autowired
 	private IMailService mailService;
 	
-/*	@RabbitListener(queues = "loginRecord")
+	@RabbitListener(queues = "loginRecord")
     public void insertLoginRecord(LoginRecordEntity loginRecord) {
 		logger.info("接收到object : " + loginRecord);
 		loginRecordService.insert(loginRecord);
     }
 	
-	@RabbitListener(queues = "loginRecord")
+	@RabbitListener(queues = "mail")
     public void process(MailEntity mail) {
 		logger.info("接收到object : " + mail);
 		mailService.sendSimpleMail(mail);
-    }*/
+    }
 
 }

@@ -67,7 +67,7 @@ public class JsonUtil {
 	     * @param keyvalue  
 	     * @return  
 	     */  
-	    public static Object textToJson(String text) {  
+	    public static Object stringToJson(String text) {  
 	        Object objectJson  = JSON.parse(text);  
 	        return objectJson;  
 	    }  

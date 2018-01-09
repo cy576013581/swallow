@@ -7,16 +7,23 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.cy.example.carrier.PageCa;
+import com.cy.example.config.WebConfig;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.mapper.system.UserMapper;
 import com.cy.example.service.IUserService;
+import com.cy.example.supplement.redis.RedisCacheStorage;
+import com.cy.example.supplement.redis.RedisClient;
 import com.cy.example.util.MD5Util;
+import com.cy.example.util.StringUtil;
 
 @Service
 public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implements IUserService {
 
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private RedisClient redisClinet; 
 	
 	public int updateMy(SysUserEntity user) {
 		if (null != user.getC_pwd() && "" != user.getC_pwd()) {
@@ -53,5 +60,23 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
 		// TODO Auto-generated method stub
 		return userMapper.findAll(page);
 	}
+	
+    public boolean insertUserCache(SysUserEntity entity) {  
+        //非空  
+        if(entity ==null || StringUtil.IsNullOrEmpty(String.valueOf(entity.getId()))){  
+            return false;  
+        }  
+        
+        return redisClinet.hset(WebConfig.CACHE_USER, entity.getC_username(), entity);  
+    }
+    
+    public SysUserEntity getUserCache(String username) {  
+        //非空  
+        if(username ==null || StringUtil.IsNullOrEmpty(username)){  
+            return null;  
+        }  
+        
+        return (SysUserEntity) redisClinet.hget(WebConfig.CACHE_USER, username);
+    }
 
 }

@@ -24,7 +24,7 @@ public class RedisController {
 
 	@RequestMapping("/get")
 	public String get(String key) throws Exception {
-		String value = redisClinet.get(key);
+		String value = (String) redisClinet.get(key);
 		System.out.println(value);
 		return value;
 	}

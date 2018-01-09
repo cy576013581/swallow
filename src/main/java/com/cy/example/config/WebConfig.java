@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class WebConfig{
 
-	public static String LOGIN_USER = "loginUser";
+	public static final String LOGIN_USER = "loginUser";
+	
+	public static final String CACHE_USER = "CACHE_USER";
 	
 	
 }

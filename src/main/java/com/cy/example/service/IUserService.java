@@ -21,4 +21,8 @@ public interface IUserService extends IService<SysUserEntity>{
 	public int findAllCount();
 
 	public List<SysUserEntity> findAll(PageCa page);
+
+	SysUserEntity getUserCache(String username);
+
+	boolean insertUserCache(SysUserEntity entity);
 }
