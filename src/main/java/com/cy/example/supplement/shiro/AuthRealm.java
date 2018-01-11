@@ -3,6 +3,7 @@ package com.cy.example.supplement.shiro;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -65,12 +66,15 @@ public class AuthRealm extends AuthorizingRealm {
         /*
          * 在这里写错误登陆次数的限制代码
          */
-		SysUserEntity user = userService.findOneByUsername(username);
-		/*SysUserEntity user = userService.getUserCache(username);
+		userService.incrLoginCount(username);
+		
+		
+		//使用緩存存儲用戶信息
+		SysUserEntity user = userService.getUserCache(username);
 		if(null == user){
 			user = userService.findOneByUsername(username);
 			userService.insertUserCache(user);
-		}*/
+		}
 		
 		
 		logger.info("***" + token.getCredentials());
@@ -82,6 +86,9 @@ public class AuthRealm extends AuthorizingRealm {
             // 用户被管理员锁定抛出异常
             throw new LockedAccountException();
         }
+		if (Integer.valueOf(userService.getLoginCount(username)) > 5){
+	        throw new DisabledAccountException("由于密码输入错误次数大于5次，帐号已经禁止登录！");
+	    }
 		logger.info("***登录user：" + user);
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
 				user, // 用户名

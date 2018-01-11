@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -209,6 +210,8 @@ public class UserController extends BaseController {
 			loginRecord.setC_username(user.getC_username());
 			//采用消息中心的通知添加
 			rabbitSender.sendLoginRecord(loginRecord);
+			//清楚错误次数缓存
+			userService.removeCount(user.getC_username());
 			msg = "登陆成功！";
 			map.put("flag", flag);
 		} catch (Exception exception) {
@@ -221,7 +224,10 @@ public class UserController extends BaseController {
 			} else if (exception instanceof LockedAccountException) {
 				logger.info(" 用户被锁定： -- >LockedAccountException");
 				msg = "登录失败，用户被锁定！";
-			} else {
+			} else if (exception instanceof DisabledAccountException) {
+				logger.info(" 由于密码输入错误次数大于5次，帐号已经禁止登录！ -- >DisabledAccountException");
+				msg = "由于密码输入错误次数大于5次，请一个小时之后登录！";
+			}else {
 				logger.info("else -- >" + exception);
 				msg = "登录失败，发生未知错误：" + exception;
 			}

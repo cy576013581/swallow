@@ -11,7 +11,6 @@ import com.cy.example.config.WebConfig;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.mapper.system.UserMapper;
 import com.cy.example.service.IUserService;
-import com.cy.example.supplement.redis.RedisCacheStorage;
 import com.cy.example.supplement.redis.RedisClient;
 import com.cy.example.util.MD5Util;
 import com.cy.example.util.StringUtil;
@@ -67,7 +66,8 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
             return false;  
         }  
         
-        return redisClinet.hset(WebConfig.CACHE_USER, entity.getC_username(), entity);  
+        redisClinet.setObject("user:"+entity.getC_username(), entity);  
+        return true;
     }
     
     public SysUserEntity getUserCache(String username) {  
@@ -76,7 +76,26 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
             return null;  
         }  
         
-        return (SysUserEntity) redisClinet.hget(WebConfig.CACHE_USER, username);
+        return (SysUserEntity) redisClinet.getObject("user:"+username);
+    }
+    
+    public void incrLoginCount(String key){
+    	redisClinet.incr("loginCount:"+key);
+    	if("1".equals(getLoginCount(key))){
+    		expire("loginCount:"+key);
+    	}
+    }
+    
+    public String getLoginCount(String key){
+    	String value = redisClinet.get("loginCount:"+key);
+    	return value == null ? "-1":value;
+    }
+    
+    public void expire(String key){
+    	redisClinet.expire("loginCount:"+key,3600);
     }
 
+    public void removeCount(String key){
+    	redisClinet.del("loginCount:"+key);
+    }
 }

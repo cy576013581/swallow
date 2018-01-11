@@ -7,8 +7,12 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
 
 @TableName("users")
-@SuppressWarnings("serial")
 public class SysUserEntity extends SuperEntity<SysUserEntity> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2967710007706812401L;
 
 	private String c_username;
 

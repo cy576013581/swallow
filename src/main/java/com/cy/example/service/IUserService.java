@@ -25,4 +25,13 @@ public interface IUserService extends IService<SysUserEntity>{
 	SysUserEntity getUserCache(String username);
 
 	boolean insertUserCache(SysUserEntity entity);
+
+	public void incrLoginCount(String key);
+	
+	public String getLoginCount(String key);
+	
+	public void expire(String key);
+	
+	public void removeCount(String key);
+	
 }
