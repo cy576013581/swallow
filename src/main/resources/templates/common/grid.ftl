@@ -249,7 +249,7 @@
 			//console.log(arr);
 			for(var index = 0;index < arr.length;index++){
 				var id = arr[index].replace(".", "_");
-				$("#tb_"+id).parent().remove();
+				$("#tb_"+id).parent().parent().remove();
 				map.remove(id);
 			}
 		}
@@ -463,19 +463,35 @@
     </table>
     <!--查询栏-->	
     <div id="tb" style="padding:20px 10px;">
+    	<table>
+    	<#assign nub='${width?replace("px","")}'?number /200 />  
+    	<#assign count=0 />
         <#list fields?split(",") as x>  
+        	
         	<#if (x_index !=0)>
+        		<#if (count == nub || count == 0)>
+	        		<tr>
+	        	</#if>
 		        <#list x?split(":")?reverse  as y>
 		         	<#if (y_index ==0 && "${y}" != "id")>
-						<span>${y}:
+						<td style="width:200px;"><span style="width:200px;">${y}:
 					
 					</#if>
 					<#if (y_index ==2 && "${y}" != " ")>
-						<input id="tb_${y?replace('.','_')}" name="${y}" class="easyui-textbox" style="width:120px"></span>&emsp;
+						<input id="tb_${y?replace('.','_')}" name="${y}" class="easyui-textbox" style="width:120px"></span>&emsp;</td>
 					</#if>
 		        </#list> 
+		        <#assign count=count+1 /> 
+			    <#if (count == nub)>
+	        		<#assign count=0 /> 
+	        		</tr>
+	        	</#if>
+		        
 		    </#if>
+		    
 	    </#list>
+	    
+	    <table>
 	    &emsp;<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="searchData()">查询</a>
     </div>
     <!--操作栏-->
