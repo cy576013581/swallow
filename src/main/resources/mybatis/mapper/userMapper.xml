@@ -118,17 +118,32 @@
     
     <select id="findAll" resultMap="BaseResultMap"  >
 	   select u.id, u.c_username, u.c_phone , u.n_age,u.c_email,
+	   <if test="null ==  page"> u.c_pwd,</if>
 	   case when u.n_sex=1 then '男'
 	   when u.n_sex=0 then '女' end as tranfo_n_sex ,
 	   case when u.n_status=1 then '可用'
 	   when u.n_status=0 then '锁定' end as n_status ,<include refid="BaseList" />,
-	   d.id as d_id,
-	   d.c_departName as d_c_departName,
-	   d.c_departCode as d_c_departCode
+	   r.c_roleCode,
+		r.id as r_id,
+		p.id as p_id,
+		p.c_permisCode,
+		
+		u1.c_username as u1_c_username,
+		u.n_superior,
+		u1.id as u1_id,
+		d.id as d_id,
+		d.c_departName as d_c_departName,
+		d.c_departCode as d_c_departCode
 	   from users u
-	   LEFT JOIN sys_department d on u.n_departmentId = d.id
+	   LEFT JOIN sys_user_role ur ON u.id = ur.n_userId
+		LEFT JOIN sys_roles r ON ur.n_roleId = r.id
+		LEFT JOIN sys_role_permission rp ON rp.n_roleId = ur.n_roleId
+		LEFT JOIN sys_permission p ON p.id = rp.n_permisId
+		LEFT JOIN users u1 on u.n_superior = u1.id
+		LEFT JOIN sys_department d on u.n_departmentId = d.id
 	   where u.n_deleted=0 
-   	   order by id limit #{page.index},#{page.rows}
+   	   order by u.id
+   	   <if test="null !=  page"> limit #{page.index},#{page.rows}</if>
     </select>  
     
     <select id="findAllCount" resultType="java.lang.Integer" >

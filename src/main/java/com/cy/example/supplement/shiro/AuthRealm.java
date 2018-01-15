@@ -56,8 +56,6 @@ public class AuthRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) throws AuthenticationException {
-		// TODO Auto-generated method stub
-		logger.info("***用户身份验证");
 		// 获取用户的输入的账号.
 		String username = (String) token.getPrincipal();
 		if (StringUtil.IsNullOrEmptyT(username)) {
@@ -76,8 +74,6 @@ public class AuthRealm extends AuthorizingRealm {
 			userService.insertUserCache(user);
 		}
 		
-		
-		logger.info("***" + token.getCredentials());
 		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 		if(null == user){
 			throw new UnknownAccountException();
