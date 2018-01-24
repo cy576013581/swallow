@@ -11,7 +11,8 @@
    #### Mysql<br>
    #### FastJSON<br>
    #### Redis<br>
-   #### RabbitMQ<br>
+   #### activiti<br>
+   #### RabbitMQ<br>
    ***
 ## 前端：<br>
    #### 整体：easyui和ace admin<br>
