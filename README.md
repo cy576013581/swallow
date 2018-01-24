@@ -7,12 +7,13 @@
    #### Freemarker<br>
    #### Shiro<br>
    #### MybatisPlus<br>
+   #### RabbitMQ<br>
    #### Druid<br>
    #### Mysql<br>
    #### FastJSON<br>
    #### Redis<br>
    #### activiti<br>
-   #### RabbitMQ<br>
+   
    ***
 ## 前端：<br>
    #### 整体：easyui和ace admin<br>
