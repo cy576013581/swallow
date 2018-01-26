@@ -78,7 +78,8 @@ public class SystemController {
 	}
 
 	@RequestMapping("/loginOut")
-	public String loginOut(HttpSession session) {
+	public String loginOut(HttpSession session, ModelMap map) {
+		map.put("SYS_NAME", SYS_NAME);
 		session.removeAttribute(WebConfig.LOGIN_USER);
 		return "index";
 	}
