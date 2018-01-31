@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.config.WebConfig;
@@ -170,5 +171,50 @@ public class SystemController {
 	@RequestMapping("/menu/departmentManage")
 	public String departmentManage(ModelMap map) {
 		return "departmentManage";
+	}
+	
+	@RequestMapping("/courtBusiness/nonStandardProductAttr/api.sdo")
+	@ResponseBody
+	public Map<String, Object> test() {
+		List<Map<String, Object>> l = new ArrayList<Map<String, Object>>();
+		
+//		l.add('SL':'','SHLL':'','JXLX':'','QXRQ':'','ZXRQ':'','SFBB':'','FHMS':'','JYSC':'','CPNM':'','JYBZ':'','FXSJ':'','MSGS':'','BJYZ':'','JSFS':''");
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("SHR", "0");
+		m.put("BZ", "");
+		m.put("CPLX", "");
+		m.put("GZFS", "");
+		m.put("PMJE", "");
+		m.put("DQSJ", "");
+		m.put("FXPL", "");
+		m.put("SQLL", "");
+		m.put("", "");
+		m.put("", "");
+		m.put("", "");
+		m.put("", "");
+		m.put("PZDM", "ZYZX06");
+		m.put("PZMC", "招盈智兴六号资管管理计划");
+		m.put("GLR", "");
+		m.put("YJFL", "");
+		m.put("EJFL", "");
+		m.put("SJFL", "254");
+		m.put("JZLY", "");
+		m.put("JXFS", "");
+		m.put("F", "ZYZX06招盈智兴六号资管管理计划");
+		m.put("LWBS", "0");
+		m.put("BDZZXS", "");
+		m.put("BAQK", "");
+		m.put("DKLXSR", "");
+		m.put("JRCPZLSR", "");
+		m.put("SIJFL", "");
+		m.put("JXBADM", "");
+		m.put("ZT", "2");
+		m.put("WHSJ", "2017-07-24 15:11:05.0");
+		l.add(m);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", "1");
+		map.put("note", "1");
+		map.put("data",l );
+		return map;
 	}
 }
