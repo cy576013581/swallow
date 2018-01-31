@@ -131,3 +131,5 @@
 - 2018.1.15 添加项目启动缓存所有用户、优化grid界面查询框，使用table布局  add  by  cy  
 
 - 2018.1.26 完善loginout链接  add  by  cy  
+
+- 2018.1.31 STORY33:使用AOP替换调用基类方法的entity公共字段的数据填充  by  cy 

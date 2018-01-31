@@ -30,7 +30,6 @@ public class User_RoleController extends BaseController {
 	public Map<String, Object> add(@ModelAttribute("ur") User_Role_Ca ur) {
 		ur.setN_userId(Long.valueOf(ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
-		super.add(ur);
 		Map<String, Object> map = new HashMap<String, Object>();
 		User_Role_Ca user = urService.selectOne(new EntityWrapper<User_Role_Ca>().eq("n_userId", ur.getN_userId()));
 		if(null == user){
@@ -56,7 +55,6 @@ public class User_RoleController extends BaseController {
 	public Map<String, Object> update(@ModelAttribute("ur") User_Role_Ca ur) {
 		ur.setN_userId(Long.valueOf(ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
-		super.update(ur);
 		Map<String, Object> map = new HashMap<String, Object>();
 		User_Role_Ca user = urService.selectOne(new EntityWrapper<User_Role_Ca>().eq("n_userId", ur.getN_userId()));
 		if(null == user){

@@ -27,7 +27,6 @@ public class PermissionController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public Map<String, Object> add(@ModelAttribute("per") SysPermissionEntity per) {
-		super.add(per);
 		boolean flag = permissionService.insert(per);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
@@ -43,7 +42,6 @@ public class PermissionController extends BaseController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("per") SysPermissionEntity per) {
-		super.update(per);
 		boolean flag = permissionService.updateById(per);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {

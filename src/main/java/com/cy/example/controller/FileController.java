@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.cy.example.config.WebConfig;
 import com.cy.example.entity.FileEntity;
 import com.cy.example.service.IFileService;
 
@@ -54,7 +55,7 @@ public class FileController extends BaseController {
 			// System.out.println(src+"/"+newFileName + "-->" + size);
 			FileEntity entity = new FileEntity(newFileName, fileName, src,
 					String.valueOf(size));
-			super.add(entity);
+			WebConfig.add(entity);
 
 			if (file.isEmpty()) {
 				// return "false";

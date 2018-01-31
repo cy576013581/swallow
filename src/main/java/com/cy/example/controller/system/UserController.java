@@ -51,7 +51,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/register")
 	@ResponseBody
 	public Map<String, Object> register(@ModelAttribute("user") SysUserEntity user) {
-		super.add(user);
+		WebConfig.add(user);
 		user.setN_status("0");
 		boolean flag = userService.insert(user);
 		MailEntity mail = new MailEntity();
@@ -77,7 +77,7 @@ public class UserController extends BaseController {
 		SysUserEntity user = userService.selectById(id);
 		String msg = "";
 		user.setN_status(n_status);
-		super.update(user);
+		WebConfig.update(user);
 		boolean flag = userService.updateById(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
@@ -93,7 +93,6 @@ public class UserController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public Map<String, Object> add(@ModelAttribute("user") SysUserEntity user) {
-		super.add(user);
 		user.setN_status("1");
 		boolean flag = userService.insert(user);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -110,7 +109,6 @@ public class UserController extends BaseController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("user") SysUserEntity user) {
-		super.update(user);
 		/*if("男".equals(user.getN_sex())){
 			user.setN_sex("1");
 		}else if("女".equals(user.getN_sex())){
@@ -205,7 +203,7 @@ public class UserController extends BaseController {
 			SysUserEntity user = (SysUserEntity) subject.getPrincipal();
 			subject.getSession().setAttribute(WebConfig.LOGIN_USER, user);
 			LoginRecordEntity loginRecord = new LoginRecordEntity();
-			super.add(loginRecord);
+			WebConfig.add(loginRecord);
 			loginRecord.setC_loginIp(super.getIP(getRequest()));
 			loginRecord.setC_username(user.getC_username());
 			//采用消息中心的通知添加

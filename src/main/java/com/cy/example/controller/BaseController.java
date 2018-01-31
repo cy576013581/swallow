@@ -73,28 +73,4 @@ public class BaseController {
 		return getRequest().getSession();
 	}
 
-	public void add(SuperEntity<?> entity) {
-		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
-				.getAttribute(WebConfig.LOGIN_USER);
-		entity.setC_createDate(DateUtil.getNow());
-		entity.setC_updateDate(DateUtil.getNow());
-		entity.setN_creater(user.getId());
-		entity.setN_updater(user.getId());
-		entity.setN_deleted(0);
-	}
-
-	public void update(SuperEntity<?> entity) {
-		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
-				.getAttribute(WebConfig.LOGIN_USER);
-		entity.setC_updateDate(DateUtil.getNow());
-		entity.setN_updater(user.getId());
-	}
-
-	public SysUserEntity getCurrentUser() {
-
-		SysUserEntity currentUser = (SysUserEntity) SecurityUtils.getSubject()
-				.getSession().getAttribute(WebConfig.LOGIN_USER);
-		return currentUser;
-	}
-
 }

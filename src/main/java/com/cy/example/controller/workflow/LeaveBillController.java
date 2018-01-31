@@ -30,7 +30,7 @@ public class LeaveBillController extends BaseController {
 	@RequestMapping("/submit")
 	@ResponseBody
 	public Map<String, Object> submit(@ModelAttribute("bill") LeaveBillEntity bill) {
-		super.add(bill);
+		WebConfig.add(bill);
 		if("未提交".equals(bill.getN_status())){
 			bill.setN_status("1");
 		}/*else if("审核中".equals(bill.getN_status())){
@@ -53,7 +53,6 @@ public class LeaveBillController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public Map<String, Object> add(@ModelAttribute("bill") LeaveBillEntity bill) {
-		super.add(bill);
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		bill.setUser(user);
@@ -72,7 +71,6 @@ public class LeaveBillController extends BaseController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("bill") LeaveBillEntity bill) {
-		super.update(bill);
 		boolean flag = billService.updateById(bill);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {

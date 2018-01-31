@@ -27,7 +27,6 @@ public class DepartmentController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public Map<String, Object> add(@ModelAttribute("depart") SysDepartmentEntity depart) {
-		super.add(depart);
 		boolean flag = departService.insert(depart);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
@@ -43,7 +42,6 @@ public class DepartmentController extends BaseController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("depart") SysDepartmentEntity depart) {
-		super.update(depart);
 		boolean flag = departService.updateById(depart);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {

@@ -27,7 +27,6 @@ public class MenuController extends BaseController{
 	@RequestMapping("/add")
 	@ResponseBody
 	public Map<String, Object> add(@ModelAttribute("menu") SysMenuEntity menu) {
-		super.add(menu);
 		boolean flag = menuService.insert(menu);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
@@ -43,7 +42,6 @@ public class MenuController extends BaseController{
 	@RequestMapping("/update")
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("menu") SysMenuEntity menu) {
-		super.update(menu);
 		boolean flag = menuService.updateById(menu);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {

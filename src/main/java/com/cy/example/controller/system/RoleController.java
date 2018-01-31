@@ -30,7 +30,6 @@ public class RoleController extends BaseController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public Map<String, Object> add(@ModelAttribute("role") SysRoleEntity role) {
-		super.add(role);
 		boolean flag = roleService.insert(role);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
@@ -46,7 +45,6 @@ public class RoleController extends BaseController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public Map<String, Object> update(@ModelAttribute("role") SysRoleEntity role) {
-		super.update(role);
 		boolean flag = roleService.updateById(role);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {

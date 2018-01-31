@@ -28,7 +28,6 @@ public class Role_PermisController extends BaseController {
 	public Map<String, Object> add(@ModelAttribute("rp") Role_Permis_Ca rp) {
 		rp.setN_roleId(Long.valueOf(" ".equals(rp.getC_roleName()) ? "0" : rp.getC_roleName()));
 		rp.setN_permisId(Long.valueOf(" ".equals(rp.getC_permisName()) ? "0" : rp.getC_permisName()));
-		super.add(rp);
 		Map<String, Object> map = new HashMap<String, Object>();
 		Role_Permis_Ca user = rpService.selectOne(new EntityWrapper<Role_Permis_Ca>().eq("n_roleId", rp.getN_roleId())
 				.eq("n_permisId", rp.getN_permisId()));
@@ -55,7 +54,6 @@ public class Role_PermisController extends BaseController {
 	public Map<String, Object> update(@ModelAttribute("rp") Role_Permis_Ca rp) {
 		rp.setN_roleId(Long.valueOf(" ".equals(rp.getC_roleName()) ? "0" : rp.getC_roleName()));
 		rp.setN_permisId(Long.valueOf(" ".equals(rp.getC_permisName()) ? "0" : rp.getC_permisName()));
-		super.update(rp);
 		Map<String, Object> map = new HashMap<String, Object>();
 		Role_Permis_Ca user = rpService.selectOne(new EntityWrapper<Role_Permis_Ca>().eq("n_roleId", rp.getN_roleId())
 				.eq("n_permisId", rp.getN_permisId()));

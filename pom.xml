@@ -50,6 +50,12 @@
 		    <artifactId>spring-boot-starter-freemarker</artifactId>  
 		</dependency>
 		
+		<!-- AOP -->
+		<dependency>  
+		    <groupId>org.springframework.boot</groupId>  
+		    <artifactId>spring-boot-starter-aop</artifactId>  
+		</dependency>  
+		
 		<!-- mybatis配置
 		不添加spring-boot-starter-jdbc
 		mybatis-spring-boot-starter依赖中存在spring-boot-starter-jdbc
