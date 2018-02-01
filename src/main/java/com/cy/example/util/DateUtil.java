@@ -40,7 +40,7 @@ public final class DateUtil {
 	 * 获得默认的 date pattern
 	 */
 	public static String getDatePattern() {
-		return FORMAT_LONG;
+		return FORMAT_SHORT;
 	}
 
 	/**

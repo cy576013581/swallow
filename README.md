@@ -20,6 +20,7 @@
    #### 文件上传：Dropzone.js   or  Web Uploader<br>
    #### 日历：calendar<br>
    #### 弹窗：layer<br>
+   #### 数据展示：Echarts<br>
    #### 消息提示：toarst
 ***
 
@@ -133,3 +134,5 @@
 - 2018.1.26 完善loginout链接  add  by  cy  
 
 - 2018.1.31 STORY31:使用AOP替换调用基类方法的entity公共字段的数据填充  by  cy 
+
+- 2018.2.1 使用echarts展示近7天系统用户登陆情况  by  cy 

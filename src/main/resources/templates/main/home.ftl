@@ -35,6 +35,8 @@
 
 		<!-- ace settings handler -->
 		<script src="../lib/aceadmin/assets/js/ace-extra.min.js"></script>
+		
+		<script src="../lib/echarts/echarts.min.js"></script>
 	</head>
 
 	<body class="no-skin">
@@ -46,94 +48,7 @@
 			<!-- /section:basics/sidebar -->
 			<div class="main-content">
 				<div class="page-content">
-					<div class="ace-settings-container" id="ace-settings-container">
-						<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-							<i class="ace-icon fa fa-cog bigger-150"></i>
-						</div>
-
-						<div class="ace-settings-box clearfix" id="ace-settings-box">
-							<div class="pull-left width-40">
-								<!-- #section:settings.skins -->
-								<div class="ace-settings-item">
-									<div class="pull-left">
-										<select id="skin-colorpicker" class="hide">
-											<option data-skin="no-skin" value="#438EB9">#438EB9</option>
-											<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-											<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-											<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-										</select>
-									</div>
-									<span>&nbsp; Choose Skin</span>
-								</div>
-
-								<!-- /section:settings.skins -->
-
-								<!-- #section:settings.navbar -->
-								<div class="ace-settings-item">
-									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
-									<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-								</div>
-
-								<!-- /section:settings.navbar -->
-
-								<!-- #section:settings.sidebar -->
-								<div class="ace-settings-item">
-									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
-									<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-								</div>
-
-								<!-- /section:settings.sidebar -->
-
-								<!-- #section:settings.breadcrumbs -->
-								<div class="ace-settings-item">
-									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
-									<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-								</div>
-
-								<!-- /section:settings.breadcrumbs -->
-
-								<!-- #section:settings.rtl -->
-								<div class="ace-settings-item">
-									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
-									<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-								</div>
-
-								<!-- /section:settings.rtl -->
-
-								<!-- #section:settings.container -->
-								<div class="ace-settings-item">
-									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
-									<label class="lbl" for="ace-settings-add-container">
-										Inside
-										<b>.container</b>
-									</label>
-								</div>
-
-								<!-- /section:settings.container -->
-							</div><!-- /.pull-left -->
-
-							<div class="pull-left width-50">
-								<!-- #section:basics/sidebar.options -->
-								<div class="ace-settings-item">
-									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" />
-									<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-								</div>
-
-								<div class="ace-settings-item">
-									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" />
-									<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-								</div>
-
-								<div class="ace-settings-item">
-									<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" />
-									<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-								</div>
-
-								<!-- /section:basics/sidebar.options -->
-							</div><!-- /.pull-left -->
-						</div><!-- /.ace-settings-box -->
-					</div><!-- /.ace-settings-container -->
-
+					
 					<div class="page-content-area">
 						<div class="row">
 							<div class="col-xs-12">
@@ -144,52 +59,67 @@
 											<div class="widget-header">
 												<h6 class="widget-title bigger lighter">
 													<i class="ace-icon fa fa-table"></i>
-													统计表格
+													近一周登陆人数
 												</h6>
 
-												<div class="widget-toolbar">
-													<div class="widget-menu">
-														<a href="#" data-action="settings">
-															<i class="ace-icon fa fa-bars"></i>
-														</a>
-														
-														<a href="#" data-action="reload">
-															<i class="ace-icon fa fa-refresh"></i>
-														</a>
-													</div>
-												</div>
-												<!--<div class="widget-toolbar widget-toolbar-light no-border">
-													<select id="simple-colorpicker-1" class="hide">
-														<option selected="" data-class="blue" value="#307ECC">#307ECC</option>
-														<option data-class="blue2" value="#5090C1">#5090C1</option>
-														<option data-class="blue3" value="#6379AA">#6379AA</option>
-														<option data-class="green" value="#82AF6F">#82AF6F</option>
-														<option data-class="green2" value="#2E8965">#2E8965</option>
-														<option data-class="green3" value="#5FBC47">#5FBC47</option>
-														<option data-class="red" value="#E2755F">#E2755F</option>
-														<option data-class="red2" value="#E04141">#E04141</option>
-														<option data-class="red3" value="#D15B47">#D15B47</option>
-														<option data-class="orange" value="#FFC657">#FFC657</option>
-														<option data-class="purple" value="#7E6EB0">#7E6EB0</option>
-														<option data-class="pink" value="#CE6F9E">#CE6F9E</option>
-														<option data-class="dark" value="#404040">#404040</option>
-														<option data-class="grey" value="#848484">#848484</option>
-														<option data-class="default" value="#EEE">#EEE</option>
-													</select>
-												</div>-->
 											</div>
 
 											<!-- 第一个对应内容 -->
 											<div class="widget-body">
 												<div class="widget-main no-padding">
-													<div style="height:240px;background-color: #EEE;">
-													
+													<div id="home_loginCount" style="height:240px;background-color: #EEE;padding-right:15px">
+														
 													</div>
 												</div>
 											</div>
 										</div>
 										
 									</div>
+									
+									<script type="text/javascript">
+										var dom = document.getElementById("home_loginCount");
+										var myChart = echarts.init(dom);
+										var app = {};
+										option = null;
+										option = {
+										    tooltip: {
+										        trigger: 'axis'
+										    },
+										    grid: {
+										        left: '3%',
+										        right: '4%',
+										        bottom: '3%',
+										        containLabel: true
+										    },
+										    toolbox: {
+										        feature: {
+										        	dataView: {readOnly: false},
+										            saveAsImage: {}
+										        }
+										    },
+										    xAxis: {
+										        type: 'category',
+										        boundaryGap: false,
+										        data: ['${loginRecord.date.date1}','${loginRecord.date.date2}','${loginRecord.date.date3}','${loginRecord.date.date4}','${loginRecord.date.date5}','${loginRecord.date.date6}','${loginRecord.date.date7}']
+										    },
+										    yAxis: {
+										        type: 'value'
+										    },
+										    series: [
+										        {
+										            name:'登陆人数',
+										            type:'line',
+										            stack: '总量',
+										            data:[${loginRecord.sum.sum1}, ${loginRecord.sum.sum2}, ${loginRecord.sum.sum3}, ${loginRecord.sum.sum4}, ${loginRecord.sum.sum5}, ${loginRecord.sum.sum6}, ${loginRecord.sum.sum7}]
+										        }
+										    ]
+										};
+										if (option && typeof option === "object") {
+										    myChart.setOption(option, true);
+										}
+      								</script>
+									
+									<!-- ==============================================================-->
 
 									<div class="col-xs-12 col-sm-6 widget-container-col">
 										<div class="widget-box widget-color-blue2">

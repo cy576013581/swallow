@@ -23,6 +23,7 @@ import com.cy.example.entity.system.SysPermissionEntity;
 import com.cy.example.entity.system.SysRoleEntity;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.service.IDepartmentService;
+import com.cy.example.service.ILoginRecordService;
 import com.cy.example.service.IMenuService;
 import com.cy.example.service.IPermissionService;
 import com.cy.example.service.IRoleService;
@@ -42,6 +43,9 @@ public class SystemController {
 	
 	@Autowired
 	private IMenuService menuService;
+	
+	@Autowired
+	private ILoginRecordService loginRecordService;
 	
 	@Autowired
 	private IDepartmentService departmentService;
@@ -86,7 +90,9 @@ public class SystemController {
 	}
 	
 	@RequestMapping("/menu/home")
-	public String showHome() {
+	public String showHome(ModelMap map) {
+		Map<String, Object> loginRecord = loginRecordService.recentLoginCount();
+		map.put("loginRecord", loginRecord);
 		return "main/home";
 	}
 

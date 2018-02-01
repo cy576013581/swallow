@@ -148,7 +148,7 @@
 	
 	</div>
 	
-	<div id="mm" class="easyui-menu" style="width:120px;">
+	<div id="mm" class="easyui-menu" style="width:150px;">
         <div id="mm-tabclose" data-options="name:1">关闭</div>
         <div id="mm-tabcloseall" data-options="name:2">全部关闭</div>
         <div id="mm-tabcloseother" data-options="name:3">除此之外全部关闭</div>

@@ -30,4 +30,7 @@
    	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp like CONCAT('%',#{loginRecord.c_loginIp},'%')</if></if>
    	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
     </select>
+    <select id="recentLoginCount" resultType="java.lang.Integer" >
+	 	select count(1) from loginrecord where DATE_FORMAT(c_createDate,'%Y-%m-%d') = str_to_date(#{date}, '%Y-%m-%d')  
+	</select>
 </mapper>
