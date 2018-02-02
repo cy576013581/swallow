@@ -35,7 +35,7 @@ public class ShiroPermissionsFilter extends PermissionsAuthorizationFilter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         String requestedWith = httpServletRequest.getHeader("X-Requested-With");
         if (!StringUtil.IsNullOrEmpty(requestedWith) &&
-                StringUtil.IsEmpty(requestedWith, "XMLHttpRequest")) {//如果是ajax返回指定格式数据
+                StringUtil.IsEqual(requestedWith, "XMLHttpRequest")) {//如果是ajax返回指定格式数据
         	Map<String, Object> result = new HashMap<String, Object>();
 			result.put("flag", false);
 			result.put("msg", "权限不足！");

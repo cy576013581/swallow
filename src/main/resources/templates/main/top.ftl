@@ -14,8 +14,7 @@
 -->        
 <div class="topright">    
     <ul>
-	    <li><span><img src="../images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
-	    <li><a href="#">关于</a></li>
+	    <li><a href="#">在线人数：${activeNum}</a></li>
 	    <li><a href="javascript:void(0);" onclick="loginOut()" target="_parent">退出</a></li>
     </ul>
      

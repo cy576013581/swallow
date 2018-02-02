@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections.map.HashedMap;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -76,9 +76,11 @@ public class SystemController {
 				data.put(menuList.get(i).getC_menuName(), tool);
 			}
 		}
+		//在线人数统计
 		map.put("user", user);
 		map.put("menuList", data);
 		map.put("SYS_NAME", SYS_NAME);
+		map.put("activeNum", WebConfig.getActiveUserSum());
 		return "main/main";
 	}
 
