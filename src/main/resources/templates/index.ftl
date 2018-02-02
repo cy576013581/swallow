@@ -18,6 +18,7 @@
 		function login(){
 			var username = $(".loginuser").val();
 			var pwd = $(".loginpwd").val();
+			var rememberMe =$('#rememberMe').is(':checked');
 			if(username == ""){
 				alert("用户名不能为空！");
 				return;
@@ -30,7 +31,7 @@
                 url:"system/user/validate?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
                 type:"POST",
                 async:false,
-                data: {username:username,password:pwd}, //$('#yourformid').serialize()；向后台发送的form表单中的数据
+                data: {username:username,password:pwd,rememberMe:rememberMe}, //$('#yourformid').serialize()；向后台发送的form表单中的数据
                 dataType:"json", //接收返回的数据方式为json
                 error:function(XMLHttpRequest,textStatus,errorThrown){
                 }, //错误提示
@@ -85,7 +86,7 @@
 			    <ul>
 				    <li><input name="c_username" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>
 				    <li><input name="c_pwd" type="password" class="loginpwd" placeholder="密码" onclick="JavaScript:this.value=''"/></li>
-				    <li><input type="button" class="loginbtn" value="登录"  onclick="login()"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>
+				    <li><input type="button" class="loginbtn" value="登录"  onclick="login()"  /><label><input name="" type="checkbox" checked="checked" name="rememberMe" id="rememberMe"/>记住密码</label><label><a href="#">忘记密码？</a></label></li>
 			    </ul>
 	    </div>
     </div>

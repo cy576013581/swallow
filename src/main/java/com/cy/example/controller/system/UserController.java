@@ -190,16 +190,15 @@ public class UserController extends BaseController {
 	@SuppressWarnings("finally")
 	@RequestMapping("/validate")
 	@ResponseBody
-	public Map<String, Object> validate(String username, String password) {
+	public Map<String, Object> validate(String username, String password,Boolean rememberMe) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		password = MD5Util.GetMD5Code(password);
-		UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
-				username, password);
+		UsernamePasswordToken token = new UsernamePasswordToken(username, password,rememberMe);
 		boolean flag = true;
 		String msg = "";
-		Subject subject = SecurityUtils.getSubject();
 		try {
-			subject.login(usernamePasswordToken); // 完成登录
+			Subject subject = SecurityUtils.getSubject();
+			subject.login(token); // 完成登录
 			SysUserEntity user = (SysUserEntity) subject.getPrincipal();
 			subject.getSession().setAttribute(WebConfig.LOGIN_USER, user);
 			LoginRecordEntity loginRecord = new LoginRecordEntity();
