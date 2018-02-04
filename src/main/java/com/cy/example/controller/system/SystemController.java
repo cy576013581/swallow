@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.config.WebConfig;
+import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.entity.system.SysDepartmentEntity;
 import com.cy.example.entity.system.SysMenuEntity;
 import com.cy.example.entity.system.SysPermissionEntity;
@@ -94,7 +96,11 @@ public class SystemController {
 	@RequestMapping("/menu/home")
 	public String showHome(ModelMap map) {
 		Map<String, Object> loginRecord = loginRecordService.recentLoginCount();
+		Page<LoginRecordEntity> recordList = loginRecordService.selectPage(new Page<LoginRecordEntity>(1, 20)
+				, new EntityWrapper<LoginRecordEntity>().orderBy("c_createDate",false));
+		
 		map.put("loginRecord", loginRecord);
+		map.put("recordList", recordList.getRecords());
 		return "main/home";
 	}
 

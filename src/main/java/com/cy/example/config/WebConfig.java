@@ -22,8 +22,8 @@ public class WebConfig{
 	public static void add(SuperEntity<?> entity) {
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
-		entity.setC_createDate(DateUtil.getNow());
-		entity.setC_updateDate(DateUtil.getNow());
+		entity.setC_createDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
+		entity.setC_updateDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
 		entity.setN_creater(user.getId());
 		entity.setN_updater(user.getId());
 		entity.setN_deleted(0);
@@ -32,7 +32,7 @@ public class WebConfig{
 	public static void update(SuperEntity<?> entity) {
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
-		entity.setC_updateDate(DateUtil.getNow());
+		entity.setC_updateDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
 		entity.setN_updater(user.getId());
 	}
 

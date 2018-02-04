@@ -156,6 +156,9 @@
 								</div><!-- /.row -->
 
 
+								<!-- ==============================================================-->
+
+
 								<div class="row">
 									<div class="col-sm-6 widget-container-col">
 										<div class="widget-box widget-color-blue3">
@@ -202,88 +205,20 @@
 																</thead>
 
 																<tbody>
-																	<tr>
-																		<td class="">Alex</td>
-
-																		<td>
-																			<a href="#">alex@email.com</a>
-																		</td>
-
-																		<td class="hidden-480">
-																			<span class="label label-warning">Pending</span>
-																		</td>
-																	</tr>
-
-																	<tr>
-																		<td class="">Fred</td>
-
-																		<td>
-																			<a href="#">fred@email.com</a>
-																		</td>
-
-																		<td class="hidden-480">
-																			<span class="label label-success arrowed-in arrowed-in-right">Approved</span>
-																		</td>
-																	</tr>
-
-																	<tr>
-																		<td class="">Jack</td>
-
-																		<td>
-																			<a href="#">jack@email.com</a>
-																		</td>
-
-																		<td class="hidden-480">
-																			<span class="label label-warning">Pending</span>
-																		</td>
-																	</tr>
-
-																	<tr>
-																		<td class="">John</td>
-
-																		<td>
-																			<a href="#">john@email.com</a>
-																		</td>
-
-																		<td class="hidden-480">
-																			<span class="label label-inverse arrowed">Blocked</span>
-																		</td>
-																	</tr>
-
-																	<tr>
-																		<td class="">James</td>
-
-																		<td>
-																			<a href="#">james@email.com</a>
-																		</td>
-
-																		<td class="hidden-480">
-																			<span class="label label-info arrowed-in arrowed-in-right">Online</span>
-																		</td>
-																	</tr>
+																	<#list recordList as x>  
+																		<tr>
+																			<td class="">${x.c_username}</td>
+	
+																			<td>
+																				<a href="#">${x.c_loginIp}</a>
+																			</td>
+	
+																			<td class="hidden-480">
+																				<span class="label label-warning">${x.c_createDate}</span>
+																			</td>
+																		</tr>
+																  </#list>
 																	
-																	<tr>
-																		<td class="">James</td>
-
-																		<td>
-																			<a href="#">james@email.com</a>
-																		</td>
-
-																		<td class="hidden-480">
-																			<span class="label label-info arrowed-in arrowed-in-right">Online</span>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td class="">James</td>
-
-																		<td>
-																			<a href="#">james@email.com</a>
-																		</td>
-
-																		<td class="hidden-480">
-																			<span class="label label-info arrowed-in arrowed-in-right">Online</span>
-																		</td>
-																	</tr>
 																</tbody>
 															</table>
 														</div>
