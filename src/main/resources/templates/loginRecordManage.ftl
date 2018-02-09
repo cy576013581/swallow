@@ -9,7 +9,7 @@
 <body>
 	
 	<@loginRecord.grid controller="/system/loginRecord/" idDb="false" title="登录" width="1100px" height="500px"
-		fields="id:true: ,c_username:false:登录用户,c_loginIp:false:登录IP,c_createDate:false:登录时间">
+		fields="id:true: ,c_username:false:登录用户,c_loginIp:false:登录IP,c_province:false:登陆地址,c_createDate:false:登录时间">
 		
 	</@loginRecord.grid>
 	

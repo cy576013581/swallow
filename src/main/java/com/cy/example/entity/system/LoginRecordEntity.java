@@ -3,13 +3,15 @@ package com.cy.example.entity.system;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
 
-@TableName("loginrecord")
+@TableName("sys_loginrecord")
 @SuppressWarnings("serial")
 public class LoginRecordEntity extends SuperEntity<LoginRecordEntity> {
 
 	private String c_loginIp;
 	
 	private String c_username;
+	
+	private String c_province;
 
 	public String getC_username() {
 		return c_username;
@@ -27,11 +29,18 @@ public class LoginRecordEntity extends SuperEntity<LoginRecordEntity> {
 		this.c_loginIp = c_loginIp;
 	}
 
+	public String getC_province() {
+		return c_province;
+	}
+
+	public void setC_province(String c_province) {
+		this.c_province = c_province;
+	}
+
 	@Override
 	public String toString() {
 		return "LoginRecordEntity [c_loginIp=" + c_loginIp + ", c_username="
-				+ c_username + "]";
+				+ c_username + ", c_province=" + c_province + "]";
 	}
-
 	
 }

@@ -4,12 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.entity.system.MailEntity;
 import com.cy.example.service.ILoginRecordService;
 import com.cy.example.service.IMailService;
+import com.cy.example.util.HttpRequestUtil;
 
 @Configuration
 public class RabbitReceiver {
