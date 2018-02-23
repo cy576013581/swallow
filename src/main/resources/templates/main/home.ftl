@@ -350,12 +350,14 @@
 											</div>
 										</div>
 									</div>
+									
+									<!--=====================================================-->
 
 									<!--第四个-->
 									<div class="col-sm-6 widget-container-col">
 										<div class="widget-box widget-color-purple">
 											<div class="widget-header widget-hea1der-small">
-												<h6 class="widget-title"><i class="ace-icon fa fa-table"></i>最新消息</h6>
+												<h6 class="widget-title"><i class="ace-icon fa fa-table"></i>最新系统公告</h6>
 
 												<div class="widget-toolbar">
 													<a href="#" data-action="settings">
@@ -372,32 +374,24 @@
 												<div class="widget-main no-padding">
 													<!-- #section:custom/scrollbar -->
 													<div class="scrollable" data-height="125">
-														<div class="content">
-															<div class="alert alert-info">
-																Lorem ipsum dolor sit amet, consectetur adipiscing.
-															</div>
-															<div class="alert alert-danger">
-																Lorem ipsum dolor sit amet, consectetur adipiscing.
-															</div>
-															<div class="alert alert-success">
-																Lorem ipsum dolor sit amet, consectetur adipiscing.
-															</div>
-															<div class="alert">
-																Lorem ipsum dolor sit amet, consectetur adipiscing.
-															</div>
-															
-															<div class="alert alert-info">
-																Lorem ipsum dolor sit amet, consectetur adipiscing.
-															</div>
-															<div class="alert alert-danger">
-																Lorem ipsum dolor sit amet, consectetur adipiscing.
-															</div>
-															<div class="alert alert-success">
-																Lorem ipsum dolor sit amet, consectetur adipiscing.
-															</div>
-															<div class="alert">
-																Lorem ipsum dolor sit amet, consectetur adipiscing.
-															</div>
+														<div class="content" style="height:240px;background-color: #fff;">
+															<#list noticeList as x>  
+																<#if ("${x.n_order}" == 1)>
+																	<div class="alert alert-danger">
+																		${x.c_updateDate}&nbsp;&nbsp;&nbsp;${x.c_title}&nbsp;&nbsp;&nbsp;${x.c_content}
+																	</div>
+																</#if>
+																<#if ("${x.n_order}" == 2)>
+																	<div class="alert alert-success">
+																		${x.c_updateDate}-${x.c_title}-${x.c_content}
+																	</div>
+																</#if>
+																<#if ("${x.n_order}" == 3)>
+																	<div class="alert alert-info">
+																		${x.c_updateDate}-${x.c_title}-${x.c_content}
+																	</div>
+																</#if>
+														  	</#list>
 														</div>
 													</div>
 

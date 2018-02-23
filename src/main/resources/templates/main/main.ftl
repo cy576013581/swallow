@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>信息管理系统界面</title>
+	<title>swallow主页</title>
 	<link rel="stylesheet" type="text/css" href="lib/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="lib/easyui/themes/icon.css">
     <link href="css/style.css" rel="stylesheet" type="text/css" />

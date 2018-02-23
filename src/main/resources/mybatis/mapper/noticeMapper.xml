@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.example.mapper.system.NoticeMapper" >
+    <resultMap id="BaseResultMap" type="com.cy.example.entity.system.SysNoticeEntity" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="c_content" property="c_content" jdbcType="VARCHAR" />
+        <result column="c_title" property="c_title" jdbcType="VARCHAR"/>
+        <result column="n_order" property="n_order" jdbcType="INTEGER"/>
+        <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
+        <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
+        <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
+        <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
+    </resultMap>
+    
+    <sql id="ColumnList" >
+        id, c_content,c_title,n_order,c_createDate,n_creater,c_updateDate,n_updater
+    </sql>
+    
+    <select id="searchAll" resultMap="BaseResultMap">
+	   select <include refid="ColumnList" />
+	   from sys_notice
+	   where 1=1
+	   <if test="notice.c_title != null"><if test="notice.c_title != null"> and c_title like CONCAT('%',#{notice.c_title},'%')</if></if>
+   	   order by id limit #{page.index},#{page.rows}
+    </select>  
+    
+    <select id="searchAllCount" resultType="java.lang.Integer" >
+	   select count(id)
+	   from sys_roles
+	   where 1=1
+	  <if test="notice.c_title != null"><if test="notice.c_title != null"> and c_title like CONCAT('%',#{notice.c_title},'%')</if></if>
+    </select>
+</mapper>

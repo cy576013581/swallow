@@ -77,7 +77,7 @@ public class WebControllerAop {
 	    SuperEntity<?> entity =  (SuperEntity<?>) obj[0];
 	    SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
-		entity.setC_updateDate(DateUtil.getNow());
+		entity.setC_updateDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
 		entity.setN_updater(user.getId());
 	}  
 	
@@ -88,8 +88,8 @@ public class WebControllerAop {
 	    SuperEntity<?> entity =  (SuperEntity<?>) obj[0];
 	    SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
-	    entity.setC_createDate(DateUtil.getNow());
-		entity.setC_updateDate(DateUtil.getNow());
+	    entity.setC_createDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
+		entity.setC_updateDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
 		entity.setN_creater(user.getId());
 		entity.setN_updater(user.getId());
 		entity.setN_deleted(0);
