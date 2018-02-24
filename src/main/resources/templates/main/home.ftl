@@ -383,12 +383,12 @@
 																</#if>
 																<#if ("${x.n_order}" == 2)>
 																	<div class="alert alert-success">
-																		${x.c_updateDate}-${x.c_title}-${x.c_content}
+																		${x.c_updateDate}&nbsp;&nbsp;&nbsp;${x.c_title}&nbsp;&nbsp;&nbsp;${x.c_content}
 																	</div>
 																</#if>
 																<#if ("${x.n_order}" == 3)>
 																	<div class="alert alert-info">
-																		${x.c_updateDate}-${x.c_title}-${x.c_content}
+																		${x.c_updateDate}&nbsp;&nbsp;&nbsp;${x.c_title}&nbsp;&nbsp;&nbsp;${x.c_content}
 																	</div>
 																</#if>
 														  	</#list>

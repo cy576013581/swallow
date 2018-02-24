@@ -1,6 +1,6 @@
 package com.cy.example.carrier;
 
-public class IpAnalysisCa {
+public class IpAnalysisCa_Tb {
 
 	/*
 	 * 2. 响应信息：
