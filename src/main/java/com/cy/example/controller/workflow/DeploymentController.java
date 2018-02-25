@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.activiti.engine.repository.Deployment;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,9 +23,6 @@ import com.cy.example.service.IWorkFlowService;
 @RequestMapping("/system/deploy")
 public class DeploymentController extends BaseController {
 
-	private final Logger logger = LoggerFactory
-			.getLogger(this.getClass());
-	
 	@Autowired
 	private IWorkFlowService workFlowService;
 	

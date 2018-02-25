@@ -37,7 +37,6 @@ import com.cy.example.carrier.ProcessDefinitionCa;
 import com.cy.example.carrier.TaskCa;
 import com.cy.example.carrier.WorkFLowCa;
 import com.cy.example.config.WebConfig;
-import com.cy.example.entity.SuperEntity;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.entity.workflow.LeaveBillEntity;
 import com.cy.example.mapper.workflow.LeaveBillMapper;
@@ -195,7 +194,7 @@ public class WorkFlowService implements IWorkFlowService{
 		//批注信息
 		String message = workflow.getComment();
 		//获取请假单ID
-		Long id = workflow.getId();
+//		Long id = workflow.getId();
 		
 		/**
 		 * 1：在完成之前，添加一个批注信息，向act_hi_comment表中添加数据，用于记录对当前申请人的一些审核信息

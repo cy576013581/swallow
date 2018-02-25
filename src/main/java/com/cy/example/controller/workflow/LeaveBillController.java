@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;

@@ -1,7 +1,6 @@
 package com.cy.example.carrier;
 
 import org.activiti.engine.task.Comment;
-import org.activiti.engine.task.Task;
 
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.util.DateUtil;

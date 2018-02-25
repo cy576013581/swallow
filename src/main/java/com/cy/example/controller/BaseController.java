@@ -7,14 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.shiro.SecurityUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import com.cy.example.config.WebConfig;
-import com.cy.example.entity.SuperEntity;
-import com.cy.example.entity.system.SysUserEntity;
-import com.cy.example.util.DateUtil;
 
 /**
  * 

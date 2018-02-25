@@ -8,20 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.cy.example.carrier.DeploymentCa;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.ProcessDefinitionCa;
 import com.cy.example.controller.BaseController;
@@ -31,9 +25,6 @@ import com.cy.example.service.IWorkFlowService;
 @RequestMapping("/system/process")
 public class ProcessDefinitionController extends BaseController {
 
-	private final Logger logger = LoggerFactory
-			.getLogger(this.getClass());
-	
 	@Autowired
 	private IWorkFlowService workFlowService;
 	

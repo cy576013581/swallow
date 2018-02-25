@@ -76,7 +76,6 @@ public class DepartmentController extends BaseController {
 				, new EntityWrapper<SysDepartmentEntity>());
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = departService.selectCount(new EntityWrapper<SysDepartmentEntity>());
-		List<SysDepartmentEntity> data = list.getRecords();
 		map.put("rows", list.getRecords());
 		map.put("total", sum);
 		return map;

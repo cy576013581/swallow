@@ -131,7 +131,6 @@ public class RedisClient {
 	 */
 	public Long del(String... keys) {
 		Jedis jedis = null;
-		Long num = null;
 		try {
 			jedis = pool.getResource();
 			return jedis.del(keys);

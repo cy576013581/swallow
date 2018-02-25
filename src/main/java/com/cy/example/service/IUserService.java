@@ -2,8 +2,6 @@ package com.cy.example.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.baomidou.mybatisplus.service.IService;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.entity.system.SysUserEntity;

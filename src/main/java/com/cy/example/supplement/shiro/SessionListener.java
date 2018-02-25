@@ -1,12 +1,8 @@
 package com.cy.example.supplement.shiro;
 
-import java.util.LinkedHashSet;
-
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
 
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.system.SysUserEntity;
