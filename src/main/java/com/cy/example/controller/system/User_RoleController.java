@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.User_Role_Ca;
 import com.cy.example.controller.BaseController;
-import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.service.IUser_RoleService;
 
 @Controller

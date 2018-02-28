@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.User_Role_Ca;
-import com.cy.example.entity.system.SysRoleEntity;
-import com.cy.example.mapper.system.RoleMapper;
 import com.cy.example.mapper.system.User_RoleMapper;
 import com.cy.example.service.IUser_RoleService;
 

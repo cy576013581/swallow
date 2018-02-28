@@ -10,10 +10,8 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.cy.example.carrier.PageCa;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.service.IUserService;
-import com.cy.example.supplement.shiro.AuthRealm;
 
 @Component
 @Order(value = 1)

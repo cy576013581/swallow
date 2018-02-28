@@ -1,6 +1,5 @@
 package com.cy.example.controller.system;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +14,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.carrier.PageCa;
 import com.cy.example.controller.BaseController;
-import com.cy.example.entity.system.SysPermissionEntity;
 import com.cy.example.entity.system.SysRoleEntity;
-import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.service.IRoleService;
 
 @Controller
@@ -79,7 +76,6 @@ public class RoleController extends BaseController {
 				, new EntityWrapper<SysRoleEntity>().setSqlSelect("c_roleCode,c_roleName,c_createDate,c_updateDate,id"));
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = roleService.selectCount(new EntityWrapper<SysRoleEntity>());
-		List<SysRoleEntity> data = list.getRecords();
 		map.put("rows", list.getRecords());
 		map.put("total", sum);
 		return map;

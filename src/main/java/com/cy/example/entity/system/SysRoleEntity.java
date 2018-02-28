@@ -1,13 +1,11 @@
 package com.cy.example.entity.system;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @TableName("sys_roles")
 @SuppressWarnings("serial")

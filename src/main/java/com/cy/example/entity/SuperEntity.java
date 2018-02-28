@@ -5,7 +5,12 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableLogic;
 
-public class SuperEntity<T extends Model> extends Model<T>{
+public class SuperEntity<T extends Model<?>> extends Model<T>{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	protected long id;
 

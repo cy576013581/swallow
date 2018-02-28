@@ -27,16 +27,6 @@ public class MD5Util {
 		return strDigits[iD1] + strDigits[iD2];
 	}
 
-	// 返回形式只为数字
-	private static String byteToNum(byte bByte) {
-		int iRet = bByte;
-		// System.out.println("iRet1=" + iRet);
-		if (iRet < 0) {
-			iRet += 256;
-		}
-		return String.valueOf(iRet);
-	}
-
 	// 转换字节数组为16进制字串
 	private static String byteToString(byte[] bByte) {
 		StringBuffer sBuffer = new StringBuffer();

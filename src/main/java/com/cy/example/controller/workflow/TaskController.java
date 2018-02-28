@@ -12,8 +12,6 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,9 +34,6 @@ import com.cy.example.service.IWorkFlowService;
 @Controller
 @RequestMapping("/system/task")
 public class TaskController extends BaseController {
-
-	private final Logger logger = LoggerFactory
-			.getLogger(this.getClass());
 	
 	@Autowired
 	private IUserService userService;
