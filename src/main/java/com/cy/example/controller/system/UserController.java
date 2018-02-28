@@ -223,7 +223,7 @@ public class UserController extends BaseController {
 				msg = "登录失败，用户被锁定！";
 			} else if (exception instanceof DisabledAccountException) {
 				logger.info(" 由于密码输入错误次数大于5次，帐号已经禁止登录！ -- >DisabledAccountException");
-				msg = "由于密码输入错误次数大于5次，请一个小时之后登录！";
+				msg = "由于密码输入错误次数大于5次，请5分钟之后登录！";
 			}else {
 				logger.info("else -- >" + exception);
 				msg = "登录失败，发生未知错误：" + exception;

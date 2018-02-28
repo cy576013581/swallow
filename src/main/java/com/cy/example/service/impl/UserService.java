@@ -85,7 +85,7 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
     
     public void incrLoginCount(String key){
     	redisClinet.incr("loginCount:"+key);
-    	if("1".equals(getLoginCount(key))){
+    	if(Integer.valueOf(getLoginCount(key))  > 5){
     		expire("loginCount:"+key);
     	}
     }
@@ -96,7 +96,7 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
     }
     
     public void expire(String key){
-    	redisClinet.expire("loginCount:"+key,3600);
+    	redisClinet.expire(key,300);
     }
 
     public void removeCount(String key){
