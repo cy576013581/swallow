@@ -90,6 +90,6 @@
 			    </ul>
 	    </div>
     </div>
-    <div class="loginbm">版权所有  swallow</div>
+    <div class="loginbm">版权所有  swallow  https://github.com/cy576013581/swallow</div>
 </body>
 </html>
