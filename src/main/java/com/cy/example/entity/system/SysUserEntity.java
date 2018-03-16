@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
 
-@TableName("users")
+@TableName("sys_user")
 public class SysUserEntity extends SuperEntity<SysUserEntity> {
 
 	/**

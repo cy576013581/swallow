@@ -20,9 +20,9 @@
     <select id="searchAll" resultMap="BaseResultMap">
 	   select <include refid="ColumnList" />,u.c_username,r.c_roleName,a.c_createDate,a.c_updateDate
 	   from sys_user_role a
-	   left join users u
+	   left join sys_user u
 	   on u.id = a.n_userId
-	   left join sys_roles r
+	   left join sys_role r
 	   on r.id = a.n_roleId
 	   where a.n_deleted = 0
 	   <if test="ur.n_userId != ''"><if test="ur.n_userId != '0'"> and n_userId = #{ur.n_userId}</if></if>
@@ -46,9 +46,9 @@
     <select id="findAll" resultMap="BaseResultMap">
 	   select <include refid="ColumnList" />,u.c_username,r.c_roleName,a.c_createDate,a.c_updateDate
 	   from sys_user_role a
-	   left join users u
+	   left join sys_user u
 	   on u.id = a.n_userId
-	   left join sys_roles r
+	   left join sys_role r
 	   on r.id = a.n_roleId
 	   where a.n_deleted = 0
    	   order by id limit #{page.index},#{page.rows}

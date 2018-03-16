@@ -22,7 +22,7 @@
 	   from sys_role_permission a
 	   left join sys_permission p
 	   on p.id = a.n_permisId
-	   left join sys_roles r
+	   left join sys_role r
 	   on r.id = a.n_roleId
 	   where a.n_deleted = 0
 	   <if test="rp.n_permisId != ''"><if test="rp.n_permisId != '0'"> and n_permisId = #{rp.n_permisId}</if></if>
@@ -47,7 +47,7 @@
 	   from sys_role_permission a
 	   left join sys_permission p
 	   on p.id = a.n_permisId
-	   left join sys_roles r
+	   left join sys_role r
 	   on r.id = a.n_roleId
 	   where a.n_deleted = 0
    	   order by id limit #{page.index},#{page.rows}

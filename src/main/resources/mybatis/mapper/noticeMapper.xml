@@ -26,7 +26,7 @@
     
     <select id="searchAllCount" resultType="java.lang.Integer" >
 	   select count(id)
-	   from sys_roles
+	   from sys_notice
 	   where 1=1
 	  <if test="notice.c_title != null"><if test="notice.c_title != null"> and c_title like CONCAT('%',#{notice.c_title},'%')</if></if>
     </select>

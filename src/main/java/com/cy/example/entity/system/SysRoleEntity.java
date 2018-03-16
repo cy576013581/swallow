@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@TableName("sys_roles")
+@TableName("sys_role")
 @SuppressWarnings("serial")
 public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 

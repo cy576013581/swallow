@@ -72,12 +72,12 @@
 			d.c_departName as d_c_departName,
 			d.c_departCode as d_c_departCode
 		FROM
-			users u
+			sys_user u
 		LEFT JOIN sys_user_role ur ON u.id = ur.n_userId
-		LEFT JOIN sys_roles r ON ur.n_roleId = r.id
+		LEFT JOIN sys_role r ON ur.n_roleId = r.id
 		LEFT JOIN sys_role_permission rp ON rp.n_roleId = ur.n_roleId
 		LEFT JOIN sys_permission p ON p.id = rp.n_permisId
-		LEFT JOIN users u1 on u.n_superior = u1.id
+		LEFT JOIN sys_user u1 on u.n_superior = u1.id
 		LEFT JOIN sys_department d on u.n_departmentId = d.id
 	   WHERE u.c_username = #{c_username} and u.n_deleted=0
     </select>
@@ -91,7 +91,7 @@
 	   d.id as d_id,
 	   d.c_departName as d_c_departName,
 	   d.c_departCode as d_c_departCode
-	   from users u
+	   from sys_user u
 	   LEFT JOIN sys_department d on u.n_departmentId = d.id
 	   where u.n_deleted=0 
 	   <if test="user.c_username != ''"><if test="user.c_username != null"> and c_username like CONCAT('%',#{user.c_username},'%')</if></if>
@@ -106,7 +106,7 @@
     
     <select id="searchAllCount" resultType="java.lang.Integer" >
 	   select count(id)
-	   from users
+	   from sys_user
 	   where n_deleted=0
 	   <if test="user.c_username != ''"><if test="user.c_username != null"> and c_username like CONCAT('%',#{user.c_username},'%')</if></if>
    	   <if test="user.c_phone != ''"><if test="user.c_phone != null"> and c_phone like CONCAT('%',#{user.c_phone},'%')</if></if>
@@ -134,12 +134,12 @@
 		d.id as d_id,
 		d.c_departName as d_c_departName,
 		d.c_departCode as d_c_departCode
-	   from users u
+	   from sys_user u
 	   LEFT JOIN sys_user_role ur ON u.id = ur.n_userId
-		LEFT JOIN sys_roles r ON ur.n_roleId = r.id
+		LEFT JOIN sys_role r ON ur.n_roleId = r.id
 		LEFT JOIN sys_role_permission rp ON rp.n_roleId = ur.n_roleId
 		LEFT JOIN sys_permission p ON p.id = rp.n_permisId
-		LEFT JOIN users u1 on u.n_superior = u1.id
+		LEFT JOIN sys_user u1 on u.n_superior = u1.id
 		LEFT JOIN sys_department d on u.n_departmentId = d.id
 	   where u.n_deleted=0 
    	   order by u.id
@@ -148,13 +148,13 @@
     
     <select id="findAllCount" resultType="java.lang.Integer" >
 	   select count(id)
-	   from users
+	   from sys_user
 	   where n_deleted=0
     </select>
 
     <update id="updateMy" parameterType="com.cy.example.entity.system.SysUserEntity" >
        UPDATE 
-       		users 
+       		sys_user 
        SET 
        	<if test="c_pwd != null">
        		c_pwd = #{c_pwd},
