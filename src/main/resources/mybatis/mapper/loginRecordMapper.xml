@@ -7,10 +7,11 @@
         <result column="c_loginIp" property="c_loginIp" jdbcType="VARCHAR"/>
         <result column="c_username" property="c_username" jdbcType="VARCHAR"/>
         <result column="c_province" property="c_province" jdbcType="VARCHAR"/>
+        <result column="c_city" property="c_city" jdbcType="VARCHAR"/>
     </resultMap>
     
     <sql id="ColumnList" >
-        id, c_createDate, c_loginIp, c_username,c_province
+        id, c_createDate, c_loginIp, c_username,c_province,c_city
     </sql>
     
     <select id="searchAll" resultMap="BaseResultMap">
@@ -19,6 +20,7 @@
 	   where 1=1
 	   <if test="loginRecord.c_username != null"><if test="loginRecord.c_username != null"> and c_username like CONCAT('%',#{loginRecord.c_username},'%')</if></if>
 	   <if test="loginRecord.c_province != null"><if test="loginRecord.c_province != null"> and c_province like CONCAT('%',#{loginRecord.c_province},'%')</if></if>
+	   <if test="loginRecord.c_city != null"><if test="loginRecord.c_city != null"> and c_city like CONCAT('%',#{loginRecord.c_city},'%')</if></if>
    	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp like CONCAT('%',#{loginRecord.c_loginIp},'%')</if></if>
    	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
    	   order by id limit #{page.index},#{page.rows}
@@ -30,6 +32,7 @@
 	   where 1=1
 	   <if test="loginRecord.c_username != null"><if test="loginRecord.c_username != null"> and c_username like CONCAT('%',#{loginRecord.c_username},'%')</if></if>
    	   <if test="loginRecord.c_province != null"><if test="loginRecord.c_province != null"> and c_province like CONCAT('%',#{loginRecord.c_province},'%')</if></if>
+   	   <if test="loginRecord.c_city != null"><if test="loginRecord.c_city != null"> and c_city like CONCAT('%',#{loginRecord.c_city},'%')</if></if>
    	   <if test="loginRecord.c_loginIp != ''"><if test="loginRecord.c_loginIp != null"> and c_loginIp like CONCAT('%',#{loginRecord.c_loginIp},'%')</if></if>
    	   <if test="loginRecord.c_createDate != ''"><if test="loginRecord.c_createDate != null">	and substr(c_createDate,1,10) = #{loginRecord.c_createDate}</if></if>
     </select>

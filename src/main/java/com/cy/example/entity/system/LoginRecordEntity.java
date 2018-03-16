@@ -12,6 +12,8 @@ public class LoginRecordEntity extends SuperEntity<LoginRecordEntity> {
 	private String c_username;
 	
 	private String c_province;
+	
+	private String c_city;
 
 	public String getC_username() {
 		return c_username;
@@ -35,6 +37,14 @@ public class LoginRecordEntity extends SuperEntity<LoginRecordEntity> {
 
 	public void setC_province(String c_province) {
 		this.c_province = c_province;
+	}
+
+	public String getC_city() {
+		return c_city;
+	}
+
+	public void setC_city(String c_city) {
+		this.c_city = c_city;
 	}
 
 	@Override

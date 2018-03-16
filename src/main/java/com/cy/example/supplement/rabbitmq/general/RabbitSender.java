@@ -37,8 +37,10 @@ public class RabbitSender {
 			if(0 == ipAnalusisTb.getCode()){
 				if(StringUtil.IsEqual("XX", ipAnalusisTb.getData().getRegion())){
 					loginRecord.setC_province(ipAnalusisTb.getData().getCity());
+					loginRecord.setC_city(ipAnalusisTb.getData().getCity());
 				}else{
 					loginRecord.setC_province(ipAnalusisTb.getData().getRegion());
+					loginRecord.setC_city(ipAnalusisTb.getData().getCity());
 				}
 				
 			}else{
@@ -47,15 +49,17 @@ public class RabbitSender {
 				IpAnalysisCa_Sina ipAnalusisSina = JsonUtil.toBean(addr, IpAnalysisCa_Sina.class);
 				if(1 == ipAnalusisSina.getRet()){
 					loginRecord.setC_province(ipAnalusisSina.getProvince());
+					loginRecord.setC_city(ipAnalusisSina.getCity());
 				}else{
 					loginRecord.setC_province("未知");
+					loginRecord.setC_city("未知");
 				}
 			}
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.info("解析IP出错！");
 			loginRecord.setC_province("未知");
+			loginRecord.setC_city("未知");
 		}
 		logger.info("发送对象信息: " + loginRecord.toString());
 		this.rabbitTemplate.convertAndSend(RabbitConfig.QUEUE_LOGINRECORD, loginRecord);
