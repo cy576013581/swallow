@@ -66,9 +66,9 @@
 				  	btn: ['删除','取消'] //按钮
 				}, function(){
 				  	$.ajax({ //使用ajax与服务器异步交互
-		                url:"${controller}delete?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
-		                type:"POST",
-		                data: {id:row.id}, 
+		                url:"${controller}/"+row.id+"?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+		                type:"DELETE",
+		                //data: {id:row.id}, 
 		                dataType:"json",
 		                error:function(XMLHttpRequest,textStatus,errorThrown){
 		                	toastr.error('网络连接失败！');
@@ -104,8 +104,8 @@
 			json += "rows="+options.pageSize
 			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
-                url:"${controller}searchData?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
-                type:"POST",
+                url:"${controller}/search?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+                type:"GET",
                 data: json, 
                 async: false,
                 dataType:"json",
@@ -190,27 +190,27 @@
 		function dlgBtnClick(){
 			var url;
 			var json = "";
-			/*for(var i = 0;i<tranMap.size();i++){
-					alert(tranMap.key(i));
-			}*/
+			var type = "";
 			for(var i = 0;i<editMap.size();i++){
 				var key = editMap.key(i);
+				//alert("1"+key);
 				if(tranMap.contains(key)>-1){
 					key = tranMap.get(key);
 				}
+				//alert("2"+key);
 				json = json + key+"="+getValues(editMap,"ed_",editMap.key(i))+"&";
 			}
 			if(operation == 1){
-				url = "${controller}add";
 				json = json.substring(0,json.length-1);
+				type = "POST";
 			}else if(operation == 2){
-				url = "${controller}update";
 				json += "id="+$("#ed_id").val();
+				type = "PUT";
 			}
 			//alert(json);
 			$.ajax({ //使用ajax与服务器异步交互
-                url:url+"?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
-                type: "POST",
+                url:"${controller}?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+                type: type,
                 data: json, 
                 //contentType: "multipart/form-data",
                 //data: $('#form').serialize(),
@@ -440,7 +440,7 @@
 	<div id="box" style="display:none;">
 		<table id="dg" class="easyui-datagrid" title="${title}" style="width:${width};height:${height}"
             data-options="rownumbers:${rownumbers},singleSelect:${singleSelect},
-            url:'${controller}findAll',method:'get',toolbar:'#tb,#ft',pagination:'true',nowrap:'true',
+            url:'${controller}',method:'get',toolbar:'#tb,#ft',pagination:'true',nowrap:'true',
             onDblClickRow: onDblClickRow">
         <thead>
             <tr>

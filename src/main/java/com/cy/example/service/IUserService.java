@@ -9,6 +9,8 @@ import com.cy.example.entity.system.SysUserEntity;
 public interface IUserService extends IService<SysUserEntity>{
 	
 	public int updateMy(SysUserEntity user);
+	
+	public boolean insertMy(SysUserEntity user);
 
 	public SysUserEntity findOneByUsername(String username);
 

@@ -13,9 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -23,7 +22,7 @@ import com.cy.example.config.WebConfig;
 import com.cy.example.entity.FileEntity;
 import com.cy.example.service.IFileService;
 
-@Controller
+@RestController
 @RequestMapping("/system/file")
 public class FileController extends BaseController {
 
@@ -34,7 +33,6 @@ public class FileController extends BaseController {
 	private IFileService fileService;
 
 	@RequestMapping("/upload")
-	@ResponseBody
 	public Map<String, Object> upload(HttpServletRequest request)
 			throws IOException {
 

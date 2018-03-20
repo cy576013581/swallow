@@ -12,7 +12,9 @@ import com.cy.example.mapper.SuperMapper;
 @Mapper
 public interface UserMapper extends SuperMapper<SysUserEntity>{
 	
-	int updateMy(SysUserEntity user);
+	int updateMy(@Param("user")SysUserEntity user);
+	
+	boolean insertMy(@Param("user")SysUserEntity user);
 
 	SysUserEntity validate(String username, String pwd);
 

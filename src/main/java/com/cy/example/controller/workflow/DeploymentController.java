@@ -8,7 +8,11 @@ import java.util.Map;
 import org.activiti.engine.repository.Deployment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,9 +30,9 @@ public class DeploymentController extends BaseController {
 	@Autowired
 	private IWorkFlowService workFlowService;
 	
-	@RequestMapping("/delete")
+	@DeleteMapping("/{id}")
 	@ResponseBody
-	public Map<String, Object> delete(@RequestParam("id") String id) {
+	public Map<String, Object> delete(@PathVariable("id")String id) {
 		workFlowService.deleteDeploy(id, true);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", true);
@@ -37,7 +41,7 @@ public class DeploymentController extends BaseController {
 	}
 	
 	//部署方式后期再做优化
-	@RequestMapping("/add")
+	@PostMapping
 	public String add(@RequestParam("name") String name,  
 			@RequestParam("file") MultipartFile file) {
 		workFlowService.deploy(file, name);
@@ -48,7 +52,7 @@ public class DeploymentController extends BaseController {
 		return "workflow/deployManage";
 	}
 	
-	@RequestMapping("/findAll")
+	@GetMapping
 	@ResponseBody
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
 		List<Deployment> list = workFlowService.getDeploymentList(page);
@@ -65,9 +69,9 @@ public class DeploymentController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/searchData")
+	@GetMapping("/search")
 	@ResponseBody
-	public Map<String, Object> searchData(
+	public Map<String, Object> search(
 			@ModelAttribute("deployment") DeploymentCa deployment,
 			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();

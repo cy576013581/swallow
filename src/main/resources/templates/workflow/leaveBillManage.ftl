@@ -7,7 +7,7 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/bill/" title="请假单管理" width="1400px" height="500px"
+	<@loginRecord.grid controller="/system/bill" title="请假单管理" width="1400px" height="500px"
 		fields="id:true: ,user.id:true: ,user.c_username:false:申请人,n_status:false:审核状态,c_leaveReason:false:请假原因,c_leaveDays:false:请假天数,c_startTime:false:请假开始时间,c_endTime:false:请假结束时间,c_remarks:false:备注,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
 	</@loginRecord.grid>

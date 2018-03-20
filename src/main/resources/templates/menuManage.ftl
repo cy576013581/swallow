@@ -7,7 +7,7 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/menu/" title="菜单管理" width="1100px" height="500px"
+	<@loginRecord.grid controller="/system/menu" title="菜单管理" width="1100px" height="500px"
 		fields="id:true: ,c_url:false:菜单地址,c_menuName:false:菜单名称,c_node:false:菜单节点,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
 	</@loginRecord.grid>

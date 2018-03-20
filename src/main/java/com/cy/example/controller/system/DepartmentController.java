@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -17,15 +21,14 @@ import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysDepartmentEntity;
 import com.cy.example.service.IDepartmentService;
 
-@Controller
+@RestController
 @RequestMapping("/system/depart")
 public class DepartmentController extends BaseController {
 
 	@Autowired
 	private IDepartmentService departService;
 	
-	@RequestMapping("/add")
-	@ResponseBody
+	@PostMapping
 	public Map<String, Object> add(@ModelAttribute("depart") SysDepartmentEntity depart) {
 		boolean flag = departService.insert(depart);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -39,8 +42,7 @@ public class DepartmentController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/update")
-	@ResponseBody
+	@PutMapping
 	public Map<String, Object> update(@ModelAttribute("depart") SysDepartmentEntity depart) {
 		boolean flag = departService.updateById(depart);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -54,10 +56,9 @@ public class DepartmentController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/delete")
-	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("depart") SysDepartmentEntity depart) {
-		boolean flag = departService.deleteById(depart.getId());
+	@DeleteMapping("/{id}")
+	public Map<String, Object> delete(@PathVariable("id")Long id) {
+		boolean flag = departService.deleteById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -69,8 +70,7 @@ public class DepartmentController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/findAll")
-	@ResponseBody
+	@GetMapping
 	public Map<String, Object> findAll(int page, int rows) {
 		Page<SysDepartmentEntity> list = departService.selectPage(new Page<SysDepartmentEntity>(page, rows)
 				, new EntityWrapper<SysDepartmentEntity>());
@@ -81,9 +81,8 @@ public class DepartmentController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/searchData")
-	@ResponseBody
-	public Map<String, Object> searchData(
+	@GetMapping("/search")
+	public Map<String, Object> search(
 			@ModelAttribute("depart") SysDepartmentEntity depart,
 			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();

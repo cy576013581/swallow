@@ -7,7 +7,7 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/user_role/" title="角色管理" width="1100px" height="500px"
+	<@loginRecord.grid controller="/system/user_role" title="角色管理" width="1100px" height="500px"
 		fields="id:true: ,n_userId:true:用户ID,c_username:false:用户名称,n_roleId:true:角色ID,c_roleName:false:角色名称,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
 	</@loginRecord.grid>

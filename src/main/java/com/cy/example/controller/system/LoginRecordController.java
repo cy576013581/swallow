@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -18,7 +18,7 @@ import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.service.ILoginRecordService;
 import com.cy.example.service.IUserService;
 
-@Controller
+@RestController
 @RequestMapping("/system/loginRecord")
 public class LoginRecordController extends BaseController {
 
@@ -28,8 +28,7 @@ public class LoginRecordController extends BaseController {
 	@Autowired
 	private IUserService userService;
 
-	@RequestMapping("/findAll")
-	@ResponseBody
+	@GetMapping
 	public Map<String, Object> findAll(int page, int rows) {
 		Page<LoginRecordEntity> list = loginRecordService.selectPage(new Page<LoginRecordEntity>(page, rows)
 				, new EntityWrapper<LoginRecordEntity>().orderBy("c_createDate",false));
@@ -40,9 +39,8 @@ public class LoginRecordController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/searchData")
-	@ResponseBody
-	public Map<String, Object> searchData(
+	@GetMapping("/search")
+	public Map<String, Object> search(
 			@ModelAttribute("loginRecord") LoginRecordEntity loginRecord,
 			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();

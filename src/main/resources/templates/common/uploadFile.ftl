@@ -21,13 +21,13 @@
     </style>
 </head>
 <body>
-		<form id="dropz" enctype="multipart/form-data" action="${controller}upload" class="dropzone dz-clickable dz-started" style="width:${width};height:${height};">
+		<form id="dropz" enctype="multipart/form-data" action="${controller}/upload" class="dropzone dz-clickable dz-started" style="width:${width};height:${height};">
 		</form>
 
 	<script type="text/javascript">
 	    $(function(){
 	    	var dropz = new Dropzone("#dropz", {
-		        url: "${controller}upload",
+		        url: "${controller}/upload",
 		        maxFiles: 6,
 		        paramName: "file", 
 			    maxFilesize: 20, // MB

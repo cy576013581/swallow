@@ -14,10 +14,14 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.carrier.PageCa;
@@ -25,14 +29,16 @@ import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.entity.system.MailEntity;
+import com.cy.example.entity.system.SysDepartmentEntity;
 import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.service.IDepartmentService;
 import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
 import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-@Controller
+@RestController
 @RequestMapping("/system/user")
 public class UserController extends BaseController {
 
@@ -49,7 +55,6 @@ public class UserController extends BaseController {
 			.getLogger(this.getClass());
 	
 	@RequestMapping("/register")
-	@ResponseBody
 	public Map<String, Object> register(@ModelAttribute("user") SysUserEntity user) {
 		WebConfig.add(user);
 		user.setN_status("0");
@@ -72,7 +77,6 @@ public class UserController extends BaseController {
 	}
 	
 	@RequestMapping("/lock")
-	@ResponseBody
 	public Map<String, Object> lock(long id,String n_status) {
 		SysUserEntity user = userService.selectById(id);
 		String msg = "";
@@ -90,11 +94,10 @@ public class UserController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/add")
-	@ResponseBody
+	@PostMapping
 	public Map<String, Object> add(@ModelAttribute("user") SysUserEntity user) {
-		user.setN_status("1");
-		boolean flag = userService.insert(user);
+		user.getN_departmentId().setId(Long.valueOf(user.getN_departmentId().getC_departName()));
+		boolean flag = userService.insertMy(user);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -106,8 +109,7 @@ public class UserController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/update")
-	@ResponseBody
+	@PutMapping
 	public Map<String, Object> update(@ModelAttribute("user") SysUserEntity user) {
 		/*if("男".equals(user.getN_sex())){
 			user.setN_sex("1");
@@ -132,10 +134,9 @@ public class UserController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/delete")
-	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("user") SysUserEntity user) {
-		boolean flag = userService.deleteById(user.getId());
+	@DeleteMapping("/{id}")
+	public Map<String, Object> delete(@PathVariable("id")Long id) {
+		boolean flag = userService.deleteById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -147,8 +148,7 @@ public class UserController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/findAll")
-	@ResponseBody
+	@GetMapping
 	public Map<String, Object> findAll(@ModelAttribute("page") PageCa page)
 			throws JsonProcessingException {
 		// System.out.print("================================="+page.toString()+page.getIndex());
@@ -174,9 +174,8 @@ public class UserController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/searchData")
-	@ResponseBody
-	public Map<String, Object> searchData(
+	@GetMapping("/search")
+	public Map<String, Object> search(
 			@ModelAttribute("user") SysUserEntity user,
 			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -189,7 +188,6 @@ public class UserController extends BaseController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping("/validate")
-	@ResponseBody
 	public Map<String, Object> validate(String username, String password,Boolean rememberMe) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		password = MD5Util.GetMD5Code(password);

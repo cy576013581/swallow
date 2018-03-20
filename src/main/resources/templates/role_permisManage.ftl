@@ -7,7 +7,7 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/role_permis/" title="角色关联权限管理" width="1100px" height="500px"
+	<@loginRecord.grid controller="/system/role_permis" title="角色关联权限管理" width="1100px" height="500px"
 		fields="id:true: ,n_roleId:true:角色ID,c_roleName:false:角色名称,n_permisId:true:权限ID,c_permisName:false:权限名称,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
 	</@loginRecord.grid>

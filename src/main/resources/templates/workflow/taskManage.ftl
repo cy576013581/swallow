@@ -7,7 +7,7 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/task/" title="个人任务" width="1100px" height="400px" idDb="false"
+	<@loginRecord.grid controller="/system/task" title="个人任务" width="1100px" height="400px" idDb="false"
 		fields="id:true: ,assignee.id:true: ,name:false:任务名称,createTime:false:创建时间,assignee.c_username:false:办理人">
 		
 	</@loginRecord.grid>

@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.carrier.PageCa;
@@ -16,15 +20,14 @@ import com.cy.example.carrier.Role_Permis_Ca;
 import com.cy.example.controller.BaseController;
 import com.cy.example.service.IRole_PermisService;
 
-@Controller
+@RestController
 @RequestMapping("/system/role_permis")
 public class Role_PermisController extends BaseController {
 
 	@Autowired
 	private IRole_PermisService rpService;
 	
-	@RequestMapping("/add")
-	@ResponseBody
+	@PostMapping
 	public Map<String, Object> add(@ModelAttribute("rp") Role_Permis_Ca rp) {
 		rp.setN_roleId(Long.valueOf(" ".equals(rp.getC_roleName()) ? "0" : rp.getC_roleName()));
 		rp.setN_permisId(Long.valueOf(" ".equals(rp.getC_permisName()) ? "0" : rp.getC_permisName()));
@@ -49,8 +52,7 @@ public class Role_PermisController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/update")
-	@ResponseBody
+	@PutMapping
 	public Map<String, Object> update(@ModelAttribute("rp") Role_Permis_Ca rp) {
 		rp.setN_roleId(Long.valueOf(" ".equals(rp.getC_roleName()) ? "0" : rp.getC_roleName()));
 		rp.setN_permisId(Long.valueOf(" ".equals(rp.getC_permisName()) ? "0" : rp.getC_permisName()));
@@ -73,10 +75,9 @@ public class Role_PermisController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/delete")
-	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("rp") Role_Permis_Ca rp) {
-		boolean flag = rpService.deleteById(rp.getId());
+	@DeleteMapping("/{id}")
+	public Map<String, Object> delete(@PathVariable("id")Long id) {
+		boolean flag = rpService.deleteById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -88,8 +89,7 @@ public class Role_PermisController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/findAll")
-	@ResponseBody
+	@GetMapping
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
 		List<Role_Permis_Ca> list = rpService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -99,9 +99,8 @@ public class Role_PermisController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/searchData")
-	@ResponseBody
-	public Map<String, Object> searchData(
+	@GetMapping("/search")
+	public Map<String, Object> search(
 			@ModelAttribute("rp") Role_Permis_Ca rp,
 			@ModelAttribute("page") PageCa page) {
 		rp.setN_roleId(Long.valueOf(" ".equals(rp.getC_roleName()) ? "0" : rp.getC_roleName()));

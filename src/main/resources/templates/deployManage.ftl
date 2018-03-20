@@ -7,7 +7,7 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/workflow/" title="部署管理" width="1100px" height="500px"
+	<@loginRecord.grid controller="/system/workflow" title="部署管理" width="1100px" height="500px"
 		fields="id:true: ,name:false:部署名称,c_roleName:false:角色名称,deploymentTime:false:部署时间">
 		
 	</@loginRecord.grid>

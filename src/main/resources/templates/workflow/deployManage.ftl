@@ -13,7 +13,7 @@
         <input class="easyui-filebox" style="width:200px" name="file" buttonText='选择文件' prompt='选择要部署的文件'>
         <input type="submit" value="部署"/>  
     </form>
-	<@loginRecord.grid controller="/system/deploy/" title="部署" width="1100px" height="400px"
+	<@loginRecord.grid controller="/system/deploy" title="部署" width="1100px" height="400px"
 		fields="id:true: ,name:false:部署名称,deploymentTime:false:部署时间">
 		
 	</@loginRecord.grid>

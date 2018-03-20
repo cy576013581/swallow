@@ -23,6 +23,16 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
 	@Autowired
 	private RedisClient redisClinet; 
 	
+	public boolean insertMy(SysUserEntity user) {
+		// TODO Auto-generated method stub
+		if (null != user.getC_pwd() && "" != user.getC_pwd()) {
+			user.setC_pwd(MD5Util.GetMD5Code(user.getC_pwd()));
+		}else{
+			user.setC_pwd(MD5Util.GetMD5Code("123456"));
+		}
+		return this.userMapper.insertMy(user);
+	}
+	
 	public int updateMy(SysUserEntity user) {
 		if (null != user.getC_pwd() && "" != user.getC_pwd()) {
 			user.setC_pwd(MD5Util.GetMD5Code(user.getC_pwd()));
@@ -97,5 +107,5 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
     public void removeCount(String key){
     	redisClinet.del("loginCount:"+key);
     }
-    
+
 }

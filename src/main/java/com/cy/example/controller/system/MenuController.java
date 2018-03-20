@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -17,15 +21,14 @@ import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysMenuEntity;
 import com.cy.example.service.IMenuService;
 
-@Controller
+@RestController
 @RequestMapping("/system/menu")
 public class MenuController extends BaseController{
 	
 	@Autowired
 	private IMenuService menuService;
 	
-	@RequestMapping("/add")
-	@ResponseBody
+	@PostMapping
 	public Map<String, Object> add(@ModelAttribute("menu") SysMenuEntity menu) {
 		boolean flag = menuService.insert(menu);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -39,8 +42,7 @@ public class MenuController extends BaseController{
 		return map;
 	}
 
-	@RequestMapping("/update")
-	@ResponseBody
+	@PutMapping
 	public Map<String, Object> update(@ModelAttribute("menu") SysMenuEntity menu) {
 		boolean flag = menuService.updateById(menu);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -54,10 +56,9 @@ public class MenuController extends BaseController{
 		return map;
 	}
 
-	@RequestMapping("/delete")
-	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("menu") SysMenuEntity menu) {
-		boolean flag = menuService.deleteById(menu.getId());
+	@DeleteMapping("/{id}")
+	public Map<String, Object> delete(@PathVariable("id")Long id) {
+		boolean flag = menuService.deleteById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -69,8 +70,7 @@ public class MenuController extends BaseController{
 		return map;
 	}
 
-	@RequestMapping("/findAll")
-	@ResponseBody
+	@GetMapping
 	public Map<String, Object> findAll(int page, int rows) {
 		Page<SysMenuEntity> list = menuService.selectPage(new Page<SysMenuEntity>(page, rows)
 				, new EntityWrapper<SysMenuEntity>());
@@ -88,9 +88,8 @@ public class MenuController extends BaseController{
 		return map;
 	}
 
-	@RequestMapping("/searchData")
-	@ResponseBody
-	public Map<String, Object> searchData(
+	@GetMapping("/search")
+	public Map<String, Object> search(
 			@ModelAttribute("menu") SysMenuEntity menu,
 			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();

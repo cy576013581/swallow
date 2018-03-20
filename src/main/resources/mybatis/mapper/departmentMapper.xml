@@ -19,8 +19,8 @@
 	   select <include refid="ColumnList" />
 	   from sys_department
 	   where 1=1
-	   <if test="depart.c_departName != null"><if test="depart.c_departName != null"> and c_departName like CONCAT('%',#{c_departName},'%')</if></if>
-	   <if test="depart.c_departCode != null"><if test="depart.c_departCode != null"> and c_departCode like CONCAT('%',#{c_departCode},'%')</if></if>
+	   <if test="depart.c_departName != null"><if test="depart.c_departName != null"> and c_departName like CONCAT('%',#{depart.c_departName},'%')</if></if>
+	   <if test="depart.c_departCode != null"><if test="depart.c_departCode != null"> and c_departCode like CONCAT('%',#{depart.c_departCode},'%')</if></if>
    	   order by id limit #{page.index},#{page.rows}
     </select>  
     
@@ -28,7 +28,7 @@
 	   select count(id)
 	   from sys_department
 	   where 1=1
-	   <if test="depart.c_departName != null"><if test="depart.c_departName != null"> and c_departName like CONCAT('%',#{c_departName},'%')</if></if>
-	   <if test="depart.c_departCode != null"><if test="depart.c_departCode != null"> and c_departCode like CONCAT('%',#{c_departCode},'%')</if></if>
+	   <if test="depart.c_departName != null"><if test="depart.c_departName != null"> and c_departName like CONCAT('%',#{depart.c_departName},'%')</if></if>
+	   <if test="depart.c_departCode != null"><if test="depart.c_departCode != null"> and c_departCode like CONCAT('%',#{depart.c_departCode},'%')</if></if>
     </select>
 </mapper>

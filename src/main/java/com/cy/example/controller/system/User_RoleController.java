@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.carrier.PageCa;
@@ -16,15 +20,14 @@ import com.cy.example.carrier.User_Role_Ca;
 import com.cy.example.controller.BaseController;
 import com.cy.example.service.IUser_RoleService;
 
-@Controller
+@RestController
 @RequestMapping("/system/user_role")
 public class User_RoleController extends BaseController {
 
 	@Autowired
 	private IUser_RoleService urService;
 	
-	@RequestMapping("/add")
-	@ResponseBody
+	@PostMapping
 	public Map<String, Object> add(@ModelAttribute("ur") User_Role_Ca ur) {
 		ur.setN_userId(Long.valueOf(ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
@@ -48,8 +51,7 @@ public class User_RoleController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/update")
-	@ResponseBody
+	@PutMapping
 	public Map<String, Object> update(@ModelAttribute("ur") User_Role_Ca ur) {
 		ur.setN_userId(Long.valueOf(ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
@@ -71,10 +73,9 @@ public class User_RoleController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/delete")
-	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("ur") User_Role_Ca ur) {
-		boolean flag = urService.deleteById(ur.getId());
+	@DeleteMapping("/{id}")
+	public Map<String, Object> delete(@PathVariable("id")Long id) {
+		boolean flag = urService.deleteById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -86,8 +87,7 @@ public class User_RoleController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/findAll")
-	@ResponseBody
+	@GetMapping
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
 		List<User_Role_Ca> list = urService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -97,9 +97,8 @@ public class User_RoleController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/searchData")
-	@ResponseBody
-	public Map<String, Object> searchData(
+	@GetMapping("/search")
+	public Map<String, Object> search(
 			@ModelAttribute("ur") User_Role_Ca ur,
 			@ModelAttribute("page") PageCa page) {
 		ur.setN_userId(Long.valueOf(" ".equals(ur.getC_username()) ? "0" : ur.getC_username()));

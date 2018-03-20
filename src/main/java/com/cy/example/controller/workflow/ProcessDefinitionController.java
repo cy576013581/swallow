@@ -10,18 +10,18 @@ import java.util.Map;
 
 import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cy.example.carrier.PageCa;
 import com.cy.example.carrier.ProcessDefinitionCa;
 import com.cy.example.controller.BaseController;
 import com.cy.example.service.IWorkFlowService;
 
-@Controller
+@RestController
 @RequestMapping("/system/process")
 public class ProcessDefinitionController extends BaseController {
 
@@ -43,8 +43,7 @@ public class ProcessDefinitionController extends BaseController {
 		in.close();
 	}
 	
-	@RequestMapping("/findAll")
-	@ResponseBody
+	@GetMapping
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
 		List<ProcessDefinition> list = workFlowService.getProcessDefinitionList(page);
 		List<ProcessDefinitionCa> data = new ArrayList<ProcessDefinitionCa>();
@@ -60,9 +59,8 @@ public class ProcessDefinitionController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/searchData")
-	@ResponseBody
-	public Map<String, Object> searchData(
+	@GetMapping("/search")
+	public Map<String, Object> search(
 			@ModelAttribute("process") ProcessDefinitionCa process,
 			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();

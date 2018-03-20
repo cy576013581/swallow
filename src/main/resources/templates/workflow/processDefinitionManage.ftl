@@ -7,7 +7,7 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/process/" title="部署" idDb="false" width="1100px" height="400px"
+	<@loginRecord.grid controller="/system/process" title="部署" idDb="false" width="1100px" height="400px"
 		fields="id:true: ,name:false:流程定义名称,key:false:流程定义KEY,version:false:流程定义版本,resourceName:false:规则文件名称,diagramResourceName:false:规则图片名称,deploymentId:false:部署ID">
 		
 	</@loginRecord.grid>

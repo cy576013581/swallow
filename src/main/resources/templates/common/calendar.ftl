@@ -192,7 +192,8 @@
 					events: function(start,end,timezone, callback) {
 						//alert(new Date(start).Format("yyyy-MM-dd")+":"+new Date(end).Format("yyyy-MM-dd"));
 						$.ajax({
-				            url: "${controller}searchAll?s="+new Date().getTime(),
+				            url: "${controller}?s="+new Date().getTime(),
+				            type:"GET",
 				            dataType: 'json',
 				            data: {
 				                start: new Date(start).Format("yyyy-MM-dd"), 
@@ -231,7 +232,7 @@
 						var endStr = new Date(new Date(date).getTime()+1000 * 60 * 60 * 24).Format("yyyy-MM-dd");
 						//alert(startStr+":"+endStr);
 						$.ajax({ 
-							url:"${controller}add?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+							url:"${controller}?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
 							type:"POST",
 							data: {c_start:startStr,c_end:endStr,c_color:color},
 							dataType:"json", //接收返回的数据方式为json
@@ -263,8 +264,8 @@
 					eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ) {
 						//alert(new Date(event.start).Format("yyyy-MM-dd")+":"+new Date(event.end).Format("yyyy-MM-dd"));
 						$.ajax({ 
-							url:"${controller}update?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
-							type:"POST",
+							url:"${controller}?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+							type:"PUT",
 							data: {id:event.id,c_color:event.color,c_title:event.title,c_start:new Date(event.start).Format("yyyy-MM-dd"),c_end:new Date(event.end).Format("yyyy-MM-dd")},
 							dataType:"json", //接收返回的数据方式为json
 							error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -281,8 +282,8 @@
 					},
 					eventResize: function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
 						$.ajax({ 
-							url:"${controller}update?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
-							type:"POST",
+							url:"${controller}?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+							type:"PUT",
 							data: {id:event.id,c_color:event.color,c_title:event.title,c_start:new Date(event.start).Format("yyyy-MM-dd"),c_end:new Date(event.end).Format("yyyy-MM-dd")},
 							dataType:"json", //接收返回的数据方式为json
 							error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -307,7 +308,7 @@
 								var endStr = new Date(end).Format("yyyy-MM-dd");
 								var startStr = new Date(start).Format("yyyy-MM-dd");
 								$.ajax({ 
-									url:"${controller}add?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+									url:"${controller}?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
 									type:"POST",
 									data: {c_title:title,c_start:startStr,c_end:endStr},
 									dataType:"json", //接收返回的数据方式为json
@@ -359,8 +360,8 @@
 							
 							calEvent.title = $(this).find("input[type=text]").val();
 							$.ajax({ 
-								url:"${controller}update?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
-								type:"POST",
+								url:"${controller}?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+								type:"PUT",
 								data: {id:parseInt(calEvent._id),c_title:calEvent.title},
 								dataType:"json", //接收返回的数据方式为json
 								error:function(XMLHttpRequest,textStatus,errorThrown){
@@ -379,9 +380,8 @@
 						});
 						modal.find('button[data-action=delete]').on('click', function() {//删除
 							$.ajax({ 
-									url:"${controller}delete?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
-									type:"POST",
-									data: {id:calEvent._id},
+									url:"${controller}/"+calEvent._id+"?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+									type:"DELETE",
 									dataType:"json", //接收返回的数据方式为json
 									error:function(XMLHttpRequest,textStatus,errorThrown){
 									}, //错误提示 

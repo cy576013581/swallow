@@ -8,7 +8,7 @@
 	</head>
 
 	<body>
-		<@cal.calendar controller="/system/calendar/"/>
+		<@cal.calendar controller="/system/calendar"/>
 		
 	</body>
 </html>

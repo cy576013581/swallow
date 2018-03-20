@@ -7,9 +7,15 @@ import java.util.Map;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cy.example.carrier.PageCa;
 import com.cy.example.config.WebConfig;
@@ -18,15 +24,14 @@ import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.entity.workflow.LeaveBillEntity;
 import com.cy.example.service.ILeaveBillService;
 
-@Controller
+@RestController
 @RequestMapping("/system/bill")
 public class LeaveBillController extends BaseController {
 
 	@Autowired
 	private ILeaveBillService billService;
 	
-	@RequestMapping("/submit")
-	@ResponseBody
+	@PostMapping("/submit")
 	public Map<String, Object> submit(@ModelAttribute("bill") LeaveBillEntity bill) {
 		WebConfig.add(bill);
 		if("未提交".equals(bill.getN_status())){
@@ -48,8 +53,7 @@ public class LeaveBillController extends BaseController {
 		return map;
 	}
 	
-	@RequestMapping("/add")
-	@ResponseBody
+	@PostMapping
 	public Map<String, Object> add(@ModelAttribute("bill") LeaveBillEntity bill) {
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
@@ -66,8 +70,7 @@ public class LeaveBillController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/update")
-	@ResponseBody
+	@PutMapping
 	public Map<String, Object> update(@ModelAttribute("bill") LeaveBillEntity bill) {
 		boolean flag = billService.updateById(bill);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -81,10 +84,9 @@ public class LeaveBillController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/delete")
-	@ResponseBody
-	public Map<String, Object> delete(@ModelAttribute("bill") LeaveBillEntity bill) {
-		boolean flag = billService.deleteById(bill.getId());
+	@DeleteMapping("/{id}")
+	public Map<String, Object> delete(@PathVariable("id")Long id) {
+		boolean flag = billService.deleteById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (flag) {
 			map.put("flag", flag);
@@ -96,8 +98,7 @@ public class LeaveBillController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/findAll")
-	@ResponseBody
+	@GetMapping
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
 		List<LeaveBillEntity> list = billService.findAll(page);
 		for(LeaveBillEntity bill : list){
@@ -116,9 +117,8 @@ public class LeaveBillController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/searchData")
-	@ResponseBody
-	public Map<String, Object> searchData(
+	@GetMapping("/search")
+	public Map<String, Object> search(
 			@ModelAttribute("bill") LeaveBillEntity bill,
 			@ModelAttribute("page") PageCa page) {
 		Map<String, Object> map = new HashMap<String, Object>();

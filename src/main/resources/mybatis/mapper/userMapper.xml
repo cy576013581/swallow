@@ -41,6 +41,15 @@
         u.c_createDate, u.n_creater, u.c_updateDate, u.n_updater
     </sql>
     
+    <update id="insertMy" parameterType="com.cy.example.entity.system.SysUserEntity" >
+       insert into
+       		sys_user(c_username,c_pwd,c_email,n_departmentId,c_phone,
+       		n_age,n_sex,c_createDate,n_creater,c_updateDate,n_updater,n_deleted,n_status)
+       values(#{user.c_username},#{user.c_pwd},#{user.c_email},#{user.n_departmentId.id},#{user.c_phone},
+       		#{user.n_age},#{user.n_sex},#{user.c_createDate},#{user.n_creater},#{user.c_updateDate},#{user.n_updater},0,1)
+       
+    </update>
+    
     <select id="findOneByUsername" parameterType="java.lang.String" resultMap="BaseResultMap" >
        SELECT
 			u.id,
@@ -118,15 +127,16 @@
     
     <select id="findAll" resultMap="BaseResultMap"  >
 	   select u.id, u.c_username, u.c_phone , u.n_age,u.c_email,
+	   <!-- 为了区别是缓存查询还是用户管理查询，用户管理不应返回密码 -->
 	   <if test="null ==  page"> u.c_pwd,</if>
 	   case when u.n_sex=1 then '男'
 	   when u.n_sex=0 then '女' end as tranfo_n_sex ,
 	   case when u.n_status=1 then '可用'
 	   when u.n_status=0 then '锁定' end as n_status ,<include refid="BaseList" />,
-	   r.c_roleCode,
+	  <!--  r.c_roleCode,
 		r.id as r_id,
 		p.id as p_id,
-		p.c_permisCode,
+		p.c_permisCode, -->
 		
 		u1.c_username as u1_c_username,
 		u.n_superior,
@@ -135,14 +145,14 @@
 		d.c_departName as d_c_departName,
 		d.c_departCode as d_c_departCode
 	   from sys_user u
-	   LEFT JOIN sys_user_role ur ON u.id = ur.n_userId
+	   <!-- LEFT JOIN sys_user_role ur ON u.id = ur.n_userId
 		LEFT JOIN sys_role r ON ur.n_roleId = r.id
 		LEFT JOIN sys_role_permission rp ON rp.n_roleId = ur.n_roleId
-		LEFT JOIN sys_permission p ON p.id = rp.n_permisId
+		LEFT JOIN sys_permission p ON p.id = rp.n_permisId -->
 		LEFT JOIN sys_user u1 on u.n_superior = u1.id
 		LEFT JOIN sys_department d on u.n_departmentId = d.id
 	   where u.n_deleted=0 
-   	   order by u.id
+   	   order by u.id,u.c_username
    	   <if test="null !=  page"> limit #{page.index},#{page.rows}</if>
     </select>  
     

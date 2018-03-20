@@ -5,17 +5,21 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.CalendarEntity;
 import com.cy.example.service.ICalendarService;
 import com.cy.example.service.IUserService;
 
-@Controller
+@RestController
 @RequestMapping("/system/calendar")
 public class CalendarController extends BaseController {
 
@@ -25,8 +29,7 @@ public class CalendarController extends BaseController {
 	@Autowired
 	private IUserService userService;
 
-	@RequestMapping("/add")
-	@ResponseBody
+	@PostMapping
 	public Map<String, Object> add(
 			@ModelAttribute("calendar") CalendarEntity calendar) {
 		if (null == calendar.getC_color()) {
@@ -48,8 +51,7 @@ public class CalendarController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/update")
-	@ResponseBody
+	@PutMapping
 	public Map<String, Object> update(@ModelAttribute("cal") CalendarEntity cal) {
 		int rows = calendarService.updateMy(cal);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -63,9 +65,8 @@ public class CalendarController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/delete")
-	@ResponseBody
-	public Map<String, Object> delete(long id) {
+	@DeleteMapping("/{id}")
+	public Map<String, Object> delete(@PathVariable("id")Long id) {
 		boolean rows = calendarService.deleteById(id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (rows) {
@@ -78,9 +79,8 @@ public class CalendarController extends BaseController {
 		return map;
 	}
 
-	@RequestMapping("/searchAll")
-	@ResponseBody
-	public Map<String, Object> searchAll(
+	@GetMapping
+	public Map<String, Object> findAll(
 			@ModelAttribute("cal") CalendarEntity cal, String start, String end) {
 		cal.setC_username(WebConfig.getCurrentUser().getC_username());
 		List<CalendarEntity> list = calendarService.searchAll(cal);

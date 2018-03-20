@@ -7,7 +7,7 @@
     
 </head>
 <body>
-	<@uploadFile.file controller="/system/file/">
+	<@uploadFile.file controller="/system/file">
 		
 	</@uploadFile.file>
 	
