@@ -36,6 +36,7 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
 	public boolean updateMy(SysUserEntity user) {
 		if (null != user.getC_pwd() && "" != user.getC_pwd()) {
 			user.setC_pwd(MD5Util.GetMD5Code(user.getC_pwd()));
+			insertUserCache(user);
 		}else{
 			user.setC_pwd(null);
 		}
