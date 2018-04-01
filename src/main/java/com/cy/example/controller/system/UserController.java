@@ -122,9 +122,9 @@ public class UserController extends BaseController {
 			user.setN_status("0");
 		}*/
 		user.getN_departmentId().setId(Long.valueOf(user.getN_departmentId().getC_departName()));
-		int rows = userService.updateMy(user);
+		boolean flag = userService.updateMy(user);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if (rows > 0) {
+		if (flag) {
 			map.put("flag", true);
 			map.put("msg", "更新成功！");
 		} else {

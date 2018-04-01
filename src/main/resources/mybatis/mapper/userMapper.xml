@@ -166,18 +166,18 @@
        UPDATE 
        		sys_user 
        SET 
-       	<if test="c_pwd != null">
-       		c_pwd = #{c_pwd},
+       	<if test="user.c_pwd != null">
+       		c_pwd = #{user.c_pwd},
        	</if>
-       	c_phone = #{c_phone},
-       	n_age = #{n_age},
-       	n_sex = #{n_sex},
-       	c_email = #{c_email},
-       	c_username = #{c_username},
-       	c_updateDate = #{c_updateDate},
-       	n_updater = #{n_updater},
-       	n_departmentId = #{n_departmentId.id}
+       	c_phone = #{user.c_phone},
+       	n_age = #{user.n_age},
+       	n_sex = #{user.n_sex},
+       	c_email = #{user.c_email},
+       	c_username = #{user.c_username},
+       	c_updateDate = #{user.c_updateDate},
+       	n_updater = #{user.n_updater},
+       	n_departmentId = #{user.n_departmentId.id}
        WHERE 
-       		id = #{id}
+       		id = #{user.id}
     </update>
 </mapper>
