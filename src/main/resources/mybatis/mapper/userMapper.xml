@@ -137,19 +137,19 @@
 		r.id as r_id,
 		p.id as p_id,
 		p.c_permisCode, -->
-		
-		u1.c_username as u1_c_username,
+
+		<!--u1.c_username as u1_c_username,
 		u.n_superior,
 		u1.id as u1_id,
-		d.id as d_id,
+		d.id as d_id,-->
 		d.c_departName as d_c_departName,
 		d.c_departCode as d_c_departCode
 	   from sys_user u
 	   <!-- LEFT JOIN sys_user_role ur ON u.id = ur.n_userId
 		LEFT JOIN sys_role r ON ur.n_roleId = r.id
 		LEFT JOIN sys_role_permission rp ON rp.n_roleId = ur.n_roleId
-		LEFT JOIN sys_permission p ON p.id = rp.n_permisId -->
-		LEFT JOIN sys_user u1 on u.n_superior = u1.id
+		LEFT JOIN sys_permission p ON p.id = rp.n_permisId
+		LEFT JOIN sys_user u1 on u.n_superior = u1.id-->
 		LEFT JOIN sys_department d on u.n_departmentId = d.id
 	   where u.n_deleted=0 
    	   order by u.id,u.c_username
