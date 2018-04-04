@@ -107,8 +107,8 @@ public class TaskController extends BaseController {
 		map.put("msg", "审核成功！");
 		return map;
 	}
-	
-	@RequestMapping("/findAll")
+
+	@GetMapping
 	@ResponseBody
 	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
