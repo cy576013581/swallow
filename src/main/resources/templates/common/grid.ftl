@@ -492,7 +492,7 @@
 	    </#list>
 	    
 	    <table>
-	    &emsp;<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="searchData()">查询</a>
+	    &emsp;<a style="margin-top: 10px;margin-left: -10px" href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="searchData()">查询</a>
     </div>
     <!--操作栏-->
     <div id="ft" style="padding:2px 5px;">
