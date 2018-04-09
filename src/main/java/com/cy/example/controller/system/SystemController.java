@@ -166,6 +166,11 @@ public class SystemController {
 		map.put("roleList", roleList);
 		return "role_permisManage";
 	}
+
+	@RequestMapping("/menu/role_menuManage")
+	public String role_menuManage(ModelMap map) {
+		return "role_menuManage";
+	}
 	
 	@RequestMapping("/menu/workflow/deployManage")
 	public String deployManage(ModelMap map) {

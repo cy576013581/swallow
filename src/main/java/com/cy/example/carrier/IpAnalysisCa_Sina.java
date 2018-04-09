@@ -1,5 +1,8 @@
 package com.cy.example.carrier;
 
+import lombok.Data;
+
+@Data
 public class IpAnalysisCa_Sina {
 
 	/*
@@ -23,60 +26,4 @@ public class IpAnalysisCa_Sina {
 	private String type;
 	
 	private String desc;
-
-	public int getRet() {
-		return ret;
-	}
-
-	public void setRet(int ret) {
-		this.ret = ret;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getProvince() {
-		return province;
-	}
-
-	public void setProvince(String province) {
-		this.province = province;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getIsp() {
-		return isp;
-	}
-
-	public void setIsp(String isp) {
-		this.isp = isp;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
 }
