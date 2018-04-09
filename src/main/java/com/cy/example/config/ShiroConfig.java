@@ -41,7 +41,6 @@ public class ShiroConfig {
 		// 拦截器.
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 		// 配置不会被拦截的链接 顺序判断
-		filterChainDefinitionMap.put("/courtBusiness/nonStandardProductAttr/api.sdo", "anon");
 		filterChainDefinitionMap.put("/css/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
 		filterChainDefinitionMap.put("/images/**", "anon");
@@ -54,11 +53,24 @@ public class ShiroConfig {
 		// 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
 		// 这里自定义的权限拦截规则
-		filterChainDefinitionMap.put("/system/*/add","authc,perms[add]");
-		filterChainDefinitionMap.put("/system/*/delete","authc,perms[del]");
-		filterChainDefinitionMap.put("/system/*/update","authc,perms[update]");
-		filterChainDefinitionMap.put("/system/*/list","authc,perms[list]");
-		// filterChainDefinitionMap.put("/system/*/list", "perms[list]");
+		/*anon:例子/admins*//**=anon 没有参数，表示可以匿名使用。
+		 authc:例如/admins/user/**=authc表示需要认证(登录)才能使用，没有参数
+		 roles：例子/admins/user/**=roles[admin],参数可以写多个，多个时必须加上引号，并且参数之间用逗号分割，当有多个参数时，例如admins/user/**=roles["admin,guest"],每个参数通过才算通过，相当于hasAllRoles()方法。
+		 perms：例子/admins/user/**=perms[user:add:*],参数可以写多个，多个时必须加上引号，并且参数之间用逗号分割，例如/admins/user/**=perms["user:add:*,user:modify:*"]，当有多个参数时必须每个参数都通过才通过，想当于isPermitedAll()方法。
+		 rest：例子/admins/user/**=rest[user],根据请求的方法，相当于/admins/user/**=perms[user:method] ,其中method为post，get，delete等。
+		 port：例子/admins/user/**=port[8081],当请求的url的端口不是8081是跳转到schemal://serverName:8081?queryString,其中schmal是协议http或https等，serverName是你访问的host,8081是url配置里port的端口，queryString是你访问的url里的？后面的参数。
+		 authcBasic：例如/admins/user/**=authcBasic没有参数表示httpBasic认证
+		 ssl:例子/admins/user/**=ssl没有参数，表示安全的url请求，协议为https
+		 user:例如/admins/user/**=user没有参数表示必须存在用户，当登入操作时不做检查*/
+//		filterChainDefinitionMap.put("/system/user/**","authc,perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/sys_loginrecord/**","authc,perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/sys_department/**","authc,perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/sys_menu/**","authc,perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/sys_permission/**","authc,perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/sys_role/**","authc,perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/sys_rule/**","authc,perms[admin:add]");
+//
+//		filterChainDefinitionMap.put("/system/**", "perms[list]");
 		// <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 		filterChainDefinitionMap.put("/**", "authc");
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面

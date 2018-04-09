@@ -6,9 +6,10 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
 @TableName("sys_role")
-@SuppressWarnings("serial")
+@Data
 public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 
 	private String c_roleCode;
@@ -22,39 +23,4 @@ public class SysRoleEntity extends SuperEntity<SysRoleEntity> {
 	@TableField(exist = false)
 	@JsonInclude(JsonInclude.Include.NON_DEFAULT ) 
 	private List<SysUserEntity> userList;// 一个角色对应多个用户
-	
-	public String getC_roleName() {
-		return c_roleName;
-	}
-
-	public void setC_roleName(String c_roleName) {
-		this.c_roleName = c_roleName;
-	}
-
-	public String getC_roleCode() {
-		return c_roleCode;
-	}
-
-	public void setC_roleCode(String c_roleCode) {
-		this.c_roleCode = c_roleCode;
-	}
-
-	public List<SysPermissionEntity> getPermisList() {
-		return permisList;
-	}
-
-	public void setPermisList(List<SysPermissionEntity> permisList) {
-		this.permisList = permisList;
-	}
-
-	public List<SysUserEntity> getUserList() {
-		return userList;
-	}
-
-	public void setUserList(List<SysUserEntity> userList) {
-		this.userList = userList;
-	}
-
-
-
 }

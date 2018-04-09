@@ -151,8 +151,14 @@
 		    <groupId>com.github.penggle</groupId>  
 		    <artifactId>kaptcha</artifactId>  
 		    <version>${kaptcha.version}</version>  
-		</dependency> 
-		
+		</dependency>
+
+		<!-- lombok setter getter 标签 -->
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>s
+		</dependency>
 	</dependencies>
 
 	<build>
