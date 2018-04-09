@@ -14,11 +14,21 @@
     <script type="text/javascript" src="/lib/toastr/toastr.js"></script>
     <script language="javascript">
 
-		
+        //编辑数据
+        function editData(){
+            var row = $('#dl').datalist('getSelected');
+            //console.log(row);
+            if (row){
+                console.log(row);
+
+            }else{
+                toastr.warning('在操作之前请先选中行！');
+            }
+        }
 	</script>
 </head>
 <body>
-	<ul class="easyui-datalist" title="${title}" lines="${isLines}" style="width:400px;height:250px"
+	<ul id="dl" class="easyui-datalist" title="${title}" lines="${isLines}" style="width:400px;height:250px"
         data-options="
             url: '${controller}',
             method: 'get',
