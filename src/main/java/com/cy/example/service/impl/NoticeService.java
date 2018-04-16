@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysNoticeEntity;
 import com.cy.example.mapper.system.NoticeMapper;
 import com.cy.example.service.INoticeService;
@@ -20,7 +20,7 @@ public class NoticeService extends ServiceImpl<NoticeMapper, SysNoticeEntity>
 	
 
 	public List<SysNoticeEntity> searchAll(SysNoticeEntity notice,
-			PageCa page) {
+			Page page) {
 		// TODO Auto-generated method stub
 		return noticeMapper.searchAll(notice, page);
 	}

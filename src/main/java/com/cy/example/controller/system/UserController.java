@@ -24,14 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.entity.system.MailEntity;
-import com.cy.example.entity.system.SysDepartmentEntity;
 import com.cy.example.entity.system.SysUserEntity;
-import com.cy.example.service.IDepartmentService;
 import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
 import com.cy.example.supplement.rabbitmq.general.RabbitSender;
@@ -149,7 +147,7 @@ public class UserController extends BaseController {
 	}
 
 	@GetMapping
-	public Map<String, Object> findAll(@ModelAttribute("page") PageCa page)
+	public Map<String, Object> findAll(@ModelAttribute("page") Page page)
 			throws JsonProcessingException {
 		// System.out.print("================================="+page.toString()+page.getIndex());
 		List<SysUserEntity> list = userService.findAll(page);
@@ -177,7 +175,7 @@ public class UserController extends BaseController {
 	@GetMapping("/search")
 	public Map<String, Object> search(
 			@ModelAttribute("user") SysUserEntity user,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysUserEntity> users = userService.searchAll(user, page);
 		int sum = userService.searchAllCount(user);

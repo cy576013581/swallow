@@ -10,20 +10,20 @@ import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cy.example.carrier.DeploymentCa;
-import com.cy.example.carrier.PageCa;
-import com.cy.example.carrier.ProcessDefinitionCa;
-import com.cy.example.carrier.TaskCa;
-import com.cy.example.carrier.WorkFLowCa;
+import com.cy.example.vo.DeploymentVo;
+import com.cy.example.model.Page;
+import com.cy.example.vo.ProcessDefinitionVo;
+import com.cy.example.vo.TaskVo;
+import com.cy.example.vo.WorkFLowVo;
 import com.cy.example.entity.workflow.LeaveBillEntity;
 
 public interface IWorkFlowService {
 
 	
 
-	public List<Deployment> getDeploymentList(PageCa page);
+	public List<Deployment> getDeploymentList(Page page);
 
-	public List<Deployment> searchAllDeployment(DeploymentCa deployment, PageCa page);
+	public List<Deployment> searchAllDeployment(DeploymentVo deployment, Page page);
 
 	public void deploy(MultipartFile file, String filename);
 	
@@ -32,17 +32,17 @@ public interface IWorkFlowService {
 	public InputStream findImageInputStream(String deploymentId,
 			String diagramResourceName);
 	
-	public List<ProcessDefinition> getProcessDefinitionList(PageCa page);
+	public List<ProcessDefinition> getProcessDefinitionList(Page page);
 	
-	public List<ProcessDefinition> searchAllProcessDefinition(ProcessDefinitionCa process, PageCa page);
+	public List<ProcessDefinition> searchAllProcessDefinition(ProcessDefinitionVo process, Page page);
 	
 	public void startProcessDefinition(LeaveBillEntity entity);
 
 	public List<Task> findAllTask(String id);
 	
-	public List<Task> searchAllTask(TaskCa task,String id);
+	public List<Task> searchAllTask(TaskVo task, String id);
 
-	public boolean compeleteTask(WorkFLowCa workflow);
+	public boolean compeleteTask(WorkFLowVo workflow);
 
 	List<String> findOutComeListByTaskId(String taskId);
 

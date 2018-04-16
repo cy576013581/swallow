@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cy.example.carrier.CommentCa;
-import com.cy.example.carrier.PageCa;
-import com.cy.example.carrier.TaskCa;
-import com.cy.example.carrier.WorkFLowCa;
+import com.cy.example.vo.CommentVo;
+import com.cy.example.model.Page;
+import com.cy.example.vo.TaskVo;
+import com.cy.example.vo.WorkFLowVo;
 import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysUserEntity;
@@ -71,11 +71,11 @@ public class TaskController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> findComment(@RequestParam("id") String id) {
 		List<Comment> list = workFlowService.findCommentByTaskId(id);
-		List<CommentCa> data = new ArrayList<CommentCa>();
+		List<CommentVo> data = new ArrayList<CommentVo>();
 		if(list.size()>0){
 			for(Comment task : list){
 				SysUserEntity user = userService.selectById(task.getUserId());
-				CommentCa ca = new CommentCa();
+				CommentVo ca = new CommentVo();
 				ca.transfor(task);
 				ca.setUser(user);
 				data.add(ca);
@@ -100,7 +100,7 @@ public class TaskController extends BaseController {
 	
 	@RequestMapping("/submit")
 	@ResponseBody
-	public Map<String, Object> submit(@ModelAttribute("workflow")WorkFLowCa workflow) {
+	public Map<String, Object> submit(@ModelAttribute("workflow")WorkFLowVo workflow) {
 		workFlowService.compeleteTask(workflow);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", true);
@@ -110,13 +110,13 @@ public class TaskController extends BaseController {
 
 	@GetMapping
 	@ResponseBody
-	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
+	public Map<String, Object> findAll(@ModelAttribute("page")Page page) {
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		List<Task> list = workFlowService.findAllTask(String.valueOf(user.getId()));
-		List<TaskCa> data = new ArrayList<TaskCa>();
+		List<TaskVo> data = new ArrayList<TaskVo>();
 		for(Task task : list){
-			TaskCa ca = new TaskCa();
+			TaskVo ca = new TaskVo();
 			ca.transfor(task);
 			ca.setAssignee(user);
 			data.add(ca);
@@ -131,14 +131,14 @@ public class TaskController extends BaseController {
 	@GetMapping("/search")
 	@ResponseBody
 	public Map<String, Object> search(
-			@ModelAttribute("task") TaskCa task,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("task") TaskVo task,
+			@ModelAttribute("page") Page page) {
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		List<Task> list = workFlowService.searchAllTask(task, String.valueOf(user.getId()));
-		List<TaskCa> data = new ArrayList<TaskCa>();
+		List<TaskVo> data = new ArrayList<TaskVo>();
 		for(Task tool : list){
-			TaskCa ca = new TaskCa();
+			TaskVo ca = new TaskVo();
 			ca.transfor(tool);
 			ca.setAssignee(user);
 			data.add(ca);

@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysNoticeEntity;
 import com.cy.example.service.INoticeService;
@@ -72,7 +71,7 @@ public class NoticeController extends BaseController {
 
 	@GetMapping
 	public Map<String, Object> findAll(int page, int rows) {
-		Page<SysNoticeEntity> list = noticeService.selectPage(new Page<SysNoticeEntity>(page, rows)
+		com.baomidou.mybatisplus.plugins.Page list = noticeService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysNoticeEntity>().setSqlSelect("c_title,c_content,n_order,c_createDate,c_updateDate,id"));
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = noticeService.selectCount(new EntityWrapper<SysNoticeEntity>());
@@ -84,7 +83,7 @@ public class NoticeController extends BaseController {
 	@GetMapping("/search")
 	public Map<String, Object> search(
 			@ModelAttribute("role") SysNoticeEntity notice,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysNoticeEntity> list = noticeService.searchAll(
 				notice, page);

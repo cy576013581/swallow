@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysNoticeEntity;
 import com.cy.example.mapper.SuperMapper;
 
@@ -16,7 +16,7 @@ public interface NoticeMapper extends SuperMapper<SysNoticeEntity> {
 
 	List<SysNoticeEntity> searchAll(
 			@Param("notice") SysNoticeEntity notice,
-			@Param("page") PageCa page);
+			@Param("page") Page page);
 	
 	public int recentLoginCount(String date);
 }

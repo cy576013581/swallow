@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.mapper.system.UserMapper;
 import com.cy.example.service.IUserService;
@@ -43,7 +43,7 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
 		return this.userMapper.updateMy(user);
 	}
 
-	public List<SysUserEntity> searchAll(SysUserEntity user, PageCa page) {
+	public List<SysUserEntity> searchAll(SysUserEntity user, Page page) {
 		List<SysUserEntity> list = userMapper.searchAll(user, page);
 		return list;
 	}
@@ -65,7 +65,7 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
 		return userMapper.findAllCount();
 	}
 
-	public List<SysUserEntity> findAll(PageCa page) {
+	public List<SysUserEntity> findAll(Page page) {
 		// TODO Auto-generated method stub
 		return userMapper.findAll(page);
 	}

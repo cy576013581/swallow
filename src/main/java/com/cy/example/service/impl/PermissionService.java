@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysPermissionEntity;
 import com.cy.example.mapper.system.PermissionMapper;
 import com.cy.example.service.IPermissionService;
@@ -20,7 +20,7 @@ public class PermissionService extends ServiceImpl<PermissionMapper, SysPermissi
 	
 
 	public List<SysPermissionEntity> searchAll(SysPermissionEntity permission,
-			PageCa page) {
+			Page page) {
 		// TODO Auto-generated method stub
 		return permissionMapper.searchAll(permission, page);
 	}

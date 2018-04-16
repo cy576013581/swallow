@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cy.example.carrier.PageCa;
-import com.cy.example.carrier.ProcessDefinitionCa;
+import com.cy.example.model.Page;
+import com.cy.example.vo.ProcessDefinitionVo;
 import com.cy.example.controller.BaseController;
 import com.cy.example.service.IWorkFlowService;
 
@@ -44,11 +44,11 @@ public class ProcessDefinitionController extends BaseController {
 	}
 	
 	@GetMapping
-	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
+	public Map<String, Object> findAll(@ModelAttribute("page")Page page) {
 		List<ProcessDefinition> list = workFlowService.getProcessDefinitionList(page);
-		List<ProcessDefinitionCa> data = new ArrayList<ProcessDefinitionCa>();
+		List<ProcessDefinitionVo> data = new ArrayList<ProcessDefinitionVo>();
 		for(ProcessDefinition pro : list){
-			ProcessDefinitionCa pa = new ProcessDefinitionCa();
+			ProcessDefinitionVo pa = new ProcessDefinitionVo();
 			pa.transfor(pro);
 			data.add(pa);
 		}
@@ -61,13 +61,13 @@ public class ProcessDefinitionController extends BaseController {
 
 	@GetMapping("/search")
 	public Map<String, Object> search(
-			@ModelAttribute("process") ProcessDefinitionCa process,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("process") ProcessDefinitionVo process,
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<ProcessDefinition> list = workFlowService.searchAllProcessDefinition(process, page);
-		List<ProcessDefinitionCa> data = new ArrayList<ProcessDefinitionCa>();
+		List<ProcessDefinitionVo> data = new ArrayList<ProcessDefinitionVo>();
 		for(ProcessDefinition pro : list){
-			ProcessDefinitionCa pa = new ProcessDefinitionCa();
+			ProcessDefinitionVo pa = new ProcessDefinitionVo();
 			pa.transfor(pro);
 			data.add(pa);
 		}

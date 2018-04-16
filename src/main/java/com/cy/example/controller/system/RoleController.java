@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysRoleEntity;
 import com.cy.example.service.IRoleService;
@@ -72,7 +71,7 @@ public class RoleController extends BaseController {
 
 	@GetMapping
 	public Map<String, Object> findAll(int page, int rows) {
-		Page<SysRoleEntity> list = roleService.selectPage(new Page<SysRoleEntity>(page, rows)
+		com.baomidou.mybatisplus.plugins.Page list = roleService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysRoleEntity>().setSqlSelect("c_roleCode,c_roleName,c_createDate,c_updateDate,id"));
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = roleService.selectCount(new EntityWrapper<SysRoleEntity>());
@@ -84,7 +83,7 @@ public class RoleController extends BaseController {
 	@GetMapping("/search")
 	public Map<String, Object> search(
 			@ModelAttribute("role") SysRoleEntity role,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysRoleEntity> list = roleService.searchAll(
 				role, page);

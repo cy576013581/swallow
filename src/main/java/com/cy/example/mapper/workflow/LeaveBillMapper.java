@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.workflow.LeaveBillEntity;
 import com.cy.example.mapper.SuperMapper;
 
@@ -14,7 +14,7 @@ public interface LeaveBillMapper extends SuperMapper<LeaveBillEntity> {
 
 	public int findAllCount();
 
-	public List<LeaveBillEntity> findAll(@Param("page") PageCa page);
+	public List<LeaveBillEntity> findAll(@Param("page") Page page);
 
 	public boolean updateMy(@Param("bill")LeaveBillEntity bill);
 	

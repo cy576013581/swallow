@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.service.ILoginRecordService;
@@ -30,7 +29,7 @@ public class LoginRecordController extends BaseController {
 
 	@GetMapping
 	public Map<String, Object> findAll(int page, int rows) {
-		Page<LoginRecordEntity> list = loginRecordService.selectPage(new Page<LoginRecordEntity>(page, rows)
+		com.baomidou.mybatisplus.plugins.Page list = loginRecordService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<LoginRecordEntity>().orderBy("c_createDate",false));
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = loginRecordService.selectCount(new EntityWrapper<LoginRecordEntity>());
@@ -42,7 +41,7 @@ public class LoginRecordController extends BaseController {
 	@GetMapping("/search")
 	public Map<String, Object> search(
 			@ModelAttribute("loginRecord") LoginRecordEntity loginRecord,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<LoginRecordEntity> list = loginRecordService.searchAll(
 				loginRecord, page);

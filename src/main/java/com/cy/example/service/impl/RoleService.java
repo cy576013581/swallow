@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysRoleEntity;
 import com.cy.example.mapper.system.RoleMapper;
 import com.cy.example.service.IRoleService;
@@ -20,7 +20,7 @@ public class RoleService extends ServiceImpl<RoleMapper, SysRoleEntity>
 	
 
 	public List<SysRoleEntity> searchAll(SysRoleEntity role,
-			PageCa page) {
+			Page page) {
 		// TODO Auto-generated method stub
 		return roleMapper.searchAll(role, page);
 	}

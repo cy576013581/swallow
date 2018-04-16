@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysPermissionEntity;
 import com.cy.example.mapper.SuperMapper;
 
@@ -16,5 +16,5 @@ public interface PermissionMapper extends SuperMapper<SysPermissionEntity> {
 
 	List<SysPermissionEntity> searchAll(
 			@Param("permission") SysPermissionEntity role,
-			@Param("page") PageCa page);
+			@Param("page") Page page);
 }

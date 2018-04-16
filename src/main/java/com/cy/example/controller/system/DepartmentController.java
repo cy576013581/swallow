@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysDepartmentEntity;
 import com.cy.example.service.IDepartmentService;
@@ -72,7 +71,7 @@ public class DepartmentController extends BaseController {
 
 	@GetMapping
 	public Map<String, Object> findAll(int page, int rows) {
-		Page<SysDepartmentEntity> list = departService.selectPage(new Page<SysDepartmentEntity>(page, rows)
+		com.baomidou.mybatisplus.plugins.Page list = departService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysDepartmentEntity>());
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = departService.selectCount(new EntityWrapper<SysDepartmentEntity>());
@@ -84,7 +83,7 @@ public class DepartmentController extends BaseController {
 	@GetMapping("/search")
 	public Map<String, Object> search(
 			@ModelAttribute("depart") SysDepartmentEntity depart,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysDepartmentEntity> list = departService.searchAll(
 				depart, page);

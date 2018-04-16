@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cy.example.carrier.DeploymentCa;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.vo.DeploymentVo;
+import com.cy.example.model.Page;
 import com.cy.example.controller.BaseController;
 import com.cy.example.service.IWorkFlowService;
 
@@ -54,11 +54,11 @@ public class DeploymentController extends BaseController {
 	
 	@GetMapping
 	@ResponseBody
-	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
+	public Map<String, Object> findAll(@ModelAttribute("page")Page page) {
 		List<Deployment> list = workFlowService.getDeploymentList(page);
-		List<DeploymentCa> data = new ArrayList<DeploymentCa>();
+		List<DeploymentVo> data = new ArrayList<DeploymentVo>();
 		for(Deployment dep : list){
-			DeploymentCa ca = new DeploymentCa();
+			DeploymentVo ca = new DeploymentVo();
 			ca.transfor(dep);
 			data.add(ca);
 		}
@@ -72,13 +72,13 @@ public class DeploymentController extends BaseController {
 	@GetMapping("/search")
 	@ResponseBody
 	public Map<String, Object> search(
-			@ModelAttribute("deployment") DeploymentCa deployment,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("deployment") DeploymentVo deployment,
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Deployment> list = workFlowService.searchAllDeployment(deployment, page);
-		List<DeploymentCa> data = new ArrayList<DeploymentCa>();
+		List<DeploymentVo> data = new ArrayList<DeploymentVo>();
 		for(Deployment dep : list){
-			DeploymentCa ca = new DeploymentCa();
+			DeploymentVo ca = new DeploymentVo();
 			ca.transfor(dep);
 			data.add(ca);
 		}

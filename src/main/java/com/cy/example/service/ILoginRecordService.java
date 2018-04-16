@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.system.LoginRecordEntity;
 
 public interface ILoginRecordService extends IService<LoginRecordEntity> {
 	
-	List<LoginRecordEntity> searchAll(LoginRecordEntity loginRecord, PageCa page);
+	List<LoginRecordEntity> searchAll(LoginRecordEntity loginRecord, Page page);
 
 	int searchAllCount(LoginRecordEntity loginRecord);
 

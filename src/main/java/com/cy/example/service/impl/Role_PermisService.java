@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.carrier.Role_Permis_Ca;
 import com.cy.example.mapper.system.Role_PermisMapper;
 import com.cy.example.service.IRole_PermisService;
@@ -18,7 +18,7 @@ public class Role_PermisService extends ServiceImpl<Role_PermisMapper, Role_Perm
 	@Autowired
 	private Role_PermisMapper mapper;
 
-	public List<Role_Permis_Ca> searchAll(Role_Permis_Ca rp, PageCa page) {
+	public List<Role_Permis_Ca> searchAll(Role_Permis_Ca rp, Page page) {
 		// TODO Auto-generated method stub
 		return mapper.searchAll(rp, page);
 	}
@@ -28,12 +28,12 @@ public class Role_PermisService extends ServiceImpl<Role_PermisMapper, Role_Perm
 		return mapper.searchAllCount(rp);
 	}
 
-	public int findAllCount(PageCa page) {
+	public int findAllCount(Page page) {
 		// TODO Auto-generated method stub
 		return mapper.findAllCount(page);
 	}
 
-	public List<Role_Permis_Ca> findAll(PageCa page) {
+	public List<Role_Permis_Ca> findAll(Page page) {
 		// TODO Auto-generated method stub
 		return mapper.findAll(page);
 	}

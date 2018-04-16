@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysMenuEntity;
 import com.cy.example.service.IMenuService;
@@ -72,7 +71,7 @@ public class MenuController extends BaseController{
 
 	@GetMapping
 	public Map<String, Object> findAll(int page, int rows) {
-		Page<SysMenuEntity> list = menuService.selectPage(new Page<SysMenuEntity>(page, rows)
+		com.baomidou.mybatisplus.plugins.Page list = menuService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysMenuEntity>());
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = menuService.selectCount(new EntityWrapper<SysMenuEntity>());
@@ -91,7 +90,7 @@ public class MenuController extends BaseController{
 	@GetMapping("/search")
 	public Map<String, Object> search(
 			@ModelAttribute("menu") SysMenuEntity menu,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysMenuEntity> list = menuService.searchAll(
 				menu, page);

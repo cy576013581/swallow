@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.cy.example.carrier.IpAnalysisCa_Sina;
-import com.cy.example.carrier.IpAnalysisCa_Tb;
+import com.cy.example.vo.IpAnalysisVo_Sina;
+import com.cy.example.vo.IpAnalysisVo_Tb;
 import com.cy.example.config.RabbitConfig;
 import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.entity.system.MailEntity;
@@ -33,7 +33,7 @@ public class RabbitSender {
 		String tbUrl = ipAnalysis.split(",")[0] + loginRecord.getC_loginIp();
 		try {
 			String addr = HttpRequestUtil.get(tbUrl);
-			IpAnalysisCa_Tb ipAnalusisTb = JsonUtil.toBean(addr, IpAnalysisCa_Tb.class);
+			IpAnalysisVo_Tb ipAnalusisTb = JsonUtil.toBean(addr, IpAnalysisVo_Tb.class);
 			if(0 == ipAnalusisTb.getCode()){
 				if(StringUtil.IsEqual("XX", ipAnalusisTb.getData().getRegion())){
 					loginRecord.setC_province(ipAnalusisTb.getData().getCity());
@@ -46,13 +46,14 @@ public class RabbitSender {
 			}else{
 				String sinaUrl = ipAnalysis.split(",")[1] + loginRecord.getC_loginIp();
 				addr = HttpRequestUtil.get(sinaUrl);
-				IpAnalysisCa_Sina ipAnalusisSina = JsonUtil.toBean(addr, IpAnalysisCa_Sina.class);
+				IpAnalysisVo_Sina ipAnalusisSina = JsonUtil.toBean(addr, IpAnalysisVo_Sina.class);
 				if(1 == ipAnalusisSina.getRet()){
 					loginRecord.setC_province(ipAnalusisSina.getProvince());
 					loginRecord.setC_city(ipAnalusisSina.getCity());
 				}else{
 					loginRecord.setC_province("未知");
 					loginRecord.setC_city("未知");
+					loginRecord.toString();
 				}
 			}
 		} catch (Exception e) {

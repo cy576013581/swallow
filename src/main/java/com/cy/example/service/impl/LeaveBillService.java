@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.workflow.LeaveBillEntity;
 import com.cy.example.mapper.workflow.LeaveBillMapper;
 import com.cy.example.service.ILeaveBillService;
@@ -24,7 +24,7 @@ public class LeaveBillService extends ServiceImpl<LeaveBillMapper, LeaveBillEnti
 	private IWorkFlowService workFlowService;
 	
 
-	public List<LeaveBillEntity> findAll(PageCa page) {
+	public List<LeaveBillEntity> findAll(Page page) {
 		// TODO Auto-generated method stub
 		return billMapper.findAll(page);
 	}
@@ -34,7 +34,7 @@ public class LeaveBillService extends ServiceImpl<LeaveBillMapper, LeaveBillEnti
 		return billMapper.findAllCount();
 	}
 
-	public List<LeaveBillEntity> searchAll(LeaveBillEntity bill, PageCa page) {
+	public List<LeaveBillEntity> searchAll(LeaveBillEntity bill, Page page) {
 		// TODO Auto-generated method stub
 		return null;
 	}

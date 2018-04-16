@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,10 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysUserEntity;
@@ -99,7 +97,7 @@ public class LeaveBillController extends BaseController {
 	}
 
 	@GetMapping
-	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
+	public Map<String, Object> findAll(@ModelAttribute("page")Page page) {
 		List<LeaveBillEntity> list = billService.findAll(page);
 		for(LeaveBillEntity bill : list){
 			if("0".equals(bill.getN_status())){
@@ -120,7 +118,7 @@ public class LeaveBillController extends BaseController {
 	@GetMapping("/search")
 	public Map<String, Object> search(
 			@ModelAttribute("bill") LeaveBillEntity bill,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<LeaveBillEntity> list = billService.searchAll(
 				bill, page);

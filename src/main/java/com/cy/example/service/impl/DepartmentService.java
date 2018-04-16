@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysDepartmentEntity;
 import com.cy.example.mapper.system.DepartmentMapper;
 import com.cy.example.service.IDepartmentService;
@@ -19,7 +19,7 @@ public class DepartmentService extends ServiceImpl<DepartmentMapper, SysDepartme
 	private DepartmentMapper departmentMapper;
 
 	public List<SysDepartmentEntity> searchAll(SysDepartmentEntity depart,
-			PageCa page) {
+			Page page) {
 		// TODO Auto-generated method stub
 		return departmentMapper.searchAll(depart, page);
 	}

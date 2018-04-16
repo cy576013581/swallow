@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysPermissionEntity;
 import com.cy.example.service.IPermissionService;
@@ -72,7 +71,7 @@ public class PermissionController extends BaseController {
 
 	@GetMapping
 	public Map<String, Object> findAll(int page, int rows) {
-		Page<SysPermissionEntity> list = permissionService.selectPage(new Page<SysPermissionEntity>(page, rows)
+		com.baomidou.mybatisplus.plugins.Page list = permissionService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysPermissionEntity>());
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = permissionService.selectCount(new EntityWrapper<SysPermissionEntity>());
@@ -87,7 +86,7 @@ public class PermissionController extends BaseController {
 	@GetMapping("/search")
 	public Map<String, Object> search(
 			@ModelAttribute("per") SysPermissionEntity per,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysPermissionEntity> list = permissionService.searchAll(
 				per, page);

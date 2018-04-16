@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.carrier.User_Role_Ca;
 import com.cy.example.controller.BaseController;
 import com.cy.example.service.IUser_RoleService;
@@ -88,7 +88,7 @@ public class User_RoleController extends BaseController {
 	}
 
 	@GetMapping
-	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
+	public Map<String, Object> findAll(@ModelAttribute("page")Page page) {
 		List<User_Role_Ca> list = urService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = urService.findAllCount(page);
@@ -100,7 +100,7 @@ public class User_RoleController extends BaseController {
 	@GetMapping("/search")
 	public Map<String, Object> search(
 			@ModelAttribute("ur") User_Role_Ca ur,
-			@ModelAttribute("page") PageCa page) {
+			@ModelAttribute("page") Page page) {
 		ur.setN_userId(Long.valueOf(" ".equals(ur.getC_username()) ? "0" : ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(" ".equals(ur.getC_roleName()) ? "0" : ur.getC_roleName()));
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.model.Page;
 import com.cy.example.carrier.Role_Menu_Ca;
 import com.cy.example.mapper.system.Role_MenuMapper;
 import com.cy.example.service.IRole_MenuService;
@@ -18,7 +18,7 @@ public class Role_MenuService extends ServiceImpl<Role_MenuMapper, Role_Menu_Ca>
 	@Autowired
 	private Role_MenuMapper mapper;
 
-	public List<Role_Menu_Ca> searchAll(Role_Menu_Ca rm, PageCa page) {
+	public List<Role_Menu_Ca> searchAll(Role_Menu_Ca rm, Page page) {
 		// TODO Auto-generated method stub
 		return mapper.searchAll(rm, page);
 	}
@@ -28,12 +28,12 @@ public class Role_MenuService extends ServiceImpl<Role_MenuMapper, Role_Menu_Ca>
 		return mapper.searchAllCount(rm);
 	}
 
-	public int findAllCount(PageCa page) {
+	public int findAllCount(Page page) {
 		// TODO Auto-generated method stub
 		return mapper.findAllCount(page);
 	}
 
-	public List<Role_Menu_Ca> findAll(PageCa page) {
+	public List<Role_Menu_Ca> findAll(Page page) {
 		// TODO Auto-generated method stub
 		return mapper.findAll(page);
 	}

@@ -5,7 +5,6 @@ import com.cy.example.entity.SuperEntity;
 import lombok.Data;
 
 @TableName("sys_loginrecord")
-@SuppressWarnings("serial")
 @Data
 public class LoginRecordEntity extends SuperEntity<LoginRecordEntity> {
 

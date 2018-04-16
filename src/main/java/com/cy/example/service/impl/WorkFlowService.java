@@ -31,11 +31,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cy.example.carrier.DeploymentCa;
-import com.cy.example.carrier.PageCa;
-import com.cy.example.carrier.ProcessDefinitionCa;
-import com.cy.example.carrier.TaskCa;
-import com.cy.example.carrier.WorkFLowCa;
+import com.cy.example.vo.DeploymentVo;
+import com.cy.example.model.Page;
+import com.cy.example.vo.ProcessDefinitionVo;
+import com.cy.example.vo.TaskVo;
+import com.cy.example.vo.WorkFLowVo;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.entity.workflow.LeaveBillEntity;
@@ -91,14 +91,14 @@ public class WorkFlowService implements IWorkFlowService{
 		}
 	}
 	
-    public List<Deployment> getDeploymentList(PageCa page){
+    public List<Deployment> getDeploymentList(Page page){
     	List<Deployment> list = repositoryService.createDeploymentQuery()
     					.orderByDeploymenTime().asc()
     					.listPage(page.getIndex(), page.getRows());
     	return list;
     }
     
-    public List<Deployment> searchAllDeployment(DeploymentCa deployment, PageCa page) {
+    public List<Deployment> searchAllDeployment(DeploymentVo deployment, Page page) {
 		// TODO Auto-generated method stub
 		List<Deployment> list = repositoryService.createDeploymentQuery()
 				.deploymentNameLike("%" + deployment.getName() + "%")
@@ -113,7 +113,7 @@ public class WorkFlowService implements IWorkFlowService{
      */
     
     /**查询流程定义的信息，对应表（act_re_procdef）*/
-	public List<ProcessDefinition> getProcessDefinitionList(PageCa page) {
+	public List<ProcessDefinition> getProcessDefinitionList(Page page) {
 		List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery()//创建流程定义查询
 							.orderByProcessDefinitionVersion().asc()//
 							.listPage(page.getIndex(), page.getRows());
@@ -127,7 +127,7 @@ public class WorkFlowService implements IWorkFlowService{
 	}
 
 	public List<ProcessDefinition> searchAllProcessDefinition(
-			ProcessDefinitionCa process, PageCa page) {
+			ProcessDefinitionVo process, Page page) {
 		// TODO Auto-generated method stub
 		List<ProcessDefinition> list =  new ArrayList<ProcessDefinition>();
 				
@@ -185,7 +185,7 @@ public class WorkFlowService implements IWorkFlowService{
 		return list;
 	}
 	
-	public boolean compeleteTask(WorkFLowCa workflow) {
+	public boolean compeleteTask(WorkFLowVo workflow) {
 		
 		//获取任务ID
 		String taskId = workflow.getTaskId();
@@ -249,7 +249,7 @@ public class WorkFlowService implements IWorkFlowService{
 		
 	}
 
-	public List<Task> searchAllTask(TaskCa task, String id) {
+	public List<Task> searchAllTask(TaskVo task, String id) {
 		// TODO Auto-generated method stub
 		TaskQuery query = taskService.createTaskQuery().taskAssignee(String.valueOf(id));
 		if(null != task.getName() && !"".equals(task.getName())){

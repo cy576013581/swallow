@@ -1,30 +1,32 @@
 package com.cy.example.controller.system;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.cy.example.carrier.PageCa;
+import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.cy.example.model.Page;
 import com.cy.example.carrier.Role_Menu_Ca;
 import com.cy.example.controller.BaseController;
 import com.cy.example.service.IRole_MenuService;
 
-@Controller
+@RestController
 @RequestMapping("/system/role_menu")
 public class Role_MenuController extends BaseController {
 
 	@Autowired
 	private IRole_MenuService rmService;
+
+	@Autowired
+	private IUserService userService;
 	
-	@RequestMapping("/add")
-	@ResponseBody
+	@PostMapping
 	public Map<String, Object> add(@ModelAttribute("rm") Role_Menu_Ca rm) {
 //		rm.setN_roleId(Long.valueOf(" ".equals(rm.getC_roleName()) ? "0" : rm.getC_roleName()));
 //		rm.setN_permisId(Long.valueOf(" ".equals(rm.getC_permisName()) ? "0" : rm.getC_permisName()));
@@ -48,8 +50,7 @@ public class Role_MenuController extends BaseController {
 		return null;
 	}
 
-	@RequestMapping("/update")
-	@ResponseBody
+	@PutMapping
 	public Map<String, Object> update(@ModelAttribute("rm") Role_Menu_Ca rm) {
 //		rm.setN_roleId(Long.valueOf(" ".equals(rm.getC_roleName()) ? "0" : rm.getC_roleName()));
 //		rm.setN_permisId(Long.valueOf(" ".equals(rm.getC_permisName()) ? "0" : rm.getC_permisName()));
@@ -73,8 +74,7 @@ public class Role_MenuController extends BaseController {
 		return null;
 	}
 
-	@RequestMapping("/delete")
-	@ResponseBody
+	@DeleteMapping
 	public Map<String, Object> delete(@ModelAttribute("rm") Role_Menu_Ca rm) {
 //		boolean flag = rmService.deleteById(rm.getId());
 //		Map<String, Object> map = new HashMap<String, Object>();
@@ -89,14 +89,28 @@ public class Role_MenuController extends BaseController {
 		return null;
 	}
 
-	@RequestMapping("/findAll")
-	@ResponseBody
-	public Map<String, Object> findAll(@ModelAttribute("page")PageCa page) {
+	@GetMapping
+	public Map<String, Object> findAll(@ModelAttribute("page")Page page) {
 		List<Role_Menu_Ca> list = rmService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = rmService.findAllCount(page);
 		map.put("rows", list);
 		map.put("total", sum);
 		return map;
+	}
+
+	@GetMapping("/getUsers")
+	public List<Map<String, Object>> getUsers(){
+		List<SysUserEntity> data = userService.selectList(new EntityWrapper<SysUserEntity>().setSqlSelect("id,c_username"));
+
+		List<Map<String, Object>> list = new ArrayList<>();
+		for (SysUserEntity user : data){
+			Map<String, Object> map = new HashMap<>();
+			map.put("text",user.getC_username());
+			map.put("value",user.getId());
+			list.add(map);
+		}
+
+		return list;
 	}
 }
