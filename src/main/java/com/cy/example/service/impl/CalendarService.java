@@ -17,7 +17,7 @@ public class CalendarService extends ServiceImpl<CalendarMapper, CalendarEntity>
 	@Autowired
 	private CalendarMapper calendarMapper;
 	
-	public int updateMy(CalendarEntity cal) {
+	public boolean updateMy(CalendarEntity cal) {
 		return this.calendarMapper.updateMy(cal);
 	}
 	

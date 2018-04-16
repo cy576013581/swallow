@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @TableName("sys_menu")
-@SuppressWarnings("serial")
 @Data
-public class SysMenuEntity extends SuperEntity<SysMenuEntity>{
+public class SysMenuEntity extends SuperEntity<SysMenuEntity>
+	implements Serializable{
 
 	private String c_url;
 	

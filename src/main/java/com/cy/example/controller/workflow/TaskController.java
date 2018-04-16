@@ -1,13 +1,16 @@
 package com.cy.example.controller.workflow;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.cy.example.config.WebConfig;
+import com.cy.example.controller.BaseController;
+import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.entity.workflow.LeaveBillEntity;
+import com.cy.example.model.Page;
+import com.cy.example.model.Result;
+import com.cy.example.service.IUserService;
+import com.cy.example.service.IWorkFlowService;
+import com.cy.example.vo.CommentVo;
+import com.cy.example.vo.TaskVo;
+import com.cy.example.vo.WorkFLowVo;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
@@ -15,22 +18,14 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.cy.example.vo.CommentVo;
-import com.cy.example.model.Page;
-import com.cy.example.vo.TaskVo;
-import com.cy.example.vo.WorkFLowVo;
-import com.cy.example.config.WebConfig;
-import com.cy.example.controller.BaseController;
-import com.cy.example.entity.system.SysUserEntity;
-import com.cy.example.entity.workflow.LeaveBillEntity;
-import com.cy.example.service.IUserService;
-import com.cy.example.service.IWorkFlowService;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/system/task")
@@ -69,7 +64,7 @@ public class TaskController extends BaseController {
 	
 	@RequestMapping("/findComment")
 	@ResponseBody
-	public Map<String, Object> findComment(@RequestParam("id") String id) {
+	public Result<List<CommentVo>> findComment(@RequestParam("id") String id) {
 		List<Comment> list = workFlowService.findCommentByTaskId(id);
 		List<CommentVo> data = new ArrayList<CommentVo>();
 		if(list.size()>0){
@@ -81,11 +76,7 @@ public class TaskController extends BaseController {
 				data.add(ca);
 			}
 		}
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("rows", data);
-		map.put("total", data.size());
-		
-		return map;
+		return new Result<>(true,null,data.size(),data);
 	}
 	
 	@RequestMapping("/getBillInfo")
@@ -100,17 +91,14 @@ public class TaskController extends BaseController {
 	
 	@RequestMapping("/submit")
 	@ResponseBody
-	public Map<String, Object> submit(@ModelAttribute("workflow")WorkFLowVo workflow) {
+	public Result<String> submit(@ModelAttribute("workflow")WorkFLowVo workflow) {
 		workFlowService.compeleteTask(workflow);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("flag", true);
-		map.put("msg", "审核成功！");
-		return map;
+		return new Result<>(true,"审核成功！",0,null);
 	}
 
 	@GetMapping
 	@ResponseBody
-	public Map<String, Object> findAll(@ModelAttribute("page")Page page) {
+	public Result<List<TaskVo>> findAll(@ModelAttribute("page")Page page) {
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
 		List<Task> list = workFlowService.findAllTask(String.valueOf(user.getId()));
@@ -121,16 +109,12 @@ public class TaskController extends BaseController {
 			ca.setAssignee(user);
 			data.add(ca);
 		}
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("rows", data);
-		map.put("total", data.size());
-		
-		return map;
+		return new Result<>(true,null,data.size(),data);
 	}
 
 	@GetMapping("/search")
 	@ResponseBody
-	public Map<String, Object> search(
+	public Result<List<TaskVo>> search(
 			@ModelAttribute("task") TaskVo task,
 			@ModelAttribute("page") Page page) {
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
@@ -143,11 +127,7 @@ public class TaskController extends BaseController {
 			ca.setAssignee(user);
 			data.add(ca);
 		}
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("rows", data);
-		map.put("total", data.size());
-		
-		return map;
+		return new Result<>(true,null,data.size(),data);
 	}
 	
 }

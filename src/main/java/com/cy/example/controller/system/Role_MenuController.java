@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.model.Result;
 import com.cy.example.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class Role_MenuController extends BaseController {
 	private IUserService userService;
 	
 	@PostMapping
-	public Map<String, Object> add(@ModelAttribute("rm") Role_Menu_Ca rm) {
+	public Result<String> add(@ModelAttribute("rm") Role_Menu_Ca rm) {
 //		rm.setN_roleId(Long.valueOf(" ".equals(rm.getC_roleName()) ? "0" : rm.getC_roleName()));
 //		rm.setN_permisId(Long.valueOf(" ".equals(rm.getC_permisName()) ? "0" : rm.getC_permisName()));
 //		Map<String, Object> map = new HashMap<String, Object>();
@@ -51,7 +52,7 @@ public class Role_MenuController extends BaseController {
 	}
 
 	@PutMapping
-	public Map<String, Object> update(@ModelAttribute("rm") Role_Menu_Ca rm) {
+	public Result<String> update(@ModelAttribute("rm") Role_Menu_Ca rm) {
 //		rm.setN_roleId(Long.valueOf(" ".equals(rm.getC_roleName()) ? "0" : rm.getC_roleName()));
 //		rm.setN_permisId(Long.valueOf(" ".equals(rm.getC_permisName()) ? "0" : rm.getC_permisName()));
 //		Map<String, Object> map = new HashMap<String, Object>();
@@ -75,7 +76,7 @@ public class Role_MenuController extends BaseController {
 	}
 
 	@DeleteMapping
-	public Map<String, Object> delete(@ModelAttribute("rm") Role_Menu_Ca rm) {
+	public Result<String> delete(@ModelAttribute("rm") Role_Menu_Ca rm) {
 //		boolean flag = rmService.deleteById(rm.getId());
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		if (flag) {

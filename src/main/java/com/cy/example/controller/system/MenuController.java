@@ -1,24 +1,17 @@
 package com.cy.example.controller.system;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.cy.example.controller.BaseController;
+import com.cy.example.entity.system.SysMenuEntity;
+import com.cy.example.model.Page;
+import com.cy.example.model.Result;
+import com.cy.example.service.IMenuService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.cy.example.model.Page;
-import com.cy.example.controller.BaseController;
-import com.cy.example.entity.system.SysMenuEntity;
-import com.cy.example.service.IMenuService;
 
 @RestController
 @RequestMapping("/system/menu")
@@ -28,52 +21,46 @@ public class MenuController extends BaseController{
 	private IMenuService menuService;
 	
 	@PostMapping
-	public Map<String, Object> add(@ModelAttribute("menu") SysMenuEntity menu) {
+	public Result<String> add(@ModelAttribute("menu") SysMenuEntity menu) {
 		boolean flag = menuService.insert(menu);
 		Map<String, Object> map = new HashMap<String, Object>();
+		String msg;
 		if (flag) {
-			map.put("flag", flag);
-			map.put("msg", "添加成功！");
+			msg = "添加成功！";
 		} else {
-			map.put("flag", flag);
-			map.put("msg", "添加失败！");
+			msg = "添加失败！";
 		}
-		return map;
+		return new Result<>(flag,msg,0,null);
 	}
 
 	@PutMapping
-	public Map<String, Object> update(@ModelAttribute("menu") SysMenuEntity menu) {
+	public Result<String> update(@ModelAttribute("menu") SysMenuEntity menu) {
 		boolean flag = menuService.updateById(menu);
-		Map<String, Object> map = new HashMap<String, Object>();
+		String msg;
 		if (flag) {
-			map.put("flag", flag);
-			map.put("msg", "更新成功！");
+			msg = "更新成功！";
 		} else {
-			map.put("flag", flag);
-			map.put("msg", "更新失败！");
+			msg = "更新失败！";
 		}
-		return map;
+		return new Result<>(flag,msg,0,null);
 	}
 
 	@DeleteMapping("/{id}")
-	public Map<String, Object> delete(@PathVariable("id")Long id) {
+	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = menuService.deleteById(id);
-		Map<String, Object> map = new HashMap<String, Object>();
+		String msg;
 		if (flag) {
-			map.put("flag", flag);
-			map.put("msg", "删除成功！");
+			msg = "删除成功！";
 		} else {
-			map.put("flag", flag);
-			map.put("msg", "删除失败！");
+			msg = "删除失败！";
 		}
-		return map;
+		return new Result<>(flag,msg,0,null);
 	}
 
 	@GetMapping
-	public Map<String, Object> findAll(int page, int rows) {
+	public Result<List<SysMenuEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = menuService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysMenuEntity>());
-		Map<String, Object> map = new HashMap<String, Object>();
 		int sum = menuService.selectCount(new EntityWrapper<SysMenuEntity>());
 		List<SysMenuEntity> data = list.getRecords();
 		for(SysMenuEntity entity : data){
@@ -82,13 +69,11 @@ public class MenuController extends BaseController{
 				entity.setC_node(en.getC_menuName());
 			}
 		}
-		map.put("rows", data);
-		map.put("total", sum);
-		return map;
+		return new Result<>(true,null,sum,list.getRecords());
 	}
 
 	@GetMapping("/search")
-	public Map<String, Object> search(
+	public Result<List<SysMenuEntity>> search(
 			@ModelAttribute("menu") SysMenuEntity menu,
 			@ModelAttribute("page") Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -100,10 +85,7 @@ public class MenuController extends BaseController{
 				entity.setC_node(en.getC_menuName());
 			}
 		}
-		int sum = menuService.searchAllCount(menu);
-		map.put("rows", list);
-		map.put("total", sum);
-		return map;
+		return new Result<>(true,null,list.size(),list);
 	}
 
 }
