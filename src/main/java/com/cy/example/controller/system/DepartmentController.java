@@ -6,6 +6,7 @@ import com.cy.example.entity.system.SysDepartmentEntity;
 import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IDepartmentService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +56,7 @@ public class DepartmentController extends BaseController {
 	}
 
 	@GetMapping
+	@ApiOperation(value="获取用户列表", notes="获取用户列表的分页列表")
 	public Result<List<SysDepartmentEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = departService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysDepartmentEntity>());

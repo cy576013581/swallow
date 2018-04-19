@@ -50,6 +50,9 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/index", "anon");
 		filterChainDefinitionMap.put("/druid/**", "anon");
 		filterChainDefinitionMap.put("/system/user/validate", "anon");
+
+		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+		filterChainDefinitionMap.put("/webjars/**", "anon");
 		// 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 		filterChainDefinitionMap.put("/logout", "logout");
 		// 这里自定义的权限拦截规则
