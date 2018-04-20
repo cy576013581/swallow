@@ -1,4 +1,4 @@
-<#macro list controller title isLines=true isSources=true width="300px" height="500px" >
+<#macro list controller title checkbox=true isLines=true isSources=true width="300px" height="500px" >
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,27 +15,19 @@
         <script type="text/javascript" src="/lib/toastr/toastr.js"></script>
     </#if>
     <script language="javascript">
-
-        //编辑数据
-        function editData(){
-            var row = $('#dl').datalist('getSelected');
-            //console.log(row);
-            if (row){
-                console.log(row);
-
-            }else{
-                toastr.warning('在操作之前请先选中行！');
-            }
-        }
-        $(function(){
-
+        $(function () {
             $('#dl').datalist({
-                onLoadSuccess: function(data){
-                    console.log(data);
+                onSelect: function(index, row){
+                    // alert(row.value);
+                    getChoose(row.value);
                 }
             });
 
         });
+        
+        function getChoose(value) {
+            
+        }
 	</script>
 </head>
 <body>
@@ -43,6 +35,8 @@
         data-options="
             url: '${controller}',
             method: 'get',
+            valueField: 'value',
+            checkbox: ${checkbox}
             ">
 		<#--<li value="AL">Alabama</li>
 		<li value="AK">Alaska</li>

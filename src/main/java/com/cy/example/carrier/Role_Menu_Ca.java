@@ -18,4 +18,10 @@ public class Role_Menu_Ca extends SuperEntity<Role_Menu_Ca>{
 	
 	@TableField(exist = false)
 	private String c_menuName;
+
+	@TableField(exist = false)
+	private String c_url;
+
+	@TableField(exist = false)
+	private String c_node;
 }

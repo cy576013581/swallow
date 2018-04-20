@@ -12,13 +12,5 @@ import com.cy.example.mapper.SuperMapper;
 @Mapper
 public interface Role_MenuMapper extends SuperMapper<Role_Menu_Ca> {
 
-	int searchAllCount(@Param("rm") Role_Menu_Ca rm);
-
-	List<Role_Menu_Ca> searchAll(
-            @Param("rm") Role_Menu_Ca rm,
-            @Param("page") Page page);
-	
-	int findAllCount(@Param("page") Page page);
-
-	List<Role_Menu_Ca> findAll(@Param("page") Page page);
+	List<Role_Menu_Ca> findAll(@Param("n_roleId")int n_roleId);
 }

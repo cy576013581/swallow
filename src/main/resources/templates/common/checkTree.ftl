@@ -1,4 +1,4 @@
-<#macro checkTree controller title fields isSources=true rownumbers=true checkbox=true width="1000px" height="500px">
+<#macro checkTree controller title treeField fields isSources=true rownumbers=true checkbox=true width="1000px" height="500px">
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,18 +30,22 @@
                 checkbox: ${checkbox},
                 rownumbers: ${rownumbers},
                 idField: 'id',
-                treeField: 'name'">
+                checkOnSelect : true,
+                selectOnCheck : true,
+                <#--singleSelect : false,  //是否单选-->
+                striped: true,
+                treeField : '${treeField}'">
         <thead>
             <tr>
                 <!--<th data-options="field:'name'" width="220">Name</th>
                 <th data-options="field:'size'" width="100" align="right">Size</th>
                 <th data-options="field:'date'" width="150">Modified Date</th>-->
-                
-                <#list fields?split(",") as x>  
+
+                <#list fields?split(",") as x>
 			        <#list x?split(":") as y>
 			         	<#if (y_index ==0)>
 			         		<th data-options="field:'${y}',
-						
+
 						</#if>
 						<#if (y_index ==1)>
 							width: ${y}">
@@ -49,7 +53,7 @@
 						<#if (y_index ==2)>
 							${y}</th>
 						</#if>
-			        </#list> 
+			        </#list>
 			    </#list>
             </tr>
         </thead>

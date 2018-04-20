@@ -439,7 +439,7 @@
 <body>
 	<div id="box" style="display:none;">
 		<table id="dg" class="easyui-datagrid" title="${title}" style="width:${width};height:${height}"
-            data-options="rownumbers:${rownumbers},singleSelect:${singleSelect},
+            data-options="rownumbers:${rownumbers},singleSelect:${singleSelect},striped: true,
             url:'${controller}',method:'get',toolbar:'#tb,#ft',pagination:'true',nowrap:'true',
             onDblClickRow: onDblClickRow">
         <thead>

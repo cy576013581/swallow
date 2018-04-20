@@ -8,11 +8,5 @@ import com.cy.example.carrier.Role_Menu_Ca;
 
 public interface IRole_MenuService extends IService<Role_Menu_Ca>{
 
-	List<Role_Menu_Ca> searchAll(Role_Menu_Ca rm, Page page);
-
-	int searchAllCount(Role_Menu_Ca rp);
-	
-	int findAllCount(Page page);
-
-	List<Role_Menu_Ca> findAll(Page page);
+	List<Role_Menu_Ca> findAll(int n_roleId);
 }

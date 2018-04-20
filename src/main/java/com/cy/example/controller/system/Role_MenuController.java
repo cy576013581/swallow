@@ -1,21 +1,25 @@
 package com.cy.example.controller.system;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.cy.example.carrier.Role_Menu_Ca;
+import com.cy.example.controller.BaseController;
+import com.cy.example.entity.system.SysMenuEntity;
+import com.cy.example.entity.system.SysRoleEntity;
+import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.model.Page;
+import com.cy.example.model.Result;
+import com.cy.example.service.IMenuService;
+import com.cy.example.service.IRoleService;
+import com.cy.example.service.IRole_MenuService;
+import com.cy.example.service.IUserService;
+import com.cy.example.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.cy.example.entity.system.SysUserEntity;
-import com.cy.example.model.Result;
-import com.cy.example.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.cy.example.model.Page;
-import com.cy.example.carrier.Role_Menu_Ca;
-import com.cy.example.controller.BaseController;
-import com.cy.example.service.IRole_MenuService;
 
 @RestController
 @RequestMapping("/system/role_menu")
@@ -25,7 +29,10 @@ public class Role_MenuController extends BaseController {
 	private IRole_MenuService rmService;
 
 	@Autowired
-	private IUserService userService;
+	private IRoleService roleService;
+
+	@Autowired
+	private IMenuService menuService;
 	
 	@PostMapping
 	public Result<String> add(@ModelAttribute("rm") Role_Menu_Ca rm) {
@@ -75,8 +82,8 @@ public class Role_MenuController extends BaseController {
 		return null;
 	}
 
-	@DeleteMapping
-	public Result<String> delete(@ModelAttribute("rm") Role_Menu_Ca rm) {
+	@DeleteMapping("/{id}")
+	public Result<String> delete(@PathVariable("id")Long id) {
 //		boolean flag = rmService.deleteById(rm.getId());
 //		Map<String, Object> map = new HashMap<String, Object>();
 //		if (flag) {
@@ -90,28 +97,54 @@ public class Role_MenuController extends BaseController {
 		return null;
 	}
 
-	@GetMapping
-	public Map<String, Object> findAll(@ModelAttribute("page")Page page) {
-		List<Role_Menu_Ca> list = rmService.findAll(page);
-		Map<String, Object> map = new HashMap<String, Object>();
-		int sum = rmService.findAllCount(page);
-		map.put("rows", list);
-		map.put("total", sum);
-		return map;
+	@GetMapping("/{rid}")
+	public Result<List<Role_Menu_Ca>> findAll(@PathVariable("rid")Integer rid) {
+		List<Role_Menu_Ca> list = rmService.findAll(rid);
+		return new Result<>(true,null,null,list);
 	}
 
-	@GetMapping("/getUsers")
-	public List<Map<String, Object>> getUsers(){
-		List<SysUserEntity> data = userService.selectList(new EntityWrapper<SysUserEntity>().setSqlSelect("id,c_username"));
+	@GetMapping("/getRoles")
+	public Result<List<Map<String, Object>>> getRoles(){
+		List<SysRoleEntity> data = roleService.selectList(new EntityWrapper<SysRoleEntity>().setSqlSelect("id,c_roleName"));
 
 		List<Map<String, Object>> list = new ArrayList<>();
-		for (SysUserEntity user : data){
+		for (SysRoleEntity user : data){
 			Map<String, Object> map = new HashMap<>();
-			map.put("text",user.getC_username());
+			map.put("text",user.getC_roleName());
 			map.put("value",user.getId());
 			list.add(map);
 		}
 
-		return list;
+		return new Result<>(true,null,null,list);
+	}
+
+	@GetMapping("/getMenus")
+	public Result<List<Map<String, Object>>> getMenus(){
+		List<SysMenuEntity> data = menuService.findAll();
+
+		List<Map<String, Object>> list = new ArrayList<>();
+		for (SysMenuEntity menu : data){
+			if (StringUtil.IsEqual("[root]",menu.getC_node())){
+				Map<String,Object> map = new HashMap<>();
+				map.put("c_menuName",menu.getC_menuName());
+				map.put("c_url",menu.getC_url());
+				map.put("id",menu.getId());
+				List<Map<String,Object>> tempList = new ArrayList<>();
+				for (int i =0 ;i<data.size();i++){
+					Map<String,Object> temp = new HashMap<>();
+					if(StringUtil.IsEqual(String.valueOf(menu.getId()),data.get(i).getC_node().trim())){
+						temp.put("c_menuName",data.get(i).getC_menuName());
+						temp.put("c_url",data.get(i).getC_url());
+						temp.put("id",data.get(i).getId());
+						tempList.add(temp);
+					}
+				}
+				if (tempList.size()>0){
+					map.put("children",tempList);
+				}
+				list.add(map);
+			}
+		}
+		return new Result<>(true,null,null,list);
 	}
 }

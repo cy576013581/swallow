@@ -7,55 +7,23 @@
         <result column="c_roleName" property="c_roleName" jdbcType="VARCHAR" />
         <result column="n_menuId" property="n_menuId" jdbcType="BIGINT" />
 		<result column="c_menuName" property="c_menuName" jdbcType="VARCHAR" />
+		<result column="c_url" property="c_url" jdbcType="VARCHAR" />
+		<result column="c_node" property="c_node" jdbcType="VARCHAR" />
         <result column="c_createDate" property="c_createDate" jdbcType="VARCHAR" />
         <result column="n_creater" property="n_creater" jdbcType="BIGINT" />
         <result column="c_updateDate" property="c_updateDate" jdbcType="VARCHAR"/>
         <result column="n_updater" property="n_updater" jdbcType="BIGINT" />
     </resultMap>
-    
-    <sql id="ColumnList" >
-        id, n_menuId,n_roleId,c_roleName,c_menuName,c_createDate,c_updateDate
-    </sql>
-    
-    <select id="searchAll" resultMap="BaseResultMap">
-	   select <include refid="ColumnList" />,p.c_permisName,r.c_roleName,a.c_createDate,a.c_updateDate
-	   from sys_role_permission a
-	   left join sys_permission p
-	   on p.id = a.n_permisId
-	   left join sys_role r
-	   on r.id = a.n_roleId
-	   where a.n_deleted = 0
-	   <if test="rp.n_permisId != ''"><if test="rp.n_permisId != '0'"> and n_permisId = #{rp.n_permisId}</if></if>
-	   <if test="rp.n_roleId != ''"><if test="rp.n_roleId != '0'"> and n_roleId = #{rp.n_roleId}</if></if>
-	   <if test="rp.c_createDate != ''"><if test="rp.c_createDate != null">	and substr(c_createDate,1,10) = #{rp.c_createDate}</if></if>
-   	   <if test="rp.c_updateDate != ''"><if test="rp.c_updateDate != null">  and substr(c_updateDate,1,10) = #{rp. c_updateDate}</if></if>
-   	   order by id limit #{page.index},#{page.rows}
-    </select>  
-    
-    <select id="searchAllCount" resultType="java.lang.Integer" >
-	   select count(id)
-	   from sys_role_permission
-	   where 1=1
-	   <if test="rp.n_permisId != ''"><if test="rp.n_permisId != '0'"> and n_permisId = #{rp.n_permisId}</if></if>
-	   <if test="rp.n_roleId != ''"><if test="rp.n_roleId != '0'"> and n_roleId = #{rp.n_roleId}</if></if>
-	   <if test="rp.c_createDate != ''"><if test="rp.c_createDate != null">	and substr(c_createDate,1,10) = #{rp.c_createDate}</if></if>
-   	   <if test="rp.c_updateDate != ''"><if test="rp.c_updateDate != null">  and substr(c_updateDate,1,10) = #{rp. c_updateDate}</if></if>
-    </select>
-    
+
     <select id="findAll" resultMap="BaseResultMap">
-	   select <include refid="ColumnList" />,p.c_permisName,r.c_roleName,a.c_createDate,a.c_updateDate
-	   from sys_role_permission a
-	   left join sys_permission p
-	   on p.id = a.n_permisId
+	   select a.id, n_menuId,n_roleId,r.c_roleName,m.c_node,m.c_menuName,m.c_url,a.c_createDate,a.c_updateDate
+	   from sys_role_menu a
+	   left join sys_menu m
+	   on m.id = a.n_menuId
 	   left join sys_role r
 	   on r.id = a.n_roleId
 	   where a.n_deleted = 0
-   	   order by id limit #{page.index},#{page.rows}
-    </select>  
-    
-    <select id="findAllCount" resultType="java.lang.Integer" >
-	   select count(id)
-	   from sys_role_permission
-	   where n_deleted = 0
+	   and n_roleId = #{n_roleId}
     </select>
+    
 </mapper>

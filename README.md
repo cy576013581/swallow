@@ -167,3 +167,5 @@
 - 2018.4.16 对返回结果进行统一封装 by  cy
 
 - 2018.4.18 配置文件改为yaml格式 by  cy
+
+- 2018.4.20 完善checkTree、datalist组件 by  cy

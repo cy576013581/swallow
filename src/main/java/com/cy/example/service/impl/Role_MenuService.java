@@ -18,24 +18,9 @@ public class Role_MenuService extends ServiceImpl<Role_MenuMapper, Role_Menu_Ca>
 	@Autowired
 	private Role_MenuMapper mapper;
 
-	public List<Role_Menu_Ca> searchAll(Role_Menu_Ca rm, Page page) {
+	public List<Role_Menu_Ca> findAll(int n_roleId) {
 		// TODO Auto-generated method stub
-		return mapper.searchAll(rm, page);
-	}
-
-	public int searchAllCount(Role_Menu_Ca rm) {
-		// TODO Auto-generated method stub
-		return mapper.searchAllCount(rm);
-	}
-
-	public int findAllCount(Page page) {
-		// TODO Auto-generated method stub
-		return mapper.findAllCount(page);
-	}
-
-	public List<Role_Menu_Ca> findAll(Page page) {
-		// TODO Auto-generated method stub
-		return mapper.findAll(page);
+		return mapper.findAll(n_roleId);
 	}
 
 	
