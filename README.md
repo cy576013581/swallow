@@ -169,3 +169,5 @@
 - 2018.4.18 配置文件改为yaml格式 by  cy
 
 - 2018.4.20 完善checkTree、datalist组件 by  cy
+
+- 2018.4.27 由于Easyui的目前解决不了动态选中，checkTree组件暂时不设置checkbox，完成根据角色设置对应菜单，并且根据角色显示对应菜单 by  cy

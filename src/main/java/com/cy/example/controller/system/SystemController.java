@@ -68,7 +68,7 @@ public class SystemController {
 	public String showMain(HttpSession session, ModelMap map) {
 		SysUserEntity user = (SysUserEntity) session
 				.getAttribute(WebConfig.LOGIN_USER);
-		List<SysMenuEntity> menuList = menuService.findAll();
+		List<SysMenuEntity> menuList = menuService.findUserAll(user.getRole().getId());
 		Map<String, List<SysMenuEntity>> data = new HashMap<String, List<SysMenuEntity>>();
 		for (int i = 0; i < menuList.size(); i++) {
 			if("[root]".equals(menuList.get(i).getC_node())){

@@ -17,4 +17,6 @@ public interface IMenuService extends IService<SysMenuEntity>{
 	List<SysMenuEntity> findAll();
 	
 //	SysMenuEntity findMenuByNode(SysMenuEntity menu);
+
+	List<SysMenuEntity> findUserAll(Long roleId);
 }

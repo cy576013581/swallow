@@ -21,6 +21,15 @@
 	   from sys_menu
 	   where c_node = '[root]' and c_menuName = #{menu.c_menuName}
     </select> -->
+
+	<select id="findUserAll" resultMap="BaseResultMap">
+		select a.id,a.c_url,a.c_menuName,a.c_node
+		from sys_menu a
+		left join sys_role_menu rm
+		on rm.n_roleId = #{roleId}
+		where
+		a.id = rm.n_menuId
+	</select>
     
     <select id="findAll" resultMap="BaseResultMap">
 	   select <include refid="ColumnList" />

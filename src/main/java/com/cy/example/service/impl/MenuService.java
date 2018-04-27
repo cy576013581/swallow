@@ -38,4 +38,9 @@ implements IMenuService{
 		return mapper.findAll();
 	}
 
+	public List<SysMenuEntity> findUserAll(Long roleId) {
+		// TODO Auto-generated method stub
+		return mapper.findUserAll(roleId);
+	}
+
 }

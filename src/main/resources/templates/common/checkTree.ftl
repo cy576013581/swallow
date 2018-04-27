@@ -17,7 +17,15 @@
     </#if>
     <script language="javascript">
 
-    
+        $(function(){
+            $('#ct').treegrid({
+                onSelect: function(row){
+                    //加载完毕后获取所有的checkbox遍历
+                    // console.log(row);
+                    // var level = $('#ct').treegrid("getLevel",row.id);
+                }
+            });
+        })
    
 		
 	</script>
@@ -27,12 +35,13 @@
             data-options="
                 url: '${controller}',
                 method: 'get',
-                checkbox: ${checkbox},
+
+                <#--checkbox: ${checkbox},  //由于尝试多次，无法再复选框中动态勾选，故先取消勾选框-->
                 rownumbers: ${rownumbers},
                 idField: 'id',
-                checkOnSelect : true,
-                selectOnCheck : true,
-                <#--singleSelect : false,  //是否单选-->
+                <#--checkOnSelect : true,-->
+                <#--selectOnCheck : true,-->
+                singleSelect : false,  //是否单选
                 striped: true,
                 treeField : '${treeField}'">
         <thead>

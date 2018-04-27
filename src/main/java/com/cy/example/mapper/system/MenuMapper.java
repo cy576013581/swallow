@@ -22,4 +22,6 @@ public interface MenuMapper extends SuperMapper<SysMenuEntity>{
 	
 	List<SysMenuEntity> findAll();
 //	SysMenuEntity findMenuByNode(@Param("menu") SysMenuEntity menu);
+
+	List<SysMenuEntity> findUserAll(@Param("roleId")Long roleId);
 }

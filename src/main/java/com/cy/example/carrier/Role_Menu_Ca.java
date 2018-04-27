@@ -3,10 +3,14 @@ package com.cy.example.carrier;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @TableName("sys_role_menu")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Role_Menu_Ca extends SuperEntity<Role_Menu_Ca>{
 
 	private long n_roleId;
@@ -24,4 +28,8 @@ public class Role_Menu_Ca extends SuperEntity<Role_Menu_Ca>{
 
 	@TableField(exist = false)
 	private String c_node;
+
+	public Role_Menu_Ca(long n_roleId){
+		this.n_roleId = n_roleId;
+	}
 }

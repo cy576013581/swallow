@@ -1,15 +1,18 @@
 package com.cy.example.service.impl;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.cy.example.carrier.Role_Menu_Ca;
+import com.cy.example.config.WebConfig;
+import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.mapper.system.Role_MenuMapper;
+import com.cy.example.service.IRole_MenuService;
+import com.cy.example.util.DateUtil;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.model.Page;
-import com.cy.example.carrier.Role_Menu_Ca;
-import com.cy.example.mapper.system.Role_MenuMapper;
-import com.cy.example.service.IRole_MenuService;
+import java.util.List;
 
 @Service
 public class Role_MenuService extends ServiceImpl<Role_MenuMapper, Role_Menu_Ca>
@@ -23,5 +26,22 @@ public class Role_MenuService extends ServiceImpl<Role_MenuMapper, Role_Menu_Ca>
 		return mapper.findAll(n_roleId);
 	}
 
-	
+	public boolean update(Long roleId,String menuIds){
+		String[] menus = menuIds.split(",");
+		mapper.delete(new EntityWrapper<Role_Menu_Ca>().eq("n_roleId",roleId));
+		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
+				.getAttribute(WebConfig.LOGIN_USER);
+		for (String a: menus ) {
+			Role_Menu_Ca ca = new Role_Menu_Ca(roleId);
+			ca.setN_menuId(Integer.valueOf(a));
+			ca.setC_createDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
+			ca.setC_updateDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
+			ca.setN_creater(user.getId());
+			ca.setN_updater(user.getId());
+			ca.setN_deleted(0);
+			mapper.insert(ca);
+		}
+
+		return true;
+	}
 }

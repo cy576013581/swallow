@@ -5,13 +5,10 @@ import com.cy.example.carrier.Role_Menu_Ca;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysMenuEntity;
 import com.cy.example.entity.system.SysRoleEntity;
-import com.cy.example.entity.system.SysUserEntity;
-import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IMenuService;
 import com.cy.example.service.IRoleService;
 import com.cy.example.service.IRole_MenuService;
-import com.cy.example.service.IUserService;
 import com.cy.example.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,68 +30,11 @@ public class Role_MenuController extends BaseController {
 
 	@Autowired
 	private IMenuService menuService;
-	
-	@PostMapping
-	public Result<String> add(@ModelAttribute("rm") Role_Menu_Ca rm) {
-//		rm.setN_roleId(Long.valueOf(" ".equals(rm.getC_roleName()) ? "0" : rm.getC_roleName()));
-//		rm.setN_permisId(Long.valueOf(" ".equals(rm.getC_permisName()) ? "0" : rm.getC_permisName()));
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		Role_Menu_Ca user = rmService.selectOne(new EntityWrapper<Role_Menu_Ca>().eq("n_roleId", rm.getN_roleId())
-//				.eq("n_permisId", rm.getN_permisId()));
-//		if(null == user){
-//			boolean flag = rmService.insert(rm);
-//			if (flag) {
-//				map.put("flag", flag);
-//				map.put("msg", "添加成功！");
-//			} else {
-//				map.put("flag", flag);
-//				map.put("msg", "添加失败！");
-//			}
-//		}else{
-//			map.put("flag", false);
-//			map.put("msg", "添加失败，该角色已经存在此权限！");
-//		}
-//		return map;
-		return null;
-	}
 
 	@PutMapping
-	public Result<String> update(@ModelAttribute("rm") Role_Menu_Ca rm) {
-//		rm.setN_roleId(Long.valueOf(" ".equals(rm.getC_roleName()) ? "0" : rm.getC_roleName()));
-//		rm.setN_permisId(Long.valueOf(" ".equals(rm.getC_permisName()) ? "0" : rm.getC_permisName()));
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		Role_Menu_Ca user = rmService.selectOne(new EntityWrapper<Role_Menu_Ca>().eq("n_roleId", rm.getN_roleId())
-//				.eq("n_permisId", rm.getN_permisId()));
-//		if(null == user){
-//			boolean flag = rmService.updateById(rm);
-//			if (flag) {
-//				map.put("flag", flag);
-//				map.put("msg", "更新成功！");
-//			} else {
-//				map.put("flag", flag);
-//				map.put("msg", "更新失败！");
-//			}
-//		}else{
-//			map.put("flag", false);
-//			map.put("msg", "添加失败，该角色已经存在此权限！");
-//		}
-//		return map;
-		return null;
-	}
-
-	@DeleteMapping("/{id}")
-	public Result<String> delete(@PathVariable("id")Long id) {
-//		boolean flag = rmService.deleteById(rm.getId());
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		if (flag) {
-//			map.put("flag", flag);
-//			map.put("msg", "删除成功！");
-//		} else {
-//			map.put("flag", flag);
-//			map.put("msg", "删除失败！");
-//		}
-//		return map;
-		return null;
+	public Result<String> updates(Long roleId,String menuIds) {
+		rmService.update(roleId,menuIds);
+		return new Result<>(true,"更新成功！",null,null);
 	}
 
 	@GetMapping("/{rid}")

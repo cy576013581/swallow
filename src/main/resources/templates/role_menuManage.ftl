@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>角色关联菜单</title>
-    
+    <link rel="stylesheet" href="/lib/layui/css/layui.css">
 </head>
 <body>
 	<div style="float: left">
@@ -21,10 +21,12 @@
 
 		</@roleAndMenu.checkTree>
     </div>
+    <div style="width: 700px;text-align: center">
+        <button onclick="update()" class="layui-btn layui-btn-normal" style="margin: 10px">确认修改</button>
+    </div>
 
 	
 	<script language="javascript">
-
 
 		function getChoose(value) {
             $.ajax({ //使用ajax与服务器异步交互
@@ -47,14 +49,43 @@
                                  //    break;
 								// }
                                 // alert(data.rows[i].n_menuId);
-								alert(data.rows[i].n_menuId);
-                                $("#ct").treegrid("checkRow",data.rows[i].n_menuId);
+                                $("#ct").treegrid("select",data.rows[i].n_menuId);
                             }
 						}
 
 					}
 
                     // $("ct").treegrid("loadData",data);
+                }
+            });
+        }
+        
+        function update() {
+            var role = $('#dl').datalist("getSelected");
+            var roleId = role.value;
+            var menu = $('#ct').treegrid("getSelections");
+            var len = menu.length;
+            var menuIds = "";
+            $.each(menu,function(index,value){
+                if (index < len-1){
+                    menuIds = menuIds+value.id+",";
+                }else if (index = len-1){
+                    menuIds = menuIds+value.id;
+                }
+            });
+            $.ajax({ //使用ajax与服务器异步交互
+                url:"/system/role_menu/?s="+new Date().getTime(), //后面加时间戳，防止IE辨认相同的url，只从缓存拿数据
+                type:"PUT",
+                data: {roleId:roleId,menuIds:menuIds},
+                dataType:"json",
+                error:function(XMLHttpRequest,textStatus,errorThrown){
+                    toastr.error('网络连接失败！');
+                }, //错误提示
+
+                success:function(data){ //data为交互成功后，后台返回的数据
+                    if (data.flag){
+                        toastr.success(data.msg);
+                    }
                 }
             });
         }

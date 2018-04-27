@@ -33,7 +33,7 @@ public class SysUserEntity extends SuperEntity<SysUserEntity> {
 	private SysDepartmentEntity n_departmentId;
 
 	@TableField(exist = false)
-	private List<SysRoleEntity> roleList;// 一个用户具有多个角色
+	private SysRoleEntity role;
 	
 	private SysUserEntity n_superior;
 
