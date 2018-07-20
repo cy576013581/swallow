@@ -85,6 +85,3 @@ Desktop.ini
 ######################
 # Project
 ######################
-etc/data
-etc/embedding
-etc/dictionary/**/*.txt.bin
