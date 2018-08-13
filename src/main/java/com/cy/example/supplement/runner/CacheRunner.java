@@ -27,14 +27,14 @@ public class CacheRunner implements ApplicationRunner{
 	 * 在这里进行一些系统重要信息的缓存
 	 */
 	public void run(ApplicationArguments arg0) throws Exception {
-		new Thread()
-        {
-            public void run()
-            {
-            	System.out.println("=================================CacheRunner===================================");
-            	userCache();
-            }
-        }.start();
+//		new Thread()
+//        {
+//            public void run()
+//            {
+//            	System.out.println("=================================CacheRunner===================================");
+//            	userCache();
+//            }
+//        }.start();
 		
 	}
 	

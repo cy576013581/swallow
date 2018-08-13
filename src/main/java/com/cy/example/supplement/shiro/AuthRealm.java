@@ -59,18 +59,18 @@ public class AuthRealm extends AuthorizingRealm {
 		if (StringUtil.IsNullOrEmptyT(username)) {
 			return null;
 		}
-        /*
-         * 在这里写错误登陆次数的限制代码
-         */
-		userService.incrLoginCount(username);
+//        /*
+//         * 在这里写错误登陆次数的限制代码
+//         */
+//		userService.incrLoginCount(username);
 		
 		
-		//使用緩存存儲用戶信息
-		SysUserEntity user = userService.getUserCache(username);
-		if(null == user){
-			user = userService.findOneByUsername(username);
-			userService.insertUserCache(user);
-		}
+//		//使用緩存存儲用戶信息
+//		SysUserEntity user = userService.getUserCache(username);
+//		if(null == user){
+		SysUserEntity user = userService.findOneByUsername(username);
+//			userService.insertUserCache(user);
+//		}
 		
 		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 		if(null == user){
@@ -80,9 +80,9 @@ public class AuthRealm extends AuthorizingRealm {
             // 用户被管理员锁定抛出异常
             throw new LockedAccountException();
         }
-		if (Integer.valueOf(userService.getLoginCount(username)) > 5){
-	        throw new DisabledAccountException("由于密码输入错误次数大于5次，帐号已经禁止登录！");
-	    }
+//		if (Integer.valueOf(userService.getLoginCount(username)) > 5){
+//	        throw new DisabledAccountException("由于密码输入错误次数大于5次，帐号已经禁止登录！");
+//	    }
 		logger.info("***登录user：" + user);
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
 				user, // 用户名
