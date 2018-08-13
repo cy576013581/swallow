@@ -17,6 +17,7 @@
    #### FastJSON<br>
    #### Redis<br>
    #### Lombok<br>
+   #### Swagger<br>
    #### activiti<br>
    
    ***
@@ -179,3 +180,5 @@
 - 2018.8.13 Redis服务器到期，暂时注释Redis缓存代码，后面优化成内存缓存 by  cy
 
 - 2018.8.13 消息队列服务器到期，暂时注释rabbitmq代码 by  cy
+
+- 2018.8.13 添加SwaggerAPI文档工具 by  cy
