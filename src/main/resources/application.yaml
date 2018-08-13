@@ -33,9 +33,9 @@ spring:
     poolPreparedStatements: true
     filters: stat,wall
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://rm-uf6e69m5y973hu75vko.mysql.rds.aliyuncs.com:3306/example
+    url: jdbc:mysql://localhost/example
     maxPoolPreparedStatementPerConnectionSize: 20
-    password: cy0227-=
+    password: 0.0.0.
     testOnBorrow: false
     testWhileIdle: true
     minEvictableIdleTimeMillis: 300000
@@ -43,7 +43,7 @@ spring:
     testOnReturn: false
     driver-class-name: com.mysql.jdbc.Driver
     maxActive: 20
-    username: cheny
+    username: root
   resources:
     static-locations: classpath:/static/,classpath:/public/
   mvc:
