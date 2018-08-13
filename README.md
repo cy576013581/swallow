@@ -177,3 +177,5 @@
 - 2018.8.13 暂时取消activity模块，升级之后与springboot冲突，报Error creating bean with name 'requestMappingHandlerMapping by  cy
 
 - 2018.8.13 Redis服务器到期，暂时注释Redis缓存代码，后面优化成内存缓存 by  cy
+
+- 2018.8.13 消息队列服务器到期，暂时注释rabbitmq代码 by  cy

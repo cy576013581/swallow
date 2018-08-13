@@ -17,13 +17,13 @@ public class ReportScheduler {
 	private RabbitSender rabbitSender;
 
 	//@Scheduled(fixedRate = 6000)
-    @Scheduled(cron="0 0 0 * * ?")   //每天24点执行
-    public void reportCurrentTime() {
-    	String content = "";
-    	MailEntity mail = new MailEntity();
-		mail.setTo("pjchenyang@qq.com");
-    	mail.setContent(content);
-    	rabbitSender.sendMail(mail);
-    	logger.info("发送系统状态邮件,to" + DateUtil.getNow());
-    }
+//    @Scheduled(cron="0 0 0 * * ?")   //每天24点执行
+//    public void reportCurrentTime() {
+//    	String content = "";
+//    	MailEntity mail = new MailEntity();
+//		mail.setTo("pjchenyang@qq.com");
+//    	mail.setContent(content);
+//    	rabbitSender.sendMail(mail);
+//    	logger.info("发送系统状态邮件,to" + DateUtil.getNow());
+//    }
 }

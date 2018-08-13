@@ -34,8 +34,8 @@ public class UserController extends BaseController {
 	@Autowired
 	private IMailService mailService;
 	
-	@Autowired
-	private RabbitSender rabbitSender;
+//	@Autowired
+//	private RabbitSender rabbitSender;
 
 	private final Logger logger = LoggerFactory
 			.getLogger(this.getClass());
@@ -50,7 +50,7 @@ public class UserController extends BaseController {
 		mail.setTo("pjchenyang@qq.com");
     	mail.setSubject("用户:"+user.getC_username()+"的注册审核提醒");
     	mail.setContent(user.toStringCN());
-		rabbitSender.sendMail(mail);
+//		rabbitSender.sendMail(mail);
 		String msg;
 		if (flag) {
 			msg = "注册成功！请等待管理员激活！";
@@ -170,7 +170,7 @@ public class UserController extends BaseController {
 			loginRecord.setC_loginIp(super.getIP(getRequest()));
 			loginRecord.setC_username(user.getC_username());
 			//采用消息中心的通知添加
-			rabbitSender.sendLoginRecord(loginRecord);
+//			rabbitSender.sendLoginRecord(loginRecord);
 			//清楚错误次数缓存
 			userService.removeCount(user.getC_username());
 			msg = "登陆成功！";
