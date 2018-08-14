@@ -44,6 +44,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     maxActive: 20
     username: root
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
   resources:
     static-locations: classpath:/static/,classpath:/public/
   mvc:

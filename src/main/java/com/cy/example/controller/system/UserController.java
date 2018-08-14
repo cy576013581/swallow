@@ -10,7 +10,6 @@ import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
-import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -20,9 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/system/user")
@@ -172,7 +169,7 @@ public class UserController extends BaseController {
 			//采用消息中心的通知添加
 //			rabbitSender.sendLoginRecord(loginRecord);
 			//清楚错误次数缓存
-			userService.removeCount(user.getC_username());
+//			userService.removeCount(user.getC_username());
 			msg = "登陆成功！";
 		} catch (Exception exception) {
 			if (exception instanceof UnknownAccountException) {
