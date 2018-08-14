@@ -17,21 +17,23 @@ import com.cy.example.service.IWorkFlowService;
 public class LeaveBillService extends ServiceImpl<LeaveBillMapper, LeaveBillEntity>
 	implements ILeaveBillService{
 	
-	@Autowired
-	private LeaveBillMapper billMapper;
-	
-	@Autowired
-	private IWorkFlowService workFlowService;
-	
+//	@Autowired
+//	private LeaveBillMapper billMapper;
+//
+//	@Autowired
+//	private IWorkFlowService workFlowService;
+
 
 	public List<LeaveBillEntity> findAll(Page page) {
 		// TODO Auto-generated method stub
-		return billMapper.findAll(page);
+//		return billMapper.findAll(page);
+		return null;
 	}
 
 	public int findAllCount() {
 		// TODO Auto-generated method stub
-		return billMapper.findAllCount();
+//		return billMapper.findAllCount();
+		return 0;
 	}
 
 	public List<LeaveBillEntity> searchAll(LeaveBillEntity bill, Page page) {
@@ -43,23 +45,23 @@ public class LeaveBillService extends ServiceImpl<LeaveBillMapper, LeaveBillEnti
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Transactional
 	public boolean updateMy(LeaveBillEntity bill) {
 		// TODO Auto-generated method stub
-		//2、启动流程实例
-		workFlowService.startProcessDefinition(bill);
-		//1、更新状态
-		billMapper.updateMy(bill);
-		
-		
+//		//2、启动流程实例
+//		workFlowService.startProcessDefinition(bill);
+//		//1、更新状态
+//		billMapper.updateMy(bill);
+
+
 		return true;
 	}
-	
+
 	public boolean insertMy(LeaveBillEntity bill) {
 		// TODO Auto-generated method stub
-		billMapper.insertMy(bill);
-		
+//		billMapper.insertMy(bill);
+
 		return true;
 	}
 }

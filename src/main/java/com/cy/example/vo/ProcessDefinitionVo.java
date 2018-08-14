@@ -1,7 +1,7 @@
 package com.cy.example.vo;
 
 import lombok.Data;
-import org.activiti.engine.repository.ProcessDefinition;
+//import org.activiti.engine.repository.ProcessDefinition;
 
 @Data
 public class ProcessDefinitionVo {
@@ -26,13 +26,13 @@ public class ProcessDefinitionVo {
 	// 部署ID
 	private String deploymentId;
 
-	public void transfor(ProcessDefinition pro) {
-		this.id = pro.getId();
-		this.name = pro.getName();
-		this.key = pro.getKey();
-		this.version = String.valueOf(pro.getVersion());
-		this.resourceName = pro.getResourceName();
-		this.diagramResourceName = pro.getDiagramResourceName();
-		this.deploymentId = pro.getDeploymentId();
-	}
+//	public void transfor(ProcessDefinition pro) {
+//		this.id = pro.getId();
+//		this.name = pro.getName();
+//		this.key = pro.getKey();
+//		this.version = String.valueOf(pro.getVersion());
+//		this.resourceName = pro.getResourceName();
+//		this.diagramResourceName = pro.getDiagramResourceName();
+//		this.deploymentId = pro.getDeploymentId();
+//	}
 }

@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.3.RELEASE</version>
+		<version>2.0.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -34,6 +34,7 @@
         <activiti-spring-boot-starter-basi.version>5.22.0</activiti-spring-boot-starter-basi.version>
         <kaptcha.version>2.3.2</kaptcha.version>
 		<httpclient.version>4.5.6</httpclient.version>
+		<springfox.version>2.9.2</springfox.version>
 	</properties>
 
 	<dependencies>
@@ -56,6 +57,11 @@
 	        <artifactId>spring-boot-starter-web</artifactId>
  		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+
 		<!--jdk10中不存在-->
 		<!-- Javax -->
 		<dependency>
@@ -67,12 +73,17 @@
 			<artifactId>cache-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
 		<dependency>
@@ -91,9 +102,17 @@
 		<dependency>  
 		    <groupId>org.springframework.boot</groupId>  
 		    <artifactId>spring-boot-starter-aop</artifactId>  
-		</dependency>  
-		
-		<!-- 热启动配置 -->
+		</dependency>
+
+		<!-- Cache -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.10.5</version>
+        </dependency>
+
+
+        <!-- 热启动配置 -->
 	    <dependency>
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-devtools</artifactId>
@@ -166,11 +185,11 @@
 		</dependency>
 		
 		<!-- activivi工作流引擎 -->
-		<dependency>
-		   <groupId>org.activiti</groupId>
-		   <artifactId>activiti-spring-boot-starter-basic</artifactId>
-		   <version>${activiti-spring-boot-starter-basi.version}</version>
-		</dependency>
+		<!--<dependency>-->
+		   <!--<groupId>org.activiti</groupId>-->
+		   <!--<artifactId>activiti-spring-boot-starter-basic</artifactId>-->
+		   <!--<version>${activiti-spring-boot-starter-basi.version}</version>-->
+		<!--</dependency>-->
 		
 		<!-- 验证码 -->
 		<dependency>  
@@ -184,6 +203,18 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<!-- Swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox.version}</version>
 		</dependency>
 	</dependencies>
 

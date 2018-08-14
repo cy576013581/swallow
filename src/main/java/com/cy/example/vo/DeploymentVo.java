@@ -1,7 +1,7 @@
 package com.cy.example.vo;
 
 import lombok.Data;
-import org.activiti.engine.repository.Deployment;
+//import org.activiti.engine.repository.Deployment;
 
 import com.cy.example.util.DateUtil;
 
@@ -14,9 +14,9 @@ public class DeploymentVo {
 	
 	private String deploymentTime;
 	
-	public void transfor(Deployment deploy){
-		this.id = deploy.getId();
-		this.name = deploy.getName();
-		this.deploymentTime = DateUtil.format(deploy.getDeploymentTime());
-	}
+//	public void transfor(Deployment deploy){
+//		this.id = deploy.getId();
+//		this.name = deploy.getName();
+//		this.deploymentTime = DateUtil.format(deploy.getDeploymentTime());
+//	}
 }

@@ -16,25 +16,25 @@ import com.cy.example.util.HttpRequestUtil;
 @Configuration
 public class RabbitReceiver {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(RabbitReceiver.class);
-	
-	@Autowired
-	private ILoginRecordService loginRecordService;
-	
-	@Autowired
-	private IMailService mailService;
-	
-	@RabbitListener(queues = "loginRecord")
-    public void insertLoginRecord(LoginRecordEntity loginRecord) {
-		logger.info("接收到object : " + loginRecord);
-		loginRecordService.insert(loginRecord);
-    }
-	
-	@RabbitListener(queues = "mail")
-    public void process(MailEntity mail) {
-		logger.info("接收到object : " + mail);
-		mailService.sendSimpleMail(mail);
-    }
+//	private static final Logger logger = LoggerFactory
+//			.getLogger(RabbitReceiver.class);
+//
+//	@Autowired
+//	private ILoginRecordService loginRecordService;
+//
+//	@Autowired
+//	private IMailService mailService;
+//
+//	@RabbitListener(queues = "loginRecord")
+//    public void insertLoginRecord(LoginRecordEntity loginRecord) {
+//		logger.info("接收到object : " + loginRecord);
+//		loginRecordService.insert(loginRecord);
+//    }
+//
+//	@RabbitListener(queues = "mail")
+//    public void process(MailEntity mail) {
+//		logger.info("接收到object : " + mail);
+//		mailService.sendSimpleMail(mail);
+//    }
 
 }

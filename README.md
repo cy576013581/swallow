@@ -17,6 +17,8 @@
    #### FastJSON<br>
    #### Redis<br>
    #### Lombok<br>
+   #### Swagger<br>
+   #### EhCache<br>
    #### activiti<br>
    
    ***
@@ -173,3 +175,13 @@
 - 2018.4.27 由于Easyui的目前解决不了动态选中，checkTree组件暂时不设置checkbox，完成根据角色设置对应菜单，并且根据角色显示对应菜单 by  cy
 
 - 2018.7.20 JDK升级为10 by  cy
+
+- 2018.8.13 暂时取消activity模块，升级之后与springboot冲突，报Error creating bean with name 'requestMappingHandlerMapping by  cy
+
+- 2018.8.13 Redis服务器到期，暂时注释Redis缓存代码，后面优化成内存缓存 by  cy
+
+- 2018.8.13 消息队列服务器到期，暂时注释rabbitmq代码 by  cy
+
+- 2018.8.13 添加SwaggerAPI文档工具 by  cy
+
+- 2018.8.14 集成EhCache by  cy

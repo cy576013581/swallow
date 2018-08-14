@@ -1,7 +1,7 @@
 package com.cy.example.vo;
 
 import lombok.Data;
-import org.activiti.engine.task.Task;
+//import org.activiti.engine.task.Task;
 
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.util.DateUtil;
@@ -17,9 +17,9 @@ public class TaskVo {
 	
 	private SysUserEntity assignee;
 	
-	public void transfor(Task task){
-		this.id = task.getId();
-		this.name = task.getName();
-		this.createTime = DateUtil.format(task.getCreateTime());
-	}
+//	public void transfor(Task task){
+//		this.id = task.getId();
+//		this.name = task.getName();
+//		this.createTime = DateUtil.format(task.getCreateTime());
+//	}
 }
