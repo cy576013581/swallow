@@ -185,3 +185,5 @@
 - 2018.8.13 添加SwaggerAPI文档工具 by  cy
 
 - 2018.8.14 集成EhCache by  cy
+
+- 2018.8.15 日志打印使用lombok的@Slf4j by  cy

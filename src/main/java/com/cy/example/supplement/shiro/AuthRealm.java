@@ -1,47 +1,36 @@
 package com.cy.example.supplement.shiro;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.DisabledAccountException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
+import com.cy.example.entity.system.SysPermissionEntity;
+import com.cy.example.entity.system.SysUserEntity;
+import com.cy.example.service.IUserService;
+import com.cy.example.util.StringUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cy.example.entity.system.SysPermissionEntity;
-import com.cy.example.entity.system.SysRoleEntity;
-import com.cy.example.entity.system.SysUserEntity;
-import com.cy.example.service.IUserService;
-import com.cy.example.util.StringUtil;
-
+@Slf4j
 public class AuthRealm extends AuthorizingRealm {
 
 	@Autowired
 	private IUserService userService;
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(AuthRealm.class);
-
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(
 			PrincipalCollection principals) {
 		// TODO Auto-generated method stub
-		logger.info("--------------权限配置——授权----------------");
+		log.info("--------------权限配置——授权----------------");
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		SysUserEntity user = (SysUserEntity) principals.getPrimaryPrincipal();
 		authorizationInfo.addRole(user.getRole().getC_roleCode());
 		for (SysPermissionEntity p : user.getRole().getPermisList()) {
 			authorizationInfo.addStringPermission(p.getC_permisCode());
 		}
-		logger.info(user.toString());
+		log.info(user.toString());
 		return authorizationInfo;
 	}
 
@@ -83,7 +72,7 @@ public class AuthRealm extends AuthorizingRealm {
 //		if (Integer.valueOf(userService.getLoginCount(username)) > 5){
 //	        throw new DisabledAccountException("由于密码输入错误次数大于5次，帐号已经禁止登录！");
 //	    }
-		logger.info("***登录user：" + user);
+		log.info("***登录user：" + user);
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
 				user, // 用户名
 				user.getC_pwd(), // 密码

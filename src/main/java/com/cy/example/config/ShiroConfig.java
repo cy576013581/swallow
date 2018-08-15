@@ -1,32 +1,27 @@
 package com.cy.example.config;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.servlet.Filter;
-
+import com.cy.example.filter.ShiroPermissionsFilter;
+import com.cy.example.supplement.shiro.AuthRealm;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.cy.example.filter.ShiroPermissionsFilter;
-import com.cy.example.supplement.shiro.AuthRealm;
+import javax.servlet.Filter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /*
  * Shiro 配置
  */
+@Slf4j
 @Configuration
 public class ShiroConfig {
-
-	private static final Logger logger = LoggerFactory
-			.getLogger(ShiroConfig.class);
 
 	@Bean
 	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
@@ -88,7 +83,7 @@ public class ShiroConfig {
 		shiroFilterFactoryBean
 				.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
-		logger.info("--------------Shiro拦截器工厂类注入成功----------------");
+		log.info("--------------Shiro拦截器工厂类注入成功----------------");
 		return shiroFilterFactoryBean;
 	}
 	
@@ -106,7 +101,7 @@ public class ShiroConfig {
 	 */
 	@Bean
 	public SecurityManager securityManager() {
-		logger.info("--------------shiro安全事务管理器已经加载----------------");
+		log.info("--------------shiro安全事务管理器已经加载----------------");
 		DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
 		manager.setRealm(authRealm());
 		//注入记住我管理器;

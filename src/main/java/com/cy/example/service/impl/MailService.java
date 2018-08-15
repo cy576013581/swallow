@@ -1,27 +1,23 @@
 package com.cy.example.service.impl;
 
-import java.io.File;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.cy.example.entity.system.MailEntity;
+import com.cy.example.service.IMailService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.cy.example.entity.system.MailEntity;
-import com.cy.example.service.IMailService;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
 
-@Component
+@Slf4j
+@Service
 public class MailService implements IMailService{
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private JavaMailSender mailSender;
@@ -42,9 +38,9 @@ public class MailService implements IMailService{
 
         try {
             mailSender.send(message);
-            logger.info("发送给"+mail.getTo()+"邮件已经发送。");
+            log.info("发送给"+mail.getTo()+"邮件已经发送。");
         } catch (Exception e) {
-            logger.error("发送纯文本邮件时发生异常！", e);
+            log.error("发送纯文本邮件时发生异常！", e);
         }
     }
     
@@ -64,9 +60,9 @@ public class MailService implements IMailService{
             helper.setText(mail.getContent(), true);
 
             mailSender.send(message);
-            logger.info("发送给"+mail.getTo()+"邮件已经发送。");
+            log.info("发送给"+mail.getTo()+"邮件已经发送。");
         } catch (MessagingException e) {
-            logger.error("发送html邮件时发生异常！", e);
+            log.error("发送html邮件时发生异常！", e);
         }
     }
     
@@ -89,9 +85,9 @@ public class MailService implements IMailService{
             helper.addAttachment(fileName, file);
 
             mailSender.send(message);
-            logger.info("发送给"+mail.getTo()+"邮件已经发送。");
+            log.info("发送给"+mail.getTo()+"邮件已经发送。");
         } catch (MessagingException e) {
-            logger.error("发送带附件的邮件时发生异常！", e);
+            log.error("发送带附件的邮件时发生异常！", e);
         }
     }
     
@@ -113,9 +109,9 @@ public class MailService implements IMailService{
             helper.addInline(mail.getRscId(), res);
 
             mailSender.send(message);
-            logger.info("发送给"+mail.getTo()+"邮件已经发送。");
+            log.info("发送给"+mail.getTo()+"邮件已经发送。");
         } catch (MessagingException e) {
-            logger.error("发送嵌入静态资源的邮件时发生异常！", e);
+            log.error("发送嵌入静态资源的邮件时发生异常！", e);
         }
     }
 }

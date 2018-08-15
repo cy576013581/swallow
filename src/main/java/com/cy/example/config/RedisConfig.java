@@ -1,21 +1,18 @@
 package com.cy.example.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
 
+@Slf4j
 @Configuration
 public class RedisConfig {
-
-	private Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
 	@Bean(name = "jedis.pool")
 	@Autowired
@@ -24,7 +21,7 @@ public class RedisConfig {
 			@Value("${jedis.pool.host}") String host,
 			@Value("${jedis.pool.port}") int port,
 			@Value("${jedis.pool.password}") String password) {
-		logger.info("缓存服务器的地址：" + host + ":" + port);
+		log.info("缓存服务器的地址：" + host + ":" + port);
 		return new JedisPool(config, host, port, Protocol.DEFAULT_TIMEOUT,
 				password);
 	}

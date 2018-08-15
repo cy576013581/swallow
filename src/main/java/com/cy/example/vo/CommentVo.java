@@ -12,11 +12,11 @@ public class CommentVo {
 	private String id;
 	
 	private String time;
-	
+
 	private String message;
-	
+
 	private SysUserEntity user;
-	
+
 //	public void transfor(Comment comment){
 //		this.id = comment.getId();
 //		this.message = comment.getFullMessage();

@@ -1,5 +1,6 @@
 package com.cy.example.supplement.rabbitmq.general;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -16,12 +17,9 @@ import com.cy.example.util.HttpRequestUtil;
 import com.cy.example.util.JsonUtil;
 import com.cy.example.util.StringUtil;
 
-
+@Slf4j
 @Component
 public class RabbitSender {
-	
-	private static final Logger logger = LoggerFactory
-			.getLogger(RabbitSender.class);
 
 //	@Autowired
 //	private AmqpTemplate rabbitTemplate;
@@ -62,12 +60,12 @@ public class RabbitSender {
 //			loginRecord.setC_province("未知");
 //			loginRecord.setC_city("未知");
 //		}
-//		logger.info("发送对象信息: " + loginRecord.toString());
+//		log.info("发送对象信息: " + loginRecord.toString());
 //		this.rabbitTemplate.convertAndSend(RabbitConfig.QUEUE_LOGINRECORD, loginRecord);
 //	}
 //
 //	public void sendMail(MailEntity mail) {
-//		logger.info("发送对象信息: " + mail.toString());
+//		log.info("发送对象信息: " + mail.toString());
 //		this.rabbitTemplate.convertAndSend(RabbitConfig.QUEUE_MAIL, mail);
 //	}
 	
