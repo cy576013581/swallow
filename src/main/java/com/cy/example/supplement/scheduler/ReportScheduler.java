@@ -1,5 +1,6 @@
 package com.cy.example.supplement.scheduler;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,8 @@ import com.cy.example.entity.system.MailEntity;
 import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.DateUtil;
 
+@Slf4j
 public class ReportScheduler {
-	
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private RabbitSender rabbitSender;
@@ -24,6 +24,6 @@ public class ReportScheduler {
 //		mail.setTo("pjchenyang@qq.com");
 //    	mail.setContent(content);
 //    	rabbitSender.sendMail(mail);
-//    	logger.info("发送系统状态邮件,to" + DateUtil.getNow());
+//    	log.info("发送系统状态邮件,to" + DateUtil.getNow());
 //    }
 }

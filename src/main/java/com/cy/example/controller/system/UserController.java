@@ -11,16 +11,16 @@ import com.cy.example.model.Result;
 import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
 import com.cy.example.util.MD5Util;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/system/user")
 public class UserController extends BaseController {
@@ -34,9 +34,6 @@ public class UserController extends BaseController {
 //	@Autowired
 //	private RabbitSender rabbitSender;
 
-	private final Logger logger = LoggerFactory
-			.getLogger(this.getClass());
-	
 	@RequestMapping("/register")
 	public Result<String> register(@ModelAttribute("user") SysUserEntity user) {
 		WebConfig.add(user);
@@ -173,19 +170,19 @@ public class UserController extends BaseController {
 			msg = "登陆成功！";
 		} catch (Exception exception) {
 			if (exception instanceof UnknownAccountException) {
-				logger.info("账号不存在： -- > UnknownAccountException");
+				log.info("账号不存在： -- > UnknownAccountException");
 				msg = "登录失败，用户账号不存在！";
 			} else if (exception instanceof IncorrectCredentialsException) {
-				logger.info(" 密码不正确： -- >IncorrectCredentialsException");
+				log.info(" 密码不正确： -- >IncorrectCredentialsException");
 				msg = "登录失败，用户密码不正确！";
 			} else if (exception instanceof LockedAccountException) {
-				logger.info(" 用户被锁定： -- >LockedAccountException");
+				log.info(" 用户被锁定： -- >LockedAccountException");
 				msg = "登录失败，用户被锁定！";
 			} else if (exception instanceof DisabledAccountException) {
-				logger.info(" 由于密码输入错误次数大于5次，帐号已经禁止登录！ -- >DisabledAccountException");
+				log.info(" 由于密码输入错误次数大于5次，帐号已经禁止登录！ -- >DisabledAccountException");
 				msg = "由于密码输入错误次数大于5次，请5分钟之后登录！";
 			}else {
-				logger.info("else -- >" + exception);
+				log.info("else -- >" + exception);
 				msg = "登录失败，发生未知错误：" + exception;
 			}
 

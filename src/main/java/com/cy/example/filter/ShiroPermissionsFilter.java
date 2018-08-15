@@ -9,6 +9,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +17,9 @@ import org.slf4j.LoggerFactory;
 import com.cy.example.util.JsonUtil;
 import com.cy.example.util.StringUtil;
 
+@Slf4j
 public class ShiroPermissionsFilter extends PermissionsAuthorizationFilter {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(ShiroPermissionsFilter.class);
-	
 	/**
      * shiro认证perms资源失败后回调方法
      * @param servletRequest
@@ -30,7 +29,7 @@ public class ShiroPermissionsFilter extends PermissionsAuthorizationFilter {
      */
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
-    	logger.info("----------权限控制-------------");
+    	log.info("----------权限控制-------------");
     	HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         String requestedWith = httpServletRequest.getHeader("X-Requested-With");
