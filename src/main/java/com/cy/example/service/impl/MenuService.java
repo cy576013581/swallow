@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.cy.example.config.CacheConfig.CACHE_MENU_ALL;
-import static com.cy.example.config.CacheConfig.CACHE_MENU_ROOT;
-import static com.cy.example.config.CacheConfig.CACHE_MENU_USER_ALL;
+import static com.cy.example.config.CacheConfig.*;
 
 @Slf4j
 @Service
@@ -41,39 +39,38 @@ implements IMenuService{
 		return mapper.searchAll(menu, page);
 	}
 
-	@Cacheable(cacheNames = CACHE_MENU_ROOT)
+	@Cacheable(value = CACHE_MENU_ROOT)
 	public List<SysMenuEntity> findRoot() {
 		// TODO Auto-generated method stub
 		return mapper.findRoot();
 	}
 
-	@Cacheable(cacheNames = CACHE_MENU_ALL)
+	@Cacheable(value = CACHE_MENU_ALL)
 	public List<SysMenuEntity> findAll() {
 		// TODO Auto-generated method stub
 		return mapper.findAll();
 	}
 
-	@Cacheable(cacheNames = CACHE_MENU_USER_ALL,key = "#roleId")
+	@Cacheable(value = CACHE_MENU_USER_ALL,key = "#roleId")
 	public List<SysMenuEntity> findUserAll(Long roleId) {
 		// TODO Auto-generated method stub
-		System.out.println("被调用了一次");
+		log.info("Called once...");
 		return mapper.findUserAll(roleId);
 	}
 
-	@CachePut(cacheNames = CACHE_MENU_ALL)
+	@CachePut(value = CACHE_MENU_ALL)
 	public List<SysMenuEntity> refreshFindAll() {
 		return mapper.findAll();
 	}
 
-	@CachePut(cacheNames = CACHE_MENU_ROOT)
+	@CachePut(value = CACHE_MENU_ROOT)
 	public List<SysMenuEntity> refreshFindRoot() {
 		return mapper.findRoot();
 	}
 
-	@CacheEvict(cacheNames = CACHE_MENU_USER_ALL,key = "#roleId")
+	@CachePut(value = {CACHE_MENU_USER_ALL},key = "#roleId")
 	public List<SysMenuEntity> refreshUserAll(Long roleId) {
-		log.info("******refreshUserAll");
+		log.info("refreshUserAll...");
 		return mapper.findUserAll(roleId);
 	}
-
 }

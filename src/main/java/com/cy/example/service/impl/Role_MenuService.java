@@ -45,7 +45,10 @@ public class Role_MenuService extends ServiceImpl<Role_MenuMapper, Role_Menu_Ca>
 			ca.setN_deleted(0);
 			mapper.insert(ca);
 		}
-		menuService.refreshUserAll(user.getId());
+		//刷新缓存
+		menuService.refreshUserAll(user.getRole().getId());
+		menuService.refreshFindAll();
+		menuService.refreshFindRoot();
 		return true;
 	}
 }
