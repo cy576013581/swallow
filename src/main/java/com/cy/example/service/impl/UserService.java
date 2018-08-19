@@ -1,18 +1,20 @@
 package com.cy.example.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.cy.example.model.Page;
+import com.cy.example.config.CacheConfig;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.mapper.system.UserMapper;
+import com.cy.example.model.Page;
 import com.cy.example.service.IUserService;
 import com.cy.example.supplement.redis.RedisClient;
 import com.cy.example.util.MD5Util;
-import com.cy.example.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implements IUserService {
@@ -21,26 +23,35 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
 	private UserMapper userMapper;
 	
 	@Autowired
-	private RedisClient redisClinet; 
-	
-	public boolean insertMy(SysUserEntity user) {
+	private RedisClient redisClinet;
+
+	@CacheEvict(value = CacheConfig.CACHE_USER_USERNAME,key = "#user.c_username")
+	public void delete(SysUserEntity user){
+	}
+
+	@CachePut(value = CacheConfig.CACHE_USER_USERNAME,key = "#user.c_username")
+	public SysUserEntity insertMy(SysUserEntity user) {
 		// TODO Auto-generated method stub
 		if (null != user.getC_pwd() && "" != user.getC_pwd()) {
 			user.setC_pwd(MD5Util.GetMD5Code(user.getC_pwd()));
 		}else{
 			user.setC_pwd(MD5Util.GetMD5Code("123456"));
 		}
-		return this.userMapper.insertMy(user);
+		this.userMapper.insertMy(user);
+//		user = this.userMapper.findOneByUsername(user.getC_username());
+		return user;
 	}
-	
-	public boolean updateMy(SysUserEntity user) {
+
+	@CachePut(value = CacheConfig.CACHE_USER_USERNAME,key = "#user.c_username")
+	public SysUserEntity updateMy(SysUserEntity user) {
 		if (null != user.getC_pwd() && "" != user.getC_pwd()) {
 			user.setC_pwd(MD5Util.GetMD5Code(user.getC_pwd()));
-			insertUserCache(user);
 		}else{
 			user.setC_pwd(null);
 		}
-		return this.userMapper.updateMy(user);
+		this.userMapper.updateMy(user);
+		user = this.userMapper.findOneByUsername(user.getC_username());
+		return user;
 	}
 
 	public List<SysUserEntity> searchAll(SysUserEntity user, Page page) {
@@ -55,6 +66,7 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
 		return sum;
 	}
 
+	@Cacheable(value = CacheConfig.CACHE_USER_USERNAME,key = "#username")
 	public SysUserEntity findOneByUsername(String username) {
 		// TODO Auto-generated method stub
 		return this.userMapper.findOneByUsername(username);
@@ -69,26 +81,14 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
 		// TODO Auto-generated method stub
 		return userMapper.findAll(page);
 	}
-	
-    public boolean insertUserCache(SysUserEntity entity) {  
-        //非空  
-        if(entity ==null || StringUtil.IsNullOrEmpty(String.valueOf(entity.getId()))){  
-            return false;  
-        }  
-        
-        redisClinet.setObject("user:"+entity.getC_username(), entity);  
-        return true;
-    }
-    
-    public SysUserEntity getUserCache(String username) {  
-        //非空  
-        if(username ==null || StringUtil.IsNullOrEmpty(username)){  
-            return null;  
-        }  
-        
-        return (SysUserEntity) redisClinet.getObject("user:"+username);
-    }
-    
+
+	@CachePut(value = CacheConfig.CACHE_USER_USERNAME,key = "#username")
+	public SysUserEntity refreshByUsername(String username) {
+		// TODO Auto-generated method stub
+		return this.userMapper.findOneByUsername(username);
+	}
+/*
+
     public void incrLoginCount(String key){
     	redisClinet.incr("loginCount:"+key);
     	if(Integer.valueOf(getLoginCount(key))  > 5){
@@ -108,5 +108,6 @@ public class UserService extends ServiceImpl<UserMapper, SysUserEntity> implemen
     public void removeCount(String key){
     	redisClinet.del("loginCount:"+key);
     }
+*/
 
 }

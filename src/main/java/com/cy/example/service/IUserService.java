@@ -8,9 +8,9 @@ import com.cy.example.entity.system.SysUserEntity;
 
 public interface IUserService extends IService<SysUserEntity>{
 	
-	public boolean updateMy(SysUserEntity user);
+	public SysUserEntity updateMy(SysUserEntity user);
 	
-	public boolean insertMy(SysUserEntity user);
+	public SysUserEntity insertMy(SysUserEntity user);
 
 	public SysUserEntity findOneByUsername(String username);
 
@@ -22,16 +22,18 @@ public interface IUserService extends IService<SysUserEntity>{
 
 	public List<SysUserEntity> findAll(Page page);
 
-	SysUserEntity getUserCache(String username);
+	SysUserEntity refreshByUsername(String username);
 
-	boolean insertUserCache(SysUserEntity entity);
-
-	public void incrLoginCount(String key);
-	
-	public String getLoginCount(String key);
-	
-	public void expire(String key);
-	
-	public void removeCount(String key);
+//	SysUserEntity getUserCache(String username);
+//
+//	boolean insertUserCache(SysUserEntity entity);
+//
+//	public void incrLoginCount(String key);
+//
+//	public String getLoginCount(String key);
+//
+//	public void expire(String key);
+//
+//	public void removeCount(String key);
 	
 }

@@ -24,10 +24,10 @@ implements IMenuService{
 	@Autowired
 	private MenuMapper mapper;
 
-	@CacheEvict(cacheNames = {CACHE_MENU_ROOT,CACHE_MENU_ALL,CACHE_MENU_USER_ALL})
-	public boolean insert(SysMenuEntity menu){
-		return super.insert(menu);
-	}
+//	@CacheEvict(cacheNames = {CACHE_MENU_ROOT,CACHE_MENU_ALL,CACHE_MENU_USER_ALL})
+//	public boolean insert(SysMenuEntity menu){
+//		return super.insert(menu);
+//	}
 
 	public int searchAllCount(SysMenuEntity menu) {
 		// TODO Auto-generated method stub

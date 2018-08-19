@@ -57,4 +57,12 @@
          diskExpiryThreadIntervalSeconds="120"
          overflowToDisk="false">
   </cache>
+
+  <cache name="sysUserByUsername"
+         eternal="true"
+         maxEntriesLocalHeap="10000"
+         maxEntriesLocalDisk="10000000"
+         diskExpiryThreadIntervalSeconds="120"
+         overflowToDisk="false">
+  </cache>
 </ehcache>

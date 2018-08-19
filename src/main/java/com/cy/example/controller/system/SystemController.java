@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,7 @@ import com.cy.example.service.IPermissionService;
 import com.cy.example.service.IRoleService;
 import com.cy.example.service.IUserService;
 
+@Slf4j
 @Controller
 public class SystemController {
 	
@@ -68,6 +70,7 @@ public class SystemController {
 	public String showMain(HttpSession session, ModelMap map) {
 		SysUserEntity user = (SysUserEntity) session
 				.getAttribute(WebConfig.LOGIN_USER);
+		log.info("---roleID"+user.getRole().getId());
 		List<SysMenuEntity> menuList = menuService.findUserAll(user.getRole().getId());
 		Map<String, List<SysMenuEntity>> data = new HashMap<String, List<SysMenuEntity>>();
 		for (int i = 0; i < menuList.size(); i++) {

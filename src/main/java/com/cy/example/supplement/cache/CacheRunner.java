@@ -40,12 +40,4 @@ public class CacheRunner implements ApplicationRunner{
 //		menuService.refreshFindAll();
 //		menuService.refreshFindRoot();
 	}
-	
-	public void userCache(){
-		List<SysUserEntity> list = userService.findAll(null);
-		for (SysUserEntity user : list) {
-			userService.insertUserCache(user);
-		}
-		log.info("[SysUserCache]缓存完成");
-	}
 }

@@ -72,14 +72,14 @@ public class UserController extends BaseController {
 	@PostMapping
 	public Result<String> add(@ModelAttribute("user") SysUserEntity user) {
 		user.getN_departmentId().setId(Long.valueOf(user.getN_departmentId().getC_departName()));
-		boolean flag = userService.insertMy(user);
+		SysUserEntity flag = userService.insertMy(user);
 		String msg;
-		if (flag) {
+		if (flag != null) {
 			msg = "添加成功！";
 		} else {
 			msg = "添加失败！";
 		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag!= null?true:false,msg,0,null);
 	}
 
 	@PutMapping
@@ -95,14 +95,14 @@ public class UserController extends BaseController {
 			user.setN_status("0");
 		}*/
 		user.getN_departmentId().setId(Long.valueOf(user.getN_departmentId().getC_departName()));
-		boolean flag = userService.updateMy(user);
+		SysUserEntity flag = userService.updateMy(user);
 		String msg;
-		if (flag) {
+		if (flag!= null) {
 			msg = "更新成功！";
 		} else {
 			msg = "更新失败！";
 		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag!= null?true:false,msg,0,null);
 	}
 
 	@DeleteMapping("/{id}")

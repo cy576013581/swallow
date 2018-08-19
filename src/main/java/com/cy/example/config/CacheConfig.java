@@ -20,6 +20,9 @@ public class CacheConfig implements JCacheManagerCustomizer {
 
   public static final String CACHE_MENU_ALL = "sysMenuAll";
 
+  //用户信息
+  public static final String CACHE_USER_USERNAME = "sysUserByUsername";
+
   @Override
   public void customize(CacheManager cacheManager) {
 
