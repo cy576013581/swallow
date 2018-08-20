@@ -11,6 +11,15 @@
 	<name>swallow</name>
 	<description>Demo project for Spring Boot</description>
 
+	<developers>
+		<developer>
+			<id>cy</id>
+			<name>Chen,Yang</name>
+			<email>pjchenyang@qq.com</email>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
