@@ -1,12 +1,20 @@
 package com.cy.example.controller.system;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.code.kaptcha.impl.DefaultKaptcha;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -31,6 +39,7 @@ import com.cy.example.service.IPermissionService;
 import com.cy.example.service.IRoleService;
 import com.cy.example.service.IUserService;
 
+@Slf4j
 @Controller
 public class SystemController {
 	
@@ -58,6 +67,38 @@ public class SystemController {
 	@Value("${swallow.system.name}")
 	private String SYS_NAME;
 
+	@Autowired
+	DefaultKaptcha defaultKaptcha;
+
+	@RequestMapping("/kaptcha")
+	public void defaultKaptcha(HttpServletResponse httpServletResponse) throws Exception{
+		byte[] captchaChallengeAsJpeg = null;
+		ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
+		try {
+			//生产验证码字符串并保存到session中
+			String createText = defaultKaptcha.createText();
+			SecurityUtils.getSubject().getSession().setAttribute("vrifyCode", createText);
+			//使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
+			BufferedImage challenge = defaultKaptcha.createImage(createText);
+			ImageIO.write(challenge, "jpg", jpegOutputStream);
+		} catch (IllegalArgumentException e) {
+			httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+			return;
+		}
+
+		//定义response输出类型为image/jpeg类型，使用response输出流输出图片的byte数组
+		captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
+		httpServletResponse.setHeader("Cache-Control", "no-store");
+		httpServletResponse.setHeader("Pragma", "no-cache");
+		httpServletResponse.setDateHeader("Expires", 0);
+		httpServletResponse.setContentType("image/jpeg");
+		ServletOutputStream responseOutputStream =
+				httpServletResponse.getOutputStream();
+		responseOutputStream.write(captchaChallengeAsJpeg);
+		responseOutputStream.flush();
+		responseOutputStream.close();
+	}
+
 	@RequestMapping("/index")
 	public String showIndex(ModelMap map) {
 		map.put("SYS_NAME", SYS_NAME);
@@ -68,6 +109,7 @@ public class SystemController {
 	public String showMain(HttpSession session, ModelMap map) {
 		SysUserEntity user = (SysUserEntity) session
 				.getAttribute(WebConfig.LOGIN_USER);
+		log.info("---roleID"+user.getRole().getId());
 		List<SysMenuEntity> menuList = menuService.findUserAll(user.getRole().getId());
 		Map<String, List<SysMenuEntity>> data = new HashMap<String, List<SysMenuEntity>>();
 		for (int i = 0; i < menuList.size(); i++) {

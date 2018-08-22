@@ -23,4 +23,6 @@ public interface IMenuService extends IService<SysMenuEntity>{
 	List<SysMenuEntity> refreshFindAll();
 
 	List<SysMenuEntity> refreshFindRoot();
+
+	List<SysMenuEntity> refreshUserAll(Long roleId);
 }

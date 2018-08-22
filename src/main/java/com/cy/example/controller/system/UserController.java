@@ -11,6 +11,7 @@ import com.cy.example.model.Result;
 import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
 import com.cy.example.util.MD5Util;
+import com.cy.example.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -72,14 +73,14 @@ public class UserController extends BaseController {
 	@PostMapping
 	public Result<String> add(@ModelAttribute("user") SysUserEntity user) {
 		user.getN_departmentId().setId(Long.valueOf(user.getN_departmentId().getC_departName()));
-		boolean flag = userService.insertMy(user);
+		SysUserEntity flag = userService.insertMy(user);
 		String msg;
-		if (flag) {
+		if (flag != null) {
 			msg = "添加成功！";
 		} else {
 			msg = "添加失败！";
 		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag!= null?true:false,msg,0,null);
 	}
 
 	@PutMapping
@@ -95,14 +96,14 @@ public class UserController extends BaseController {
 			user.setN_status("0");
 		}*/
 		user.getN_departmentId().setId(Long.valueOf(user.getN_departmentId().getC_departName()));
-		boolean flag = userService.updateMy(user);
+		SysUserEntity flag = userService.updateMy(user);
 		String msg;
-		if (flag) {
+		if (flag!= null) {
 			msg = "更新成功！";
 		} else {
 			msg = "更新失败！";
 		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag!= null?true:false,msg,0,null);
 	}
 
 	@DeleteMapping("/{id}")
@@ -149,25 +150,31 @@ public class UserController extends BaseController {
 
 	@SuppressWarnings("finally")
 	@RequestMapping("/validate")
-	public Result<String> validate(String username, String password,Boolean rememberMe) {
+	public Result<String> validate(String username, String password,String validate,Boolean rememberMe) {
 		password = MD5Util.GetMD5Code(password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password,rememberMe);
 		boolean flag = true;
 		String msg = "";
 		try {
 			Subject subject = SecurityUtils.getSubject();
-			subject.login(token); // 完成登录
-			SysUserEntity user = (SysUserEntity) subject.getPrincipal();
-			subject.getSession().setAttribute(WebConfig.LOGIN_USER, user);
-			LoginRecordEntity loginRecord = new LoginRecordEntity();
-			WebConfig.add(loginRecord);
-			loginRecord.setC_loginIp(super.getIP(getRequest()));
-			loginRecord.setC_username(user.getC_username());
-			//采用消息中心的通知添加
-//			rabbitSender.sendLoginRecord(loginRecord);
-			//清楚错误次数缓存
-//			userService.removeCount(user.getC_username());
-			msg = "登陆成功！";
+			String kaptcha = (String) subject.getSession().getAttribute("vrifyCode");
+			if (!StringUtil.IsEqual(validate,kaptcha)){
+				flag = false;
+				msg = "登录失败，验证码错误！";
+			}else{
+				subject.login(token); // 完成登录
+				SysUserEntity user = (SysUserEntity) subject.getPrincipal();
+				subject.getSession().setAttribute(WebConfig.LOGIN_USER, user);
+				LoginRecordEntity loginRecord = new LoginRecordEntity();
+				WebConfig.add(loginRecord);
+				loginRecord.setC_loginIp(super.getIP(getRequest()));
+				loginRecord.setC_username(user.getC_username());
+				//采用消息中心的通知添加
+//				rabbitSender.sendLoginRecord(loginRecord);
+				//清楚错误次数缓存
+//				userService.removeCount(user.getC_username());
+				msg = "登陆成功！";
+			}
 		} catch (Exception exception) {
 			if (exception instanceof UnknownAccountException) {
 				log.info("账号不存在： -- > UnknownAccountException");

@@ -6,6 +6,7 @@ import com.cy.example.carrier.Role_Menu_Ca;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.mapper.system.Role_MenuMapper;
+import com.cy.example.service.IMenuService;
 import com.cy.example.service.IRole_MenuService;
 import com.cy.example.util.DateUtil;
 import org.apache.shiro.SecurityUtils;
@@ -20,6 +21,9 @@ public class Role_MenuService extends ServiceImpl<Role_MenuMapper, Role_Menu_Ca>
 	
 	@Autowired
 	private Role_MenuMapper mapper;
+
+	@Autowired
+	private IMenuService menuService;
 
 	public List<Role_Menu_Ca> findAll(int n_roleId) {
 		// TODO Auto-generated method stub
@@ -41,7 +45,10 @@ public class Role_MenuService extends ServiceImpl<Role_MenuMapper, Role_Menu_Ca>
 			ca.setN_deleted(0);
 			mapper.insert(ca);
 		}
-
+		//刷新缓存
+		menuService.refreshUserAll(user.getRole().getId());
+		menuService.refreshFindAll();
+		menuService.refreshFindRoot();
 		return true;
 	}
 }

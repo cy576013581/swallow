@@ -55,12 +55,8 @@ public class AuthRealm extends AuthorizingRealm {
 		
 		
 //		//使用緩存存儲用戶信息
-//		SysUserEntity user = userService.getUserCache(username);
-//		if(null == user){
 		SysUserEntity user = userService.findOneByUsername(username);
-//			userService.insertUserCache(user);
-//		}
-		
+
 		// 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 		if(null == user){
 			throw new UnknownAccountException();
