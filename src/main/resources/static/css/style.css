@@ -56,32 +56,20 @@ h2{font-weight:normal;}
 
 
 /*top.html*/
-.header{height:88px;}
-.topleft{height:88px;background:#066cae;float:left; width:300px;margin-top:17px;margin-left:10px;}
-.topright{height:88px;background:#066cae;float:right;}/*3367f1*/
-#top .nav{float:left;}
-#top .nav li{float:left;width:87px;height:88px; text-align:center;}
-#top .nav li a{display:block;width:87px;height:88px;-moz-transition: none; transition: background-color 0.3s linear; -moz-transition: background-color 0.3s linear; -webkit-transition: background-color 0.3s linear; -o-transition: background-color 0.3s linear; }
-#top .nav li a.selected{background:url(../images/navbg.png) no-repeat;}
-#top .nav li a:hover{display:block;background:#000;color:#fff;background: none repeat scroll 0% 0% rgb(43, 127, 181);}
-#top .nav li img{margin-top:10px;}
-#top .nav li a{display:block;}
-#top .nav a h2{font-size:14px;color:#d6e8f1;}
-#top .nav a:hover h2{color:#fff;}
+.topleft{background:#3367f1;width:300px;position: absolute;top:17px;left:15px;}
+.topright{height:88px;background:#3367f1;float:right;}/*3367f1*/
+#top{height:88px;background:#3367f1;width:100%;height:auto;overflow:hidden;}
 .topright ul{padding-top:15px; float:right; padding-right:12px;}
 .topright ul li{float:left; padding-left:9px; padding-right:9px; background:url(../images/line.gif) no-repeat right;}
 .topright ul li:last-child{background:none;}
-.topright ul li a{font-size:13px; color:#e9f2f7;}
+.topright ul li a{font-size:13px; color:#fff;}
 .topright ul li a:hover{color:#fff;}
-.topright ul li span{margin-top:2px;float:left;padding-right:3px;}
-.user{height:30px;background:url(../images/ub1.png) repeat-x;clear:both;margin-top:10px;float:right; margin-right:12px;border-radius:30px; behavior:url(js/pie.htc); white-space:nowrap;position:relative;}
-.user span{display:inline-block;padding-right:10px; background:url(../images/user.png) no-repeat 15px 10px; line-height:30px; font-size:14px;color:#b8ceda; padding-left:20px; padding-left:35px;}
+.user{height:30px;background:#2a91d8;clear:both;margin-top:10px;float:right; margin-right:12px;border-radius:20px; behavior:url(js/pie.htc); white-space:nowrap;position:relative;}
+.user span{display:inline-block;padding-right:10px; background:url(../images/user.png) no-repeat 15px 10px; line-height:30px; font-size:14px;color:#fff; padding-left:20px; padding-left:35px;}
 .user b{display:inline-block;width:20px;height:18px; background:url(../images/msg.png);text-align:center; font-weight:normal; color:#fff;font-size:14px;margin-right:13px; margin-top:7px; line-height:18px;}
-.user i{display:inline-block;margin-right:5px;font-style:normal;line-height:30px; font-size:14px;color:#b8ceda;}
+.user i{display:inline-block;margin-right:5px;font-style:normal;line-height:30px; font-size:14px;color:#fff;}
 
 /*left.html*/
-.lefttop{background:url(../images/lefttop.gif) repeat-x;height:40px;color:#fff;font-size:14px;line-height:40px;}
-.lefttop span{margin-left:8px; margin-top:10px;margin-right:8px; background:url(../images/leftico.png) no-repeat; width:20px; height:21px;float:left;}
 .leftmenu{width:100%;padding-bottom: 9999px;margin-bottom: -9999px; overflow:hidden; background:url(../images/leftline.gif) repeat-y right;}
 .leftmenu dd{background:url(../images/leftmenubg.gif) repeat-x;line-height:35px;font-weight:bold;font-size:14px;border-right:solid 1px #b7d5df;}
 .leftmenu dd span{float:left;margin:10px 8px 0 12px;}
@@ -96,28 +84,6 @@ h2{font-weight:normal;}
 .menuson li a{ display:block; *display:inline; *padding-top:5px;}
 .menuson li.active a{color:#fff;}
 .title{cursor:pointer;}
-
-
-/*right.html*/
-.place{height:40px; background:url(../images/righttop.gif) repeat-x;}
-.place span{line-height:40px; font-weight:bold;float:left; margin-left:12px;}
-.placeul li{float:left; line-height:40px; padding-left:7px; padding-right:12px; background:url(../images/rlist.gif) no-repeat right;}
-.placeul li:last-child{background:none;}
-.rightinfo{padding:8px;}
-.tools{clear:both; height:35px; margin-bottom:8px;}
-.toolbar{float:left;}
-.toolbar li{background:url(../images/toolbg.gif) repeat-x; line-height:33px; height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-right:5px;border-radius: 3px; behavior:url(js/pie.htc); cursor:pointer;}
-.toolbar li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}
-.toolbar1{float:right;}
-.toolbar1 li{background:url(../images/toolbg.gif) repeat-x; line-height:33px; height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-left:5px;border-radius: 3px; behavior:url(js/pie.htc);}
-.toolbar1 li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}
-.tablelist{border:solid 1px #cbcbcb; width:100%; clear:both;}
-.tablelist th{background:url(../images/th.gif) repeat-x; height:34px; line-height:34px; border-bottom:solid 1px #b6cad2; text-indent:11px; text-align:left;}
-.tablelist td{line-height:35px; text-indent:11px; border-right: dotted 1px #c7c7c7;}
-.tablelink{color:#056dae;}
-.tablelist tbody tr.odd{background:#f5f8fa;}
-.tablelist tbody tr:hover{background:#e5ebee;}
-.sort{padding-left:3px;}
 
 /*page*/
 .pagin{position:relative;margin-top:10px;padding:0 12px;}

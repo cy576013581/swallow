@@ -1,10 +1,9 @@
-<div id="left" style="background:#f0f9fd;">
-	<div class="lefttop"><span></span>菜单</div>
+<div id="left" style="background:#fff;">
 	<dl class="leftmenu">
 		<#list menuList?keys as key>
 		  	<dd>
 			    <div class="title">
-			    <span><img src="../images/leftico01.png" /></span>${key}
+			    	<span><img src="../images/leftico01.png" /></span>${key}
 			    </div>
 		    	<ul class="menuson">
 		    		<#assign map=menuList[key] >

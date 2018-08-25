@@ -130,15 +130,15 @@
 </head>
 <body>
 	<!-- 顶部栏-->
-	<div id="top" style="background:#066cae;width:100%;height:auto;overflow:hidden;">
+	<div id="top">
 		<#include "/main/top.ftl">
 	</div>
-	<div id="box" width="100%" >
+	<div id="box" width="100%">
 		<!-- 左部菜单-->
 		<#include "/main/left.ftl">
 		<!-- 右部主界面栏-->
 		<div id="main">
-			<div class="easyui-tabs" id="mainTabs" data-options="border:false" 
+			<div class="easyui-tabs" id="mainTabs" data-options="border:false"
 				style="width:100%;height:100%;">
 				<div title="主页" data-options="closable:false" >
 					<iframe src="/menu/home" id="iframe" width="100%" height="100%" frameborder="0"></iframe>
