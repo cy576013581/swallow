@@ -56,15 +56,15 @@ h2{font-weight:normal;}
 
 
 /*top.html*/
-.topleft{background:#3367f1;width:300px;position: absolute;top:17px;left:15px;}
-.topright{height:88px;background:#3367f1;float:right;}/*3367f1*/
+.topleft{background:#3367f1;width:300px;position: absolute;top:3px;left:15px;}
+.topright{height:56px;background:#3367f1;float:right;}/*3367f1*/
 #top{height:88px;background:#3367f1;width:100%;height:auto;overflow:hidden;}
-.topright ul{padding-top:15px; float:right; padding-right:12px;}
-.topright ul li{float:left; padding-left:9px; padding-right:9px; background:url(../images/line.gif) no-repeat right;}
+.topright ul{float:right; padding-right:12px;}
+.topright ul li{float:left; padding-left:9px; padding-right:9px;line-height:56px; background:url(../images/line.gif) no-repeat right;}
 .topright ul li:last-child{background:none;}
 .topright ul li a{font-size:13px; color:#fff;}
 .topright ul li a:hover{color:#fff;}
-.user{height:30px;background:#2a91d8;clear:both;margin-top:10px;float:right; margin-right:12px;border-radius:20px; behavior:url(js/pie.htc); white-space:nowrap;position:relative;}
+.user{height:30px;background:#2a91d8;margin-top:13px;float:right; margin-right:12px;border-radius:20px; behavior:url(js/pie.htc); white-space:nowrap;position:relative;}
 .user span{display:inline-block;padding-right:10px; background:url(../images/user.png) no-repeat 15px 10px; line-height:30px; font-size:14px;color:#fff; padding-left:20px; padding-left:35px;}
 .user b{display:inline-block;width:20px;height:18px; background:url(../images/msg.png);text-align:center; font-weight:normal; color:#fff;font-size:14px;margin-right:13px; margin-top:7px; line-height:18px;}
 .user i{display:inline-block;margin-right:5px;font-style:normal;line-height:30px; font-size:14px;color:#fff;}
@@ -263,5 +263,5 @@ h2{font-weight:normal;}
 
 body{position: relation;}
 #box{position: relation;}
-#left{position: absolute;top: 88px;left:0px;width:18%}
-#main{position: absolute;top:88px;left:18%;right: 0px;bottom: 0px;background:#das;}
+#left{position: absolute;top: 56px;left:0px;width:18%}
+#main{position: absolute;top:56px;left:18%;right: 0px;bottom: 0px;background:#das;}
