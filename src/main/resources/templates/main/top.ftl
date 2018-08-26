@@ -4,7 +4,7 @@
 </div>
 <div class="topright">
     <ul>
-	    <li><a href="#">在线人数：${activeNum}</a></li>
+	    <li><a href="#" onclick="addTabs('在线列表','/online')">在线人数：${activeNum}</a></li>
 	    <li><a href="javascript:void(0);" onclick="loginOut()" target="_parent">退出</a></li>
     </ul>
      

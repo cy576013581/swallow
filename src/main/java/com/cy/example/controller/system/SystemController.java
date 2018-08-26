@@ -1,17 +1,10 @@
 package com.cy.example.controller.system;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.cy.example.config.WebConfig;
+import com.cy.example.entity.system.*;
+import com.cy.example.service.*;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -21,23 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.cy.example.config.WebConfig;
-import com.cy.example.entity.system.LoginRecordEntity;
-import com.cy.example.entity.system.SysDepartmentEntity;
-import com.cy.example.entity.system.SysMenuEntity;
-import com.cy.example.entity.system.SysNoticeEntity;
-import com.cy.example.entity.system.SysPermissionEntity;
-import com.cy.example.entity.system.SysRoleEntity;
-import com.cy.example.entity.system.SysUserEntity;
-import com.cy.example.service.IDepartmentService;
-import com.cy.example.service.ILoginRecordService;
-import com.cy.example.service.IMenuService;
-import com.cy.example.service.INoticeService;
-import com.cy.example.service.IPermissionService;
-import com.cy.example.service.IRoleService;
-import com.cy.example.service.IUserService;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -137,6 +120,13 @@ public class SystemController {
 		session.removeAttribute(WebConfig.LOGIN_USER);
 		return "index";
 	}
+
+	@RequestMapping("/online")
+	public String getOnline(ModelMap map){
+		HashSet<String> set =  WebConfig.getActiveUsers();
+		map.put("users",set);
+		return "online";
+	}
 	
 	@RequestMapping("/menu/home")
 	public String showHome(ModelMap map) {
@@ -154,26 +144,26 @@ public class SystemController {
 
 	@RequestMapping("/menu/calendarManage")
 	public String calendarManage() {
-		return "calendarManage";
+		return "manage/calendarManage";
 	}
 
 	@RequestMapping("/menu/userManage")
 	public String userManage(ModelMap map) {
 		List<SysDepartmentEntity> departList = departmentService.selectList(new EntityWrapper<SysDepartmentEntity>());
 		map.put("departList", departList); 
-		return "userManage";
+		return "manage/userManage";
 	}
 	
 	@RequestMapping("/menu/menuManage")
 	public String menuManage(ModelMap map) {
 		List<SysMenuEntity> menuList = menuService.findRoot();
 		map.put("menuList", menuList);
-		return "menuManage";
+		return "manage/menuManage";
 	}
 
 	@RequestMapping("/menu/loginRecordManage")
 	public String loginRecordManage() {
-		return "loginRecordManage";
+		return "manage/loginRecordManage";
 	}
 
 	@RequestMapping("/menu/uploadFile")
@@ -183,12 +173,12 @@ public class SystemController {
 	
 	@RequestMapping("/menu/roleManage")
 	public String roleManage() {
-		return "roleManage";
+		return "manage/roleManage";
 	}
 	
 	@RequestMapping("/menu/permissionManage")
 	public String permissionManage() {
-		return "permissionManage";
+		return "manage/permissionManage";
 	}
 	
 	@RequestMapping("/menu/user_roleManage")
@@ -197,7 +187,7 @@ public class SystemController {
 		List<SysRoleEntity> roleList = roleService.selectList(new EntityWrapper<SysRoleEntity>());
 		map.put("userList", userList);
 		map.put("roleList", roleList);
-		return "user_roleManage";
+		return "manage/user_roleManage";
 	}
 	
 	@RequestMapping("/menu/role_permisManage")
@@ -206,12 +196,22 @@ public class SystemController {
 		List<SysRoleEntity> roleList = roleService.selectList(new EntityWrapper<SysRoleEntity>());
 		map.put("permisList", permisList);
 		map.put("roleList", roleList);
-		return "role_permisManage";
+		return "manage/role_permisManage";
 	}
 
 	@RequestMapping("/menu/role_menuManage")
 	public String role_menuManage(ModelMap map) {
-		return "role_menuManage";
+		return "manage/role_menuManage";
+	}
+
+	@RequestMapping("/menu/departmentManage")
+	public String departmentManage(ModelMap map) {
+		return "manage/departmentManage";
+	}
+
+	@RequestMapping("/menu/noticeManage")
+	public String noticeManage(ModelMap map) {
+		return "manage/noticeManage";
 	}
 	
 	@RequestMapping("/menu/workflow/deployManage")
@@ -234,15 +234,4 @@ public class SystemController {
 	public String taskManage(ModelMap map) {
 		return "workflow/taskManage";
 	}
-	
-	@RequestMapping("/menu/departmentManage")
-	public String departmentManage(ModelMap map) {
-		return "departmentManage";
-	}
-	
-	@RequestMapping("/menu/noticeManage")
-	public String noticeManage(ModelMap map) {
-		return "noticeManage";
-	}
-	
 }
