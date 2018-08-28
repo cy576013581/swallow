@@ -48,7 +48,7 @@ h2{font-weight:normal;}
 .loginpwd{width:299px; height:48px; background:url(../images/loginpassword.png) no-repeat; border:none;line-height:48px; padding-left:44px; font-size:14px; color:#90a2bc;}
 .validate{width:175px;height:48px; margin-top:-17px; background: #ecf5fa; margin-right:15px; border:1px solid #b3bfca;border-radius: 3px;  line-height:48px; padding-left:44px; font-size:14px; color:#90a2bc;}
 .kaptcha{display:block;float:left;}
-.validate1{display:block;float: left;margin-top: 0px;margin-left: 10px;}
+.validate1{display:block;float: left;margin-top: 0px;}
 .loginbtn{width:111px;height:35px; background:url(../images/buttonbg.png) repeat-x; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;}
 .loginbm{height:50px; line-height:50px; text-align:center; background:url(../images/loginbg2.png) repeat-x;position:absolute; bottom:0; width:100%; color:#0b3a58;}
 .loginbm a{font-weight:bold;color:#0b3a58;}

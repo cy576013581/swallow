@@ -88,8 +88,8 @@
 				    <li><input name="c_username" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>
 				    <li><input name="c_pwd" type="password" class="loginpwd" placeholder="密码" onclick="JavaScript:this.value=''"/></li>
 					<li style="overflow: hidden;">
+                        <input name="c_validate" type="text" class="validate validate1" placeholder="验证码" onclick="JavaScript:this.value=''"/>
                         <img class="kaptcha" alt="验证码" onclick = "this.src='/kaptcha?d='+new Date()*1" src="/kaptcha" />
-						<input name="c_validate" type="text" class="validate validate1" placeholder="验证码" onclick="JavaScript:this.value=''"/>
 					</li>
 				    <li>
 				        <input type="button" class="loginbtn" value="登录"  onclick="login()"  />

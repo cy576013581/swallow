@@ -114,6 +114,32 @@ public class SystemController {
 		return "main/main";
 	}
 
+	@RequestMapping("/main2")
+	public String showMain2(HttpSession session, ModelMap map) {
+		SysUserEntity user = (SysUserEntity) session
+				.getAttribute(WebConfig.LOGIN_USER);
+		log.info("---roleID"+user.getRole().getId());
+		List<SysMenuEntity> menuList = menuService.findUserAll(user.getRole().getId());
+		Map<String, List<SysMenuEntity>> data = new HashMap<String, List<SysMenuEntity>>();
+		for (int i = 0; i < menuList.size(); i++) {
+			if("[root]".equals(menuList.get(i).getC_node())){
+				List<SysMenuEntity> tool = new ArrayList<SysMenuEntity>();
+				for (int j = 0; j < menuList.size(); j++) {
+					if(String.valueOf(menuList.get(i).getId()).equals(menuList.get(j).getC_node())){
+						tool.add(menuList.get(j));
+					}
+				}
+				data.put(menuList.get(i).getC_menuName(), tool);
+			}
+		}
+		//在线人数统计
+		map.put("user", user);
+		map.put("menuList", data);
+		map.put("SYS_NAME", SYS_NAME);
+		map.put("activeNum", WebConfig.getActiveUserSum());
+		return "main/main2";
+	}
+
 	@RequestMapping("/loginOut")
 	public String loginOut(HttpSession session, ModelMap map) {
 		map.put("SYS_NAME", SYS_NAME);
