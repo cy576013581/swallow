@@ -33,9 +33,9 @@ spring:
     poolPreparedStatements: true
     filters: stat,wall
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost/example
+    url: jdbc:mysql://39.108.143.76/example
     maxPoolPreparedStatementPerConnectionSize: 20
-    password: 0.0.0.
+    password: XXXXXX
     testOnBorrow: false
     testWhileIdle: true
     minEvictableIdleTimeMillis: 300000
@@ -43,7 +43,7 @@ spring:
     testOnReturn: false
     driver-class-name: com.mysql.jdbc.Driver
     maxActive: 20
-    username: root
+    username: XXXXXX
   cache:
     ehcache:
       config: classpath:ehcache.xml
@@ -52,9 +52,9 @@ spring:
   mvc:
     static-path-pattern: /**
   rabbitmq:
-    password: admin
+    password: 123456
     port: 5672
-    host: 106.14.150.41
+    host: 39.108.143.76
     virtual-host: /
     publisher-confirms: true
     username: admin
@@ -62,7 +62,7 @@ server:
   port: 8090
 swallow:
   system:
-    name: swallow管理系统V1.0.1
+    name: swallow管理系统V@project.version@
   uploadfile:
     src: f:/test
   ip:
@@ -71,12 +71,12 @@ swallow:
     addr: swallow
 jedis:
   pool:
-    password: 0.0.0.
+    password: 123456
     testOnBorrow: false
     testWhileIdle: true
     port: 6379
     testOnReturn: true
-    host: 106.14.150.41
+    host: 39.108.143.76
     config:
       maxWaitMillis: 100000
       maxIdle: 10
