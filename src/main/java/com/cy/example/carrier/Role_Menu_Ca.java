@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @TableName("sys_role_menu")
 @Data
+@NoArgsConstructor
 public class Role_Menu_Ca extends SuperEntity<Role_Menu_Ca>{
 
 	private long n_roleId;
