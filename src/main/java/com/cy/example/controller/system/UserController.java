@@ -10,6 +10,7 @@ import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
+import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
 import com.cy.example.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,7 @@ public class UserController extends BaseController {
 	private IMailService mailService;
 	
 //	@Autowired
-//	private RabbitSender rabbitSender;
+	private RabbitSender rabbitSender;
 
 	@RequestMapping("/register")
 	public Result<String> register(@ModelAttribute("user") SysUserEntity user) {
@@ -170,7 +171,7 @@ public class UserController extends BaseController {
 				loginRecord.setC_loginIp(super.getIP(getRequest()));
 				loginRecord.setC_username(user.getC_username());
 				//采用消息中心的通知添加
-//				rabbitSender.sendLoginRecord(loginRecord);
+				rabbitSender.sendLoginRecord(loginRecord);
 				//清楚错误次数缓存
 //				userService.removeCount(user.getC_username());
 				msg = "登陆成功！";
