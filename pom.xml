@@ -46,6 +46,8 @@
 		<springfox.version>2.9.2</springfox.version>
 		<ehcache.version>2.10.5</ehcache.version>
 		<jaxb-impl.version>2.3.0</jaxb-impl.version>
+		<lombok.version>1.18.2</lombok.version>
+		<mail.version>1.4.7</mail.version>
 	</properties>
 
 	<dependencies>
@@ -95,7 +97,7 @@
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
+			<version>${mail.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
 		<dependency>
@@ -215,6 +217,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
 		</dependency>
 
 		<!-- Swagger -->
