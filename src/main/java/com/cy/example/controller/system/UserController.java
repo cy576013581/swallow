@@ -33,7 +33,7 @@ public class UserController extends BaseController {
 	@Autowired
 	private IMailService mailService;
 	
-//	@Autowired
+	@Autowired
 	private RabbitSender rabbitSender;
 
 	@RequestMapping("/register")
