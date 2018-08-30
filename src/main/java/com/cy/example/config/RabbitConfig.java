@@ -1,5 +1,12 @@
 package com.cy.example.config;
 
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -12,21 +19,21 @@ public class RabbitConfig {
 	/*
 	 * 邮件通知队列
 	 */
-	/*@Bean
-    public Queue Queue() {
-        return new Queue(RabbitConfig.QUEUE_MAIL);
-    }*/
+//	@Bean
+//    public Queue Queue() {
+//        return new Queue(RabbitConfig.QUEUE_MAIL);
+//    }
 	
 	/*
 	 * 登录记录队列
-	 
-    @Bean
+	 */
+	@Bean
     public Queue Queue() {
         return new Queue(RabbitConfig.QUEUE_LOGINRECORD);
     }
     
     
-    
+    /*
      * 订阅模式
      
     @Bean
@@ -45,7 +52,7 @@ public class RabbitConfig {
     }
 
     @Bean
-    FanoutExchange fanoutExchange() {
+	FanoutExchange fanoutExchange() {
         return new FanoutExchange("fanoutExchange");
     }
 
@@ -83,7 +90,7 @@ public class RabbitConfig {
     }
 
     @Bean
-    TopicExchange exchange() {
+	TopicExchange exchange() {
         return new TopicExchange("topicExchange");
     }
 
