@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysMenuEntity;
 import com.cy.example.mapper.SuperMapper;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface MenuMapper extends SuperMapper<SysMenuEntity>{
 
 	int searchAllCount(@Param("menu") SysMenuEntity menu);

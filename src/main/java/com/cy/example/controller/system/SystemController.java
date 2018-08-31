@@ -118,7 +118,6 @@ public class SystemController {
 	public String showMain2(HttpSession session, ModelMap map) {
 		SysUserEntity user = (SysUserEntity) session
 				.getAttribute(WebConfig.LOGIN_USER);
-		log.info("---roleID"+user.getRole().getId());
 		List<SysMenuEntity> menuList = menuService.findUserAll(user.getRole().getId());
 		Map<String, List<SysMenuEntity>> data = new HashMap<String, List<SysMenuEntity>>();
 		for (int i = 0; i < menuList.size(); i++) {

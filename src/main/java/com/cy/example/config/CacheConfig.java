@@ -23,6 +23,9 @@ public class CacheConfig implements JCacheManagerCustomizer {
   //用户信息
   public static final String CACHE_USER_USERNAME = "sysUserByUsername";
 
+  //首页数据
+  public static final String CACHE_HOME_RECORD_COUNT = "homeRecordCount";
+
   @Override
   public void customize(CacheManager cacheManager) {
 

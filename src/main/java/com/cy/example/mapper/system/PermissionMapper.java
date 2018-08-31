@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysPermissionEntity;
 import com.cy.example.mapper.SuperMapper;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface PermissionMapper extends SuperMapper<SysPermissionEntity> {
 
 	int searchAllCount(@Param("permission") SysPermissionEntity permission);
