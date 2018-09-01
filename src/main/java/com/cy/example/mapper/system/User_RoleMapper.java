@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import com.cy.example.model.Page;
 import com.cy.example.carrier.User_Role_Ca;
 import com.cy.example.mapper.SuperMapper;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface User_RoleMapper extends SuperMapper<User_Role_Ca> {
 
 	int searchAllCount(@Param("ur") User_Role_Ca ur);

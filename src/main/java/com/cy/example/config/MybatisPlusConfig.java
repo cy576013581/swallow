@@ -2,6 +2,7 @@ package com.cy.example.config;
 
 import javax.sql.DataSource;
 
+import com.baomidou.mybatisplus.mapper.ISqlInjector;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
@@ -37,9 +38,17 @@ public class MybatisPlusConfig {
 
     @Autowired(required = false)
     private DatabaseIdProvider databaseIdProvider;
+
+    /*
+        修改 集成  全局注入器为  LogicSqlInjector
+     */
+    @Bean
+    public ISqlInjector sqlInjector(){
+        return new LogicSqlInjector();
+    }
     
     /*
-     * 逻辑删除
+     * 全局配置注入LogicSqlInjector
      */
     @Bean
     public GlobalConfiguration globalConfiguration() {

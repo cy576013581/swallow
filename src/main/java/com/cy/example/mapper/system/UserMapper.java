@@ -8,8 +8,10 @@ import org.apache.ibatis.annotations.Param;
 import com.cy.example.model.Page;
 import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.mapper.SuperMapper;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface UserMapper extends SuperMapper<SysUserEntity>{
 	
 	boolean updateMy(@Param("user")SysUserEntity user);

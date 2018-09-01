@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.cy.example.entity.CalendarEntity;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface CalendarMapper extends SuperMapper<CalendarEntity>{
 
 	boolean updateMy(CalendarEntity cal);
