@@ -7,10 +7,10 @@ package com.cy.example.supplement.activiti;
 //import com.cy.example.config.WebConfig;
 //import com.cy.example.entity.system.SysUserEntity;
 
-import com.sun.source.util.TaskListener;
+//import com.sun.source.util.TaskListener;
 
 @SuppressWarnings("serial")
-public class ManagerTaskHandler implements TaskListener {
+public class ManagerTaskHandler /*implements TaskListener*/ {
 
 //	public void notify(DelegateTask delegateTask) {
 //		//设置个人任务的办理人
