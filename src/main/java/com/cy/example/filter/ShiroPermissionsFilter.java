@@ -9,12 +9,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.cy.example.util.JsonUtil;
 import com.cy.example.util.StringUtil;
 
 @Slf4j
@@ -40,7 +38,7 @@ public class ShiroPermissionsFilter extends PermissionsAuthorizationFilter {
 			result.put("msg", "权限不足！");
             httpServletResponse.setCharacterEncoding("UTF-8");
             httpServletResponse.setContentType("application/json");
-            httpServletResponse.getWriter().write(JsonUtil.collectToString(result));
+            httpServletResponse.getWriter().write(JSONObject.toJSONString(result));
         } else {//如果是普通请求进行重定向
             httpServletResponse.sendRedirect("/403");
         }

@@ -48,6 +48,7 @@
 		<jaxb-impl.version>2.3.0</jaxb-impl.version>
 		<lombok.version>1.18.2</lombok.version>
 		<mail.version>1.4.7</mail.version>
+		<docker.image.prefix>chenyang</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -243,7 +244,31 @@
 	                <fork>true</fork>
 	            </configuration>
 	        </plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.4.13</version>
+				<configuration>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<dockerDirectory>src/main/docker</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
 		</plugins>
-		
+
+
 	</build>
 </project>

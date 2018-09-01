@@ -1,12 +1,10 @@
 package com.cy.example.supplement.rabbitmq.general;
 
-import com.cy.example.util.JsonUtil;
+import com.alibaba.fastjson.JSON;
 import com.cy.example.util.StringUtil;
 import com.cy.example.vo.IpAnalysisVo_Sina;
 import com.cy.example.vo.IpAnalysisVo_Tb;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +35,7 @@ public class RabbitReceiver {
 		String tbUrl = ipAnalysis.split(",")[0] + loginRecord.getC_loginIp();
 		try {
 			String addr = HttpRequestUtil.get(tbUrl);
-			IpAnalysisVo_Tb ipAnalusisTb = JsonUtil.toBean(addr, IpAnalysisVo_Tb.class);
+			IpAnalysisVo_Tb ipAnalusisTb = JSON.parseObject(addr, IpAnalysisVo_Tb.class);
 			if(0 == ipAnalusisTb.getCode()){
 				if(StringUtil.IsEqual("XX", ipAnalusisTb.getData().getRegion())){
 					loginRecord.setC_province(ipAnalusisTb.getData().getCity());
@@ -50,7 +48,7 @@ public class RabbitReceiver {
 			}else{
 				String sinaUrl = ipAnalysis.split(",")[1] + loginRecord.getC_loginIp();
 				addr = HttpRequestUtil.get(sinaUrl);
-				IpAnalysisVo_Sina ipAnalusisSina = JsonUtil.toBean(addr, IpAnalysisVo_Sina.class);
+				IpAnalysisVo_Sina ipAnalusisSina = JSON.parseObject(addr, IpAnalysisVo_Sina.class);
 				if(1 == ipAnalusisSina.getRet()){
 					loginRecord.setC_province(ipAnalusisSina.getProvince());
 					loginRecord.setC_city(ipAnalusisSina.getCity());
