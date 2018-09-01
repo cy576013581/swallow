@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Page {
 	
 	private int page=1;
@@ -15,6 +17,10 @@ public class Page {
 
 	public Page(int page, int rows) {
 		this.page = page;
+		this.rows = rows;
+	}
+
+	public Page(int rows) {
 		this.rows = rows;
 	}
 }
