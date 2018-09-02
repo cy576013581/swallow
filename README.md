@@ -1,6 +1,6 @@
 
 # swallow
-#### 项目地址：http://106.14.150.41:8090/index
+#### 项目地址：http://39.108.143.76:8090/index
 ![这里写图片描述](http://img.blog.csdn.net/20180312095052994?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMjA5ODkxMDU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 
