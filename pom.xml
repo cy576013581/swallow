@@ -48,7 +48,7 @@
 		<jaxb-impl.version>2.3.0</jaxb-impl.version>
 		<lombok.version>1.18.2</lombok.version>
 		<mail.version>1.4.7</mail.version>
-		<activation.version>1.1</activation.version>
+		<activation.version>1.1.1</activation.version>
 		<docker.image.prefix>chenyang</docker.image.prefix>
 	</properties>
 
@@ -272,6 +272,13 @@
 						</resource>
 					</resources>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>javax.activation</groupId>
+						<artifactId>activation</artifactId>
+						<version>${activation.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 
