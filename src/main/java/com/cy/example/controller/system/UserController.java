@@ -154,13 +154,12 @@ public class UserController extends BaseController {
 	public Result<String> validate(String username, String password,String validate,Boolean rememberMe) {
 		password = MD5Util.GetMD5Code(password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password,rememberMe);
-		boolean flag = true;
+		boolean flag = false;
 		String msg = "";
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			String kaptcha = (String) subject.getSession().getAttribute("vrifyCode");
 			if (!StringUtil.IsEqual(validate,kaptcha)){
-				flag = false;
 				msg = "登录失败，验证码错误！";
 			}else{
 				subject.login(token); // 完成登录
@@ -175,6 +174,7 @@ public class UserController extends BaseController {
 				//清楚错误次数缓存
 //				userService.removeCount(user.getC_username());
 				msg = "登陆成功！";
+				flag = true;
 			}
 		} catch (Exception exception) {
 			if (exception instanceof UnknownAccountException) {
@@ -193,6 +193,7 @@ public class UserController extends BaseController {
 				log.info("else -- >" + exception);
 				msg = "登录失败，发生未知错误：" + exception;
 			}
+
 
 		} finally {
 			return new Result<>(flag,msg,0,null);

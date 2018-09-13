@@ -1,6 +1,6 @@
 package com.cy.example.config;
 
-import com.cy.example.filter.ShiroPermissionsFilter;
+import com.cy.example.supplement.shiro.ShiroPermissionsFilter;
 import com.cy.example.supplement.shiro.AuthRealm;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.codec.Base64;
@@ -64,14 +64,13 @@ public class ShiroConfig {
 		 ssl:例子/admins/user/**=ssl没有参数，表示安全的url请求，协议为https
 		 user:例如/admins/user/**=user没有参数表示必须存在用户，当登入操作时不做检查*/
 //		filterChainDefinitionMap.put("/system/user/**","authc,perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/sys_loginrecord/**","authc,perms[admin:add]");
+		filterChainDefinitionMap.put("/system/sys_loginrecord/**","roles[admin]");
 //		filterChainDefinitionMap.put("/system/sys_department/**","authc,perms[admin:add]");
 //		filterChainDefinitionMap.put("/system/sys_menu/**","authc,perms[admin:add]");
 //		filterChainDefinitionMap.put("/system/sys_permission/**","authc,perms[admin:add]");
 //		filterChainDefinitionMap.put("/system/sys_role/**","authc,perms[admin:add]");
 //		filterChainDefinitionMap.put("/system/sys_rule/**","authc,perms[admin:add]");
-//
-//		filterChainDefinitionMap.put("/system/**", "perms[list]");
+
 		// <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 		filterChainDefinitionMap.put("/**", "authc");
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
