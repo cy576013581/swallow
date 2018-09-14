@@ -6,6 +6,7 @@ import com.cy.example.entity.system.SysRoleEntity;
 import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IRoleService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,42 +22,28 @@ public class RoleController extends BaseController {
 	private IRoleService roleService;
 	
 	@PostMapping
+	@RequiresPermissions("role:add")
 	public Result<String> add(@ModelAttribute("role") SysRoleEntity role) {
 		boolean flag = roleService.insert(role);
-		String msg;
-		if (flag) {
-			msg = "添加成功！";
-		} else {
-			msg = "添加失败！";
-		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag,flag?"添加成功！":"添加失败！",0,null);
 	}
 
 	@PutMapping
+	@RequiresPermissions("role:update")
 	public Result<String> update(@ModelAttribute("role") SysRoleEntity role) {
 		boolean flag = roleService.updateById(role);
-		String msg;
-		if (flag) {
-			msg = "更新成功！";
-		} else {
-			msg = "更新失败！";
-		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag,flag?"更新成功！":"更新失败！",0,null);
 	}
 
 	@DeleteMapping("/{id}")
+	@RequiresPermissions("role:delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = roleService.deleteById(id);
-		String msg;
-		if (flag) {
-			msg = "删除成功！";
-		} else {
-			msg = "删除失败！";
-		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag,flag?"删除成功！":"删除失败！",0,null);
 	}
 
 	@GetMapping
+	@RequiresPermissions("role:list")
 	public Result<List<SysRoleEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = roleService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysRoleEntity>().setSqlSelect("c_roleCode,c_roleName,c_createDate,c_updateDate,id"));
@@ -66,6 +53,7 @@ public class RoleController extends BaseController {
 	}
 
 	@GetMapping("/search")
+	@RequiresPermissions("role:list")
 	public Result<List<SysRoleEntity>> search(
 			@ModelAttribute("role") SysRoleEntity role,
 			@ModelAttribute("page") Page page) {

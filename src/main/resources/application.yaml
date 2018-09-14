@@ -51,6 +51,8 @@ spring:
     static-locations: classpath:/static/,classpath:/public/
   mvc:
     static-path-pattern: /**
+  aop:
+    proxy-target-class: true
   rabbitmq:
     password: 123456
     port: 5672

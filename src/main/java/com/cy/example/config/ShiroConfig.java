@@ -1,18 +1,19 @@
 package com.cy.example.config;
 
-import com.cy.example.supplement.shiro.ShiroPermissionsFilter;
 import com.cy.example.supplement.shiro.AuthRealm;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -27,11 +28,7 @@ public class ShiroConfig {
 	public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         
-        Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();//获取filters  
-        //将自定义 的ShiroFilterFactoryBean注入shiroFilter
-        filters.put("perms", new ShiroPermissionsFilter());
-        
-        // 必须设置SecuritManager  
+        // 必须设置SecuritManager
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
 		// 拦截器.
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
@@ -41,11 +38,9 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/images/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
 		filterChainDefinitionMap.put("/lib/**", "anon");
-
 		filterChainDefinitionMap.put("/index", "anon");
 		filterChainDefinitionMap.put("/druid/**", "anon");
 		filterChainDefinitionMap.put("/system/user/validate", "anon");
-
 		filterChainDefinitionMap.put("/kaptcha", "anon");
 		filterChainDefinitionMap.put("/swagger-resources/**", "anon");
 		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
@@ -64,25 +59,16 @@ public class ShiroConfig {
 		 ssl:例子/admins/user/**=ssl没有参数，表示安全的url请求，协议为https
 		 user:例如/admins/user/**=user没有参数表示必须存在用户，当登入操作时不做检查*/
 //		filterChainDefinitionMap.put("/system/user/**","authc,perms[admin:add]");
-		filterChainDefinitionMap.put("/system/loginRecord/**","roles[admin]");
-		filterChainDefinitionMap.put("/system/role_menu/**","roles[admin]");
-		filterChainDefinitionMap.put("/system/role_permis/**","roles[admin]");
-		filterChainDefinitionMap.put("/system/user_role/**","roles[admin]");
-//		filterChainDefinitionMap.put("/system/depart/**","perms['user:get,user:add']");
-//		filterChainDefinitionMap.put("/system/menu/**","perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/permission/**","perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/role/**","perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/role_menu/**","perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/role_permis/**","perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/user_role/**","perms[admin:add]");
+		filterChainDefinitionMap.put("/system/loginRecord","perms[loginRecord:list]");
+//		filterChainDefinitionMap.put("/system/role_menu/**","roles[admin]");
+//		filterChainDefinitionMap.put("/system/role_permis/**","roles[admin]");
+//		filterChainDefinitionMap.put("/system/user_role/**","roles[admin]");
 
 		// <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 		filterChainDefinitionMap.put("/**", "authc");
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
 		shiroFilterFactoryBean.setLoginUrl("/index");
 //		shiroFilterFactoryBean.setUnauthorizedUrl("/401");
-		// 登录成功后要跳转的链接
-//		shiroFilterFactoryBean.setSuccessUrl("/main");
 
 		// 未授权界面;
 		// shiroFilterFactoryBean.setUnauthorizedUrl("/menu/403");
@@ -100,6 +86,24 @@ public class ShiroConfig {
 	public AuthRealm authRealm() {
 		AuthRealm authRealm = new AuthRealm();
 		return authRealm;
+	}
+
+	/*
+	 * 开启了Shiro注解支持
+	 */
+	@Bean
+	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+		return authorizationAttributeSourceAdvisor;
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+		DefaultAdvisorAutoProxyCreator defaultAAP = new DefaultAdvisorAutoProxyCreator();
+		defaultAAP.setProxyTargetClass(true);
+		return defaultAAP;
 	}
 
 	/*

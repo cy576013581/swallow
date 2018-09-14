@@ -6,6 +6,8 @@ import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.ILoginRecordService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +24,7 @@ public class LoginRecordController extends BaseController {
 	private ILoginRecordService loginRecordService;
 
 	@GetMapping
+	@RequiresPermissions("loginRecord:list")
 	public Result<List<LoginRecordEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = loginRecordService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<LoginRecordEntity>().orderBy("c_createDate",false));
@@ -30,6 +33,7 @@ public class LoginRecordController extends BaseController {
 	}
 
 	@GetMapping("/search")
+	@RequiresPermissions("loginRecord:list")
 	public Result<List<LoginRecordEntity>> search(
 			@ModelAttribute("loginRecord") LoginRecordEntity loginRecord,
 			@ModelAttribute("page") Page page) {

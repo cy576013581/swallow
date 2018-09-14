@@ -1,12 +1,20 @@
 package com.cy.example.controller;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cy.example.util.HttpUtil;
+import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -14,6 +22,25 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  * 
  */
 public class BaseController {
+
+	/**
+	 * 权限异常
+	 */
+	@ExceptionHandler({ UnauthorizedException.class, AuthorizationException.class })
+	public String authorizationException(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		if (HttpUtil.isAjax(request)) {
+			// 输出JSON
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("flag", false);
+			result.put("msg", "权限不足！");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			response.getWriter().write(JSONObject.toJSONString(result));
+			return null;
+		} else {
+			return "redirect:/system/403";
+		}
+	}
 
 	public String getIP(HttpServletRequest request) {
 		String ip = request.getHeader("x-forwarded-for");
@@ -61,10 +88,6 @@ public class BaseController {
 		HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder
 				.getRequestAttributes()).getResponse();
 		return response;
-	}
-
-	public HttpSession getSession() {
-		return getRequest().getSession();
 	}
 
 }

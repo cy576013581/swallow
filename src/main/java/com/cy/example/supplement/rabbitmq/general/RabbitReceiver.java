@@ -14,7 +14,7 @@ import com.cy.example.entity.system.LoginRecordEntity;
 import com.cy.example.entity.system.MailEntity;
 import com.cy.example.service.ILoginRecordService;
 import com.cy.example.service.IMailService;
-import com.cy.example.util.HttpRequestUtil;
+import com.cy.example.util.HttpUtil;
 
 @Slf4j
 @Configuration
@@ -34,7 +34,7 @@ public class RabbitReceiver {
     public void insertLoginRecord(LoginRecordEntity loginRecord) {
 		String tbUrl = ipAnalysis.split(",")[0] + loginRecord.getC_loginIp();
 		try {
-			String addr = HttpRequestUtil.get(tbUrl);
+			String addr = HttpUtil.get(tbUrl);
 			IpAnalysisVo_Tb ipAnalusisTb = JSON.parseObject(addr, IpAnalysisVo_Tb.class);
 			if(0 == ipAnalusisTb.getCode()){
 				if(StringUtil.IsEqual("XX", ipAnalusisTb.getData().getRegion())){
@@ -47,7 +47,7 @@ public class RabbitReceiver {
 
 			}else{
 				String sinaUrl = ipAnalysis.split(",")[1] + loginRecord.getC_loginIp();
-				addr = HttpRequestUtil.get(sinaUrl);
+				addr = HttpUtil.get(sinaUrl);
 				IpAnalysisVo_Sina ipAnalusisSina = JSON.parseObject(addr, IpAnalysisVo_Sina.class);
 				if(1 == ipAnalusisSina.getRet()){
 					loginRecord.setC_province(ipAnalusisSina.getProvince());
