@@ -64,17 +64,23 @@ public class ShiroConfig {
 		 ssl:例子/admins/user/**=ssl没有参数，表示安全的url请求，协议为https
 		 user:例如/admins/user/**=user没有参数表示必须存在用户，当登入操作时不做检查*/
 //		filterChainDefinitionMap.put("/system/user/**","authc,perms[admin:add]");
-		filterChainDefinitionMap.put("/system/sys_loginrecord/**","roles[admin]");
-//		filterChainDefinitionMap.put("/system/sys_department/**","authc,perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/sys_menu/**","authc,perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/sys_permission/**","authc,perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/sys_role/**","authc,perms[admin:add]");
-//		filterChainDefinitionMap.put("/system/sys_rule/**","authc,perms[admin:add]");
+		filterChainDefinitionMap.put("/system/loginRecord/**","roles[admin]");
+		filterChainDefinitionMap.put("/system/role_menu/**","roles[admin]");
+		filterChainDefinitionMap.put("/system/role_permis/**","roles[admin]");
+		filterChainDefinitionMap.put("/system/user_role/**","roles[admin]");
+//		filterChainDefinitionMap.put("/system/depart/**","perms['user:get,user:add']");
+//		filterChainDefinitionMap.put("/system/menu/**","perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/permission/**","perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/role/**","perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/role_menu/**","perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/role_permis/**","perms[admin:add]");
+//		filterChainDefinitionMap.put("/system/user_role/**","perms[admin:add]");
 
 		// <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 		filterChainDefinitionMap.put("/**", "authc");
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
 		shiroFilterFactoryBean.setLoginUrl("/index");
+//		shiroFilterFactoryBean.setUnauthorizedUrl("/401");
 		// 登录成功后要跳转的链接
 //		shiroFilterFactoryBean.setSuccessUrl("/main");
 

@@ -40,7 +40,7 @@ public class ShiroPermissionsFilter extends PermissionsAuthorizationFilter {
             httpServletResponse.setContentType("application/json");
             httpServletResponse.getWriter().write(JSONObject.toJSONString(result));
         } else {//如果是普通请求进行重定向
-            httpServletResponse.sendRedirect("/403");
+            httpServletResponse.sendRedirect("/401");
         }
         return false;
     }
