@@ -3,11 +3,13 @@ package com.cy.example.controller.system;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.cy.example.config.WebConfig;
+import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.*;
 import com.cy.example.service.*;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,7 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class SystemController {
+public class SystemController extends BaseController {
 	
 	@Autowired
 	private IPermissionService permisService;
@@ -216,6 +218,7 @@ public class SystemController {
 	}
 	
 	@RequestMapping("/menu/role_permisManage")
+	@RequiresPermissions("role_permis:list")
 	public String role_permisManage(ModelMap map) {
 		List<SysPermissionEntity> permisList = permisService.selectList(new EntityWrapper<SysPermissionEntity>());
 		List<SysRoleEntity> roleList = roleService.selectList(new EntityWrapper<SysRoleEntity>());
@@ -225,6 +228,7 @@ public class SystemController {
 	}
 
 	@RequestMapping("/menu/role_menuManage")
+	@RequiresPermissions("role_menu:list")
 	public String role_menuManage(ModelMap map) {
 		return "manage/role_menuManage";
 	}
@@ -258,5 +262,10 @@ public class SystemController {
 	@RequestMapping("/menu/workflow/taskManage")
 	public String taskManage(ModelMap map) {
 		return "workflow/taskManage";
+	}
+
+	@RequestMapping("/403")
+	public String error403() {
+		return "error/403";
 	}
 }

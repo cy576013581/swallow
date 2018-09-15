@@ -7,6 +7,7 @@ import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IUserService;
 import com.cy.example.service.IUser_RoleService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ public class User_RoleController extends BaseController {
 	private IUserService userService;
 	
 	@PostMapping
+	@RequiresPermissions("user_role:add")
 	public Result<String> add(@ModelAttribute("ur") User_Role_Ca ur) {
 		ur.setN_userId(Long.valueOf(ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
@@ -49,6 +51,7 @@ public class User_RoleController extends BaseController {
 	}
 
 	@PutMapping
+	@RequiresPermissions("user_role:update")
 	public Result<String> update(@ModelAttribute("ur") User_Role_Ca ur) {
 		ur.setN_userId(Long.valueOf(ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
@@ -67,6 +70,7 @@ public class User_RoleController extends BaseController {
 	}
 
 	@DeleteMapping("/{id}")
+	@RequiresPermissions("user_role:delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		User_Role_Ca user = urService.selectById(id);
 
@@ -77,6 +81,7 @@ public class User_RoleController extends BaseController {
 	}
 
 	@GetMapping
+	@RequiresPermissions("user_role:list")
 	public Result<List<User_Role_Ca>> findAll(@ModelAttribute("page")Page page) {
 		List<User_Role_Ca> list = urService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -85,6 +90,7 @@ public class User_RoleController extends BaseController {
 	}
 
 	@GetMapping("/search")
+	@RequiresPermissions("user_role:list")
 	public Result<List<User_Role_Ca>> search(
 			@ModelAttribute("ur") User_Role_Ca ur,
 			@ModelAttribute("page") Page page) {

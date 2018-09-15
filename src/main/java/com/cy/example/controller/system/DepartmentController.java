@@ -6,6 +6,7 @@ import com.cy.example.entity.system.SysDepartmentEntity;
 import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IDepartmentService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,42 +20,28 @@ public class DepartmentController extends BaseController {
 	private IDepartmentService departService;
 	
 	@PostMapping
+	@RequiresPermissions("depart:add")
 	public Result<String> add(@ModelAttribute("depart") SysDepartmentEntity depart) {
 		boolean flag = departService.insert(depart);
-		String msg;
-		if (flag) {
-			msg = "添加成功！";
-		} else {
-			msg = "添加失败！";
-		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag,flag ? "添加成功！":"添加失败！",0,null);
 	}
 
 	@PutMapping
+	@RequiresPermissions("depart:update")
 	public Result<String> update(@ModelAttribute("depart") SysDepartmentEntity depart) {
 		boolean flag = departService.updateById(depart);
-		String msg;
-		if (flag) {
-			msg = "更新成功！";
-		} else {
-			msg = "更新失败！";
-		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag,flag ? "更新成功！":"更新失败！",0,null);
 	}
 
 	@DeleteMapping("/{id}")
+	@RequiresPermissions("depart:delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = departService.deleteById(id);
-		String msg;
-		if (flag) {
-			msg = "删除成功！";
-		} else {
-			msg = "删除失败！";
-		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag,flag ? "删除成功！":"删除失败！",0,null);
 	}
 
 	@GetMapping
+	@RequiresPermissions("depart:list")
 	public Result<List<SysDepartmentEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = departService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysDepartmentEntity>());
@@ -63,6 +50,7 @@ public class DepartmentController extends BaseController {
 	}
 
 	@GetMapping("/search")
+	@RequiresPermissions("depart:list")
 	public Result<List<SysDepartmentEntity>> search(
 			@ModelAttribute("depart") SysDepartmentEntity depart,
 			@ModelAttribute("page") Page page) {

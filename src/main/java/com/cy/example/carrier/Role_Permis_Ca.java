@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.cy.example.entity.SuperEntity;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @TableName("sys_role_permission")
 @Data
+@NoArgsConstructor
 public class Role_Permis_Ca extends SuperEntity<Role_Permis_Ca>{
 
 	private long n_roleId;
@@ -18,4 +20,8 @@ public class Role_Permis_Ca extends SuperEntity<Role_Permis_Ca>{
 	
 	@TableField(exist = false)
 	private String c_permisName;
+
+	public Role_Permis_Ca(Long n_roleId){
+		this.n_roleId = n_roleId;
+	}
 }

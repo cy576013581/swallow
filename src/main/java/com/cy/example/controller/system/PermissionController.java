@@ -3,9 +3,11 @@ package com.cy.example.controller.system;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysPermissionEntity;
+import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IPermissionService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,42 +23,42 @@ public class PermissionController extends BaseController {
 	private IPermissionService permissionService;
 	
 	@PostMapping
+    @RequiresPermissions("permission:add")
 	public Result<String> add(@ModelAttribute("per") SysPermissionEntity per) {
-		boolean flag = permissionService.insert(per);
+		SysPermissionEntity getPer = permissionService.selectOne(new EntityWrapper<SysPermissionEntity>()
+				.eq("c_permisCode",per.getC_permisCode()));
+		boolean flag = false;
 		String msg;
-		if (flag) {
-			msg = "添加成功！";
-		} else {
-			msg = "添加失败！";
+		if (getPer != null){
+			msg = "添加失败，权限已存在！";
+		}else{
+			flag = permissionService.insert(per);
+			if (flag) {
+				msg = "添加成功！";
+			} else {
+				msg = "添加失败！";
+			}
 		}
+
 		return new Result<>(flag,msg,0,null);
 	}
 
 	@PutMapping
+    @RequiresPermissions("permission:update")
 	public Result<String> update(@ModelAttribute("per") SysPermissionEntity per) {
 		boolean flag = permissionService.updateById(per);
-		String msg;
-		if (flag) {
-			msg = "更新成功！";
-		} else {
-			msg = "更新失败！";
-		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag,flag?"更新成功！":"更新失败！",0,null);
 	}
 
 	@DeleteMapping("/{id}")
+    @RequiresPermissions("permission:delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = permissionService.deleteById(id);
-		String msg;
-		if (flag) {
-			msg = "删除成功！";
-		} else {
-			msg = "删除失败！";
-		}
-		return new Result<>(flag,msg,0,null);
+		return new Result<>(flag,flag?"删除成功！":"删除失败！",0,null);
 	}
 
 	@GetMapping
+    @RequiresPermissions("permission:list")
 	public Result<List<SysPermissionEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = permissionService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysPermissionEntity>());
@@ -68,6 +70,7 @@ public class PermissionController extends BaseController {
 	}
 
 	@GetMapping("/search")
+    @RequiresPermissions("permission:list")
 	public Result<List<SysPermissionEntity>> search(
 			@ModelAttribute("per") SysPermissionEntity per,
 			@ModelAttribute("page") Page page) {

@@ -38,7 +38,7 @@ public class BaseController {
 			response.getWriter().write(JSONObject.toJSONString(result));
 			return null;
 		} else {
-			return "redirect:/system/403";
+			return "redirect:/403";
 		}
 	}
 

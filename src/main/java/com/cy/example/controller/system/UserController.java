@@ -12,10 +12,11 @@ import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
 import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
-import com.cy.example.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,7 @@ public class UserController extends BaseController {
 	private RabbitSender rabbitSender;
 
 	@RequestMapping("/register")
+	@RequiresGuest
 	public Result<String> register(@ModelAttribute("user") SysUserEntity user) {
 		WebConfig.add(user);
 		user.setN_status("0");
@@ -57,6 +59,7 @@ public class UserController extends BaseController {
 	}
 	
 	@RequestMapping("/lock")
+	@RequiresPermissions("user:lock")
 	public Result<String> lock(long id,String n_status) {
 		SysUserEntity user = userService.selectById(id);
 		user.setN_status(n_status);
@@ -72,6 +75,7 @@ public class UserController extends BaseController {
 	}
 
 	@PostMapping
+	@RequiresPermissions("user:add")
 	public Result<String> add(@ModelAttribute("user") SysUserEntity user) {
 		user.getN_departmentId().setId(Long.valueOf(user.getN_departmentId().getC_departName()));
 		SysUserEntity flag = userService.insertMy(user);
@@ -85,6 +89,7 @@ public class UserController extends BaseController {
 	}
 
 	@PutMapping
+	@RequiresPermissions("user:update")
 	public Result<String> update(@ModelAttribute("user") SysUserEntity user) {
 		/*if("男".equals(user.getN_sex())){
 			user.setN_sex("1");
@@ -108,6 +113,7 @@ public class UserController extends BaseController {
 	}
 
 	@DeleteMapping("/{id}")
+	@RequiresPermissions("user:delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = userService.deleteById(id);
 		String msg;
@@ -120,6 +126,7 @@ public class UserController extends BaseController {
 	}
 
 	@GetMapping
+	@RequiresPermissions("user:list")
 	public Result<List<SysUserEntity>> findAll(@ModelAttribute("page") Page page){
 		// System.out.print("================================="+page.toString()+page.getIndex());
 		List<SysUserEntity> list = userService.findAll(page);
@@ -141,6 +148,7 @@ public class UserController extends BaseController {
 	}
 
 	@GetMapping("/search")
+	@RequiresPermissions("user:list")
 	public Result<List<SysUserEntity>> search(
 			@ModelAttribute("user") SysUserEntity user,
 			@ModelAttribute("page") Page page) {

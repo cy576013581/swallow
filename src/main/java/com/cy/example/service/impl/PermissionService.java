@@ -29,4 +29,9 @@ public class PermissionService extends ServiceImpl<PermissionMapper, SysPermissi
 		// TODO Auto-generated method stub
 		return permissionMapper.searchAllCount(permission);
 	}
+
+	@Override
+	public List<SysPermissionEntity> findAll() {
+		return permissionMapper.findAll();
+	}
 }
