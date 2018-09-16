@@ -23,7 +23,7 @@ public class PermissionController extends BaseController {
 	private IPermissionService permissionService;
 	
 	@PostMapping
-    @RequiresPermissions("permission:add")
+    @RequiresPermissions("permission_add")
 	public Result<String> add(@ModelAttribute("per") SysPermissionEntity per) {
 		SysPermissionEntity getPer = permissionService.selectOne(new EntityWrapper<SysPermissionEntity>()
 				.eq("c_permisCode",per.getC_permisCode()));
@@ -44,21 +44,21 @@ public class PermissionController extends BaseController {
 	}
 
 	@PutMapping
-    @RequiresPermissions("permission:update")
+    @RequiresPermissions("permission_update")
 	public Result<String> update(@ModelAttribute("per") SysPermissionEntity per) {
 		boolean flag = permissionService.updateById(per);
 		return new Result<>(flag,flag?"更新成功！":"更新失败！",0,null);
 	}
 
 	@DeleteMapping("/{id}")
-    @RequiresPermissions("permission:delete")
+    @RequiresPermissions("permission_delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = permissionService.deleteById(id);
 		return new Result<>(flag,flag?"删除成功！":"删除失败！",0,null);
 	}
 
 	@GetMapping
-    @RequiresPermissions("permission:list")
+    @RequiresPermissions("permission_list")
 	public Result<List<SysPermissionEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = permissionService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysPermissionEntity>());
@@ -70,7 +70,7 @@ public class PermissionController extends BaseController {
 	}
 
 	@GetMapping("/search")
-    @RequiresPermissions("permission:list")
+    @RequiresPermissions("permission_list")
 	public Result<List<SysPermissionEntity>> search(
 			@ModelAttribute("per") SysPermissionEntity per,
 			@ModelAttribute("page") Page page) {

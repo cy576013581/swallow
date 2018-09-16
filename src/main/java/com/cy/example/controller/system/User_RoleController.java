@@ -26,7 +26,7 @@ public class User_RoleController extends BaseController {
 	private IUserService userService;
 	
 	@PostMapping
-	@RequiresPermissions("user_role:add")
+	@RequiresPermissions("user_role_add")
 	public Result<String> add(@ModelAttribute("ur") User_Role_Ca ur) {
 		ur.setN_userId(Long.valueOf(ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
@@ -51,7 +51,7 @@ public class User_RoleController extends BaseController {
 	}
 
 	@PutMapping
-	@RequiresPermissions("user_role:update")
+	@RequiresPermissions("user_role_update")
 	public Result<String> update(@ModelAttribute("ur") User_Role_Ca ur) {
 		ur.setN_userId(Long.valueOf(ur.getC_username()));
 		ur.setN_roleId(Long.valueOf(ur.getC_roleName()));
@@ -70,7 +70,7 @@ public class User_RoleController extends BaseController {
 	}
 
 	@DeleteMapping("/{id}")
-	@RequiresPermissions("user_role:delete")
+	@RequiresPermissions("user_role_delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		User_Role_Ca user = urService.selectById(id);
 
@@ -81,7 +81,7 @@ public class User_RoleController extends BaseController {
 	}
 
 	@GetMapping
-	@RequiresPermissions("user_role:list")
+	@RequiresPermissions("user_role_list")
 	public Result<List<User_Role_Ca>> findAll(@ModelAttribute("page")Page page) {
 		List<User_Role_Ca> list = urService.findAll(page);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -90,7 +90,7 @@ public class User_RoleController extends BaseController {
 	}
 
 	@GetMapping("/search")
-	@RequiresPermissions("user_role:list")
+	@RequiresPermissions("user_role_list")
 	public Result<List<User_Role_Ca>> search(
 			@ModelAttribute("ur") User_Role_Ca ur,
 			@ModelAttribute("page") Page page) {

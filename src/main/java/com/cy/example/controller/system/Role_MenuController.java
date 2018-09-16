@@ -33,21 +33,21 @@ public class Role_MenuController extends BaseController {
 	private IMenuService menuService;
 
 	@PutMapping
-	@RequiresPermissions("role_menu:update")
+	@RequiresPermissions("role_menu_update")
 	public Result<String> updates(Long roleId,String menuIds) {
 		rmService.update(roleId,menuIds);
 		return new Result<>(true,"更新成功！",null,null);
 	}
 
 	@GetMapping("/{rid}")
-	@RequiresPermissions("role_menu:list")
+	@RequiresPermissions("role_menu_list")
 	public Result<List<Role_Menu_Ca>> findAll(@PathVariable("rid")Integer rid) {
 		List<Role_Menu_Ca> list = rmService.findAll(rid);
 		return new Result<>(true,null,null,list);
 	}
 
 	@GetMapping("/getRoles")
-	@RequiresPermissions("role_menu:list")
+	@RequiresPermissions("role_menu_list")
 	public Result<List<Map<String, Object>>> getRoles(){
 		List<SysRoleEntity> data = roleService.selectList(new EntityWrapper<SysRoleEntity>().setSqlSelect("id,c_roleName"));
 
@@ -63,7 +63,7 @@ public class Role_MenuController extends BaseController {
 	}
 
 	@GetMapping("/getMenus")
-	@RequiresPermissions("role_menu:list")
+	@RequiresPermissions("role_menu_list")
 	public Result<List<Map<String, Object>>> getMenus(){
 		List<SysMenuEntity> data = menuService.findAll();
 

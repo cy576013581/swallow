@@ -22,7 +22,7 @@ public class MenuController extends BaseController{
 	private IMenuService menuService;
 	
 	@PostMapping
-	@RequiresPermissions("menu:add")
+	@RequiresPermissions("menu_add")
 	public Result<String> add(@ModelAttribute("menu") SysMenuEntity menu) {
 		boolean flag = menuService.insert(menu);
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -30,21 +30,21 @@ public class MenuController extends BaseController{
 	}
 
 	@PutMapping
-	@RequiresPermissions("menu:update")
+	@RequiresPermissions("menu_update")
 	public Result<String> update(@ModelAttribute("menu") SysMenuEntity menu) {
 		boolean flag = menuService.updateById(menu);
 		return new Result<>(flag,flag?"更新成功！":"更新失败！",0,null);
 	}
 
 	@DeleteMapping("/{id}")
-	@RequiresPermissions("menu:delete")
+	@RequiresPermissions("menu_delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = menuService.deleteById(id);
 		return new Result<>(flag,flag?"删除成功！":"删除失败！",0,null);
 	}
 
 	@GetMapping
-	@RequiresPermissions("menu:list")
+	@RequiresPermissions("menu_list")
 	public Result<List<SysMenuEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = menuService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysMenuEntity>());
@@ -60,7 +60,7 @@ public class MenuController extends BaseController{
 	}
 
 	@GetMapping("/search")
-	@RequiresPermissions("menu:list")
+	@RequiresPermissions("menu_list")
 	public Result<List<SysMenuEntity>> search(
 			@ModelAttribute("menu") SysMenuEntity menu,
 			@ModelAttribute("page") Page page) {

@@ -20,28 +20,28 @@ public class DepartmentController extends BaseController {
 	private IDepartmentService departService;
 	
 	@PostMapping
-	@RequiresPermissions("depart:add")
+	@RequiresPermissions("depart_add")
 	public Result<String> add(@ModelAttribute("depart") SysDepartmentEntity depart) {
 		boolean flag = departService.insert(depart);
 		return new Result<>(flag,flag ? "添加成功！":"添加失败！",0,null);
 	}
 
 	@PutMapping
-	@RequiresPermissions("depart:update")
+	@RequiresPermissions("depart_update")
 	public Result<String> update(@ModelAttribute("depart") SysDepartmentEntity depart) {
 		boolean flag = departService.updateById(depart);
 		return new Result<>(flag,flag ? "更新成功！":"更新失败！",0,null);
 	}
 
 	@DeleteMapping("/{id}")
-	@RequiresPermissions("depart:delete")
+	@RequiresPermissions("depart_delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = departService.deleteById(id);
 		return new Result<>(flag,flag ? "删除成功！":"删除失败！",0,null);
 	}
 
 	@GetMapping
-	@RequiresPermissions("depart:list")
+	@RequiresPermissions("depart_list")
 	public Result<List<SysDepartmentEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = departService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysDepartmentEntity>());
@@ -50,7 +50,7 @@ public class DepartmentController extends BaseController {
 	}
 
 	@GetMapping("/search")
-	@RequiresPermissions("depart:list")
+	@RequiresPermissions("depart_list")
 	public Result<List<SysDepartmentEntity>> search(
 			@ModelAttribute("depart") SysDepartmentEntity depart,
 			@ModelAttribute("page") Page page) {

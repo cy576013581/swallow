@@ -24,7 +24,7 @@ public class LoginRecordController extends BaseController {
 	private ILoginRecordService loginRecordService;
 
 	@GetMapping
-	@RequiresPermissions("loginRecord:list")
+	@RequiresPermissions("loginRecord_list")
 	public Result<List<LoginRecordEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = loginRecordService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<LoginRecordEntity>().orderBy("c_createDate",false));
@@ -33,7 +33,7 @@ public class LoginRecordController extends BaseController {
 	}
 
 	@GetMapping("/search")
-	@RequiresPermissions("loginRecord:list")
+	@RequiresPermissions("loginRecord_list")
 	public Result<List<LoginRecordEntity>> search(
 			@ModelAttribute("loginRecord") LoginRecordEntity loginRecord,
 			@ModelAttribute("page") Page page) {

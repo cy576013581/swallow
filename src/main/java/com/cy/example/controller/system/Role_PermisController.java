@@ -32,28 +32,28 @@ public class Role_PermisController extends BaseController {
 	private IPermissionService permissionService;
 	
 	@PutMapping
-    @RequiresPermissions("role_permis:update")
+    @RequiresPermissions("role_permis_update")
 	public Result<String> updates(Long roleId,String permisIds) {
 		rpService.update(roleId,permisIds);
 		return new Result<>(true,"更新成功！",null,null);
 	}
 
 	@GetMapping("/{rid}")
-    @RequiresPermissions("role_permis:list")
+    @RequiresPermissions("role_permis_list")
 	public Result<List<Role_Permis_Ca>> findAll(@PathVariable("rid")Integer rid) {
 		List<Role_Permis_Ca> list = rpService.findAll(rid);
 		return new Result<>(true,null,null,list);
 	}
 
 	@GetMapping("/getPermis")
-    @RequiresPermissions("role_permis:list")
+    @RequiresPermissions("role_permis_list")
 	public Result<List<SysPermissionEntity>> getPermis(){
 		List<SysPermissionEntity> data = permissionService.findAll();
 		return new Result<>(true,null,null,data);
 	}
 
 	@GetMapping("/getRoles")
-    @RequiresPermissions("role_permis:list")
+    @RequiresPermissions("role_permis_list")
 	public Result<List<Map<String, Object>>> getRoles(){
 		List<SysRoleEntity> data = roleService.selectList(new EntityWrapper<SysRoleEntity>().setSqlSelect("id,c_roleName"));
 

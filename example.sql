@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2018-09-15 13:25:07
+Date: 2018-09-16 15:38:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -896,7 +896,7 @@ CREATE TABLE `sys_department` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_department
@@ -904,6 +904,7 @@ CREATE TABLE `sys_department` (
 INSERT INTO `sys_department` VALUES ('1', 'DEPART_IT', 'IT部', '2017-08-01 11:00:05', '0', '2018-01-31 13:44:05', '8', '0');
 INSERT INTO `sys_department` VALUES ('2', 'DEPART_CW', '财务部', '2017-08-01 11:00:05', '0', '2018-01-31 13:56:43', '8', '0');
 INSERT INTO `sys_department` VALUES ('3', 'DEPART_RLXZ', '人力行政部', '2017-08-01 11:00:05', '0', '2018-01-24 17:22:27', '8', '0');
+INSERT INTO `sys_department` VALUES ('4', '1', '1', '2018-09-16 14:58:48', '8', '2018-09-16 14:58:48', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_loginrecord
@@ -921,7 +922,7 @@ CREATE TABLE `sys_loginrecord` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=685 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=706 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_loginrecord
@@ -1500,6 +1501,27 @@ INSERT INTO `sys_loginrecord` VALUES ('681', 'admin', '192.168.1.103', '内网IP
 INSERT INTO `sys_loginrecord` VALUES ('682', 'guest', '192.168.1.103', '内网IP', '内网IP', '2018-09-15 13:22:53', '14', '2018-09-15 13:22:53', '14', '0');
 INSERT INTO `sys_loginrecord` VALUES ('683', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-15 13:23:31', '8', '2018-09-15 13:23:31', '8', '0');
 INSERT INTO `sys_loginrecord` VALUES ('684', 'guest', '192.168.1.103', '内网IP', '内网IP', '2018-09-15 13:24:05', '14', '2018-09-15 13:24:05', '14', '0');
+INSERT INTO `sys_loginrecord` VALUES ('685', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-15 13:31:51', '8', '2018-09-15 13:31:51', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('686', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-15 13:33:07', '8', '2018-09-15 13:33:07', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('687', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-15 13:43:50', '8', '2018-09-15 13:43:50', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('688', 'guest', '192.168.1.103', '内网IP', '内网IP', '2018-09-15 13:44:39', '14', '2018-09-15 13:44:39', '14', '0');
+INSERT INTO `sys_loginrecord` VALUES ('689', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-15 13:47:20', '8', '2018-09-15 13:47:20', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('690', 'guest', '192.168.1.103', '内网IP', '内网IP', '2018-09-15 13:47:29', '14', '2018-09-15 13:47:29', '14', '0');
+INSERT INTO `sys_loginrecord` VALUES ('691', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 14:55:02', '8', '2018-09-16 14:55:02', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('692', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 14:58:28', '8', '2018-09-16 14:58:28', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('693', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:11:15', '8', '2018-09-16 15:11:15', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('694', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:15:05', '8', '2018-09-16 15:15:05', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('695', '1', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:15:25', '16', '2018-09-16 15:15:25', '16', '0');
+INSERT INTO `sys_loginrecord` VALUES ('696', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:16:28', '8', '2018-09-16 15:16:28', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('697', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:20:51', '8', '2018-09-16 15:20:51', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('698', 'guest', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:21:04', '14', '2018-09-16 15:21:04', '14', '0');
+INSERT INTO `sys_loginrecord` VALUES ('699', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:21:45', '8', '2018-09-16 15:21:45', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('700', 'guest', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:21:58', '14', '2018-09-16 15:21:58', '14', '0');
+INSERT INTO `sys_loginrecord` VALUES ('701', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:33:31', '8', '2018-09-16 15:33:31', '8', '0');
+INSERT INTO `sys_loginrecord` VALUES ('702', 'guest', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:33:40', '14', '2018-09-16 15:33:40', '14', '0');
+INSERT INTO `sys_loginrecord` VALUES ('703', '1', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:35:53', '16', '2018-09-16 15:35:53', '16', '0');
+INSERT INTO `sys_loginrecord` VALUES ('704', 'guest', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:36:03', '14', '2018-09-16 15:36:03', '14', '0');
+INSERT INTO `sys_loginrecord` VALUES ('705', 'admin', '192.168.1.103', '内网IP', '内网IP', '2018-09-16 15:37:25', '8', '2018-09-16 15:37:25', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1585,40 +1607,40 @@ CREATE TABLE `sys_permission` (
 -- ----------------------------
 -- Records of sys_permission
 -- ----------------------------
-INSERT INTO `sys_permission` VALUES ('5', 'user:lock', '用户_锁定', '2017-10-22 13:22:49', '0', '2018-09-15 11:33:07', '8', '0');
-INSERT INTO `sys_permission` VALUES ('6', 'loginRecord:list', '登录记录_list', '2018-09-14 20:45:51', '0', '2018-09-14 21:10:36', '8', '0');
-INSERT INTO `sys_permission` VALUES ('7', 'role:list', '角色_list', '2018-09-14 21:04:36', '0', '2018-09-14 21:10:26', '8', '0');
-INSERT INTO `sys_permission` VALUES ('8', 'role:add', '角色_add', '2018-09-14 21:05:06', '8', '2018-09-14 21:05:06', '8', '0');
-INSERT INTO `sys_permission` VALUES ('9', 'role:delete', '角色_delete', '2018-09-14 21:05:45', '8', '2018-09-14 21:05:45', '8', '0');
-INSERT INTO `sys_permission` VALUES ('10', 'role:update', '角色_update', '2018-09-14 21:07:39', '8', '2018-09-14 21:07:39', '8', '0');
-INSERT INTO `sys_permission` VALUES ('11', 'role_permis:update', '角色权限_更新', '2018-09-14 21:07:39', '8', '2018-09-14 21:07:39', '8', '0');
-INSERT INTO `sys_permission` VALUES ('12', 'role_permis:list', '角色权限_列表', '2018-09-14 21:07:39', '8', '2018-09-14 21:07:39', '8', '0');
-INSERT INTO `sys_permission` VALUES ('13', 'depart:update', '部门_更新', '2018-09-15 11:44:55', '8', '2018-09-15 11:44:55', '8', '0');
-INSERT INTO `sys_permission` VALUES ('14', 'depart:add', '部门_添加', '2018-09-15 11:45:16', '8', '2018-09-15 11:45:16', '8', '0');
-INSERT INTO `sys_permission` VALUES ('15', 'depart:delete', '部门_删除', '2018-09-15 11:45:46', '8', '2018-09-15 11:45:46', '8', '0');
-INSERT INTO `sys_permission` VALUES ('16', 'depart:list', '部门_列表', '2018-09-15 11:46:03', '8', '2018-09-15 11:46:03', '8', '0');
-INSERT INTO `sys_permission` VALUES ('17', 'menu:update', '菜单_更新', '2018-09-15 11:49:26', '8', '2018-09-15 11:49:26', '8', '0');
-INSERT INTO `sys_permission` VALUES ('18', 'menu:delete', '菜单_删除', '2018-09-15 11:49:56', '8', '2018-09-15 11:49:56', '8', '0');
-INSERT INTO `sys_permission` VALUES ('19', 'menu:add', '菜单_添加', '2018-09-15 11:50:16', '8', '2018-09-15 11:50:16', '8', '0');
-INSERT INTO `sys_permission` VALUES ('20', 'menu:list', '菜单_列表', '2018-09-15 11:50:31', '0', '2018-09-15 11:50:49', '8', '0');
-INSERT INTO `sys_permission` VALUES ('21', 'notice:list', '公告_列表', '2018-09-15 11:54:50', '8', '2018-09-15 11:54:50', '8', '0');
-INSERT INTO `sys_permission` VALUES ('22', 'notice:update', '公告_更新', '2018-09-15 11:55:19', '8', '2018-09-15 11:55:19', '8', '0');
-INSERT INTO `sys_permission` VALUES ('23', 'notice:delete', '公告_删除', '2018-09-15 11:55:39', '8', '2018-09-15 11:55:39', '8', '0');
-INSERT INTO `sys_permission` VALUES ('24', 'notice:add', '公告_添加', '2018-09-15 11:56:18', '8', '2018-09-15 11:56:18', '8', '0');
-INSERT INTO `sys_permission` VALUES ('25', 'role_menu:list', '角色菜单_列表', '2018-09-15 13:03:24', '8', '2018-09-15 13:03:24', '8', '0');
-INSERT INTO `sys_permission` VALUES ('26', 'role_menu:update', '角色菜单_更新', '2018-09-15 13:03:47', '8', '2018-09-15 13:03:47', '8', '0');
-INSERT INTO `sys_permission` VALUES ('27', 'permission:list', '权限_列表', '2018-09-15 13:05:19', '8', '2018-09-15 13:05:19', '8', '0');
-INSERT INTO `sys_permission` VALUES ('28', 'permission:update', '权限_更新', '2018-09-15 13:05:33', '8', '2018-09-15 13:05:33', '8', '0');
-INSERT INTO `sys_permission` VALUES ('29', 'permission:delete', '权限_删除', '2018-09-15 13:05:54', '8', '2018-09-15 13:05:54', '8', '0');
-INSERT INTO `sys_permission` VALUES ('30', 'permission:add', '权限_添加', '2018-09-15 13:06:09', '8', '2018-09-15 13:06:09', '8', '0');
-INSERT INTO `sys_permission` VALUES ('31', 'user_role:list', '用户角色_列表', '2018-09-15 13:10:32', '0', '2018-09-15 13:11:22', '8', '0');
-INSERT INTO `sys_permission` VALUES ('32', 'user_role:add', '用户角色_添加', '2018-09-15 13:11:49', '8', '2018-09-15 13:11:49', '8', '0');
-INSERT INTO `sys_permission` VALUES ('33', 'user_role:delete', '用户角色_删除', '2018-09-15 13:12:03', '8', '2018-09-15 13:12:03', '8', '0');
-INSERT INTO `sys_permission` VALUES ('34', 'user_role:update', '用户角色_更新', '2018-09-15 13:12:24', '8', '2018-09-15 13:12:24', '8', '0');
-INSERT INTO `sys_permission` VALUES ('35', 'user:list', '用户_列表', '2018-09-15 13:14:33', '8', '2018-09-15 13:14:33', '8', '0');
-INSERT INTO `sys_permission` VALUES ('36', 'user:add', '用户_添加', '2018-09-15 13:14:51', '8', '2018-09-15 13:14:51', '8', '0');
-INSERT INTO `sys_permission` VALUES ('37', 'user:delete', '用户_删除', '2018-09-15 13:15:05', '8', '2018-09-15 13:15:05', '8', '0');
-INSERT INTO `sys_permission` VALUES ('38', 'user:update', '用户_更新', '2018-09-15 13:15:17', '8', '2018-09-15 13:15:17', '8', '0');
+INSERT INTO `sys_permission` VALUES ('5', 'user_lock', '用户_锁定', '2017-10-22 13:22:49', '0', '2018-09-15 11:33:07', '8', '0');
+INSERT INTO `sys_permission` VALUES ('6', 'loginRecord_list', '登录记录_列表', '2018-09-14 20:45:51', '0', '2018-09-16 15:16:58', '8', '0');
+INSERT INTO `sys_permission` VALUES ('7', 'role_list', '角色_列表', '2018-09-14 21:04:36', '0', '2018-09-16 15:17:05', '8', '0');
+INSERT INTO `sys_permission` VALUES ('8', 'role_add', '角色_添加', '2018-09-14 21:05:06', '0', '2018-09-16 15:17:13', '8', '0');
+INSERT INTO `sys_permission` VALUES ('9', 'role_delete', '角色_删除', '2018-09-14 21:05:45', '0', '2018-09-16 15:17:19', '8', '0');
+INSERT INTO `sys_permission` VALUES ('10', 'role_update', '角色_更新', '2018-09-14 21:07:39', '0', '2018-09-16 15:17:26', '8', '0');
+INSERT INTO `sys_permission` VALUES ('11', 'role_permis_update', '角色权限_更新', '2018-09-14 21:07:39', '8', '2018-09-14 21:07:39', '8', '0');
+INSERT INTO `sys_permission` VALUES ('12', 'role_permis_list', '角色权限_列表', '2018-09-14 21:07:39', '8', '2018-09-14 21:07:39', '8', '0');
+INSERT INTO `sys_permission` VALUES ('13', 'depart_update', '部门_更新', '2018-09-15 11:44:55', '8', '2018-09-15 11:44:55', '8', '0');
+INSERT INTO `sys_permission` VALUES ('14', 'depart_add', '部门_添加', '2018-09-15 11:45:16', '8', '2018-09-15 11:45:16', '8', '0');
+INSERT INTO `sys_permission` VALUES ('15', 'depart_delete', '部门_删除', '2018-09-15 11:45:46', '8', '2018-09-15 11:45:46', '8', '0');
+INSERT INTO `sys_permission` VALUES ('16', 'depart_list', '部门_列表', '2018-09-15 11:46:03', '8', '2018-09-15 11:46:03', '8', '0');
+INSERT INTO `sys_permission` VALUES ('17', 'menu_update', '菜单_更新', '2018-09-15 11:49:26', '8', '2018-09-15 11:49:26', '8', '0');
+INSERT INTO `sys_permission` VALUES ('18', 'menu_delete', '菜单_删除', '2018-09-15 11:49:56', '8', '2018-09-15 11:49:56', '8', '0');
+INSERT INTO `sys_permission` VALUES ('19', 'menu_add', '菜单_添加', '2018-09-15 11:50:16', '8', '2018-09-15 11:50:16', '8', '0');
+INSERT INTO `sys_permission` VALUES ('20', 'menu_list', '菜单_列表', '2018-09-15 11:50:31', '0', '2018-09-15 11:50:49', '8', '0');
+INSERT INTO `sys_permission` VALUES ('21', 'notice_list', '公告_列表', '2018-09-15 11:54:50', '8', '2018-09-15 11:54:50', '8', '0');
+INSERT INTO `sys_permission` VALUES ('22', 'notice_update', '公告_更新', '2018-09-15 11:55:19', '8', '2018-09-15 11:55:19', '8', '0');
+INSERT INTO `sys_permission` VALUES ('23', 'notice_delete', '公告_删除', '2018-09-15 11:55:39', '8', '2018-09-15 11:55:39', '8', '0');
+INSERT INTO `sys_permission` VALUES ('24', 'notice_add', '公告_添加', '2018-09-15 11:56:18', '8', '2018-09-15 11:56:18', '8', '0');
+INSERT INTO `sys_permission` VALUES ('25', 'role_menu_list', '角色菜单_列表', '2018-09-15 13:03:24', '8', '2018-09-15 13:03:24', '8', '0');
+INSERT INTO `sys_permission` VALUES ('26', 'role_menu_update', '角色菜单_更新', '2018-09-15 13:03:47', '8', '2018-09-15 13:03:47', '8', '0');
+INSERT INTO `sys_permission` VALUES ('27', 'permission_list', '权限_列表', '2018-09-15 13:05:19', '8', '2018-09-15 13:05:19', '8', '0');
+INSERT INTO `sys_permission` VALUES ('28', 'permission_update', '权限_更新', '2018-09-15 13:05:33', '8', '2018-09-15 13:05:33', '8', '0');
+INSERT INTO `sys_permission` VALUES ('29', 'permission_delete', '权限_删除', '2018-09-15 13:05:54', '8', '2018-09-15 13:05:54', '8', '0');
+INSERT INTO `sys_permission` VALUES ('30', 'permission_add', '权限_添加', '2018-09-15 13:06:09', '8', '2018-09-15 13:06:09', '8', '0');
+INSERT INTO `sys_permission` VALUES ('31', 'user_role_list', '用户角色_列表', '2018-09-15 13:10:32', '0', '2018-09-15 13:11:22', '8', '0');
+INSERT INTO `sys_permission` VALUES ('32', 'user_role_add', '用户角色_添加', '2018-09-15 13:11:49', '8', '2018-09-15 13:11:49', '8', '0');
+INSERT INTO `sys_permission` VALUES ('33', 'user_role_delete', '用户角色_删除', '2018-09-15 13:12:03', '8', '2018-09-15 13:12:03', '8', '0');
+INSERT INTO `sys_permission` VALUES ('34', 'user_role_update', '用户角色_更新', '2018-09-15 13:12:24', '8', '2018-09-15 13:12:24', '8', '0');
+INSERT INTO `sys_permission` VALUES ('35', 'user_list', '用户_列表', '2018-09-15 13:14:33', '8', '2018-09-15 13:14:33', '8', '0');
+INSERT INTO `sys_permission` VALUES ('36', 'user_add', '用户_添加', '2018-09-15 13:14:51', '8', '2018-09-15 13:14:51', '8', '0');
+INSERT INTO `sys_permission` VALUES ('37', 'user_delete', '用户_删除', '2018-09-15 13:15:05', '8', '2018-09-15 13:15:05', '8', '0');
+INSERT INTO `sys_permission` VALUES ('38', 'user_update', '用户_更新', '2018-09-15 13:15:17', '8', '2018-09-15 13:15:17', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -1720,7 +1742,7 @@ CREATE TABLE `sys_role_permission` (
   `n_updater` bigint(20) DEFAULT NULL,
   `n_deleted` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role_permission
@@ -1772,14 +1794,13 @@ INSERT INTO `sys_role_permission` VALUES ('98', '27', '2', '2018-09-15 13:19:51'
 INSERT INTO `sys_role_permission` VALUES ('99', '25', '2', '2018-09-15 13:19:51', '8', '2018-09-15 13:19:51', '8', '0');
 INSERT INTO `sys_role_permission` VALUES ('100', '12', '2', '2018-09-15 13:19:51', '8', '2018-09-15 13:19:51', '8', '0');
 INSERT INTO `sys_role_permission` VALUES ('101', '20', '2', '2018-09-15 13:19:51', '8', '2018-09-15 13:19:51', '8', '0');
-INSERT INTO `sys_role_permission` VALUES ('102', '16', '3', '2018-09-15 13:20:24', '8', '2018-09-15 13:20:24', '8', '0');
-INSERT INTO `sys_role_permission` VALUES ('103', '6', '3', '2018-09-15 13:20:24', '8', '2018-09-15 13:20:24', '8', '0');
-INSERT INTO `sys_role_permission` VALUES ('104', '20', '3', '2018-09-15 13:20:24', '8', '2018-09-15 13:20:24', '8', '0');
-INSERT INTO `sys_role_permission` VALUES ('105', '21', '3', '2018-09-15 13:20:24', '8', '2018-09-15 13:20:24', '8', '0');
-INSERT INTO `sys_role_permission` VALUES ('106', '27', '3', '2018-09-15 13:20:24', '8', '2018-09-15 13:20:24', '8', '0');
-INSERT INTO `sys_role_permission` VALUES ('107', '7', '3', '2018-09-15 13:20:24', '8', '2018-09-15 13:20:24', '8', '0');
-INSERT INTO `sys_role_permission` VALUES ('108', '35', '3', '2018-09-15 13:20:24', '8', '2018-09-15 13:20:24', '8', '0');
-INSERT INTO `sys_role_permission` VALUES ('109', '31', '3', '2018-09-15 13:20:24', '8', '2018-09-15 13:20:24', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('110', '16', '3', '2018-09-16 15:18:57', '8', '2018-09-16 15:18:57', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('111', '6', '3', '2018-09-16 15:18:57', '8', '2018-09-16 15:18:57', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('112', '20', '3', '2018-09-16 15:18:57', '8', '2018-09-16 15:18:57', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('113', '21', '3', '2018-09-16 15:18:57', '8', '2018-09-16 15:18:57', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('114', '27', '3', '2018-09-16 15:18:57', '8', '2018-09-16 15:18:57', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('115', '7', '3', '2018-09-16 15:18:57', '8', '2018-09-16 15:18:57', '8', '0');
+INSERT INTO `sys_role_permission` VALUES ('116', '31', '3', '2018-09-16 15:18:57', '8', '2018-09-16 15:18:57', '8', '0');
 
 -- ----------------------------
 -- Table structure for sys_user

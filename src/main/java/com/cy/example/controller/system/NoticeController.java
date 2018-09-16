@@ -20,28 +20,28 @@ public class NoticeController extends BaseController {
 	private INoticeService noticeService;
 	
 	@PostMapping
-	@RequiresPermissions("notice:add")
+	@RequiresPermissions("notice_add")
 	public Result<String> add(@ModelAttribute("notice") SysNoticeEntity notice) {
 		boolean flag = noticeService.insert(notice);
 		return new Result<>(flag,flag?"添加成功！":"添加失败！",0,null);
 	}
 
 	@PutMapping
-	@RequiresPermissions("notice:update")
+	@RequiresPermissions("notice_update")
 	public Result<String> update(@ModelAttribute("role") SysNoticeEntity notice) {
 		boolean flag = noticeService.updateById(notice);
 		return new Result<>(flag,flag?"更新成功！":"更新失败！",0,null);
 	}
 
 	@DeleteMapping("/{id}")
-	@RequiresPermissions("notice:delete")
+	@RequiresPermissions("notice_delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = noticeService.deleteById(id);
 		return new Result<>(flag,flag?"删除成功！":"删除失败！",0,null);
 	}
 
 	@GetMapping
-	@RequiresPermissions("notice:list")
+	@RequiresPermissions("notice_list")
 	public Result<List<SysNoticeEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = noticeService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysNoticeEntity>().setSqlSelect("c_title,c_content,n_order,c_createDate,c_updateDate,id"));
@@ -50,7 +50,7 @@ public class NoticeController extends BaseController {
 	}
 
 	@GetMapping("/search")
-	@RequiresPermissions("notice:list")
+	@RequiresPermissions("notice_list")
 	public Result<List<SysNoticeEntity>> search(
 			@ModelAttribute("notice") SysNoticeEntity notice,
 			@ModelAttribute("page") Page page) {

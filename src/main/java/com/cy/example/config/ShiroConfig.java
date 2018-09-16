@@ -59,7 +59,7 @@ public class ShiroConfig {
 		 ssl:例子/admins/user/**=ssl没有参数，表示安全的url请求，协议为https
 		 user:例如/admins/user/**=user没有参数表示必须存在用户，当登入操作时不做检查*/
 //		filterChainDefinitionMap.put("/system/user/**","authc,perms[admin:add]");
-		filterChainDefinitionMap.put("/system/loginRecord","perms[loginRecord:list]");
+//		filterChainDefinitionMap.put("/system/loginRecord","perms[loginRecord_list]");
 //		filterChainDefinitionMap.put("/system/role_menu/**","roles[admin]");
 //		filterChainDefinitionMap.put("/system/role_permis/**","roles[admin]");
 //		filterChainDefinitionMap.put("/system/user_role/**","roles[admin]");

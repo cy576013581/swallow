@@ -59,7 +59,7 @@ public class UserController extends BaseController {
 	}
 	
 	@RequestMapping("/lock")
-	@RequiresPermissions("user:lock")
+	@RequiresPermissions("user_lock")
 	public Result<String> lock(long id,String n_status) {
 		SysUserEntity user = userService.selectById(id);
 		user.setN_status(n_status);
@@ -75,7 +75,7 @@ public class UserController extends BaseController {
 	}
 
 	@PostMapping
-	@RequiresPermissions("user:add")
+	@RequiresPermissions("user_add")
 	public Result<String> add(@ModelAttribute("user") SysUserEntity user) {
 		user.getN_departmentId().setId(Long.valueOf(user.getN_departmentId().getC_departName()));
 		SysUserEntity flag = userService.insertMy(user);
@@ -89,7 +89,7 @@ public class UserController extends BaseController {
 	}
 
 	@PutMapping
-	@RequiresPermissions("user:update")
+	@RequiresPermissions("user_update")
 	public Result<String> update(@ModelAttribute("user") SysUserEntity user) {
 		/*if("男".equals(user.getN_sex())){
 			user.setN_sex("1");
@@ -113,7 +113,7 @@ public class UserController extends BaseController {
 	}
 
 	@DeleteMapping("/{id}")
-	@RequiresPermissions("user:delete")
+	@RequiresPermissions("user_delete")
 	public Result<String> delete(@PathVariable("id")Long id) {
 		boolean flag = userService.deleteById(id);
 		String msg;
@@ -126,7 +126,7 @@ public class UserController extends BaseController {
 	}
 
 	@GetMapping
-	@RequiresPermissions("user:list")
+	@RequiresPermissions("user_list")
 	public Result<List<SysUserEntity>> findAll(@ModelAttribute("page") Page page){
 		// System.out.print("================================="+page.toString()+page.getIndex());
 		List<SysUserEntity> list = userService.findAll(page);
@@ -148,7 +148,7 @@ public class UserController extends BaseController {
 	}
 
 	@GetMapping("/search")
-	@RequiresPermissions("user:list")
+	@RequiresPermissions("user_list")
 	public Result<List<SysUserEntity>> search(
 			@ModelAttribute("user") SysUserEntity user,
 			@ModelAttribute("page") Page page) {

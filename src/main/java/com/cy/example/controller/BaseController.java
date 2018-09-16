@@ -30,7 +30,7 @@ public class BaseController {
 	public String authorizationException(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		if (HttpUtil.isAjax(request)) {
 			// 输出JSON
-			Map<String, Object> result = new HashMap<String, Object>();
+			Map<String, Object> result = new HashMap<>();
 			result.put("flag", false);
 			result.put("msg", "权限不足！");
 			response.setCharacterEncoding("UTF-8");

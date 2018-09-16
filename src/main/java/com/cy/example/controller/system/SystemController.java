@@ -175,6 +175,7 @@ public class SystemController extends BaseController {
 	}
 
 	@RequestMapping("/menu/userManage")
+	@RequiresPermissions("user_list")
 	public String userManage(ModelMap map) {
 		List<SysDepartmentEntity> departList = departmentService.selectList(new EntityWrapper<SysDepartmentEntity>());
 		map.put("departList", departList); 
@@ -182,6 +183,7 @@ public class SystemController extends BaseController {
 	}
 	
 	@RequestMapping("/menu/menuManage")
+	@RequiresPermissions("menu_list")
 	public String menuManage(ModelMap map) {
 		List<SysMenuEntity> menuList = menuService.findRoot();
 		map.put("menuList", menuList);
@@ -189,6 +191,7 @@ public class SystemController extends BaseController {
 	}
 
 	@RequestMapping("/menu/loginRecordManage")
+	@RequiresPermissions("loginRecord_list")
 	public String loginRecordManage() {
 		return "manage/loginRecordManage";
 	}
@@ -199,16 +202,19 @@ public class SystemController extends BaseController {
 	}
 	
 	@RequestMapping("/menu/roleManage")
+	@RequiresPermissions("role_list")
 	public String roleManage() {
 		return "manage/roleManage";
 	}
 	
 	@RequestMapping("/menu/permissionManage")
+	@RequiresPermissions("permission_list")
 	public String permissionManage() {
 		return "manage/permissionManage";
 	}
-	
+
 	@RequestMapping("/menu/user_roleManage")
+	@RequiresPermissions("user_role_list")
 	public String user_roleManage(ModelMap map) {
 		List<SysUserEntity> userList = userService.selectList(new EntityWrapper<SysUserEntity>());
 		List<SysRoleEntity> roleList = roleService.selectList(new EntityWrapper<SysRoleEntity>());
@@ -218,7 +224,7 @@ public class SystemController extends BaseController {
 	}
 	
 	@RequestMapping("/menu/role_permisManage")
-	@RequiresPermissions("role_permis:list")
+	@RequiresPermissions("role_permis_list")
 	public String role_permisManage(ModelMap map) {
 		List<SysPermissionEntity> permisList = permisService.selectList(new EntityWrapper<SysPermissionEntity>());
 		List<SysRoleEntity> roleList = roleService.selectList(new EntityWrapper<SysRoleEntity>());
@@ -228,24 +234,25 @@ public class SystemController extends BaseController {
 	}
 
 	@RequestMapping("/menu/role_menuManage")
-	@RequiresPermissions("role_menu:list")
+	@RequiresPermissions("role_menu_list")
 	public String role_menuManage(ModelMap map) {
 		return "manage/role_menuManage";
 	}
 
 	@RequestMapping("/menu/departmentManage")
+	@RequiresPermissions("depart_list")
 	public String departmentManage(ModelMap map) {
 		return "manage/departmentManage";
 	}
 
 	@RequestMapping("/menu/noticeManage")
+	@RequiresPermissions("notice_list")
 	public String noticeManage(ModelMap map) {
 		return "manage/noticeManage";
 	}
 	
 	@RequestMapping("/menu/workflow/deployManage")
 	public String deployManage(ModelMap map) {
-		
 		return "workflow/deployManage";
 	}
 	
