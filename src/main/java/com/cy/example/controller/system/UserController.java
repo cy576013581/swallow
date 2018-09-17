@@ -12,6 +12,7 @@ import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
 import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
+import com.cy.example.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
