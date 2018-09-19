@@ -48,15 +48,15 @@ public class MenuController extends BaseController{
 	public Result<List<SysMenuEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = menuService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysMenuEntity>());
-		int sum = menuService.selectCount(new EntityWrapper<SysMenuEntity>());
 		List<SysMenuEntity> data = list.getRecords();
-		for(SysMenuEntity entity : data){
-			if(!"[root]".equals(entity.getC_node())){
-				SysMenuEntity en = menuService.selectById(entity.getC_node());
-				entity.setC_node(en.getC_menuName());
-			}
-		}
-		return new Result<>(true,null,sum,list.getRecords());
+		data.stream()
+			.forEach(s ->{
+				if(!"[root]".equals(s.getC_node())){
+					SysMenuEntity en = menuService.selectById(s.getC_node());
+					s.setC_node(en.getC_menuName());
+				}
+			});
+		return new Result<>(true,null,list.getTotal(),data);
 	}
 
 	@GetMapping("/search")
@@ -64,16 +64,17 @@ public class MenuController extends BaseController{
 	public Result<List<SysMenuEntity>> search(
 			@ModelAttribute("menu") SysMenuEntity menu,
 			@ModelAttribute("page") Page page) {
-		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysMenuEntity> list = menuService.searchAll(
 				menu, page);
-		for(SysMenuEntity entity : list){
-			if(!"[root]".equals(entity.getC_node())){
-				SysMenuEntity en = menuService.selectById(entity.getC_node());
-				entity.setC_node(en.getC_menuName());
-			}
-		}
-		return new Result<>(true,null,list.size(),list);
+		int sum = menuService.searchAllCount(menu);
+		list.stream()
+				.forEach(s -> {
+					if(!"[root]".equals(s.getC_node())){
+						SysMenuEntity en = menuService.selectById(s.getC_node());
+						s.setC_node(en.getC_menuName());
+					}
+				});
+		return new Result<>(true,null,sum,list);
 	}
 
 }
