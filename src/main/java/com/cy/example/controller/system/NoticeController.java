@@ -45,8 +45,7 @@ public class NoticeController extends BaseController {
 	public Result<List<SysNoticeEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = noticeService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysNoticeEntity>().setSqlSelect("c_title,c_content,n_order,c_createDate,c_updateDate,id"));
-		int sum = noticeService.selectCount(new EntityWrapper<SysNoticeEntity>());
-		return new Result<>(true,null,sum,list.getRecords());
+		return new Result<>(true,null,list.getTotal(),list.getRecords());
 	}
 
 	@GetMapping("/search")

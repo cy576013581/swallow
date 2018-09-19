@@ -45,8 +45,7 @@ public class DepartmentController extends BaseController {
 	public Result<List<SysDepartmentEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = departService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysDepartmentEntity>());
-		int sum = departService.selectCount(new EntityWrapper<SysDepartmentEntity>());
-		return new Result<>(true,null,sum,list.getRecords());
+		return new Result<>(true,null,list.getTotal(),list.getRecords());
 	}
 
 	@GetMapping("/search")

@@ -12,5 +12,5 @@ public class SysRuleEntity extends SuperEntity<SysRuleEntity>{
 	
 	private String c_permission;
 	
-	private int n_order;
+	private Integer n_order;
 }

@@ -62,11 +62,7 @@ public class PermissionController extends BaseController {
 	public Result<List<SysPermissionEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = permissionService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<SysPermissionEntity>());
-		int sum = permissionService.selectCount(new EntityWrapper<SysPermissionEntity>());
-		/*for(SysPermissionEntity entity:data){
-			entity.setRoles(new ArrayList<SysRoleEntity>());
-		}*/
-		return new Result<>(true,null,sum,list.getRecords());
+		return new Result<>(true,null,list.getTotal(),list.getRecords());
 	}
 
 	@GetMapping("/search")
@@ -74,13 +70,9 @@ public class PermissionController extends BaseController {
 	public Result<List<SysPermissionEntity>> search(
 			@ModelAttribute("per") SysPermissionEntity per,
 			@ModelAttribute("page") Page page) {
-		Map<String, Object> map = new HashMap<String, Object>();
 		List<SysPermissionEntity> list = permissionService.searchAll(
 				per, page);
 		int sum = permissionService.searchAllCount(per);
-		/*for(SysPermissionEntity entity:list){
-			entity.setRoles(new ArrayList<SysRoleEntity>());
-		}*/
 		return new Result<>(true,null,sum,list);
 	}
 

@@ -12,5 +12,5 @@ public class SysNoticeEntity extends SuperEntity<SysNoticeEntity> {
 	
 	private String c_title;
 	
-	private int n_order;
+	private Integer n_order;
 }

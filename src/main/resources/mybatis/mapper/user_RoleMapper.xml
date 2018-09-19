@@ -40,7 +40,6 @@
 	   <if test="ur.n_roleId != ''"><if test="ur.n_roleId != '0'"> and n_roleId = #{ur.n_roleId}</if></if>
 	   <if test="ur.c_createDate != ''"><if test="ur.c_createDate != null">	and substr(c_createDate,1,10) = #{ur.c_createDate}</if></if>
    	   <if test="ur.c_updateDate != ''"><if test="ur.c_updateDate != null">  and substr(c_updateDate,1,10) = #{ur. c_updateDate}</if></if>
-   	   order by id limit #{page.index},#{page.rows}
     </select>
     
     <select id="findAll" resultMap="BaseResultMap">

@@ -62,6 +62,10 @@
         
         function update() {
             var role = $('#dl').datalist("getSelected");
+            if(null == role){
+                toastr.warning("请选择操作角色！");
+                return;
+            }
             var roleId = role.value;
             var menu = $('#ct').treegrid("getSelections");
             var len = menu.length;

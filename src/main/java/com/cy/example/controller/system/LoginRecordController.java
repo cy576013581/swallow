@@ -28,8 +28,7 @@ public class LoginRecordController extends BaseController {
 	public Result<List<LoginRecordEntity>> findAll(int page, int rows) {
 		com.baomidou.mybatisplus.plugins.Page list = loginRecordService.selectPage(new com.baomidou.mybatisplus.plugins.Page(page, rows)
 				, new EntityWrapper<LoginRecordEntity>().orderBy("c_createDate",false));
-		int sum = loginRecordService.selectCount(new EntityWrapper<LoginRecordEntity>());
-		return new Result<>(true,null,sum,list.getRecords());
+		return new Result<>(true,null,list.getTotal(),list.getRecords());
 	}
 
 	@GetMapping("/search")

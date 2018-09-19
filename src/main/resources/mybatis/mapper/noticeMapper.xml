@@ -20,7 +20,7 @@
 	   select <include refid="ColumnList" />
 	   from sys_notice
 	   where 1=1
-	   <if test="notice.c_title != null"><if test="notice.c_title != null"> and c_title like CONCAT('%',#{notice.c_title},'%')</if></if>
+	   <if test="notice.c_title != ''"><if test="notice.c_title != null"> and c_title like CONCAT('%',#{notice.c_title},'%')</if></if>
    	   order by id limit #{page.index},#{page.rows}
     </select>  
     
@@ -28,6 +28,6 @@
 	   select count(id)
 	   from sys_notice
 	   where 1=1
-	  <if test="notice.c_title != null"><if test="notice.c_title != null"> and c_title like CONCAT('%',#{notice.c_title},'%')</if></if>
+	  <if test="notice.c_title != ''"><if test="notice.c_title != null"> and c_title like CONCAT('%',#{notice.c_title},'%')</if></if>
     </select>
 </mapper>
