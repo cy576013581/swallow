@@ -1,10 +1,10 @@
 
 # swallow
 #### 项目地址：http://39.108.143.76:8090/index
-![这里写图片描述](https://img-blog.csdn.net/20180903170041342?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIwOTg5MTA1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![登录页](./pic/login.png)
 
 
-![这里写图片描述](https://img-blog.csdn.net/2018090317005552?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIwOTg5MTA1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![主页](./pic/main.png)
 ## 后台：<br>
    #### SpringMVC<br>
    #### Mybatis<br>
@@ -20,8 +20,8 @@
    #### Swagger<br>
    #### EhCache<br>
    #### activiti<br>
-   
-   ***
+
+***
 ## 前端：<br>
    #### 整体：easyui和ace admin<br>
    #### 文件上传：Dropzone.js   or  Web Uploader<br>
@@ -35,33 +35,33 @@
 ## 开发日志<br>
 - 2017.8.22 添加Redis缓存、测试实例和安全加密工具类	add by cy
 
-- 2017.8.23 mybatis添加mapperxml、grid修改下拉框bug	add by cy
+	 2017.8.23 mybatis添加mapperxml、grid修改下拉框bug	add by cy
 
-- 2017.8.24 添加BaseEntity以及相应的数据库存储	add by cy
+	 2017.8.24 添加BaseEntity以及相应的数据库存储	add by cy
 
-- 2017.8.24 添加用户登录记录，修改获取IP的类	add by cy
+	 2017.8.24 添加用户登录记录，修改获取IP的类	add by cy
 
 - 2017.8.25 添加用户登录记录查询查看，查看功能还需修改，以使封装的easyui框架适应field.option这种格式的属性
 		   发现分页查询时#BUG001  在列表页点击下一页之后再次点击查询，查询的数据不能被赋值，当第二次点击查询的时候可以正常的显示。目前暂时找不到问题出在哪，
 		   服务端返回的数据是正常的，应该是数据绑定的时候出问题了。但是如果不点击下一页，可以正常工作	add by cy
 		   
-- 2017.8.24 grid修改基本完成，calendar还需完善	add by cy
+	 2017.8.24 grid修改基本完成，calendar还需完善	add by cy
 
-- 2017.9.01 calendar日程管理基本完成，添加文件上传模块	add by cy
+	 2017.9.01 calendar日程管理基本完成，添加文件上传模块	add by cy
 
-- 2017.9.17 添加shiro权限控制，权限分配尚未完成	  add by cy
+	 2017.9.17 添加shiro权限控制，权限分配尚未完成	  add by cy
 
-- 2017.9.20 权限配置基本完成，无权限提示还需完善	add by cy
+	 2017.9.20 权限配置基本完成，无权限提示还需完善	add by cy
 
-- 2017.9.22 用户密码添加md5加密，修改获取当前用户名的基类方法，json添加msg变量，修复登陆第一次点击不跳转	add by cy
+	 2017.9.22 用户密码添加md5加密，修改获取当前用户名的基类方法，json添加msg变量，修复登陆第一次点击不跳转	add by cy
 
-- 2017.9.23 添加JsonUtil工具类，添加fastjson，初步出完善权限拦截器，还待优化	add by cy		 
+	 2017.9.23 添加JsonUtil工具类，添加fastjson，初步出完善权限拦截器，还待优化	add by cy		 
 
-- 2017.9.24 shiro权限异常返回json，权限配置完成	add by cy
+	 2017.9.24 shiro权限异常返回json，权限配置完成	add by cy
 
-- 2017.9.29 shiro登录全部完成	add by cy
+	 2017.9.29 shiro登录全部完成	add by cy
 
-- 2017.9.30 集成shiro之后，去除之前的默认的拦截器	add by cy
+	 2017.9.30 集成shiro之后，去除之前的默认的拦截器	add by cy
 
 - 2017.9.30 tabs菜单，双击事件   add  by  zyj
 
@@ -93,7 +93,7 @@
 
 - 2017.11.29 修复用户信息修改bug add  by  cy
 
-- 2017.12.1 消息队列实现用户注册邮件发送管理员提示激活，STORY24: 使用定时器，定时向管理员汇报系统情况(具体发送内容需要完善) add  by  cy	
+	 2017.12.1 消息队列实现用户注册邮件发送管理员提示激活，STORY24: 使用定时器，定时向管理员汇报系统情况(具体发送内容需要完善) add  by  cy	
 
 - 2017.12.8 activiti文件部署初步完成，还未测试  add  by  cy
 
@@ -105,7 +105,7 @@
 
 - 2017.12.11 暂时放弃用在grid集成中提交文件，放到后期优化，原因是集成shiro之后HttpServletRequest变成ShiroHttpServletRequest，
 			  转换又因为springboot内置的文件上传和commons-fileupload冲突  add  by  cy  
-			  
+	
 - 2017.12.11 文件部署完成  add  by  cy  
 
 - 2017.12.11 流程定义列表和流程图查看完成  add  by  cy  
