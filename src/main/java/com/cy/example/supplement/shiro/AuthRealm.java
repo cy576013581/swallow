@@ -27,9 +27,10 @@ public class AuthRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		SysUserEntity user = (SysUserEntity) principals.getPrimaryPrincipal();
 		authorizationInfo.addRole(user.getRole().getC_roleCode());
-		for (SysPermissionEntity p : user.getRole().getPermisList()) {
-			authorizationInfo.addStringPermission(p.getC_permisCode());
-		}
+		user.getRole().getPermisList().stream()
+				.forEach(p ->{
+					authorizationInfo.addStringPermission(p.getC_permisCode());
+				});
 		log.info(user.toString());
 		return authorizationInfo;
 	}

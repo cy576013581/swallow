@@ -13,6 +13,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -35,16 +36,18 @@ public class Role_MenuService extends ServiceImpl<Role_MenuMapper, Role_Menu_Ca>
 		mapper.delete(new EntityWrapper<Role_Menu_Ca>().eq("n_roleId",roleId));
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
-		for (String a: menus ) {
-			Role_Menu_Ca ca = new Role_Menu_Ca(roleId);
-			ca.setN_menuId(Integer.valueOf(a));
-			ca.setC_createDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
-			ca.setC_updateDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
-			ca.setN_creater(user.getId());
-			ca.setN_updater(user.getId());
-			ca.setN_deleted(0);
-			mapper.insert(ca);
-		}
+		Arrays.stream(menus)
+				.forEach(s -> {
+					Role_Menu_Ca ca = new Role_Menu_Ca(roleId);
+					ca.setN_menuId(Integer.valueOf(s))
+						.setC_createDate(DateUtil.getNow(DateUtil.FORMAT_LONG))
+					 	.setC_updateDate(DateUtil.getNow(DateUtil.FORMAT_LONG))
+					 	.setN_creater(user.getId())
+					 	.setN_updater(user.getId())
+					 	.setN_deleted(0);
+					mapper.insert(ca);
+				});
+
 		//刷新缓存
 		menuService.refreshUserAll(user.getRole().getId());
 		menuService.refreshFindAll();

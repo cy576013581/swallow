@@ -3,10 +3,12 @@ package com.cy.example.entity;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableLogic;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
 @Data
+@Accessors(chain = true)
 public class SuperEntity<T extends Model<?>> extends Model<T>{
 
 	/**

@@ -6,10 +6,12 @@ import com.cy.example.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @TableName("sys_role_menu")
 @Data
 @NoArgsConstructor
+@Accessors(chain = true)
 public class Role_Menu_Ca extends SuperEntity<Role_Menu_Ca>{
 
 	private long n_roleId;

@@ -9,6 +9,7 @@ import com.cy.example.service.*;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -97,17 +99,14 @@ public class SystemController extends BaseController {
 		log.info("---roleID"+user.getRole().getId());
 		List<SysMenuEntity> menuList = menuService.findUserAll(user.getRole().getId());
 		Map<String, List<SysMenuEntity>> data = new HashMap<String, List<SysMenuEntity>>();
-		for (int i = 0; i < menuList.size(); i++) {
-			if("[root]".equals(menuList.get(i).getC_node())){
-				List<SysMenuEntity> tool = new ArrayList<SysMenuEntity>();
-				for (int j = 0; j < menuList.size(); j++) {
-					if(String.valueOf(menuList.get(i).getId()).equals(menuList.get(j).getC_node())){
-						tool.add(menuList.get(j));
-					}
-				}
-				data.put(menuList.get(i).getC_menuName(), tool);
-			}
-		}
+		menuList.stream()
+				.filter(m -> "[root]".equals(m.getC_node()))
+				.forEach(m -> {
+					List<SysMenuEntity> tool = menuList.stream()
+							.filter(l -> String.valueOf(m.getId()).equals(l.getC_node()))
+							.collect(Collectors.toList());
+					data.put(m.getC_menuName(), tool);
+				});
 		//在线人数统计
 		map.put("user", user);
 		map.put("menuList", data);
@@ -122,17 +121,14 @@ public class SystemController extends BaseController {
 				.getAttribute(WebConfig.LOGIN_USER);
 		List<SysMenuEntity> menuList = menuService.findUserAll(user.getRole().getId());
 		Map<String, List<SysMenuEntity>> data = new HashMap<String, List<SysMenuEntity>>();
-		for (int i = 0; i < menuList.size(); i++) {
-			if("[root]".equals(menuList.get(i).getC_node())){
-				List<SysMenuEntity> tool = new ArrayList<SysMenuEntity>();
-				for (int j = 0; j < menuList.size(); j++) {
-					if(String.valueOf(menuList.get(i).getId()).equals(menuList.get(j).getC_node())){
-						tool.add(menuList.get(j));
-					}
-				}
-				data.put(menuList.get(i).getC_menuName(), tool);
-			}
-		}
+		menuList.stream()
+				.filter(m -> "[root]".equals(m.getC_node()))
+				.forEach(m -> {
+					List<SysMenuEntity> tool = menuList.stream()
+							.filter(l -> String.valueOf(m.getId()).equals(l.getC_node()))
+							.collect(Collectors.toList());
+					data.put(m.getC_menuName(), tool);
+				});
 		//在线人数统计
 		map.put("user", user);
 		map.put("menuList", data);

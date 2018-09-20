@@ -2,6 +2,7 @@ package com.cy.example.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.cy.example.carrier.Role_Menu_Ca;
 import com.cy.example.carrier.Role_Permis_Ca;
 import com.cy.example.config.WebConfig;
 import com.cy.example.entity.system.SysUserEntity;
@@ -12,6 +13,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -31,16 +33,17 @@ public class Role_PermisService extends ServiceImpl<Role_PermisMapper, Role_Perm
 		mapper.delete(new EntityWrapper<Role_Permis_Ca>().eq("n_roleId",roleId));
 		SysUserEntity user = (SysUserEntity) SecurityUtils.getSubject().getSession()
 				.getAttribute(WebConfig.LOGIN_USER);
-		for (String p: permis ) {
-			Role_Permis_Ca ca = new Role_Permis_Ca(roleId);
-			ca.setN_permisId(Integer.valueOf(p));
-			ca.setC_createDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
-			ca.setC_updateDate(DateUtil.getNow(DateUtil.FORMAT_LONG));
-			ca.setN_creater(user.getId());
-			ca.setN_updater(user.getId());
-			ca.setN_deleted(0);
-			mapper.insert(ca);
-		}
+		Arrays.stream(permis)
+				.forEach(p -> {
+					Role_Permis_Ca ca = new Role_Permis_Ca(roleId);
+					ca.setN_permisId(Integer.valueOf(p))
+						.setC_createDate(DateUtil.getNow(DateUtil.FORMAT_LONG))
+						.setC_updateDate(DateUtil.getNow(DateUtil.FORMAT_LONG))
+						.setN_creater(user.getId())
+					 	.setN_updater(user.getId())
+					 	.setN_deleted(0);
+					mapper.insert(ca);
+				});
 		return true;
 	}
 
