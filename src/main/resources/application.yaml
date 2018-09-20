@@ -88,12 +88,10 @@ mybatis:
   typeAliasesPackage: com.cy.example.mapper
   config-locations: classpath:/mybatis/mybatis-config.xml
 logging:
+  pattern:
+    console: "%d{yyyy-MM-dd: mm:ss.SSS} %-5level [%logger{36}] :   %msg%n"
   level:
-    com:
-      favorites: DEBUG
-      cy:
-        exmple:
-          mapper: DEBUG
+    com.cy.exmple: DEBUG
     org:
       springframework:
-        web: DEBUG
+        web: INFO
