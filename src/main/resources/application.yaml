@@ -91,7 +91,6 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd: mm:ss.SSS} %-5level [%logger{36}] :   %msg%n"
   level:
-    com.cy.exmple: DEBUG
     org:
       springframework:
-        web: INFO
+        web: debug
