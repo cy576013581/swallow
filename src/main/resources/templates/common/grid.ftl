@@ -110,16 +110,14 @@
 
                 success:function(data){ //data为交互成功后，后台返回的数据
                 	//$('#dg').datagrid('gotoPage', 1);
-					console.info(data);
-					if(data.total ==0){
-                        data = {total:1,rows:''}
-                        $('#dg').datagrid('loadData',data);
-                        toastr.info('查询成功！暂未发现数据');
-					}else{
-                        console.info(2);
+					// if(data.total ==0){
+                    //     data = {total:1,rows:''}
+                    //     $('#dg').datagrid('loadData',data);
+                    //     toastr.info('查询成功！暂未发现数据');
+					// }else{
                         $('#dg').datagrid('loadData',data);
                         toastr.success('查询成功！共查询到'+data.total+'条数据！');
-                    }
+                    // }
 
 
                 }
