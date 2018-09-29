@@ -47,17 +47,12 @@
 		        </#if>
 		    </#list>
 		    change();
-		    $('#dg').datagrid({
-				onLoadSuccess: function(){
-					$("#box").show();
-					layer.close(index);
-				}
-			});
-		    
-		});  
-		
-		
-		
+		    $('#dg').datagrid();
+
+		});
+
+
+
 		function deleteData(){
 			var row = $('#dg').datagrid('getSelected');
             if (row){
@@ -115,8 +110,18 @@
 
                 success:function(data){ //data为交互成功后，后台返回的数据
                 	//$('#dg').datagrid('gotoPage', 1);
-					$('#dg').datagrid('loadData',data);  
-					toastr.success('查询成功！共查询到'+data.total+'条数据！');
+					console.info(data);
+					if(data.total ==0){
+                        data = {total:1,rows:''}
+                        $('#dg').datagrid('loadData',data);
+                        toastr.info('查询成功！暂未发现数据');
+					}else{
+                        console.info(2);
+                        $('#dg').datagrid('loadData',data);
+                        toastr.success('查询成功！共查询到'+data.total+'条数据！');
+                    }
+
+
                 }
             });
 		}
@@ -234,13 +239,17 @@
 			
 		}
 
+        function onLoadSuccess(data){
+            $("#box").show();
+            layer.close(index);
+        }
 		//实现双击编辑操作
 		function onDblClickRow(index,field,value){
 			//toastr.info('双击操作！');
 			if("${idDb}" == "true"){
 				editData();
 			}
-			
+
 		}
 		
 		//根据id隐藏查询框搜索条件
@@ -441,7 +450,7 @@
 		<table id="dg" class="easyui-datagrid" title="${title}" style="width:${width};height:${height}"
             data-options="rownumbers:${rownumbers},singleSelect:${singleSelect},striped: true,
             url:'${controller}',method:'get',toolbar:'#tb,#ft',pagination:'true',nowrap:'true',
-            onDblClickRow: onDblClickRow">
+            onDblClickRow: onDblClickRow, onLoadSuccess: onLoadSuccess">
         <thead>
             <tr>
                 <#list fields?split(",") as x>  

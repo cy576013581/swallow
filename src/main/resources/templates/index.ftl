@@ -48,7 +48,7 @@
                 success:function(data){ //data为交互成功后，后台返回的数据
                     var flag =data.flag;//服务器返回标记
                     if(flag){
-                    	alert(data.msg);
+                    	// alert(data.msg);
                     	window.location.href="/main";
                     }else {
                     	alert(data.msg);
