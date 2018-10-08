@@ -11,12 +11,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.lang.reflect.Method;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -59,18 +54,15 @@ public class ExportExcel {
     DecimalFormat floatDecimalFormat=new DecimalFormat(floatDecimal);
     DecimalFormat doubleDecimalFormat=new DecimalFormat(doubleDecimal);
 
-    private HSSFWorkbook workbook = null;
 
     public ExportExcel(String fileDir,String sheetName){
         this.fileDir = fileDir;
         this.sheetName = sheetName;
-        workbook = new HSSFWorkbook();
     }
 
     public ExportExcel(HttpServletResponse response,String fileName,String sheetName){
         this.response = response;
         this.sheetName = sheetName;
-        workbook = new HSSFWorkbook();
     }
 
     /**
@@ -79,10 +71,10 @@ public class ExportExcel {
      * @param titleName   excel要导出的表名
      * @param dataList  数据
      */
-    public void wirteExcel(String titleColumn[], String titleName[], List<?> dataList){
+    public HSSFWorkbook wirteExcel(String titleColumn[], String titleName[], List<?> dataList){
         int titleSize[] = new int[titleColumn.length];
         Arrays.fill(titleSize,13);
-        wirteExcel(titleColumn,titleName,titleSize,dataList);
+        return wirteExcel(titleColumn,titleName,titleSize,dataList);
     }
 
     /**
@@ -92,31 +84,33 @@ public class ExportExcel {
      * @param titleSize   列宽
      * @param dataList  数据
      */
-    public void wirteExcel(String titleColumn[], String titleName[], int titleSize[], List<?> dataList){
+    public HSSFWorkbook wirteExcel(String titleColumn[], String titleName[], int titleSize[], List<?> dataList){
+
+        HSSFWorkbook workbook = new HSSFWorkbook();
 
         //添加Worksheet（不添加sheet时生成的xls文件打开时会报错)
         Sheet sheet = workbook.createSheet(this.sheetName);
-        //新建文件
-        OutputStream out = null;
+//        //新建文件
+//        OutputStream out = null;
         try {
-            if(fileDir!=null){
-                //有文件路径
-                out = new FileOutputStream(fileDir);
-            }else{
-                //否则，直接写到输出流中
-                out = response.getOutputStream();
-                fileName = fileName+".xls";
-                response.setContentType("application/x-msdownload");
-                response.setHeader("Content-Disposition", "attachment; filename="
-                        + URLEncoder.encode(fileName, "UTF-8"));
-            }
+//            if(fileDir!=null){
+//                //有文件路径
+//                out = new FileOutputStream(fileDir);
+//            }else{
+//                //否则，直接写到输出流中
+//                out = response.getOutputStream();
+//                fileName = fileName+".xls";
+//                response.setContentType("application/x-msdownload");
+//                response.setHeader("Content-Disposition", "attachment; filename="
+//                        + URLEncoder.encode(fileName, "UTF-8"));
+//            }
 
             //写入excel的表头
             Row titleNameRow = workbook.getSheet(sheetName).createRow(0);
             //设置样式
             HSSFCellStyle titleStyle = workbook.createCellStyle();
-            titleStyle = (HSSFCellStyle) setFontAndBorder(titleStyle, titleFontType, (short) titleFontSize);
-            titleStyle = (HSSFCellStyle) setColor(titleStyle, titleBackColor, (short)10);
+            titleStyle = (HSSFCellStyle) setFontAndBorder(workbook,titleStyle, titleFontType, (short) titleFontSize);
+            titleStyle = (HSSFCellStyle) setColor(workbook,titleStyle, titleBackColor, (short)10);
 
             for(int i = 0;i < titleName.length;i++){
                 sheet.setColumnWidth(i, titleSize[i]*256);    //设置宽度
@@ -135,7 +129,7 @@ public class ExportExcel {
             if(dataList!=null&&dataList.size()>0){
                 //设置样式
                 HSSFCellStyle dataStyle = workbook.createCellStyle();
-                titleStyle = (HSSFCellStyle) setFontAndBorder(titleStyle, contentFontType, (short) contentFontSize);
+                titleStyle = (HSSFCellStyle) setFontAndBorder(workbook,titleStyle, contentFontType, (short) contentFontSize);
 
                 if(titleColumn.length>0){
                     for(int rowIndex = 1;rowIndex<=dataList.size();rowIndex++){
@@ -183,16 +177,11 @@ public class ExportExcel {
                 }
             }
 
-            workbook.write(out);
+//            workbook.write(out);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
+        return workbook;
     }
 
     /**
@@ -202,7 +191,7 @@ public class ExportExcel {
      * @param index 索引 8-64 使用时不可重复
      * @return
      */
-    public CellStyle setColor(CellStyle style, String color, short index){
+    public CellStyle setColor(HSSFWorkbook workbook,CellStyle style, String color, short index){
         if(color!=""&&color!=null){
             //转为RGB码
             int r = Integer.parseInt((color.substring(0,2)),16);   //转为16进制
@@ -225,7 +214,7 @@ public class ExportExcel {
      * @param style  大小
      * @return
      */
-    public CellStyle setFontAndBorder(CellStyle style,String fontName,short size){
+    public CellStyle setFontAndBorder(HSSFWorkbook workbook,CellStyle style,String fontName,short size){
         HSSFFont font = workbook.createFont();
         font.setFontHeightInPoints(size);
         font.setFontName(fontName);
@@ -236,24 +225,5 @@ public class ExportExcel {
         style.setBorderTop(BorderStyle.THIN);//上边框
         style.setBorderRight(BorderStyle.THIN);//右边框
         return style;
-    }
-    /**
-     * 删除文件
-     * @return
-     */
-    public boolean deleteExcel(){
-        boolean flag = false;
-        File file = new File(this.fileDir);
-        // 判断目录或文件是否存在
-        if (!file.exists()) {  // 不存在返回 false
-            return flag;
-        } else {
-            // 判断是否为文件
-            if (file.isFile()) {  // 为文件时调用删除文件方法
-                file.delete();
-                flag = true;
-            }
-        }
-        return flag;
     }
 }
