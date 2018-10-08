@@ -6,10 +6,19 @@ import com.cy.example.entity.system.SysRoleEntity;
 import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IRoleService;
+import com.cy.example.supplement.poi.ExportExcel;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +29,9 @@ public class RoleController extends BaseController {
 
 	@Autowired
 	private IRoleService roleService;
+
+	@Autowired
+	private ExportExcel exportExcel;
 	
 	@PostMapping
 	@RequiresPermissions("role_add")
@@ -62,6 +74,29 @@ public class RoleController extends BaseController {
 				role, page);
 		int sum = roleService.searchAllCount(role);
 		return new Result<>(true,null,sum,list);
+	}
+
+	@GetMapping("/stopwords/export")
+	@Transactional(readOnly = true)
+	public ResponseEntity<InputStreamResource> export() throws Exception {
+		List<SysRoleEntity> list = roleService.selectList(new EntityWrapper<>());
+		String[] name = {"角色名称","角色代码"};
+		String[] column = {"c_roleCode","c_roleName"};
+		exportExcel.wirteExcel(column,name,list);
+
+		FileSystemResource file = new FileSystemResource(resource);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+		headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getFilename()));
+		headers.add("Pragma", "no-cache");
+		headers.add("Expires", "0");
+
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.contentLength(file.contentLength())
+				.contentType(MediaType.parseMediaType("application/octet-stream"))
+				.body(new InputStreamResource(file.getInputStream()));
 	}
 
 }

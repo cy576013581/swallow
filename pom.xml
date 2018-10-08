@@ -49,6 +49,7 @@
 		<lombok.version>1.18.2</lombok.version>
 		<mail.version>1.4.7</mail.version>
 		<activation.version>1.1.1</activation.version>
+		<poi.version>4.0.0</poi.version>
 		<docker.image.prefix>chenyang</docker.image.prefix>
 	</properties>
 
@@ -238,6 +239,20 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${springfox.version}</version>
 		</dependency>
+
+		<!--poi-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
