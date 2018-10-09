@@ -1,4 +1,4 @@
-<#import "/common/grid.ftl" as loginRecord>
+<#import "/common/grid.ftl" as permission>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +7,10 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/permission" title="权限管理" width="1100px" height="500px"
+	<@permission.grid controller="/system/permission" title="权限管理" width="1100px" height="500px"
 		fields="id:true: ,c_permisCode:false:权限代码,c_permisName:false:权限名称,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
-	</@loginRecord.grid>
+	</@permission.grid>
 	
 	<script language="javascript">
 		//重写grid的change事件

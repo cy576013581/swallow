@@ -1,4 +1,4 @@
-<#import "/common/grid.ftl" as loginRecord>
+<#import "/common/grid.ftl" as depart>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +7,10 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/depart" title="部门管理" width="1100px" height="500px"
+	<@depart.grid controller="/system/depart" title="部门管理" width="1100px" height="500px"
 		fields="id:true: ,c_departCode:false:部门代码,c_departName:false:部门名称,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
-	</@loginRecord.grid>
+	</@depart.grid>
 	
 	<script language="javascript">
 		//重写grid的change事件

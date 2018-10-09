@@ -1,4 +1,4 @@
-<#import "/common/grid.ftl" as loginRecord>
+<#import "/common/grid.ftl" as notice>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +7,10 @@
     
 </head>
 <body>
-	<@loginRecord.grid controller="/system/notice" title="公告管理" width="1100px" height="500px"
+	<@notice.grid controller="/system/notice" title="公告管理" width="1100px" height="500px"
 		fields="id:true: ,c_title:false:系统公告,c_content:false:公告内容,n_order:false:重要等级,c_createDate:false:创建时间,c_updateDate:false:更新时间">
 		
-	</@loginRecord.grid>
+	</@notice.grid>
 	
 	<script language="javascript">
 		//重写grid的change事件

@@ -123,9 +123,9 @@
                 }
             });
 		}
-		
-		
-		//添加数据
+
+
+        //添加数据
 		function addData(){
             operation = 1;
             //清空编辑框的值
@@ -506,6 +506,7 @@
         <a id="btn_add" href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addData()">添加</a>
         <a id="btn_edit" href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editData()">编辑</a>
         <a id="btn_remove" href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteData()">删除</a>
+        <a id="btn_export" href="${controller}/export" class="easyui-linkbutton" iconCls="icon-export" plain="true">导出</a>
     </div>
     <!--编辑框-->
     <div id="dlg" class="easyui-dialog" title="编辑${title}信息" style="width:${ed_width};height:${ed_height};padding:10px"
