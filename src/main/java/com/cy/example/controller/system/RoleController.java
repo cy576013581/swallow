@@ -32,9 +32,6 @@ public class RoleController extends BaseController {
 	@Autowired
 	private IRoleService roleService;
 
-	@Autowired
-	private ExportExcel exportExcel;
-	
 	@PostMapping
 	@RequiresPermissions("role_add")
 	public Result<String> add(@ModelAttribute("role") SysRoleEntity role) {
@@ -85,17 +82,14 @@ public class RoleController extends BaseController {
 		String[] name = {"角色名称","角色代码"};
 		String[] column = {"c_roleCode","c_roleName"};
 
-		exportExcel.setSheetName("角色数据");
+		ExportExcel exportExcel = new ExportExcel("系统角色数据");
+
 		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
 
 		ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();
 		workbook.write(outByteStream);
 
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-		headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", "sys_role.xls"));
-		headers.add("Pragma", "no-cache");
-		headers.add("Expires", "0");
+		HttpHeaders headers = getFileHeader("sys_role.xls");
 
 		return ResponseEntity
 				.ok()

@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cy.example.util.HttpUtil;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -90,4 +91,12 @@ public class BaseController {
 		return response;
 	}
 
+	protected HttpHeaders getFileHeader(String filename){
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+		headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", filename));
+		headers.add("Pragma", "no-cache");
+		headers.add("Expires", "0");
+		return headers;
+	}
 }

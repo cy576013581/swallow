@@ -1,16 +1,13 @@
 package com.cy.example.supplement.poi;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFPalette;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -21,29 +18,22 @@ import java.util.List;
  * @author: chenyang
  * @create: 2018-10-08
  **/
-@Component
 @Data
-@NoArgsConstructor
 public class ExportExcel {
-    HttpServletResponse response;
-    // 文件名
-    private String fileName ;
-    //文件保存路径
-    private String fileDir;
     //sheet名
     private String sheetName;
     //表头字体
-    private String titleFontType = "Arial Unicode MS";
+    private String titleFontType = "微软雅黑";
     //表头背景色
-    private String titleBackColor = "C1FBEE";
+    private String titleBackColor = "00a4ac";
     //表头字号
     private short titleFontSize = 12;
     //添加自动筛选的列 如 A:M
     private String address = "";
     //正文字体
-    private String contentFontType = "Arial Unicode MS";
+    private String contentFontType = "微软雅黑";
     //正文字号
-    private short contentFontSize = 12;
+    private short contentFontSize = 11;
     //Float类型数据小数位
     private String floatDecimal = ".00";
     //Double类型数据小数位
@@ -55,13 +45,7 @@ public class ExportExcel {
     DecimalFormat doubleDecimalFormat=new DecimalFormat(doubleDecimal);
 
 
-    public ExportExcel(String fileDir,String sheetName){
-        this.fileDir = fileDir;
-        this.sheetName = sheetName;
-    }
-
-    public ExportExcel(HttpServletResponse response,String fileName,String sheetName){
-        this.response = response;
+    public ExportExcel(String sheetName){
         this.sheetName = sheetName;
     }
 
@@ -73,7 +57,7 @@ public class ExportExcel {
      */
     public HSSFWorkbook wirteExcel(String titleColumn[], String titleName[], List<?> dataList){
         int titleSize[] = new int[titleColumn.length];
-        Arrays.fill(titleSize,13);
+        Arrays.fill(titleSize,titleFontSize);
         return wirteExcel(titleColumn,titleName,titleSize,dataList);
     }
 
@@ -90,26 +74,13 @@ public class ExportExcel {
 
         //添加Worksheet（不添加sheet时生成的xls文件打开时会报错)
         Sheet sheet = workbook.createSheet(this.sheetName);
-//        //新建文件
-//        OutputStream out = null;
         try {
-//            if(fileDir!=null){
-//                //有文件路径
-//                out = new FileOutputStream(fileDir);
-//            }else{
-//                //否则，直接写到输出流中
-//                out = response.getOutputStream();
-//                fileName = fileName+".xls";
-//                response.setContentType("application/x-msdownload");
-//                response.setHeader("Content-Disposition", "attachment; filename="
-//                        + URLEncoder.encode(fileName, "UTF-8"));
-//            }
 
             //写入excel的表头
             Row titleNameRow = workbook.getSheet(sheetName).createRow(0);
             //设置样式
             HSSFCellStyle titleStyle = workbook.createCellStyle();
-            titleStyle = (HSSFCellStyle) setFontAndBorder(workbook,titleStyle, titleFontType, (short) titleFontSize);
+            titleStyle = (HSSFCellStyle) setFontAndBorder(workbook,titleStyle, titleFontType, (short) titleFontSize,true);
             titleStyle = (HSSFCellStyle) setColor(workbook,titleStyle, titleBackColor, (short)10);
 
             for(int i = 0;i < titleName.length;i++){
@@ -129,7 +100,7 @@ public class ExportExcel {
             if(dataList!=null&&dataList.size()>0){
                 //设置样式
                 HSSFCellStyle dataStyle = workbook.createCellStyle();
-                titleStyle = (HSSFCellStyle) setFontAndBorder(workbook,titleStyle, contentFontType, (short) contentFontSize);
+                dataStyle = (HSSFCellStyle) setFontAndBorder(workbook,dataStyle, contentFontType, (short) contentFontSize,false);
 
                 if(titleColumn.length>0){
                     for(int rowIndex = 1;rowIndex<=dataList.size();rowIndex++){
@@ -137,7 +108,8 @@ public class ExportExcel {
                         Class clsss = obj.getClass();     //获得该对对象的class实例
                         Row dataRow = workbook.getSheet(sheetName).createRow(rowIndex);
                         for(int columnIndex = 0;columnIndex<titleColumn.length;columnIndex++){
-                            String title = titleColumn[columnIndex].toString().trim();
+                            String title = titleColumn[columnIndex].trim();
+                            Cell cell = dataRow.createCell(columnIndex);
                             if(!"".equals(title)){  //字段不为空
                                 //使首字母大写
                                 String UTitle = Character.toUpperCase(title.charAt(0))+ title.substring(1, title.length()); // 使其首字母大写;
@@ -150,7 +122,6 @@ public class ExportExcel {
                                 String returnType = method.getReturnType().getName();
 
                                 String data = method.invoke(obj)==null?"":method.invoke(obj).toString();
-                                Cell cell = dataRow.createCell(columnIndex);
                                 if(data!=null&&!"".equals(data)){
                                     if("int".equals(returnType)){
                                         cell.setCellValue(Integer.parseInt(data));
@@ -167,17 +138,15 @@ public class ExportExcel {
                             }else{   //字段为空 检查该列是否是公式
                                 if(colFormula!=null){
                                     String sixBuf = colFormula[columnIndex].replace("@", (rowIndex+1)+"");
-                                    Cell cell = dataRow.createCell(columnIndex);
-                                    cell.setCellFormula(sixBuf.toString());
+                                    cell.setCellFormula(sixBuf);
                                 }
                             }
+
+                            cell.setCellStyle(dataStyle);
                         }
                     }
-
                 }
             }
-
-//            workbook.write(out);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -212,13 +181,14 @@ public class ExportExcel {
      * @param style  样式
      * @param style  字体名
      * @param style  大小
+     * @param style  是否加粗
      * @return
      */
-    public CellStyle setFontAndBorder(HSSFWorkbook workbook,CellStyle style,String fontName,short size){
+    public CellStyle setFontAndBorder(HSSFWorkbook workbook,CellStyle style,String fontName,short size,boolean weight){
         HSSFFont font = workbook.createFont();
         font.setFontHeightInPoints(size);
         font.setFontName(fontName);
-        font.setBold(true);
+        font.setBold(weight);
         style.setFont(font);
         style.setBorderBottom(BorderStyle.THIN); //下边框
         style.setBorderLeft(BorderStyle.THIN);//左边框
