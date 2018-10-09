@@ -6,10 +6,17 @@ import com.cy.example.entity.system.SysMenuEntity;
 import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IMenuService;
+import com.cy.example.supplement.poi.ExportExcel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,4 +84,25 @@ public class MenuController extends BaseController{
 		return new Result<>(true,null,sum,list);
 	}
 
+	@GetMapping("/export")
+	@Transactional(readOnly = true)
+	@RequiresPermissions("menu_export")
+	public ResponseEntity<byte[]> export() throws Exception {
+		List<SysMenuEntity> list = menuService.selectList(new EntityWrapper<>());
+		String[] name = {"菜单地址","菜单名称","菜单节点"};
+		String[] column = {"c_url","c_menuName","c_node"};
+		ExportExcel exportExcel = new ExportExcel("系统菜单数据");
+		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
+
+		ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();
+		workbook.write(outByteStream);
+
+		HttpHeaders headers = getFileHeader("menu.xls");
+
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.contentType(MediaType.parseMediaType("application/octet-stream"))
+				.body(outByteStream.toByteArray());
+	}
 }

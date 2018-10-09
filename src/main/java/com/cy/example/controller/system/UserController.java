@@ -10,18 +10,24 @@ import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IMailService;
 import com.cy.example.service.IUserService;
+import com.cy.example.supplement.poi.ExportExcel;
 import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
-import com.cy.example.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 @Slf4j
@@ -156,6 +162,30 @@ public class UserController extends BaseController {
 		List<SysUserEntity> users = userService.searchAll(user, page);
 		int sum = userService.searchAllCount(user);
 		return new Result<>(true,null,sum,users);
+	}
+
+	@GetMapping("/export")
+	@Transactional(readOnly = true)
+	@RequiresPermissions("user_export")
+	public ResponseEntity<byte[]> export() throws Exception {
+		List<SysUserEntity> list = userService.selectList(new EntityWrapper<>());
+		String[] name = {"用户名","联系方式","电子邮箱","年龄","性别","用户状态"};
+		String[] column = {"c_username","c_phone","c_email","n_age","n_sex","n_status"};
+		ExportExcel exportExcel = new ExportExcel("系统用户数据");
+
+//		n_departmentId.id   ，n_departmentId.c_departName  所属部门
+
+		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
+		ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();
+		workbook.write(outByteStream);
+
+		HttpHeaders headers = getFileHeader("user.xls");
+
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.contentType(MediaType.parseMediaType("application/octet-stream"))
+				.body(outByteStream.toByteArray());
 	}
 
 	@SuppressWarnings("finally")

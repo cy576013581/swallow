@@ -3,17 +3,21 @@ package com.cy.example.controller.system;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysPermissionEntity;
-import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IPermissionService;
+import com.cy.example.supplement.poi.ExportExcel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.io.ByteArrayOutputStream;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/system/permission")
@@ -76,4 +80,24 @@ public class PermissionController extends BaseController {
 		return new Result<>(true,null,sum,list);
 	}
 
+	@GetMapping("/export")
+	@Transactional(readOnly = true)
+	@RequiresPermissions("permission_export")
+	public ResponseEntity<byte[]> export() throws Exception {
+		List<SysPermissionEntity> list = permissionService.selectList(new EntityWrapper<>());
+		String[] name = {"权限代码","权限名称"};
+		String[] column = {"c_permisCode","c_permisName"};
+		ExportExcel exportExcel = new ExportExcel("系统权限数据");
+		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
+		ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();
+		workbook.write(outByteStream);
+
+		HttpHeaders headers = getFileHeader("permission.xls");
+
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.contentType(MediaType.parseMediaType("application/octet-stream"))
+				.body(outByteStream.toByteArray());
+	}
 }

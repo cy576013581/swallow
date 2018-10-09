@@ -7,10 +7,17 @@ import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IUserService;
 import com.cy.example.service.IUser_RoleService;
+import com.cy.example.supplement.poi.ExportExcel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,4 +110,26 @@ public class User_RoleController extends BaseController {
 		return new Result<>(true,null,sum,list);
 	}
 
+	@GetMapping("/export")
+	@Transactional(readOnly = true)
+	@RequiresPermissions("user_role_export")
+	public ResponseEntity<byte[]> export() throws Exception {
+		List<User_Role_Ca> list = urService.selectList(new EntityWrapper<>());
+		String[] name = {"用户ID","用户名称","角色ID","角色名称"};
+		String[] column = {"n_userId","c_username","n_roleId","c_roleName"};
+		ExportExcel exportExcel = new ExportExcel("用户角色数据");
+
+		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
+
+		ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();
+		workbook.write(outByteStream);
+
+		HttpHeaders headers = getFileHeader("user_role.xls");
+
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.contentType(MediaType.parseMediaType("application/octet-stream"))
+				.body(outByteStream.toByteArray());
+	}
 }

@@ -3,13 +3,21 @@ package com.cy.example.controller.system;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.SysDepartmentEntity;
+import com.cy.example.entity.system.SysUserEntity;
 import com.cy.example.model.Page;
 import com.cy.example.model.Result;
 import com.cy.example.service.IDepartmentService;
+import com.cy.example.supplement.poi.ExportExcel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 @RestController
@@ -59,4 +67,25 @@ public class DepartmentController extends BaseController {
 		return new Result<>(true,null,sum,list);
 	}
 
+	@GetMapping("/export")
+	@Transactional(readOnly = true)
+	@RequiresPermissions("depart_export")
+	public ResponseEntity<byte[]> export() throws Exception {
+		List<SysDepartmentEntity> list = departService.selectList(new EntityWrapper<>());
+		String[] name = {"部门代码","部门名称"};
+		String[] column = {"c_departCode","c_departName"};
+		ExportExcel exportExcel = new ExportExcel("系统部门数据");
+
+		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
+		ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();
+		workbook.write(outByteStream);
+
+		HttpHeaders headers = getFileHeader("department.xls");
+
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.contentType(MediaType.parseMediaType("application/octet-stream"))
+				.body(outByteStream.toByteArray());
+	}
 }
