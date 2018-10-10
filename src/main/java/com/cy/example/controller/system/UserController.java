@@ -13,6 +13,7 @@ import com.cy.example.service.IUserService;
 import com.cy.example.supplement.poi.ExportExcel;
 import com.cy.example.supplement.rabbitmq.general.RabbitSender;
 import com.cy.example.util.MD5Util;
+import com.cy.example.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.SecurityUtils;
@@ -168,9 +169,9 @@ public class UserController extends BaseController {
 	@Transactional(readOnly = true)
 	@RequiresPermissions("user_export")
 	public ResponseEntity<byte[]> export() throws Exception {
-		List<SysUserEntity> list = userService.selectList(new EntityWrapper<>());
-		String[] name = {"用户名","联系方式","电子邮箱","年龄","性别","用户状态"};
-		String[] column = {"c_username","c_phone","c_email","n_age","n_sex","n_status"};
+		List<SysUserEntity> list = userService.findAll(null);
+		String[] name = {"ID","所属部门ID","所属部门","用户名","联系方式","电子邮箱","年龄","性别","用户状态","创建时间","更新时间"};
+		String[] column = {"id","n_departmentId.id","n_departmentId.c_departName","c_username","c_phone","c_email","n_age","n_sex","n_status","c_createDate","c_updateDate"};
 		ExportExcel exportExcel = new ExportExcel("系统用户数据");
 
 //		n_departmentId.id   ，n_departmentId.c_departName  所属部门

@@ -71,8 +71,8 @@ public class NoticeController extends BaseController {
 	@RequiresPermissions("notice_export")
 	public ResponseEntity<byte[]> export() throws Exception {
 		List<SysNoticeEntity> list = noticeService.selectList(new EntityWrapper<>());
-		String[] name = {"系统公告","公告内容","重要等级"};
-		String[] column = {"c_title","c_content","n_order"};
+		String[] name = {"ID","系统公告","公告内容","重要等级","创建时间","更新时间"};
+		String[] column = {"id","c_title","c_content","n_order","c_createDate","c_updateDate"};
 		ExportExcel exportExcel = new ExportExcel("系统公告数据");
 		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
 

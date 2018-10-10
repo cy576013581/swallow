@@ -115,8 +115,8 @@ public class User_RoleController extends BaseController {
 	@RequiresPermissions("user_role_export")
 	public ResponseEntity<byte[]> export() throws Exception {
 		List<User_Role_Ca> list = urService.selectList(new EntityWrapper<>());
-		String[] name = {"用户ID","用户名称","角色ID","角色名称"};
-		String[] column = {"n_userId","c_username","n_roleId","c_roleName"};
+		String[] name = {"ID","用户ID","角色ID","创建时间","更新时间"};
+		String[] column = {"id","n_userId","n_roleId","c_createDate","c_updateDate"};
 		ExportExcel exportExcel = new ExportExcel("用户角色数据");
 
 		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);

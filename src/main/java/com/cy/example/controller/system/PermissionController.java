@@ -85,8 +85,8 @@ public class PermissionController extends BaseController {
 	@RequiresPermissions("permission_export")
 	public ResponseEntity<byte[]> export() throws Exception {
 		List<SysPermissionEntity> list = permissionService.selectList(new EntityWrapper<>());
-		String[] name = {"权限代码","权限名称"};
-		String[] column = {"c_permisCode","c_permisName"};
+		String[] name = {"ID","权限代码","权限名称","创建时间","更新时间"};
+		String[] column = {"id","c_permisCode","c_permisName","c_createDate","c_updateDate"};
 		ExportExcel exportExcel = new ExportExcel("系统权限数据");
 		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
 		ByteArrayOutputStream outByteStream = new ByteArrayOutputStream();

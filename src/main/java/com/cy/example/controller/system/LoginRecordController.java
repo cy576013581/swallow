@@ -53,8 +53,8 @@ public class LoginRecordController extends BaseController {
 	@RequiresPermissions("loginRecord_export")
 	public ResponseEntity<byte[]> export() throws Exception {
 		List<LoginRecordEntity> list = loginRecordService.selectList(new EntityWrapper<>());
-		String[] name = {"登录用户","登录IP","登陆省份","登陆城市"};
-		String[] column = {"c_username","c_loginIp","c_province","c_city"};
+		String[] name = {"ID","登录用户","登录IP","登陆省份","登陆城市","创建时间","更新时间"};
+		String[] column = {"id","c_username","c_loginIp","c_province","c_city","c_createDate","c_updateDate"};
 		ExportExcel exportExcel = new ExportExcel("登录记录数据");
 
 		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);

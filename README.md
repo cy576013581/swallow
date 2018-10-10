@@ -5,6 +5,12 @@
 
 
 ![主页](./pic/main.png)
+
+####环境要求
+ - JDK8.0+(最好是用jdk10)
+ - Mysql
+ - RabbitMQ(如果没有会导致登录记录功能无法使用)
+
 ## 后台：<br>
    #### SpringMVC<br>
    #### Mybatis<br>
@@ -13,7 +19,6 @@
    #### MybatisPlus<br>
    #### RabbitMQ<br>
    #### Druid<br>
-   #### Mysql<br>
    #### FastJSON<br>
    #### Redis<br>
    #### Lombok<br>
@@ -221,3 +226,7 @@
 - 2018.10.8 excel工具类初步写好，有待完善 by  cy
 
 - 2018.10.9 403界面修改，完成STORY26: 在grid中加入导出按钮，以及公共导出接口的实现 by  cy
+
+- 2018.10.10 导出功能添加bean.变量的支持，并且支持导出父类变量 by  cy
+
+- 2018.10.10 至此打一个版本V0.0.1,后续改进放入V0.0.2

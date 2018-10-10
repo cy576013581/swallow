@@ -89,8 +89,8 @@ public class MenuController extends BaseController{
 	@RequiresPermissions("menu_export")
 	public ResponseEntity<byte[]> export() throws Exception {
 		List<SysMenuEntity> list = menuService.selectList(new EntityWrapper<>());
-		String[] name = {"菜单地址","菜单名称","菜单节点"};
-		String[] column = {"c_url","c_menuName","c_node"};
+		String[] name = {"ID","菜单地址","菜单名称","菜单节点","创建时间","更新时间"};
+		String[] column = {"id","c_url","c_menuName","c_node","c_createDate","c_updateDate"};
 		ExportExcel exportExcel = new ExportExcel("系统菜单数据");
 		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
 

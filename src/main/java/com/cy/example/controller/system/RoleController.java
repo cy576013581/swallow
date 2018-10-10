@@ -79,8 +79,8 @@ public class RoleController extends BaseController {
 	@Transactional(readOnly = true)
 	public ResponseEntity<byte[]> export() throws Exception {
 		List<SysRoleEntity> list = roleService.selectList(new EntityWrapper<>());
-		String[] name = {"角色名称","角色代码"};
-		String[] column = {"c_roleCode","c_roleName"};
+		String[] name = {"ID","角色名称","角色代码","创建时间","更新时间"};
+		String[] column = {"id","c_roleCode","c_roleName","c_createDate","c_updateDate"};
 
 		ExportExcel exportExcel = new ExportExcel("系统角色数据");
 

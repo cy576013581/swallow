@@ -1,5 +1,6 @@
 package com.cy.example.supplement.poi;
 
+import com.cy.example.entity.SuperEntity;
 import lombok.Data;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -80,19 +81,19 @@ public class ExportExcel {
             Row titleNameRow = workbook.getSheet(sheetName).createRow(0);
             //设置样式
             HSSFCellStyle titleStyle = workbook.createCellStyle();
-            titleStyle = (HSSFCellStyle) setFontAndBorder(workbook,titleStyle, titleFontType, (short) titleFontSize,true);
+            titleStyle = (HSSFCellStyle) setFontAndBorder(workbook,titleStyle, titleFontType, titleFontSize,true);
             titleStyle = (HSSFCellStyle) setColor(workbook,titleStyle, titleBackColor, (short)10);
 
             for(int i = 0;i < titleName.length;i++){
                 sheet.setColumnWidth(i, titleSize[i]*256);    //设置宽度
                 Cell cell = titleNameRow.createCell(i);
                 cell.setCellStyle(titleStyle);
-                cell.setCellValue(titleName[i].toString());
+                cell.setCellValue(titleName[i]);
             }
 
             //为表头添加自动筛选
             if(!"".equals(address)){
-                CellRangeAddress c = (CellRangeAddress) CellRangeAddress.valueOf(address);
+                CellRangeAddress c = CellRangeAddress.valueOf(address);
                 sheet.setAutoFilter(c);
             }
 
@@ -100,28 +101,59 @@ public class ExportExcel {
             if(dataList!=null&&dataList.size()>0){
                 //设置样式
                 HSSFCellStyle dataStyle = workbook.createCellStyle();
-                dataStyle = (HSSFCellStyle) setFontAndBorder(workbook,dataStyle, contentFontType, (short) contentFontSize,false);
+                dataStyle = (HSSFCellStyle) setFontAndBorder(workbook,dataStyle, contentFontType, contentFontSize,false);
 
                 if(titleColumn.length>0){
                     for(int rowIndex = 1;rowIndex<=dataList.size();rowIndex++){
                         Object obj = dataList.get(rowIndex-1);     //获得该对象
-                        Class clsss = obj.getClass();     //获得该对对象的class实例
                         Row dataRow = workbook.getSheet(sheetName).createRow(rowIndex);
                         for(int columnIndex = 0;columnIndex<titleColumn.length;columnIndex++){
                             String title = titleColumn[columnIndex].trim();
                             Cell cell = dataRow.createCell(columnIndex);
                             if(!"".equals(title)){  //字段不为空
-                                //使首字母大写
-                                String UTitle = Character.toUpperCase(title.charAt(0))+ title.substring(1, title.length()); // 使其首字母大写;
-                                String methodName  = "get"+UTitle;
 
                                 // 设置要执行的方法
-                                Method method = clsss.getDeclaredMethod(methodName);
+                                Method method = SuperEntity.class.getDeclaredMethod("getId");
+                                //使首字母大写
+                                String methodName = "";
+                                Object objT = new Object();
+                                if(title.contains(".")){
+                                    String str[] = title.split("\\.");
+                                    if(str.length>1){
+                                        for(int i=0;i<str.length;i++){
+                                            String tool = Character.toUpperCase(str[i].charAt(0))+ str[i].substring(1);
+                                            methodName = "get"+tool;
+                                            if(i == str.length-1){
+                                                if(str[i].equals("id") || str[i].equals("c_createDate") || str[i].equals("c_updateDate")){
+                                                    method = SuperEntity.class.getDeclaredMethod(methodName);
+                                                }else{
+                                                    method = objT.getClass().getDeclaredMethod(methodName);
+                                                }
+                                            }else{
+                                                method = obj.getClass().getDeclaredMethod(methodName);
+                                                objT = method.invoke(obj);
+                                            }
+                                        }
+                                    }
+
+                                }else{
+                                    String UTitle = Character.toUpperCase(title.charAt(0))+ title.substring(1); // 使其首字母大写;
+                                    methodName  = "get"+UTitle;
+                                    if(title.equals("id") || title.equals("c_createDate") || title.equals("c_updateDate")){
+                                        method = SuperEntity.class.getDeclaredMethod(methodName);
+                                    }else{
+                                        method = obj.getClass().getDeclaredMethod(methodName);
+                                    }
+                                }
 
                                 //获取返回类型
                                 String returnType = method.getReturnType().getName();
-
-                                String data = method.invoke(obj)==null?"":method.invoke(obj).toString();
+                                String data;
+                                if(title.contains(".")){
+                                    data = method.invoke(objT)==null?"":method.invoke(objT).toString();
+                                }else{
+                                    data = method.invoke(obj)==null?"":method.invoke(obj).toString();
+                                }
                                 if(data!=null&&!"".equals(data)){
                                     if("int".equals(returnType)){
                                         cell.setCellValue(Integer.parseInt(data));
@@ -168,7 +200,7 @@ public class ExportExcel {
             int b = Integer.parseInt((color.substring(4,6)),16);
             //自定义cell颜色
             HSSFPalette palette = workbook.getCustomPalette();
-            palette.setColorAtIndex((short)index, (byte) r, (byte) g, (byte) b);
+            palette.setColorAtIndex(index, (byte) r, (byte) g, (byte) b);
 
             style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
             style.setFillForegroundColor(index);

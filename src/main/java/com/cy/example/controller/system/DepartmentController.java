@@ -72,8 +72,8 @@ public class DepartmentController extends BaseController {
 	@RequiresPermissions("depart_export")
 	public ResponseEntity<byte[]> export() throws Exception {
 		List<SysDepartmentEntity> list = departService.selectList(new EntityWrapper<>());
-		String[] name = {"部门代码","部门名称"};
-		String[] column = {"c_departCode","c_departName"};
+		String[] name = {"ID","部门代码","部门名称","创建时间","更新时间"};
+		String[] column = {"id","c_departCode","c_departName","c_createDate","c_updateDate"};
 		ExportExcel exportExcel = new ExportExcel("系统部门数据");
 
 		HSSFWorkbook workbook = exportExcel.wirteExcel(column,name,list);
