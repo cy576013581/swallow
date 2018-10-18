@@ -35,7 +35,7 @@ public class NoticeController extends BaseController {
 
 	@PutMapping
 	@RequiresPermissions("notice_update")
-	public Result<String> update(@ModelAttribute("role") SysNoticeEntity notice) {
+	public Result<String> update(@ModelAttribute("notice") SysNoticeEntity notice) {
 		boolean flag = noticeService.updateById(notice);
 		return new Result<>(flag,flag?"更新成功！":"更新失败！",0,null);
 	}
