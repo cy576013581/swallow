@@ -1,6 +1,7 @@
 package com.cy.example.supplement.rabbitmq.general;
 
 import com.alibaba.fastjson.JSON;
+import com.cy.example.config.ApplicationProperties;
 import com.cy.example.util.StringUtil;
 import com.cy.example.vo.IpAnalysisVo_Sina;
 import com.cy.example.vo.IpAnalysisVo_Tb;
@@ -27,12 +28,12 @@ public class RabbitReceiver {
 	@Autowired
 	private IMailService mailService;
 
-	@Value("${swallow.ip.analysis}")
-	private String ipAnalysis;
+	@Autowired
+	private ApplicationProperties prop;
 
 	@RabbitListener(queues = "loginRecord")
     public void insertLoginRecord(LoginRecordEntity loginRecord) {
-		String tbUrl = ipAnalysis.split(",")[0] + loginRecord.getC_loginIp();
+		String tbUrl = prop.getIp().getAnalysis().split(",")[0] + loginRecord.getC_loginIp();
 		try {
 			String addr = HttpUtil.get(tbUrl);
 			IpAnalysisVo_Tb ipAnalusisTb = JSON.parseObject(addr, IpAnalysisVo_Tb.class);
@@ -46,7 +47,7 @@ public class RabbitReceiver {
 				}
 
 			}else{
-				String sinaUrl = ipAnalysis.split(",")[1] + loginRecord.getC_loginIp();
+				String sinaUrl = prop.getIp().getAnalysis().split(",")[1] + loginRecord.getC_loginIp();
 				addr = HttpUtil.get(sinaUrl);
 				IpAnalysisVo_Sina ipAnalusisSina = JSON.parseObject(addr, IpAnalysisVo_Sina.class);
 				if(1 == ipAnalusisSina.getRet()){

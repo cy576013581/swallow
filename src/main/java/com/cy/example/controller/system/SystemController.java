@@ -2,6 +2,7 @@ package com.cy.example.controller.system;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.cy.example.config.ApplicationProperties;
 import com.cy.example.config.WebConfig;
 import com.cy.example.controller.BaseController;
 import com.cy.example.entity.system.*;
@@ -51,8 +52,8 @@ public class SystemController extends BaseController {
 	@Autowired
 	private INoticeService noticeService;
 	
-	@Value("${swallow.system.name}")
-	private String SYS_NAME;
+	@Autowired
+	private ApplicationProperties prop;
 
 	@Autowired
 	DefaultKaptcha defaultKaptcha;
@@ -88,7 +89,7 @@ public class SystemController extends BaseController {
 
 	@RequestMapping("/index")
 	public String showIndex(ModelMap map) {
-		map.put("SYS_NAME", SYS_NAME);
+		map.put("SYS_NAME", prop.getSystem().getName());
 		return "index";
 	}
 
@@ -110,7 +111,7 @@ public class SystemController extends BaseController {
 		//在线人数统计
 		map.put("user", user);
 		map.put("menuList", data);
-		map.put("SYS_NAME", SYS_NAME);
+		map.put("SYS_NAME", prop.getSystem().getName());
 		map.put("activeNum", WebConfig.getActiveUserSum());
 		return "main/main";
 	}
@@ -132,14 +133,14 @@ public class SystemController extends BaseController {
 		//在线人数统计
 		map.put("user", user);
 		map.put("menuList", data);
-		map.put("SYS_NAME", SYS_NAME);
+		map.put("SYS_NAME", prop.getSystem().getName());
 		map.put("activeNum", WebConfig.getActiveUserSum());
 		return "main/main2";
 	}
 
 	@RequestMapping("/loginOut")
 	public String loginOut(HttpSession session, ModelMap map) {
-		map.put("SYS_NAME", SYS_NAME);
+		map.put("SYS_NAME", prop.getSystem().getName());
 		session.removeAttribute(WebConfig.LOGIN_USER);
 		return "index";
 	}
