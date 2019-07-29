@@ -50,7 +50,10 @@
 		<mail.version>1.4.7</mail.version>
 		<activation.version>1.1.1</activation.version>
 		<poi.version>4.0.0</poi.version>
-		<docker.image.prefix>chenyang</docker.image.prefix>
+		<!-- Maven plugins versions -->
+		<jib-maven-plugin.version>1.0.1</jib-maven-plugin.version>
+		<spring.profiles.active>dev</spring.profiles.active>
+		<docker.image.prefix>registry.cn-shanghai.aliyuncs.com/cy576013581</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -256,47 +259,114 @@
 	</dependencies>
 
 	<build>
+		<defaultGoal>spring-boot:run</defaultGoal>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>frontend/dist/frontend</directory>
+				<targetPath>static</targetPath>
+			</resource>
+		</resources>
 		<plugins>
-			<!-- 热启动配置 -->
-			<plugin>
-	            <groupId>org.springframework.boot</groupId>
-	            <artifactId>spring-boot-maven-plugin</artifactId>
-	            <configuration>
-	                <fork>true</fork>
-	            </configuration>
-	        </plugin>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.13</version>
 				<configuration>
-					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-					<dockerDirectory>src/main/docker</dockerDirectory>
-					<resources>
-						<resource>
-							<targetPath>/</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.build.finalName}.jar</include>
-						</resource>
-					</resources>
+					<profiles>
+						<profile>${spring.profiles.active}</profile>
+					</profiles>
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>javax.activation</groupId>
-						<artifactId>activation</artifactId>
-						<version>${activation.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
-
-
 	</build>
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<properties>
+				<spring.profiles.active>prod</spring.profiles.active>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>jib-maven-plugin</artifactId>
+						<version>${jib-maven-plugin.version}</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>dockerBuild</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<from>
+								<image>openjdk:11-jre</image>
+							</from>
+							<to>
+								<image>${docker.image.prefix}/${project.artifactId}</image>
+								<tags>
+									<tag>${project.version}</tag>
+									<tag>latest</tag>
+								</tags>
+							</to>
+							<container>
+								<jvmFlags>
+									<!--<jvmFlag>-server</jvmFlag>-->
+									<!--<jvmFlag>-XX:+UnlockExperimentalVMOptions</jvmFlag>-->
+									<!--<jvmFlag>-XX:+UseZGC</jvmFlag>-->
+									<!--<jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>-->
+									<!--<jvmFlag>-Xlog:age*,gc*=info</jvmFlag>-->
+									<!--<jvmFlag>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</jvmFlag>-->
+								</jvmFlags>
+								<ports>
+									<port>8080</port>
+									<!--<port>5005</port>-->
+								</ports>
+								<useCurrentTimestamp>true</useCurrentTimestamp>
+							</container>
+							<extraDirectory>${project.basedir}/target/jib</extraDirectory>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+					<optional>true</optional>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<spring.profiles.active>prod</spring.profiles.active>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<profiles>
+								<profile>prod</profile>
+							</profiles>
+							<addResources>false</addResources>
+							<jvmArguments>-Djava.security.egd=file:/dev/./urandom</jvmArguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
