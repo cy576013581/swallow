@@ -35,7 +35,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://39.108.143.76/example
     maxPoolPreparedStatementPerConnectionSize: 20
-    password: XXXXXX
+    password: 123456
     testOnBorrow: false
     testWhileIdle: true
     minEvictableIdleTimeMillis: 300000
@@ -43,7 +43,7 @@ spring:
     testOnReturn: false
     driver-class-name: com.mysql.jdbc.Driver
     maxActive: 20
-    username: XXXXXX
+    username: root
   cache:
     ehcache:
       config: classpath:ehcache.xml

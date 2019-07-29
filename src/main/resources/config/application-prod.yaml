@@ -1,0 +1,96 @@
+---
+spring:
+  freemarker:
+    settings:
+      classic_compatible: true
+      default_encoding: UTF-8
+      template_update_delay: 0
+    charset: UTF-8
+    cache: true
+    allow-request-override: false
+    expose-request-attributes: false
+    allow-session-override: false
+    prefer-file-system-access: true
+    expose-session-attributes: false
+    suffix: .ftl
+    check-template-location: true
+    enabled: true
+    content-type: text/html
+    template-loader-path: classpath:/templates/
+    expose-spring-macro-helpers: true
+    order: 1
+  mail:
+    password: cy0227
+    default-encoding: UTF-8
+    host: smtp.163.com
+    username: 18858935759@163.com
+  datasource:
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    minIdle: 5
+    validationQuery: SELECT 1 FROM DUAL
+    initialSize: 5
+    maxWait: 60000
+    poolPreparedStatements: true
+    filters: stat,wall
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://39.108.143.76/example
+    maxPoolPreparedStatementPerConnectionSize: 20
+    password: 123456
+    testOnBorrow: false
+    testWhileIdle: true
+    minEvictableIdleTimeMillis: 300000
+    timeBetweenEvictionRunsMillis: 60000
+    testOnReturn: false
+    driver-class-name: com.mysql.jdbc.Driver
+    maxActive: 20
+    username: root
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  resources:
+    static-locations: classpath:/static/,classpath:/public/
+  mvc:
+    static-path-pattern: /**
+  aop:
+    proxy-target-class: true
+  rabbitmq:
+    password: 123456
+    port: 5672
+    host: 39.108.143.76
+    virtual-host: /
+    publisher-confirms: true
+    username: admin
+server:
+  port: 8090
+swallow:
+  system:
+    name: swallow管理系统V@project.version@
+  uploadfile:
+    src: ./file
+  ip:
+    analysis: http://ip.taobao.com/service/getIpInfo.php?ip=,http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip=
+  fromMail:
+    addr: swallow
+jedis:
+  pool:
+    password: 123456
+    testOnBorrow: false
+    testWhileIdle: true
+    port: 6379
+    testOnReturn: true
+    host: 39.108.143.76
+    config:
+      maxWaitMillis: 100000
+      maxIdle: 10
+      maxTotal: 100
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  typeAliasesPackage: com.cy.example.entity
+  config-locations: classpath:/mybatis/mybatis-config.xml
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd: mm:ss.SSS} %-5level [%logger{36}] :   %msg%n"
+  level:
+    org:
+      springframework:
+        web: debug
