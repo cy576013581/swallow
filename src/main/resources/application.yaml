@@ -66,7 +66,7 @@ swallow:
   system:
     name: swallow管理系统V@project.version@
   uploadfile:
-    src: f:/test
+    src: ./file
   ip:
     analysis: http://ip.taobao.com/service/getIpInfo.php?ip=,http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip=
   fromMail:
@@ -85,7 +85,7 @@ jedis:
       maxTotal: 100
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
-  typeAliasesPackage: com.cy.example.mapper
+  typeAliasesPackage: com.cy.example.entity
   config-locations: classpath:/mybatis/mybatis-config.xml
 logging:
   pattern:

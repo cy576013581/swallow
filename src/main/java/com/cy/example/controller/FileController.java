@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.cy.example.config.ApplicationProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +27,8 @@ import com.cy.example.service.IFileService;
 @RequestMapping("/system/file")
 public class FileController extends BaseController {
 
-	@Value("${swallow.uploadfile.src}")
-	private String src;
+	@Autowired
+	private ApplicationProperties prop;
 
 	@Autowired
 	private IFileService fileService;
@@ -51,14 +52,14 @@ public class FileController extends BaseController {
 					.toString();
 			int size = (int) file.getSize() / 1024;
 			// System.out.println(src+"/"+newFileName + "-->" + size);
-			FileEntity entity = new FileEntity(newFileName, fileName, src,
+			FileEntity entity = new FileEntity(newFileName, fileName, prop.getUploadfile().getSrc(),
 					String.valueOf(size));
 			WebConfig.add(entity);
 
 			if (file.isEmpty()) {
 				// return "false";
 			} else {
-				File dest = new File(src + "/" + newFileName);
+				File dest = new File(prop.getUploadfile().getSrc() + "/" + newFileName);
 				if (!dest.getParentFile().exists()) { // 判断文件父目录是否存在
 					dest.getParentFile().mkdir();
 				}

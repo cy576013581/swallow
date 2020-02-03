@@ -1,5 +1,6 @@
 package com.cy.example.service.impl;
 
+import com.cy.example.config.ApplicationProperties;
 import com.cy.example.entity.system.MailEntity;
 import com.cy.example.service.IMailService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +23,8 @@ public class MailService implements IMailService{
     @Autowired
     private JavaMailSender mailSender;
 
-    @Value("${swallow.fromMail.addr}")
-    private String from;
+    @Autowired
+    private ApplicationProperties prop;
 
     /*
      * (non-Javadoc)
@@ -31,7 +32,7 @@ public class MailService implements IMailService{
      */
     public void sendSimpleMail(MailEntity mail) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
+        message.setFrom(prop.getFromMail().getAddr());
         message.setTo(mail.getTo());
         message.setSubject(mail.getSubject());
         message.setText(mail.getContent());
@@ -54,7 +55,7 @@ public class MailService implements IMailService{
         try {
             //true表示需要创建一个multipart message
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(from);
+            helper.setFrom(prop.getFromMail().getAddr());
             helper.setTo(mail.getTo());
             helper.setSubject(mail.getSubject());
             helper.setText(mail.getContent(), true);
@@ -75,7 +76,7 @@ public class MailService implements IMailService{
 
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(from);
+            helper.setFrom(prop.getFromMail().getAddr());
             helper.setTo(mail.getTo());
             helper.setSubject(mail.getSubject());
             helper.setText(mail.getContent(), true);
@@ -100,7 +101,7 @@ public class MailService implements IMailService{
 
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
-            helper.setFrom(from);
+            helper.setFrom(prop.getFromMail().getAddr());
             helper.setTo(mail.getTo());
             helper.setSubject(mail.getSubject());
             helper.setText(mail.getContent(), true);
