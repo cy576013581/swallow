@@ -49,7 +49,7 @@
 		<lombok.version>1.18.2</lombok.version>
 		<mail.version>1.4.7</mail.version>
 		<activation.version>1.1.1</activation.version>
-		<poi.version>4.0.0</poi.version>
+		<poi.version>4.1.1</poi.version>
 		<docker.image.prefix>chenyang</docker.image.prefix>
 	</properties>
 
